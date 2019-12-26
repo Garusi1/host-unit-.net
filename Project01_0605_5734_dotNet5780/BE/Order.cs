@@ -21,7 +21,8 @@ namespace BE
         }
 
         ///eunm -
-        Status;  //טרם טופל, נשלח מייל, נסגר מחוסר הענות של הלקוח ,נסגר בהיענות של הלקוח
+        public StatusEnum Status{ get; private set; }   //טרם טופל, נשלח מייל, נסגר מחוסר הענות של הלקוח ,נסגר בהיענות של הלקוח
+
 
         public DateTime CreateDate; //לממש == ליום יצירת ההזמנה
         public DateTime OrderDate; //לממש == תאריך משלוח המייל ללקוח
