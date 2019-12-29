@@ -8,12 +8,67 @@ namespace BE
 {
     public class BankBranch
     {
+        // capital letter its for the public function.
+        private int bankNumber;
+        public int BankNumber
+        {
+            get { return bankNumber; }
+            set
+            {
+                //to define
+            }
+        }
 
-        public int BankNumber { get; private set; }
-        public string BankName { get; private set; }
-        public int BranchNumber { get; private set; } //Branch = סניף
-        public string BranchAddress { get; private set; }
-        public string BranchCity { get; private set; }
+
+        private string bankName;
+        public string BankName
+        {
+            get { return bankName; }
+            set
+            {
+                //to define
+            }
+
+        }
+
+
+        private int branchNumber; //Branch = סניף
+        public int BranchNumber
+        {
+            get { return branchNumber; }
+            set
+            {
+                //to define
+            }
+
+        }
+
+
+
+        private string branchAddress;
+        public string BranchAddress
+        {
+            get { return branchAddress; }
+            set
+            {
+                //to define
+            }
+
+        }
+
+
+        private string branchCity;
+        public string BranchCity
+        {
+            get { return branchCity; }
+            set
+            {
+                //to define
+            }
+
+        }
+
+
 
         public override string ToString()
         {
@@ -27,5 +82,7 @@ namespace BE
 
             return "output";
         }
+
+
     }
 }
