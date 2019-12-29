@@ -4,15 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace BE
+namespace DAL
 {
-    public class MyBE
+    interface Idal
     {
-        static void Main(string[] args)
-        {
-
-        }
-
-
     }
 }
