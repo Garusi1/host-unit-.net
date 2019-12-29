@@ -9,25 +9,32 @@ using BE; //check if its ligel
 
 namespace DAL
 {
-     public interface Idal
+     public interface IDAL
     {
         //GuestRequest
-        bool addGuestRequest();
-        bool updateGuestRequest();
+        void addGuestRequest(BE.GuestRequest guest);
+        void updateGuestRequest(BE.GuestRequest guest);
 
         //HostingUnit
-        bool addHostingUnit();
-        bool delHostingUnit();
-        bool updateHostingUnit();
+        void addHostingUnit(BE.HostingUnit hostUnit);
+        void delHostingUnit(int hostUnitID);
+        void updateHostingUnit(BE.HostingUnit hostUnit);
 
         //Order
-        bool addOrder();
-        bool UpdateOrder();
+        void addOrder(BE.Order order);
+        void UpdateOrder(BE.Order order);
+
 
         //lists
-        bool sss(List<GuestRequest> ggg);
-        bool sss(List<HostingUnit> ggg);
-        bool sss(List<Order> ggg);
+
+        void SetGuestRequestList(List<BE.GuestRequest> GuestRequestList);
+        void SetHostingUnit(List<BE.HostingUnit> HostingUnitList);
+        void SetOrderList(List<BE.Order> OrderList);
+        void SetBankBranchList(List<BE.BankBranch> BankBranchList);
+
+
+
+
 
     }
 }

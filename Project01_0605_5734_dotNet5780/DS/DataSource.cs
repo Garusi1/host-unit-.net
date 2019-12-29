@@ -9,9 +9,9 @@ namespace DS
 {
     class DataSource
     {
-        public static List<GuestRequest> GuestRequestList;
-        public static List<HostingUnit> HostingUnitList;
-        public static List<Order> OrderList;
+        public static List<BE.GuestRequest> GuestRequestList;
+        public static List<BE.HostingUnit> HostingUnitList;
+        public static List<BE.Order> OrderList;
 
 
     }
