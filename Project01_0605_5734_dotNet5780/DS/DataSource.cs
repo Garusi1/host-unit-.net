@@ -11,14 +11,11 @@ namespace DAL
     {
         public static List<BE.GuestRequest> GuestRequestList = new List<BE.GuestRequest>();
 
-
-
-
         public static List<BE.HostingUnit> HostingUnitList = new List<BE.HostingUnit>();
-
 
         public static List<BE.Order> OrderList = new List<BE.Order>();
 
+        public List<BE.GuestRequest> getGuestRequestList() { return GuestRequestList; }
 
     }
 }
