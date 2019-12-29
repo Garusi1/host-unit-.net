@@ -27,10 +27,10 @@ namespace DAL
 
         //lists
 
-        void SetGuestRequestList(List<BE.GuestRequest> GuestRequestList);
-        void SetHostingUnit(List<BE.HostingUnit> HostingUnitList);
-        void SetOrderList(List<BE.Order> OrderList);
-        void SetBankBranchList(List<BE.BankBranch> BankBranchList);
+        void GetGuestRequestList(List<BE.GuestRequest> GuestRequestList);
+        void GetHostingUnit(List<BE.HostingUnit> HostingUnitList);
+        void GetOrderList(List<BE.Order> OrderList);
+        void GetBankBranchList(List<BE.BankBranch> BankBranchList);
 
 
 

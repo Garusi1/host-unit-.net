@@ -14,6 +14,10 @@ namespace DS
         
         public void addGuestRequest(BE.GuestRequest guest)
         {
+            if (guest.GuestRequestKey)
+            {
+
+            }
 
         }
         public void updateGuestRequest(BE.GuestRequest guest)
@@ -46,19 +50,19 @@ namespace DS
         }
 
         //lists
-        public void SetGuestRequestList(List<BE.GuestRequest> GuestRequestList)
+        public void GetGuestRequestList(List<BE.GuestRequest> GuestRequestList)
         {
 
         }
-        public void SetHostingUnit(List<BE.HostingUnit> HostingUnitList)
+        public void GetHostingUnit(List<BE.HostingUnit> HostingUnitList)
         {
 
         }
-        public void SetOrderList(List<BE.Order> OrderList)
+        public void GetOrderList(List<BE.Order> OrderList)
         {
 
         }
-        public void SetBankBranchList(List<BE.BankBranch> BankBranchList)
+        public void GetBankBranchList(List<BE.BankBranch> BankBranchList)
         {
 
         }
