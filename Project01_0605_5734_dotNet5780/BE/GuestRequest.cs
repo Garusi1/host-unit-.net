@@ -39,20 +39,5 @@ namespace BE
         public int Adults { get; private set; }
         public int Children { get; private set; }
 
-        public override string ToString()  // יש לממש בהתאם לדרישות הפרוייקט.
-        {
-            string str = "Entry date: " + EntryDate.Date.ToString() + "\n";
-            str += "Release date: " + ReleaseDate.Date.ToString();
-            if (IsApproved)
-            {
-                str += "\n The request has approved";
-            }
-            else
-            {
-                str += "\n The request has rejected";
-            }
-
-            return str;
-        }
     }
 }
