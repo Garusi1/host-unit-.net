@@ -10,7 +10,6 @@ namespace DS
 {
     public class imp_Dal : IDAL
     {
-
         
         public void addGuestRequest(BE.GuestRequest guest)
         {
