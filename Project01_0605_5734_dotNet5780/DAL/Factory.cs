@@ -6,14 +6,14 @@ using System.Text;
 
 namespace DAL
 {
-    public class Factory
+    static public class Factory
     {
-        static IDAL Show = null;
+        static IDAL show = null;
         public static IDAL GetInstance()
         {
-            if (Show == null)
-                Show = new imp_Dal();
-            return Show;
+            if (show == null)
+                show = new imp_Dal();
+            return show;
         }
 
     }

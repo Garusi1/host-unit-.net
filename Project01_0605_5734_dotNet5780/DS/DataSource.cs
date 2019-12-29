@@ -9,11 +9,15 @@ namespace DS
 {
     class DataSource
     {
-        public static List<BE.GuestRequest> GuestRequestList;
+        public static List<BE.GuestRequest> GuestRequestList = new List<BE.GuestRequest>();
 
 
-        public static List<BE.HostingUnit> HostingUnitList;
-        public static List<BE.Order> OrderList;
+
+
+        public static List<BE.HostingUnit> HostingUnitList = new List<BE.HostingUnit>();
+
+
+        public static List<BE.Order> OrderList = new List<BE.Order>();
 
 
     }
