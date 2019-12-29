@@ -1,5 +1,4 @@
 ﻿using BE;
-using DAL;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,8 +9,9 @@ namespace DAL
 {
     public class imp_Dal : IDAL
     {
+        private int ds;
+        public ;
 
-        
         public void addGuestRequest(BE.GuestRequest guest)
         {
             //if (guest.GuestRequestKey)

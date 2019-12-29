@@ -5,9 +5,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace DS
+namespace DAL
 {
-    class DataSource
+    public class DataSource
     {
         public static List<BE.GuestRequest> GuestRequestList = new List<BE.GuestRequest>();
 
