@@ -8,56 +8,65 @@ using System.Threading.Tasks;
 
 namespace DS
 {
-    public class imp_Dal : Idal
+    public class imp_Dal : IDAL
     {
-        public bool addGuestRequest()
+
+        
+        public void addGuestRequest(BE.GuestRequest guest)
         {
-            throw new NotImplementedException();
+
+        }
+        public void updateGuestRequest(BE.GuestRequest guest)
+        {
+
         }
 
-        public bool addHostingUnit()
+        //HostingUnit
+        public void addHostingUnit(BE.HostingUnit hostUnit)
         {
-            throw new NotImplementedException();
+
+        }
+        public void delHostingUnit(int hostUnitID)
+        {
+
+        }
+        public void updateHostingUnit(BE.HostingUnit hostUnit)
+        {
+
         }
 
-        public bool addOrder()
+        //Order
+        public void addOrder(BE.Order order)
         {
-            throw new NotImplementedException();
+
+        }
+        public void UpdateOrder(BE.Order order)
+        {
+
         }
 
-        public bool delHostingUnit()
+        //lists
+        public void SetGuestRequestList(List<BE.GuestRequest> GuestRequestList)
         {
-            throw new NotImplementedException();
+
+        }
+        public void SetHostingUnit(List<BE.HostingUnit> HostingUnitList)
+        {
+
+        }
+        public void SetOrderList(List<BE.Order> OrderList)
+        {
+
+        }
+        public void SetBankBranchList(List<BE.BankBranch> BankBranchList)
+        {
+
         }
 
-        public bool sss(List<GuestRequest> ggg)
-        {
-            throw new NotImplementedException();
-        }
 
-        public bool sss(List<HostingUnit> ggg)
-        {
-            throw new NotImplementedException();
-        }
 
-        public bool sss(List<Order> ggg)
-        {
-            throw new NotImplementedException();
-        }
 
-        public bool updateGuestRequest()
-        {
-            throw new NotImplementedException();
-        }
 
-        public bool updateHostingUnit()
-        {
-            throw new NotImplementedException();
-        }
 
-        public bool UpdateOrder()
-        {
-            throw new NotImplementedException();
-        }
     }
 }
