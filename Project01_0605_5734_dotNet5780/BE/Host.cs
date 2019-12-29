@@ -103,17 +103,19 @@ namespace BE
 
 
 
-        ////public override string ToString()  //יש לממש בהתאם לדרישות הפרוייקט
-        ////{
-        ////    string str1 = $"Host Key : {this.HostKey} \n";
-        ////    foreach (var item in HostingUnitCollection)
-        ////    {
-        ////        str1 += item.ToString();
-        ////    }
-        ////    return str1;
-        ////}
+        //public override string ToString()  //יש לממש בהתאם לדרישות הפרוייקט
+        //{
+
+
+        //    string str1 = $"Host Key : {this.HostKey} \n";
+        //    foreach (var item in HostingUnitCollection)
+        //    {
+        //        str1 += item.ToString();
+        //    }
+        //    return str1;
+        //}
 
     }
-        
+
 }
 
