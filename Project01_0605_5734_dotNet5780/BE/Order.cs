@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace BE
 {
-    class Order //מחלקה בשם Order שמייצגת הזמנה )כלומר את הקשר בין לקוח ליחידת אירוח( ותכלול:
+    public class Order //מחלקה בשם Order שמייצגת הזמנה )כלומר את הקשר בין לקוח ליחידת אירוח( ותכלול:
     {
         public int HostingUnitKey { get; private set; }
         public int GuestRequestKey { get; private set; }

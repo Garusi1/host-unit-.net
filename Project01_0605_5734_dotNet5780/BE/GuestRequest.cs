@@ -10,23 +10,103 @@ namespace BE
     {
 
         private static int serialKey = 10000000;
-        public int GuestRequestKey { get; private set; }
+        private int guestRequestKey;
+        public int GuestRequestKey
+        {
+            get { return guestRequestKey; }
+            private set { } // ctor usuing this 
+        }
         //ctor 
         public GuestRequest()
         {
             this.GuestRequestKey = serialKey++;
         }
-        public string PrivateName { get; private set; }
-        public string FamilyName { get; private set; }
-        public string MailAddress { get; private set; }
-        public string Status { get; private set; }// for example: "Active"
 
-        public DateTime RegistrationDate { get; private set; }
-        public DateTime EntryDate;
-        public DateTime ReleaseDate;
 
-        public AreaEnum Area { get; private set; }  //All,North,South,Center,Jerusalem
+        public string privateName;
+        public string PrivateName
+        {
+            get { return privateName; }
+            set
+            {
+                //to define
+            }
+        }
+
+
+        private string familyName;
+        public string FamilyName
+        {
+            get { return familyName; }
+            set
+            {
+                //to define
+            }
+        }
+
+
+
+        private string mailAddress;
+        public string MailAddress
+        {
+            get { return mailAddress; }
+            set
+            {
+                //to define
+            }
+        }
+
+
+        private string status;// for example: "Active"
+        public string Status
+        {
+            get { return status; }
+            set
+            {
+                //to define
+            }
+        }
+
+
+        private DateTime registrationDate;
+        public DateTime RegistrationDate
+        {
+            get { return registrationDate; }
+            set
+            {
+                //to define
+            }
+        }
+
+
+        private DateTime entryDate;
+        public DateTime EntryDate
+        {
+            get { return entryDate; }
+            set
+            {
+                //to define
+            }
+        }
+
+
+        private DateTime releaseDate;
+        public DateTime ReleaseDate
+        {
+            get { return releaseDate; }
+            set
+            {
+                //to define
+            }
+        }
+
+
+
+        //All,North,South,Center,Jerusalem
         //public AreaEnum SubArea { get; private set; }
+
+        public AreaEnum Area { get; private set; }  
+
         public TypeEnum type { get; private set; } //Zimmer\Hotel\Camping\ Etc;
 
        // AttractionsEnum= הכרחי/אפשרי/לא מעוניין

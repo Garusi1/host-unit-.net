@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace BE
 {
-    class HostingUnit
+    public class HostingUnit
     {
 
         private static int stSerialKey = 10000000;
