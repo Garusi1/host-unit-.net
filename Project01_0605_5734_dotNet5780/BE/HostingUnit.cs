@@ -10,11 +10,54 @@ namespace BE
     {
 
         private static int stSerialKey = 10000000;
-        public int HostingUnitKey { get; private set; } ///  נקבע        בבנאי ע"פ השדה הסטטי.
-        public Host Owner { get; private set; }//יש לוודא מתודות
-        public string HostingUnitName { get; private set; }
 
-        public bool[,] Diary = new bool[31, 12]; //C# reset automaticly the values .
+        private int hostingUnitKey;
+        public int HostingUnitKey
+        {
+            get { return hostingUnitKey; }
+            set
+            {
+                //to define
+            }
+        }
+
+        private Host owner;
+
+        public Host Owner
+        {
+            get { return owner; }
+            set
+            {
+                //to define
+            }
+
+        }
+
+        private string hostingUnitName;
+
+        public string HostingUnitName
+        {
+            get { return hostingUnitName; }
+            set
+            {
+                //to define
+            }
+
+        }
+
+
+        private bool[,] diary = new bool[31, 12];
+
+        public bool[,] Diary
+        {
+            get { return diary; }
+            set
+            {
+                //to define
+            }
+
+
+        }
 
 
 

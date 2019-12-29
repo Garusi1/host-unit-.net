@@ -8,17 +8,98 @@ namespace BE
 {
     public class Host
     {
-        public int HostKey;
+        private int hostKey;
+        public int HostKey
+        {
+            get { return hostKey; }
+            set
+            {
+                //to define
+            }
+        }
 
-        public string PrivateName { get; private set; }
-        public string FamilyName { get; private set; }
-        public string FhoneNumber { get; private set; }  // יש להוסיף בדיקה שאין תוים  לא חוקיים
-        public string MailAddress { get; private set; }
+        private string privateName;
+        public string PrivateName
+        {
+            get { return privateName; }
+            set
+            {
+                //to define
+            }
+        }
 
-        public BankBranch BankBranchDetails { get; private set; } // יש לבדוק איך מתודות אלו פועלות
-        public int BankAccountNumber { get; private set; }
-        public string CollectionClearance { get; private set; } //Yes/No //אישור גביה מחשבון הבנק
-        public bool aproveCollection { get; private set; } //  תוספת
+
+        private string familyName;
+        public string FamilyName
+        {
+            get { return familyName; }
+            set
+            {
+                //to define
+            }
+        }
+
+
+        private string phoneNumber;
+        public string PhoneNumber
+        {
+            get { return phoneNumber; }
+            set
+            {
+                //to define
+                // יש להוסיף בדיקה שאין תוים  לא חוקיים
+                /// הם בטעות רשמו FhoneNumber
+            }
+        }
+
+        private string mailAddress;
+        public string MailAddress
+        {
+            get { return mailAddress; }
+            set
+            {
+                //to define
+            }
+        }
+
+        private BankBranch bankBranchDetails;
+        public BankBranch BankBranchDetails
+        {
+            get { return bankBranchDetails; }
+            set
+            {
+                //to define
+                // יש לבדוק איך מתודות אלו פועלות
+            }
+        }
+
+
+
+        private int bankAccountNumber;
+        public int BankAccountNumber
+        {
+            get { return bankAccountNumber; }
+            set
+            {
+                //to define
+            }
+        }
+
+        private bool collectionClearance;
+        public string CollectionClearance //Yes/No //אישור גביה מחשבון הבנק
+        {
+            get
+            {
+                if (collectionClearance) return "Yes"; 
+                else return "No";
+            }
+            set
+            {
+                //to define
+            }
+
+        }
+
 
 
 
