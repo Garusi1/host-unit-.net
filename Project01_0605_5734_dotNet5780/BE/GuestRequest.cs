@@ -41,16 +41,16 @@ namespace BE
 
         public override string ToString()  // יש לממש בהתאם לדרישות הפרוייקט.
         {
-            string str = "Entry date: " + EntryDate.Date.ToString() + "\n";
-            str += "Release date: " + ReleaseDate.Date.ToString();
-            if (IsApproved)
-            {
-                str += "\n The request has approved";
-            }
-            else
-            {
-                str += "\n The request has rejected";
-            }
+            string str = "";
+            str += "Geust name: " + PrivateName + " " + FamilyName +"\n" +
+                "MailAddress: " +MailAddress +"\n" +
+                "Status: " + Status + "\n" +
+                "Registration Date: " + RegistrationDate.ToString() +"\n" +
+                + "Entry date: " + EntryDate.Date.ToString() + "\n"+
+                "Release date: " + ReleaseDate.Date.ToString() +"\n" 
+                + "Area: "
+
+
 
             return str;
         }

@@ -15,6 +15,17 @@ namespace BE
         public string BranchAddress { get; private set; }
         public string BranchCity { get; private set; }
 
-     ///  public override string ToString() // יש לממש
+        public override string ToString()
+        {
+            string output = "";
+            output += "Bank Number: " + BankNumber + "\n" +
+                "Bank Name: " + BankName + "\n" +
+                "Branch Number:" + BranchNumber + "\n" +
+                "Branch Address: " + BranchAddress + "\n" +
+                "Branch City: " + BranchCity;
+
+
+            return "output";
+        }
     }
 }

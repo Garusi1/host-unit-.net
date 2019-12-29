@@ -8,6 +8,8 @@ namespace BE
 {
     public class MyBE
     {
+        BankBranch b = new BankBranch();
+        b.
 
     }
 }
