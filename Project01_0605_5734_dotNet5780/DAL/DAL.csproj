@@ -41,7 +41,6 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Configure.cs" />
     <Compile Include="IDAL.cs" />
     <Compile Include="MyDAL.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

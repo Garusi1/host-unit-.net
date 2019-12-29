@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace DAL
 {
-   public class Configure
+   public class Configuration
     {
         private static int OrderID = 10000000;
         private static int hostUnitID = 20000000;
