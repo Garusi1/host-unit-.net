@@ -14,16 +14,14 @@ namespace BE
         public int GuestRequestKey
         {
             get { return guestRequestKey; }
-            private set { } // ctor usuing this 
-        }
-        //ctor 
-        public GuestRequest()
-        {
-            this.GuestRequestKey = serialKey++;
+            set 
+            {
+                //to define
+            } 
         }
 
 
-        public string privateName;
+        private string privateName;
         public string PrivateName
         {
             get { return privateName; }
@@ -102,22 +100,102 @@ namespace BE
 
 
 
-        //All,North,South,Center,Jerusalem
-        //public AreaEnum SubArea { get; private set; }
-
-        public AreaEnum Area { get; private set; }  
-
-        public TypeEnum type { get; private set; } //Zimmer\Hotel\Camping\ Etc;
-
-       // AttractionsEnum= הכרחי/אפשרי/לא מעוניין
-        public AttractionsEnum Pool { get; private set; }
-        public AttractionsEnum Jacuzzi { get; private set; }
-        public AttractionsEnum Garden { get; private set; }
-        public AttractionsEnum ChildrensAttractions { get; private set; }
 
 
-        public int Adults { get; private set; }
-        public int Children { get; private set; }
+        private AreaEnum area;//All,North,South,Center,Jerusalem
+
+        public AreaEnum Area
+        {
+            get { return area; }
+            set
+            {
+                //to define
+            }
+
+        }
+
+        //public AreaEnum SubArea { get; private set; } .... // להגדיר באופן נכון כמו את האחרים
+
+
+        private TypeEnum type;  //Zimmer\Hotel\Camping\ Etc;
+        public TypeEnum Type
+        {
+            get { return type; }
+            set
+            {
+                //to define
+            }
+
+        }
+
+
+        // AttractionsEnum= הכרחי/אפשרי/לא מעוניין
+
+        private AttractionsEnum pool;
+        public AttractionsEnum Pool
+        {
+            get { return pool; }
+            set
+            {
+                //to define
+            }
+        }
+
+
+        private AttractionsEnum jacuzzi;
+        public AttractionsEnum Jacuzzi
+        {
+            get { return jacuzzi; }
+            set
+            {
+                //to define
+            }
+        }
+
+
+        private AttractionsEnum garden;
+        public AttractionsEnum Garden
+        {
+            get { return garden; }
+            set
+            {
+                //to define
+            }
+        }
+
+
+        private AttractionsEnum childrensAttractions;
+        public AttractionsEnum ChildrensAttractions
+        {
+            get { return childrensAttractions; }
+            set
+            {
+                //to define
+            }
+        }
+
+        private int adults;
+        public int Adults
+        {
+            get { return adults;  }
+            set
+            {
+                //to define
+            }
+        }
+
+
+
+        private int children;
+        public int Children
+        {
+            get { return children; }
+            set
+            {
+                //to define
+            }
+        }
+
 
         public override string ToString()  // יש לממש בהתאם לדרישות הפרוייקט.
         {

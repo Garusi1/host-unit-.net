@@ -2,7 +2,7 @@
 
 namespace BE
 {
-    enum AreaEnum 
+    public enum AreaEnum 
     {
         All,North,South,Center,Jerusalem
     }
@@ -12,18 +12,18 @@ namespace BE
     //  Tel_Aviv
     //}
 
-    enum TypeEnum // type of hosting 
+    public enum TypeEnum // type of hosting 
     {
         Zimmer,Hotel,Camping
     }
-    enum AttractionsEnum 
+    public enum AttractionsEnum 
     {
         הכרחי,
         אפשרי,
         לא_מעוניין
     }
 
-    enum StatusEnum // status Order enum
+    public enum StatusEnum // status Order enum
     {
         טרם_טופל,
         נשלח_מייל,
