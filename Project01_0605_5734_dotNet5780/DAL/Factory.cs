@@ -6,7 +6,15 @@ using System.Text;
 
 namespace DAL
 {
-    class Factory
+    public class Factory
     {
+        static IDAL Show = null;
+        public static IDAL GetInstance()
+        {
+            if (Show == null)
+                Show = new imp_Dal();
+            return Show;
+        }
+
     }
 }

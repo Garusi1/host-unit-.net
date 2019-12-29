@@ -6,7 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace DS
+namespace DAL
 {
     public class imp_Dal : IDAL
     {
