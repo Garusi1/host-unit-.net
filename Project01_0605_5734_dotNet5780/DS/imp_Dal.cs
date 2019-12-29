@@ -14,10 +14,10 @@ namespace DS
         
         public void addGuestRequest(BE.GuestRequest guest)
         {
-            if (guest.GuestRequestKey)
-            {
+            //if (guest.GuestRequestKey)
+            //{
 
-            }
+            //}
 
         }
         public void updateGuestRequest(BE.GuestRequest guest)
