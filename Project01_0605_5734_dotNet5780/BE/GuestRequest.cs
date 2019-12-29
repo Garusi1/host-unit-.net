@@ -42,16 +42,20 @@ namespace BE
         public override string ToString()  // יש לממש בהתאם לדרישות הפרוייקט.
         {
             string str = "";
-            str += "Geust name: " + PrivateName + " " + FamilyName +"\n" +
-                "MailAddress: " +MailAddress +"\n" +
+            str += "Geust name: " + PrivateName + " " + FamilyName + "\n" +
+                "MailAddress: " + MailAddress + "\n" +
                 "Status: " + Status + "\n" +
-                "Registration Date: " + RegistrationDate.ToString() +"\n" +
-                + "Entry date: " + EntryDate.Date.ToString() + "\n"+
-                "Release date: " + ReleaseDate.Date.ToString() +"\n" 
-                + "Area: "
-
-
-
+                "Registration Date: " + RegistrationDate.ToString() + "\n" +
+                "Entry date: " + EntryDate.Date.ToString() + "\n" +
+                "Release date: " + ReleaseDate.Date.ToString() + "\n"
+                + "Area: " + Area + "\n" +
+                "type: " + type + "\n" +
+                "Adults: " + Adults + "\n" +
+                "Children" + Children + "\n" +
+                "Pool: " + Pool + "\n" +
+                "Jacuzzi: " + Jacuzzi + "\n" +
+                "Garden: " + Garden + "\n" +
+                "Childrens Attractions: " + ChildrensAttractions + "\n";
             return str;
         }
     }
