@@ -12,6 +12,7 @@ namespace DS
     {
         public bool addGuestRequest()
         {
+
             throw new NotImplementedException();
         }
 

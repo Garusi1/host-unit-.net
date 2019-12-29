@@ -63,32 +63,32 @@ namespace BE
 
 
         //overrides
-        //public override string ToString()  //יש לדרוס בהתאם לדרישות הפרוייקט
-        ////{
-        ////    string str = "Serial number of the hosting unit: " + this.HostingUnitKey + "\n";
-        ////    bool flag = false;
-        ////    int year = GuestRequest.year;
-        ////    DateTime beginDate = new DateTime(year, 01, 01);
+        public override string ToString()  //יש לדרוס בהתאם לדרישות הפרוייקט
+        {
+            string str = "Serial number of the hosting unit: " + this.HostingUnitKey + "\n";
+        bool flag = false;
+        int year = GuestRequest.year;
+        DateTime beginDate = new DateTime(year, 01, 01);
 
 
-        ////    for (DateTime tempDate = beginDate; tempDate.Year == year; tempDate = tempDate.AddDays(1))
-        ////    {
-        ////        if (this[tempDate])
-        ////        {
-        ////            if (!flag) { beginDate = tempDate; }
-        ////            flag = true;
-        ////        }
-        ////        else if (flag)
-        ////        {
-        ////            string begingDate = beginDate.ToString("dd/MM/yyyy");
-        ////            string endDate = tempDate.AddDays(1).ToString("dd/MM/yyyy");
-        ////            str += begingDate + " , " + endDate + "\n";
+            for (DateTime tempDate = beginDate; tempDate.Year == year; tempDate = tempDate.AddDays(1))
+            {
+                if (this[tempDate])
+                {
+            if (!flag) { beginDate = tempDate; }
+            flag = true;
+        }
+                else if (flag)
+                {
+                    string begingDate = beginDate.ToString("dd/MM/yyyy");
+        string endDate = tempDate.AddDays(1).ToString("dd/MM/yyyy");
+        str += begingDate + " , " + endDate + "\n";
 
-        ////            flag = false;
-        ////        }
-        ////    }
-        ////    return str;
-        //}
+                    flag = false;
+                }
+}
+            return str;
+        }
 
 
     }
