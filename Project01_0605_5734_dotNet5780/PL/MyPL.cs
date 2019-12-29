@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace UI
 {
-    class MyPL
+    class MyUI
     {
         static void Main(string[] args)
         {
