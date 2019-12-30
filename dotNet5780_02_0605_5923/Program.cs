@@ -16,6 +16,7 @@ namespace dotNet5780_02_0605_5923
 {
     class Program
     {
+        
         static Random rand = new Random(DateTime.Now.Millisecond);
         private static GuestRequest CreateRandomRequest()
         {

@@ -20,6 +20,8 @@ namespace BL
 
         public void addGuestRequest(GuestRequest guest)
         {
+            if (!checkRequestDates(guest))// if the dates are not legal
+                throw new System.ArgumentException("Dates are not legal!");
             
 
             throw new NotImplementedException();
@@ -32,6 +34,7 @@ namespace BL
 
         public void addOrder(Order order)
         {
+            
             throw new NotImplementedException();
         }
 
@@ -74,6 +77,24 @@ namespace BL
         {
             throw new NotImplementedException();
         }
+    
         
+        public bool checkRequestDates (GuestRequest guest)
+        {
+            if(guest.EntryDate<= guest.ReleaseDate) // check if the dates are not equal and if the relase date are not bigger then EntryDate
+                return false;
+            return true;
+
+        }
+
+
     }
+
+
+
+
+
+
+
+
 }
