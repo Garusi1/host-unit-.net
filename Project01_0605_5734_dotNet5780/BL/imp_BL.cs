@@ -14,15 +14,13 @@ namespace BL
 
         internal imp_BL()
         {
-            IDAL = DAL.Factory.show();
+            IDAL = DAL.Factory.GetInstance();
         }
 
 
         public void addGuestRequest(GuestRequest guest)
         {
-            //input check
-
-
+            
 
             throw new NotImplementedException();
         }
@@ -76,5 +74,6 @@ namespace BL
         {
             throw new NotImplementedException();
         }
+        
     }
 }
