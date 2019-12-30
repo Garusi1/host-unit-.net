@@ -12,7 +12,7 @@ namespace BL
 
         DAL.IDAL IDAL;
 
-        internal BL_imp()
+        internal imp_BB()
         {
             IDAL = DAL.Factory.GetInstance();
         }
@@ -20,6 +20,7 @@ namespace BL
 
         public void addGuestRequest(GuestRequest guest)
         {
+            if(guest.)
             throw new NotImplementedException();
         }
 
