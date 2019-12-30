@@ -85,16 +85,14 @@ namespace DAL
         }
         public List<BE.HostingUnit> GetHostingUnit(List<BE.HostingUnit> HostingUnitList)
         {
-            return 
+            return ds.getHostingUnitList();
         }
         public List<BE.Order> GetOrderList(List<BE.Order> OrderList)
         {
-
+            return ds.getOrderList();
         }
         public List<BE.BankBranch> GetBankBranchList(List<BE.BankBranch> BankBranchList)
-        {
-
-        }
+        {  }
 
 
 
@@ -103,7 +101,7 @@ namespace DAL
 
         public static bool Add<T>(List<T> list, T t) where T : IComparable
         {
-
+            
             foreach (T item in list)
             {
                 if (t.CompareTo(item) == 0)
