@@ -16,6 +16,7 @@ namespace BE
             get { return guestRequestKey; }
             set 
             {
+                
                 //to define
                 /// put attention
             }
