@@ -10,6 +10,8 @@ namespace DAL
 {
     public class imp_Dal : IDAL
     {
+        DataSource ds = new DataSource();
+
         public static List<BE.GuestRequest> GuestRequestList1 = new List<GuestRequest>();
 
         public static List<BE.HostingUnit> HostingUnitList1 = new List<HostingUnit>();
@@ -76,9 +78,9 @@ namespace DAL
         }
 
         //lists
-        public void GetGuestRequestList(List<BE.GuestRequest> GuestRequestList)
+        public List<BE.GuestRequest> GetGuestRequestList(List<BE.GuestRequest> GuestRequestList)
         {
-
+            return ds.getGuestRequestList();
         }
         public void GetHostingUnit(List<BE.HostingUnit> HostingUnitList)
         {
