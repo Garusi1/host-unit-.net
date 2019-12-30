@@ -59,7 +59,15 @@ namespace BE
 
         }
 
+        public bool isEqual(HostingUnit host1)
+        {
+            return host1.HostingUnitKey == HostingUnitKey;
+        }
 
+        public bool isEqualID(int ID)
+        {
+            return ID == HostingUnitKey;
+        }
 
 
         //overrides

@@ -197,6 +197,16 @@ namespace BE
             }
         }
 
+        public bool isEqual(GuestRequest xx)
+        {
+            return xx.GuestRequestKey == GuestRequestKey;
+        }
+        public void updateStatus(string status1)
+        {
+            status = status1;
+
+        }
+
 
         public override string ToString()  // יש לממש בהתאם לדרישות הפרוייקט.
         {
