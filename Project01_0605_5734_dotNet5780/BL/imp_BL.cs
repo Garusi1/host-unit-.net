@@ -9,6 +9,15 @@ namespace BL
 {
     public class imp_BL : IBL
     {
+
+        DAL.IDAL IDAL;
+
+        internal BL_imp()
+        {
+            IDAL = DAL.Factory.GetInstance();
+        }
+
+
         public void addGuestRequest(GuestRequest guest)
         {
             throw new NotImplementedException();
