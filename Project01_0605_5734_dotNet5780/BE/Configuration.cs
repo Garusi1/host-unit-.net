@@ -12,6 +12,8 @@ namespace BE
         private static int hostUnitID = 20000000;
         private static int hostID = 30000000;
         private static int geustReqID = 40000000;
+        public static int Comission = 10;
+
 
         public static int getOrderId()
         {
