@@ -83,23 +83,75 @@ namespace DAL
         {
             return ds.getGuestRequestList();
         }
-        public void GetHostingUnit(List<BE.HostingUnit> HostingUnitList)
+        public List<BE.HostingUnit> GetHostingUnit(List<BE.HostingUnit> HostingUnitList)
         {
+            return ds.getHostingUnitList();
+        }
+        public List<BE.Order> GetOrderList(List<BE.Order> OrderList)
+        {
+            return ds.getOrderList();
+        }
+        public List<BE.BankBranch> GetBankBranchList(List<BE.BankBranch> BankBranchList)
+        {  }
+
+
+
+
+ 
+
+        public static bool Add<T>(List<T> list, T t) where T : IComparable
+        {
+            
+            foreach (T item in list)
+            {
+                if (t.CompareTo(item) == 0)
+                {
+                    return false;
+                }
+            }
+            list.Add(t);
+            return true;
 
         }
-        public void GetOrderList(List<BE.Order> OrderList)
+
+
+
+
+        public static void Remove<T>(List<T> list, T t) where T : IComparable
+        {
+            T temp = default(T);
+            foreach (T item in list)
+            {
+                if (t.CompareTo(item) == 0)
+                {
+                    temp = item;
+                    break;
+                }
+            }
+
+            if (temp != null)
+                list.Remove(temp);
+        }
+
+
+
+
+        public static T Find<T>(List<T> list, T t) where T : class, IComparable
         {
 
+            foreach (T item in list)
+            {
+                if (t.CompareTo(item) == 0)
+                {
+                    return item;
+                }
+
+            }
+            return null;
         }
-        public void GetBankBranchList(List<BE.BankBranch> BankBranchList)
-        {
-
-        }
-
-
-
-
-
 
     }
+
+
+
 }

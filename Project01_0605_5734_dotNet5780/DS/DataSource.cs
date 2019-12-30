@@ -12,7 +12,7 @@ namespace DAL
         public static List<BE.GuestRequest> GuestRequestList = new List<BE.GuestRequest>()
         {new BE.GuestRequest()
             {// יש לערוך ולממש כמו שצריך
-        GuestRequestKey=BE.Configuration.getGeustReqID(), 
+        GuestRequestKey=BE.Configuration.getGeustReqID(),
         PrivateName="Michael",
         FamilyName="Garusi",
         MailAddress=/*@*/"mgarusi101@gmail.com",
@@ -53,8 +53,30 @@ namespace DAL
             OrderDate=DateTime.Now.AddDays(5), //תלוי שליחת מיילץ 
         }};
 
+        public static List<BE.BankBranch> BankBranchList = new List<BE.BankBranch>()
+        {new BankBranch()
+        {
+            BankNumber=11,
+            BankName="Discount",
+            BranchNumber=510,
+            BranchAddress="Har'el St 1, 9079129",
+            BranchCity="Mevaseret Zion"
+        }
+
+        };
+
+
 
         public List<BE.GuestRequest> getGuestRequestList() { return GuestRequestList; }
+
+        public List<BE.HostingUnit> getHostingUnitList() { return HostingUnitList; }
+        public List<BE.Order> getOrderList() { return OrderList; }
+
+
+
+
+
+
 
     }
 }
