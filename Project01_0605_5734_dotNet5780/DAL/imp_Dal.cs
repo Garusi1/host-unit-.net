@@ -23,7 +23,7 @@ namespace DAL
         public void addGuestRequest(BE.GuestRequest guest)
         {
 
-            foreach(GuestRequest element in GuestRequestList1) // צריך לבדוק שהלולאות האלה באמת עובדות
+            foreach(GuestRequest element in ds.getGuestRequestList()) // צריך לבדוק שהלולאות האלה באמת עובדות
             {
                 if (element.isEqual(guest)) return; //צריך להקפיץ פה איזה הודעה על זה שהוא כבר קיים
             }
@@ -65,7 +65,7 @@ namespace DAL
         }
         public void updateHostingUnit(BE.HostingUnit hostUnit)
         {
-
+            foreach(HostingUnit element in HostingUnitList1)
         }
 
         //Order
