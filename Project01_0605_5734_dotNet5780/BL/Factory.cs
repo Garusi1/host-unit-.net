@@ -8,7 +8,7 @@ namespace BL
     /// <summary>
     /// get the singelton instance of BL
     /// </summary>
-    public static class Factory
+     static public class Factory
     {
          static IBL show = null;
         public static IBL GetShow()
