@@ -56,5 +56,13 @@ namespace DAL
 
         public List<BE.GuestRequest> getGuestRequestList() { return GuestRequestList; }
 
+        public List<BE.HostingUnit> getHostingUnitList() { return HostingUnitList; }
+        public List<BE.GuestRequest> getGuestRequestList() { return GuestRequestList; }
+        public List<BE.GuestRequest> getGuestRequestList() { return GuestRequestList; }
+
+
+
+
+
     }
 }
