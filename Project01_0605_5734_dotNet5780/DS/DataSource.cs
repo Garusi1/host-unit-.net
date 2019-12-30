@@ -72,6 +72,9 @@ namespace DAL
         public List<BE.HostingUnit> getHostingUnitList() { return HostingUnitList; }
         public List<BE.Order> getOrderList() { return OrderList; }
 
+        public List<BE.BankBranch> getBankBranchList() { return BankBranchList; }
+
+
 
 
 
