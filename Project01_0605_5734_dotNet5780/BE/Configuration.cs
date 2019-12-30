@@ -13,25 +13,25 @@ namespace BE
         private static int hostID = 30000000;
         private static int geustReqID = 40000000;
 
-        public int getOrderId()
+        public static int getOrderId()
         {
             OrderID++;
             return OrderID;
         }
 
-        public int getHostUnitID()
+        public static int getHostUnitID()
         {
             hostUnitID++;
             return hostUnitID;
         }
 
-        public int getHostID()
+        public static int getHostID()
         {
             hostID++;
             return hostID;
         }
 
-        public int getGeustReqID()
+        public static int getGeustReqID()
         {
             geustReqID++;
             return geustReqID;

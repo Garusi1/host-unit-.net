@@ -9,8 +9,5 @@ namespace BE
     public class MyBE
     {
 
-
-
-
     }
 }

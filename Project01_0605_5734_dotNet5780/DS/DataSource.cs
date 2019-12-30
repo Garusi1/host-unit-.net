@@ -12,7 +12,7 @@ namespace DAL
         public static List<BE.GuestRequest> GuestRequestList = new List<BE.GuestRequest>()
         {new BE.GuestRequest()
             {// יש לערוך ולממש כמו שצריך
-        GuestRequestKey=1, /// יש לממש בעזרת מספר רץ
+        GuestRequestKey=BE.Configuration.getGeustReqID(), 
         PrivateName="Michael",
         FamilyName="Garusi",
         MailAddress=/*@*/"mgarusi101@gmail.com",
@@ -34,7 +34,7 @@ namespace DAL
         public static List<BE.HostingUnit> HostingUnitList = new List<BE.HostingUnit>()
         {new BE.HostingUnit()
         {
-            HostingUnitKey=2, /// יש לממש בעזרת מספר רץ
+            HostingUnitKey=BE.Configuration.getHostUnitID(), /// זה מספר רץ. יש לממש נכון
             Owner=new Host(),// כמובן שבמימוש בפועל צריך לקשר למארח קיים שכבר מוגדר בנתונים
             HostingUnitName="Gal Banof",
             Diary,// יש לממש
@@ -45,9 +45,9 @@ namespace DAL
         public static List<BE.Order> OrderList = new List<BE.Order>()
         {new Order()
         {
-            HostingUnitKey=2,/// יש לממש בעזרת לפי הקשר
+            HostingUnitKey=2,/// יש לממש  לפי הקשר
             GuestRequestKey=1,///יש לממש בהתאם לבקשה
-            OrderKey=3, /// יש לממש בעזרת מספר רץ
+            OrderKey=BE.Configuration.getOrderId(), /// יש לממש בעזרת מספר רץ
             Status=StatusEnum.טרם_טופל,
             CreateDate=DateTime.Now,
             OrderDate=DateTime.Now.AddDays(5), //תלוי שליחת מיילץ 
