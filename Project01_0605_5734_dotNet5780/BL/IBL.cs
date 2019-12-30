@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace BL
 {
-    interface IBL
+    public interface IBL
     {
         //GuestRequest
         void addGuestRequest(BE.GuestRequest guest);
