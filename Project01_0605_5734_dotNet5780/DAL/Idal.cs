@@ -29,9 +29,9 @@ namespace DAL
 
         List<BE.GuestRequest> GetGuestRequestList(List<BE.GuestRequest> GuestRequestList);
 
-        void GetHostingUnit(List<BE.HostingUnit> HostingUnitList);
-        void GetOrderList(List<BE.Order> OrderList);
-        void GetBankBranchList(List<BE.BankBranch> BankBranchList);
+        List<BE.HostingUnit> GetHostingUnit(List<BE.HostingUnit> HostingUnitList);
+        List<BE.Order> GetOrderList(List<BE.Order> OrderList);
+        List<BE.BankBranch> GetBankBranchList(List<BE.BankBranch> BankBranchList);
 
 
 
