@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace DAL
 {
-    public class DataSource
+    public class DataSource 
     {
         public static List<BE.GuestRequest> GuestRequestList = new List<BE.GuestRequest>();
 
