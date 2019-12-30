@@ -37,7 +37,7 @@ namespace DAL
             HostingUnitKey=BE.Configuration.getHostUnitID(), /// זה מספר רץ. יש לממש נכון
             Owner=new Host(),// כמובן שבמימוש בפועל צריך לקשר למארח קיים שכבר מוגדר בנתונים
             HostingUnitName="Gal Banof",
-            Diary,// יש לממש
+            //Diary,// יש לממש
 
         } };
 
