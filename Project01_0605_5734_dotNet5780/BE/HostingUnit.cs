@@ -9,7 +9,6 @@ namespace BE
     public class HostingUnit
     {
 
-        private static int stSerialKey = 10000000;
 
         private int hostingUnitKey;
         public int HostingUnitKey
@@ -17,7 +16,7 @@ namespace BE
             get { return hostingUnitKey; }
             set
             {
-                //to define
+                hostingUnitKey = value;
             }
         }
 
@@ -28,7 +27,7 @@ namespace BE
             get { return owner; }
             set
             {
-                //to define
+                owner = value; //דורש בדיקה!
             }
 
         }
@@ -40,7 +39,7 @@ namespace BE
             get { return hostingUnitName; }
             set
             {
-                //to define
+                hostingUnitName = value;
             }
 
         }
@@ -53,7 +52,7 @@ namespace BE
             get { return diary; }
             set
             {
-                //to define
+                diary = value;
             }
 
 
@@ -73,30 +72,15 @@ namespace BE
         //overrides
         public override string ToString()  //יש לדרוס בהתאם לדרישות הפרוייקט
         {
-            string str = "Serial number of the hosting unit: " + this.HostingUnitKey + "\n";
-        bool flag = false;
-        int year = GuestRequest.year;
-        DateTime beginDate = new DateTime(year, 01, 01);
+            string str = "";
+            str += "Hosting Unit Key: " + HostingUnitKey + "\n" +
+                  "Hosting Unit Name: " + HostingUnitName + "\n"+
+            "Owner details: \n" + Owner + "\n";
 
-
-            for (DateTime tempDate = beginDate; tempDate.Year == year; tempDate = tempDate.AddDays(1))
-            {
-                if (this[tempDate])
-                {
-            if (!flag) { beginDate = tempDate; }
-            flag = true;
-        }
-                else if (flag)
-                {
-                    string begingDate = beginDate.ToString("dd/MM/yyyy");
-        string endDate = tempDate.AddDays(1).ToString("dd/MM/yyyy");
-        str += begingDate + " , " + endDate + "\n";
-
-                    flag = false;
-                }
-}
             return str;
         }
+
+        
 
 
     }
