@@ -35,7 +35,7 @@ namespace BE
             {
                 Regex r = new Regex("^([^20]|[a-zA-Zא-ת]){2,20}$");
                 if (!r.IsMatch(value))
-                    throw new Exception(/*"שם פרטי צריך להכיל 2-20 אותיות."*/"Private name need to contain 2-20 letters ");
+                    throw new Exception(/*"שם פרטי צריך להכיל 2-20 אותיות בלבד."*/"Private name need to contain 2-20 letters only ");
                 privateName = value;
             }
         }
@@ -49,7 +49,7 @@ namespace BE
             {
                 Regex r = new Regex("^([^20]|[a-zA-Zא-ת]){2,20}$");
                 if (!r.IsMatch(value))
-                    throw new Exception(/*"שם משפחה צריך להכיל 2-20 אותיות."*/"Family name need to contain 2-20 letters ");
+                    throw new Exception(/*"שם משפחה צריך להכיל 2-20 אותיות בלבד."*/"Family name need to contain 2-20 letters only ");
                 familyName = value;
             }
         }
@@ -75,7 +75,7 @@ namespace BE
         }
 
 
-        private StatusGREnum status;// for example: "Active"
+        private StatusGREnum status;// for example: "Active"  // פתוחה, נסגרה_עסקה_דרך_האתר, נסגרה_כי_פג_תוקפה
         public StatusGREnum Status
         {
             get { return status; }
@@ -113,7 +113,8 @@ namespace BE
         {
             get { return releaseDate; }
             set
-            {// to define
+            {
+
                 releaseDate = value;
             }
         }
@@ -128,7 +129,9 @@ namespace BE
         {
             get { return area; }
             set
-            {// to define
+            {
+                if (!Enum.IsDefined(typeof(AreaEnum), value))
+                    throw new Exception("Enum input illegal");
                 area = value;
             }
 
@@ -141,8 +144,10 @@ namespace BE
         public TypeEnum Type
         {
             get { return type; }
-            set// to define
+            set
             {
+                if (!Enum.IsDefined(typeof(TypeEnum), value))
+                    throw new Exception("Enum input illegal");
                 type = value;
             }
 
@@ -156,7 +161,9 @@ namespace BE
         {
             get { return pool; }
             set
-            {// to define
+            {
+                if (!Enum.IsDefined(typeof(AttractionsEnum), value))
+                    throw new Exception("Enum input illegal");
                 pool = value;
             }
         }
@@ -167,7 +174,9 @@ namespace BE
         {
             get { return jacuzzi; }
             set
-            {// to define
+            {
+                if (!Enum.IsDefined(typeof(AttractionsEnum), value))
+                    throw new Exception("Enum input illegal");
                 jacuzzi = value;
             }
         }
@@ -178,7 +187,9 @@ namespace BE
         {
             get { return garden; }
             set
-            {// to define
+            {
+                if (!Enum.IsDefined(typeof(AttractionsEnum), value))
+                    throw new Exception("Enum input illegal");
                 garden = value;
             }
         }
@@ -190,7 +201,8 @@ namespace BE
             get { return childrensAttractions; }
             set
             {
-
+                if (!Enum.IsDefined(typeof(AttractionsEnum), value))
+                    throw new Exception("Enum input illegal");
                 childrensAttractions = value;
             }
         }

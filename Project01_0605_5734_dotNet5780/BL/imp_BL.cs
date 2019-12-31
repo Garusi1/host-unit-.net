@@ -34,13 +34,19 @@ namespace BL
 
             if (guest.ReleaseDate < theDateToday.AddDays(1))
                 throw new Exception(/*תאריך אינו יכול להיות  מוקדם מעוד יום"*/"ReleaseDate cannot be earlier from tomorrow ");
-            
+
+            if (guest.Status!= BE.StatusGREnum.פתוחה)
+                throw new Exception(/* "סטטוס דרישת לקוח שגוי.סטטוס דרישה חדשה יהיה תמיד פתוח"*/"Incorrect GuestRequest status. New GuestRequest status will always be open ");
+
+
+
 
 
 
 
             // after we cheek all the possible problems we can transfer the data to DAL layer
 
+            guest.RegistrationDate = DateTime.Now;
 
 
             //throw new NotImplementedException();
