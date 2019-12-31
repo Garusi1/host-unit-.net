@@ -59,8 +59,8 @@ namespace BE
         {
             get { return phoneNumber; }
             set
-            {
-                Regex r = new Regex("(^0(5|7)[0-9]-{0,1}[0-9]{7}$)|(^0(2|3|4|7|8|9)-{0,1}[0-9]{7}$)"/*"^0[0-9]{1,2}-{0,1}[0-9]{7}$"*/);
+            {// support all israel numbers //for exampale support 0508771340 / 050-8771340 / 050-877-1340 / 025334750/ 02-5334750 / 02-533-4750
+                Regex r = new Regex("(^0(5|7)[0-9]-{0,1}[0-9]{7}$)|(^0(5|7)[0-9]-{0,1}[0-9]{3}-{0,1}[0-9]{4}$)|(^0(2|3|4|7|8|9)-{0,1}[0-9]{7}$)|(^0(2|3|4|7|8|9)-{0,1}[0-9]{3}-{0,1}[0-9]{4}$)");
                 if (!r.IsMatch(value))
                     throw new Exception(/*"מספר טלפון אינו חוקי"*/"Phone number is not legal ");
                 phoneNumber = value;
