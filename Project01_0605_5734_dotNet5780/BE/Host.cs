@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using DAL;
 
 namespace BE
 {
@@ -15,7 +14,7 @@ namespace BE
             get { return hostKey; }
             set
             {
-                hostKey = ;
+                hostKey = value;
             }
         }
 
@@ -25,7 +24,7 @@ namespace BE
             get { return privateName; }
             set
             {
-                //to define
+                privateName = value;
             }
         }
 
@@ -36,7 +35,7 @@ namespace BE
             get { return familyName; }
             set
             {
-                //to define
+                familyName = value;
             }
         }
 
@@ -47,9 +46,7 @@ namespace BE
             get { return phoneNumber; }
             set
             {
-                //to define
-                // יש להוסיף בדיקה שאין תוים  לא חוקיים
-                /// הם בטעות רשמו FhoneNumber
+                phoneNumber = value;
             }
         }
 
@@ -59,7 +56,7 @@ namespace BE
             get { return mailAddress; }
             set
             {
-                //to define
+                mailAddress = value;
             }
         }
 
@@ -69,8 +66,7 @@ namespace BE
             get { return bankBranchDetails; }
             set
             {
-                //to define
-                // יש לבדוק איך מתודות אלו פועלות
+                bankBranchDetails = value;
             }
         }
 
@@ -82,7 +78,7 @@ namespace BE
             get { return bankAccountNumber; }
             set
             {
-                //to define
+                bankAccountNumber = value;
             }
         }
 
@@ -96,7 +92,8 @@ namespace BE
             }
             set
             {
-                //to define
+                if (value.Equals("yes")|| value.Equals("Yes")) collectionClearance = true;
+                else collectionClearance = false;
             }
 
         }
@@ -104,17 +101,21 @@ namespace BE
 
 
 
-        //public override string ToString()  //יש לממש בהתאם לדרישות הפרוייקט
-        //{
+        public override string ToString()  //יש לממש בהתאם לדרישות הפרוייקט
+        {
 
 
-        //    string str1 = $"Host Key : {this.HostKey} \n";
-        //    foreach (var item in HostingUnitCollection)
-        //    {
-        //        str1 += item.ToString();
-        //    }
-        //    return str1;
-        //}
+            string str1 = "";
+            str1 += "Host Key: " + HostKey + "\n" +
+                "Name: " + PrivateName + " " + FamilyName + "\n" +
+                "Phone Number: " + PhoneNumber + "\n" +
+                "Mail Address: " + MailAddress + "\n" +
+                "Bank Branch Details: " + BankBranchDetails + "\n" +
+                "Bank Account Number: " + BankAccountNumber + "\n" +
+                "Collection Clearance: " + CollectionClearance + "\n";         
+
+            return str1;
+        }
 
     }
 
