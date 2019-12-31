@@ -25,7 +25,8 @@ namespace DAL
 
             foreach(GuestRequest element in ds.getGuestRequestList()) // צריך לבדוק שהלולאות האלה באמת עובדות
             {
-                if (element.isEqual(guest)) return; //צריך להקפיץ פה איזה הודעה על זה שהוא כבר קיים
+                if (element.isEqual(guest))
+                { return; } //צריך להקפיץ פה איזה הודעה על זה שהוא כבר קיים
             }
 
            GuestRequestList1.Add(guest);
