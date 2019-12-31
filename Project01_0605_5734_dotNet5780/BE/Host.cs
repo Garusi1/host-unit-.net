@@ -4,6 +4,12 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
+
+using System.Text.RegularExpressions;
+using System.Net.Mail;
+
+
+
 namespace BE
 {
     public class Host
@@ -14,7 +20,12 @@ namespace BE
             get { return hostKey; }
             set
             {
+                Regex r = new Regex("^([^20]|[a-zA-Zא-ת]){2,35}$");
+                if (!r.IsMatch(value))
+                    throw new Exception("שם צריך להכיל 2-35 אותיות.");
                 hostKey = value;
+
+
             }
         }
 
@@ -56,6 +67,14 @@ namespace BE
             get { return mailAddress; }
             set
             {
+                try
+                {
+                    MailAddress m = new MailAddress(value);
+                }
+                catch (Exception)
+                {
+                    throw new Exception(/*"כתובת המייל לא תקינה."*/"Email address incorrect");
+                }
                 mailAddress = value;
             }
         }
@@ -101,7 +120,7 @@ namespace BE
 
 
 
-        public override string ToString()  //יש לממש בהתאם לדרישות הפרוייקט
+        public override string ToString()  
         {
 
 

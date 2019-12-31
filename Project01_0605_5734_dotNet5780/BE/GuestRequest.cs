@@ -8,18 +8,13 @@ namespace BE
 {
     public class GuestRequest
     {
+        BE.Configuration r = new BE.Configuration();
 
-        private static int serialKey = 10000000;
         private int guestRequestKey;
         public int GuestRequestKey
         {
             get { return guestRequestKey; }
-            set 
-            {
-                
-                //to define
-                /// put attention
-            }
+            set { guestRequestKey = value; }
         }
 
 
@@ -29,7 +24,7 @@ namespace BE
             get { return privateName; }
             set
             {
-                //to define
+                privateName = value;
             }
         }
 
@@ -40,7 +35,7 @@ namespace BE
             get { return familyName; }
             set
             {
-                //to define
+                familyName = value;
             }
         }
 
@@ -52,7 +47,7 @@ namespace BE
             get { return mailAddress; }
             set
             {
-                //to define
+                mailAddress = value;
             }
         }
 
@@ -63,7 +58,7 @@ namespace BE
             get { return status; }
             set
             {
-                //to define
+                status = value;
             }
         }
 
@@ -74,7 +69,7 @@ namespace BE
             get { return registrationDate; }
             set
             {
-                //to define
+                registrationDate = value;
             }
         }
 
@@ -85,7 +80,7 @@ namespace BE
             get { return entryDate; }
             set
             {
-                //to define
+                entryDate = value;
             }
         }
 
@@ -96,7 +91,7 @@ namespace BE
             get { return releaseDate; }
             set
             {
-                //to define
+                releaseDate = value;
             }
         }
 
@@ -111,7 +106,7 @@ namespace BE
             get { return area; }
             set
             {
-                //to define
+                area = value;
             }
 
         }
@@ -125,7 +120,7 @@ namespace BE
             get { return type; }
             set
             {
-                //to define
+                type = value;
             }
 
         }
@@ -139,7 +134,7 @@ namespace BE
             get { return pool; }
             set
             {
-                //to define
+                pool = value;
             }
         }
 
@@ -150,7 +145,7 @@ namespace BE
             get { return jacuzzi; }
             set
             {
-                //to define
+                jacuzzi = value;
             }
         }
 
@@ -161,7 +156,7 @@ namespace BE
             get { return garden; }
             set
             {
-                //to define
+                garden = value;
             }
         }
 
@@ -172,7 +167,7 @@ namespace BE
             get { return childrensAttractions; }
             set
             {
-                //to define
+                childrensAttractions = value;
             }
         }
 
@@ -182,7 +177,7 @@ namespace BE
             get { return adults;  }
             set
             {
-                //to define
+                adults = value;
             }
         }
 
@@ -194,7 +189,7 @@ namespace BE
             get { return children; }
             set
             {
-                //to define
+                children = value;
             }
         }
 
