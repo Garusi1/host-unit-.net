@@ -4,8 +4,12 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
+using System.Text.RegularExpressions;
+using System.Net.Mail;
 namespace BE
 {
+
+    [Serializable]
     public class GuestRequest
     {
         BE.Configuration r = new BE.Configuration();
@@ -14,7 +18,12 @@ namespace BE
         public int GuestRequestKey
         {
             get { return guestRequestKey; }
-            set { guestRequestKey = value; }
+            set
+            {
+                if (value < 10000000) //from number with 8 letters 
+                    throw new Exception(/*מספר זיהוי אינו תקין"*/"Incorrect key!");
+                guestRequestKey = value;
+            }
         }
 
 
@@ -24,6 +33,9 @@ namespace BE
             get { return privateName; }
             set
             {
+                Regex r = new Regex("^([^20]|[a-zA-Zא-ת]){2,20}$");
+                if (!r.IsMatch(value))
+                    throw new Exception(/*"שם פרטי צריך להכיל 2-20 אותיות."*/"Private name need to contain 2-20 letters ");
                 privateName = value;
             }
         }
@@ -35,6 +47,9 @@ namespace BE
             get { return familyName; }
             set
             {
+                Regex r = new Regex("^([^20]|[a-zA-Zא-ת]){2,20}$");
+                if (!r.IsMatch(value))
+                    throw new Exception(/*"שם משפחה צריך להכיל 2-20 אותיות."*/"Family name need to contain 2-20 letters ");
                 familyName = value;
             }
         }
@@ -47,17 +62,25 @@ namespace BE
             get { return mailAddress; }
             set
             {
+                try
+                {
+                    MailAddress m = new MailAddress(value);
+                }
+                catch (Exception)
+                {
+                    throw new Exception(/*"כתובת המייל לא תקינה."*/"Email address incorrect");
+                }
                 mailAddress = value;
             }
         }
 
 
-        private string status;// for example: "Active"
-        public string Status
+        private StatusGREnum status;// for example: "Active"
+        public StatusGREnum Status
         {
             get { return status; }
             set
-            {
+            {// to define
                 status = value;
             }
         }
@@ -68,7 +91,7 @@ namespace BE
         {
             get { return registrationDate; }
             set
-            {
+            {// to define
                 registrationDate = value;
             }
         }
@@ -90,7 +113,7 @@ namespace BE
         {
             get { return releaseDate; }
             set
-            {
+            {// to define
                 releaseDate = value;
             }
         }
@@ -105,7 +128,7 @@ namespace BE
         {
             get { return area; }
             set
-            {
+            {// to define
                 area = value;
             }
 
@@ -118,7 +141,7 @@ namespace BE
         public TypeEnum Type
         {
             get { return type; }
-            set
+            set// to define
             {
                 type = value;
             }
@@ -133,7 +156,7 @@ namespace BE
         {
             get { return pool; }
             set
-            {
+            {// to define
                 pool = value;
             }
         }
@@ -144,7 +167,7 @@ namespace BE
         {
             get { return jacuzzi; }
             set
-            {
+            {// to define
                 jacuzzi = value;
             }
         }
@@ -155,7 +178,7 @@ namespace BE
         {
             get { return garden; }
             set
-            {
+            {// to define
                 garden = value;
             }
         }
@@ -167,6 +190,7 @@ namespace BE
             get { return childrensAttractions; }
             set
             {
+
                 childrensAttractions = value;
             }
         }
@@ -177,6 +201,10 @@ namespace BE
             get { return adults;  }
             set
             {
+                if (value < 0)
+                    throw new Exception(/*מספר מבוגרים אינו יכול להיות שלילי"*/"Number of adults cannot be negative");
+                if (value == 0)
+                    throw new Exception(/*מספר מבוגרים אינוי יכול להיות 0"*/"Number of adults cannot be 0");
                 adults = value;
             }
         }
@@ -189,6 +217,8 @@ namespace BE
             get { return children; }
             set
             {
+                if (value < 0)
+                    throw new Exception(/*מספר ילדים אינו יכול להיות שלילי"*/"Number of children cannot be negative");
                 children = value;
             }
         }
@@ -197,9 +227,11 @@ namespace BE
         {
             return xx.GuestRequestKey == GuestRequestKey;
         }
+
+
         public void updateStatus(string status1)
         {
-            status = status1;
+            //status = status1;
 
         }
 

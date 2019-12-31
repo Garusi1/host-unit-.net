@@ -6,14 +6,18 @@ using System.Text;
 
 namespace DAL
 {
+
+
+    /// get the singelton instance of BL
+
     static public class Factory
     {
-        static IDAL show = null;
+        static IDAL instance = null;
         public static IDAL GetInstance()
         {
-            if (show == null)
-                show = new imp_Dal();
-            return show;
+            if (instance == null)
+                instance = new imp_Dal();
+            return instance;
         }
 
     }

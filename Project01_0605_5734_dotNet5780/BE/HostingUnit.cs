@@ -2,10 +2,13 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 
 namespace BE
 {
+
+    [Serializable]
     public class HostingUnit
     {
 
@@ -16,6 +19,8 @@ namespace BE
             get { return hostingUnitKey; }
             set
             {
+                if (value < 10000000) //from number with 8 letters 
+                    throw new Exception(/*מספר זיהוי אינו תקין"*/"Incorrect key!");
                 hostingUnitKey = value;
             }
         }
@@ -39,6 +44,9 @@ namespace BE
             get { return hostingUnitName; }
             set
             {
+                Regex r = new Regex("^([^20]|[0-9a-zA-Zא-ת]){2,30}$");
+                if (!r.IsMatch(value))
+                    throw new Exception(/*"שם יחידה צריך להכיל 2-30 אותיות."*/"HostingUnitName name need to contain 2-30 letters ");
                 hostingUnitName = value;
             }
 

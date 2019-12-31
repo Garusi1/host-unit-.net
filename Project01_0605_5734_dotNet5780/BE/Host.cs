@@ -7,11 +7,13 @@ using System.Threading.Tasks;
 
 using System.Text.RegularExpressions;
 using System.Net.Mail;
-
+using System.Xml.Serialization;
 
 
 namespace BE
 {
+
+    [Serializable]
     public class Host
     {
         private int hostKey;
@@ -20,8 +22,8 @@ namespace BE
             get { return hostKey; }
             set
             {
-                if(value< 30000000)
-                    throw new Exception(/*"שם פרטי צריך להכיל 2-20 אותיות."*/"Private name need to contain 2-20 letters ");
+                if(value< 10000000) //from number with 8 letters 
+                    throw new Exception(/*מספר זיהוי אינו תקין"*/"Incorrect key!");
                 hostKey = value;
             }
         }
@@ -91,7 +93,7 @@ namespace BE
         {
             get { return bankBranchDetails; }
             set
-            {
+            { // לממש בדיקה
                 bankBranchDetails = value;
             }
         }
@@ -103,7 +105,7 @@ namespace BE
         {
             get { return bankAccountNumber; }
             set
-            {
+            { // לממש בדיקה
                 bankAccountNumber = value;
             }
         }

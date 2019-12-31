@@ -13,6 +13,7 @@ namespace DAL
     {
         //GuestRequest
         void addGuestRequest(BE.GuestRequest guest);
+
         void updateGuestRequest(BE.GuestRequest guest);
 
         //HostingUnit

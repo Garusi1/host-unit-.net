@@ -1,4 +1,4 @@
-﻿using BE;
+﻿
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,18 +12,18 @@ namespace DAL
     {
         DataSource ds = new DataSource();
 
-        public static List<BE.GuestRequest> GuestRequestList1 = new List<GuestRequest>();
+        public static List<BE.GuestRequest> GuestRequestList1 = new List<BE.GuestRequest>();
 
-        public static List<BE.HostingUnit> HostingUnitList1 = new List<HostingUnit>();
+        public static List<BE.HostingUnit> HostingUnitList1 = new List<BE.HostingUnit>();
 
-        public static List<BE.Order> OrderList1 = new List<Order>();
+        public static List<BE.Order> OrderList1 = new List<BE.Order>();
 
 
                 
         public void addGuestRequest(BE.GuestRequest guest)
         {
 
-            foreach(GuestRequest element in ds.getGuestRequestList()) // צריך לבדוק שהלולאות האלה באמת עובדות
+            foreach(BE.GuestRequest element in ds.getGuestRequestList()) // צריך לבדוק שהלולאות האלה באמת עובדות
             {
                 if (element.isEqual(guest))
                 { return; } //צריך להקפיץ פה איזה הודעה על זה שהוא כבר קיים
@@ -35,7 +35,7 @@ namespace DAL
         public void updateGuestRequest(BE.GuestRequest guest)
 
         {
-            foreach (GuestRequest element in GuestRequestList1)
+            foreach (BE.GuestRequest element in GuestRequestList1)
             {
                 if (element.isEqual(guest))
                     element.updateStatus(guest.Status);
@@ -45,7 +45,7 @@ namespace DAL
         //HostingUnit
         public void addHostingUnit(BE.HostingUnit hostUnit)
         {
-            foreach (HostingUnit element in HostingUnitList1)
+            foreach (BE.HostingUnit element in HostingUnitList1)
             {
                 if (element.isEqual(hostUnit)) return; //צריך להקפיץ פה איזה הודעה על זה שהוא כבר קיים
             }
@@ -54,7 +54,7 @@ namespace DAL
         }
         public void delHostingUnit(int hostUnitID)
         {
-            foreach (HostingUnit element in HostingUnitList1)
+            foreach (BE.HostingUnit element in HostingUnitList1)
             {
                 if (element.isEqualID(hostUnitID))
                 {
@@ -66,7 +66,7 @@ namespace DAL
         }
         public void updateHostingUnit(BE.HostingUnit hostUnit)
         {
-            foreach(HostingUnit element in HostingUnitList1)
+            foreach(BE.HostingUnit element in HostingUnitList1)
         }
 
         //Order

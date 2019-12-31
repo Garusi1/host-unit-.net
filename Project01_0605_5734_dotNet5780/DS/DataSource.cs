@@ -66,13 +66,13 @@ namespace DAL
         };
 
 
+        //clone to the BL
+        public List<BE.GuestRequest> getGuestRequestList() { return GuestRequestList.Clone(); }
 
-        public List<BE.GuestRequest> getGuestRequestList() { return GuestRequestList; }
+        public List<BE.HostingUnit> getHostingUnitList() { return HostingUnitList.Clone(); }
+        public List<BE.Order> getOrderList() { return OrderList.Clone(); }
 
-        public List<BE.HostingUnit> getHostingUnitList() { return HostingUnitList; }
-        public List<BE.Order> getOrderList() { return OrderList; }
-
-        public List<BE.BankBranch> getBankBranchList() { return BankBranchList; }
+        public List<BE.BankBranch> getBankBranchList() { return BankBranchList.Clone(); }
 
 
 
