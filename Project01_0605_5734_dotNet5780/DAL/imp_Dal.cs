@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 //using DS;
+using BE;
 
 namespace DAL
 {
@@ -22,15 +23,14 @@ namespace DAL
                 
         public void addGuestRequest(BE.GuestRequest guest)
         {
-
-            foreach(BE.GuestRequest element in ds.getGuestRequestList()) // צריך לבדוק שהלולאות האלה באמת עובדות
+            guest.GuestRequestKey = BE.Configuration.geustReqID++;// לוודא שאכן מקדם אותו
+            foreach (BE.GuestRequest element in ds.getGuestRequestList()) // צריך לבדוק שהלולאות האלה באמת עובדות
             {
                 if (element.isEqual(guest))
-                { return; } //צריך להקפיץ פה איזה הודעה על זה שהוא כבר קיים
+                    throw new Exception(/* "ישנו מספר זהה של דרישת אירוח"*/"Cannot add.duplicate GuestRequest key on data ");
             }
 
-           GuestRequestList1.Add(guest);
-
+            GuestRequestList1.Add(guest.Clone());
         }
         public void updateGuestRequest(BE.GuestRequest guest)
 
@@ -45,12 +45,16 @@ namespace DAL
         //HostingUnit
         public void addHostingUnit(BE.HostingUnit hostUnit)
         {
+            hostUnit.HostingUnitKey = BE.Configuration.hostUnitID++;// לוודא שאכן מקדם אותו
+
             foreach (BE.HostingUnit element in HostingUnitList1)
             {
-                if (element.isEqual(hostUnit)) return; //צריך להקפיץ פה איזה הודעה על זה שהוא כבר קיים
+                if (element.isEqual(hostUnit))
+                    throw new Exception(/* "ישנו מספר זהה של יחידת אירוח"*/"Cannot add.duplicate HostingUnit key on data ");
+
             }
 
-            HostingUnitList1.Add(hostUnit);
+            HostingUnitList1.Add(hostUnit.Clone());
         }
         public void delHostingUnit(int hostUnitID)
         {

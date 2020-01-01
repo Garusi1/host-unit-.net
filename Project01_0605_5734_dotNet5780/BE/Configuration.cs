@@ -14,7 +14,5 @@ namespace BE
         public static int geustReqID = 40000000;
         public static int Commission = 10;
 
-
-
     }
 }

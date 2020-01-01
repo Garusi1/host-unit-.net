@@ -17,7 +17,7 @@ namespace BE
 
     public enum TypeEnum // type of hosting 
     {
-        All,Zimmer,Hotel,Camping
+        Unknown, Zimmer,Hotel,Camping
     }
     public enum AttractionsEnum 
     {

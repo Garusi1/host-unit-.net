@@ -65,8 +65,8 @@ namespace BE
             get { return status; }
             set
             {
-                //to define
-
+                if (!Enum.IsDefined(typeof(StatusEnum), value))
+                    throw new Exception("Enum input illegal");
                 status = value;
             }
         }

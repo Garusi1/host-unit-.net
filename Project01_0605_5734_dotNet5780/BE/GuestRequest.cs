@@ -80,7 +80,9 @@ namespace BE
         {
             get { return status; }
             set
-            {// to define
+            {
+                if (!Enum.IsDefined(typeof(StatusGREnum), value))
+                    throw new Exception("Enum input illegal");
                 status = value;
             }
         }
