@@ -76,6 +76,12 @@ namespace BL
             //לא הושלם מילוי
             if (hostUnit.Owner == null || hostUnit.HostingUnitName == "" )
                 throw new Exception("חובה למלא את כל השדות");
+            if (!Enum.IsDefined(typeof(AreaEnum), hostUnit.Area))
+                throw new Exception("Enum input illegal");
+            if (hostUnit.Area == AreaEnum.All)
+                throw new Exception("Enum input illegal. HostingUnit cannot be in All regions");
+
+
 
             // after we cheek all the possible problems we can transfer the data to DAL layer
 
@@ -86,7 +92,31 @@ namespace BL
 
         public void addOrder(BE.Order order)
         {
-            // 
+
+
+            var fit = from GS in GetGuestRequestList()
+                      from HU in GetHostingUnit()
+                      where (GS.Status == BE.StatusGREnum.פתוחה) &&
+                            (GS.Type == HU.Type) &&
+                            ((GS.Area == BE.AreaEnum.All) || (GS.Area == HU.Area)) &&
+
+                            /* ביחידת אירוח או שיש אטרקאציה או שאין. אם יש, אז אם בדירשת אירוח היא הכרחית יש התאמה.
+                            אם האטראקציה לא הכרחית אז לא משנה אם יש או אין.
+                            אם האורח לא מעוניין, אז נתאים רק אם אין את הארטאקציה.*/
+                            (((HU.Pool) && (GS.Pool == BE.AttractionsEnum.הכרחי)) || (GS.Pool == BE.AttractionsEnum.אפשרי) || ((!(HU.Pool)) && (GS.Pool == BE.AttractionsEnum.לא_מעוניין))) &&
+                            (((HU.Jacuzzi) && (GS.Jacuzzi == BE.AttractionsEnum.הכרחי)) || (GS.Jacuzzi == BE.AttractionsEnum.אפשרי) || ((!(HU.Jacuzzi)) && (GS.Jacuzzi == BE.AttractionsEnum.לא_מעוניין))) &&
+                            (((HU.Garden) && (GS.Garden == BE.AttractionsEnum.הכרחי)) || (GS.Garden == BE.AttractionsEnum.אפשרי) || ((!(HU.Garden)) && (GS.Garden == BE.AttractionsEnum.לא_מעוניין))) &&
+                            (((HU.ChildrensAttractions) && (GS.ChildrensAttractions == BE.AttractionsEnum.הכרחי)) || (GS.ChildrensAttractions == BE.AttractionsEnum.אפשרי) || ((!(HU.ChildrensAttractions)) && (GS.ChildrensAttractions == BE.AttractionsEnum.לא_מעוניין))) &&
+
+                            ///יש לממש לפי תאריך - אם פנוי 
+                            ///יש לממש 
+                      select new {GS guset, };
+
+
+
+                      ;
+
+
             throw new NotImplementedException();
         }
 
@@ -95,25 +125,33 @@ namespace BL
             throw new NotImplementedException();
         }
 
-        public List<BE.BankBranch> GetBankBranchList(List<BE.BankBranch> BankBranchList)
+
+
+
+        public List<BE.BankBranch> GetBankBranchList()
         {
-            throw new NotImplementedException();
+            //throw new NotImplementedException();
+            return IDAL.GetBankBranchList().Clone();
         }
 
-        public List<BE.GuestRequest> GetGuestRequestList(List<BE.GuestRequest> GuestRequestList)
+        public List<BE.GuestRequest> GetGuestRequestList()
         {
-            throw new NotImplementedException();
+            //throw new NotImplementedException();
+            return IDAL.GetGuestRequestList().Clone();
+
         }
 
 
-        public List<BE.HostingUnit> GetHostingUnit(List<BE.HostingUnit> HostingUnitList)
+        public List<BE.HostingUnit> GetHostingUnit()
         {
-            throw new NotImplementedException();
+            //throw new NotImplementedException();
+            return IDAL.GetHostingUnit().Clone();
         }
 
-        public List<BE.Order> GetOrderList(List<BE.Order> OrderList)
+        public List<BE.Order> GetOrderList()
         {
-            throw new NotImplementedException();
+            //throw new NotImplementedException();
+            return IDAL.GetOrderList().Clone();
         }
 
         public void updateGuestRequest(BE.GuestRequest guest)

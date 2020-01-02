@@ -39,9 +39,9 @@ namespace BL
         //lists
 
         //get lists from DataBase
-        List<BE.GuestRequest> GetGuestRequestList(List<BE.GuestRequest> GuestRequestList);
-        List<BE.HostingUnit> GetHostingUnit(List<BE.HostingUnit> HostingUnitList);
-        List<BE.Order> GetOrderList(List<BE.Order> OrderList);
-        List<BE.BankBranch> GetBankBranchList(List<BE.BankBranch> BankBranchList);
+        List<BE.GuestRequest> GetGuestRequestList();
+        List<BE.HostingUnit> GetHostingUnit();
+        List<BE.Order> GetOrderList();
+        List<BE.BankBranch> GetBankBranchList();
     }
 }

@@ -84,20 +84,20 @@ namespace DAL
         }
 
         //lists
-        public List<BE.GuestRequest> GetGuestRequestList(List<BE.GuestRequest> GuestRequestList)
+        public List<BE.GuestRequest> GetGuestRequestList()
         {
-            return ds.getGuestRequestList();
+            return ds.getGuestRequestList().Clone() ;
         }
-        public List<BE.HostingUnit> GetHostingUnit(List<BE.HostingUnit> HostingUnitList)
+        public List<BE.HostingUnit> GetHostingUnit()
         {
-            return ds.getHostingUnitList();
+            return ds.getHostingUnitList().Clone();
         }
-        public List<BE.Order> GetOrderList(List<BE.Order> OrderList)
+        public List<BE.Order> GetOrderList()
         {
-            return ds.getOrderList();
+            return ds.getOrderList().Clone();
         }
-        public List<BE.BankBranch> GetBankBranchList(List<BE.BankBranch> BankBranchList)
-        { return ds.getBankBranchList();  }
+        public List<BE.BankBranch> GetBankBranchList()
+        { return ds.getBankBranchList().Clone();  }
 
 
 
