@@ -12,7 +12,7 @@ namespace PL
         public static void Main(string[] args)
         {
             int number = -1;
-            mainMenu choosM1;
+            mainMenuEnum choosMenuEnum;
 
             do
             {
@@ -40,21 +40,21 @@ namespace PL
                     continue;
                 }
 
-                choosM1 = (mainMenu)number;
+                choosMenuEnum = (mainMenuEnum)number;
 
                 ConsoleMenus conMenu = new ConsoleMenus();
-                switch (choosM1)
+                switch (choosMenuEnum)
                 {
-                    case mainMenu.Add_Guest_Request:
-                        conMenu.clientMenu();
+                    case mainMenuEnum.Add_Guest_Request:
+                        conMenu.clientMenu();//1.0
                         break;
-                    case mainMenu.Hosting_Unit_Menu:
-                        conMenu.HostingUnitMenu();
+                    case mainMenuEnum.Hosting_Unit_Menu:
+                        conMenu.HostingUnitMenu();//2.0
                         break;
-                    case mainMenu.WebManager:
-                        conMenu.WebManagerMenu();
+                    case mainMenuEnum.WebManager:
+                        conMenu.WebManagerMenu();//4.0
                         break;
-                    case mainMenu.Exit:
+                    case mainMenuEnum.Exit:
                         break;
                 }
 
