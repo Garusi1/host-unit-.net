@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-using BE; //check if its ligel
+using BE; 
 
 
 namespace DAL
@@ -28,11 +28,11 @@ namespace DAL
 
         //lists
 
-        List<BE.GuestRequest> GetGuestRequestList(List<BE.GuestRequest> GuestRequestList);
+        List<BE.GuestRequest> GetGuestRequestList();
 
-        List<BE.HostingUnit> GetHostingUnit(List<BE.HostingUnit> HostingUnitList);
-        List<BE.Order> GetOrderList(List<BE.Order> OrderList);
-        List<BE.BankBranch> GetBankBranchList(List<BE.BankBranch> BankBranchList);
+        List<BE.HostingUnit> GetHostingUnit();
+        List<BE.Order> GetOrderList();
+        List<BE.BankBranch> GetBankBranchList();
 
 
 
