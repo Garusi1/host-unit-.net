@@ -110,7 +110,10 @@ namespace BL
 
                             ///יש לממש לפי תאריך - אם פנוי 
                             ///יש לממש 
-                      select new {GS guset, };
+                            ///
+                            ///לבדוק לוגיקה
+                      select new Order()/*{GS.GuestRequestKey,HU.HostingUnitKey };*/{GuestRequestKey= GS.GuestRequestKey,HostingUnitKey = HU.HostingUnitKey ,Status=BE.StatusEnum.טרם_טופל ,CreateDate=DateTime.Now}
+
 
 
 
