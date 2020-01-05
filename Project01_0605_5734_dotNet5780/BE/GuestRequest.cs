@@ -4,8 +4,12 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
+using System.Text.RegularExpressions;
+using System.Net.Mail;
 namespace BE
 {
+
+    [Serializable]
     public class GuestRequest
     {
         BE.Configuration r = new BE.Configuration();
@@ -14,7 +18,12 @@ namespace BE
         public int GuestRequestKey
         {
             get { return guestRequestKey; }
-            set { guestRequestKey = value; }
+            set
+            {
+                if (value < 10000000) //from number with 8 letters 
+                    throw new Exception(/*מספר זיהוי אינו תקין"*/"Incorrect key!");
+                guestRequestKey = value;
+            }
         }
 
 
@@ -24,6 +33,9 @@ namespace BE
             get { return privateName; }
             set
             {
+                Regex r = new Regex("^([^20]|[a-zA-Zא-ת]){2,20}$");
+                if (!r.IsMatch(value))
+                    throw new Exception(/*"שם פרטי צריך להכיל 2-20 אותיות בלבד."*/"Private name need to contain 2-20 letters only ");
                 privateName = value;
             }
         }
@@ -35,6 +47,9 @@ namespace BE
             get { return familyName; }
             set
             {
+                Regex r = new Regex("^([^20]|[a-zA-Zא-ת]){2,20}$");
+                if (!r.IsMatch(value))
+                    throw new Exception(/*"שם משפחה צריך להכיל 2-20 אותיות בלבד."*/"Family name need to contain 2-20 letters only ");
                 familyName = value;
             }
         }
@@ -47,17 +62,27 @@ namespace BE
             get { return mailAddress; }
             set
             {
+                try
+                {
+                    MailAddress m = new MailAddress(value);
+                }
+                catch (Exception)
+                {
+                    throw new Exception(/*"כתובת המייל לא תקינה."*/"Email address incorrect");
+                }
                 mailAddress = value;
             }
         }
 
 
-        private string status;// for example: "Active"
-        public string Status
+        private StatusGREnum status;// for example: "Active"  // פתוחה, נסגרה_עסקה_דרך_האתר, נסגרה_כי_פג_תוקפה
+        public StatusGREnum Status
         {
             get { return status; }
             set
             {
+                if (!Enum.IsDefined(typeof(StatusGREnum), value))
+                    throw new Exception("Enum input illegal");
                 status = value;
             }
         }
@@ -68,7 +93,7 @@ namespace BE
         {
             get { return registrationDate; }
             set
-            {
+            {// to define
                 registrationDate = value;
             }
         }
@@ -91,6 +116,7 @@ namespace BE
             get { return releaseDate; }
             set
             {
+
                 releaseDate = value;
             }
         }
@@ -106,6 +132,8 @@ namespace BE
             get { return area; }
             set
             {
+                if (!Enum.IsDefined(typeof(AreaEnum), value))
+                    throw new Exception("Enum input illegal");
                 area = value;
             }
 
@@ -120,6 +148,8 @@ namespace BE
             get { return type; }
             set
             {
+                if (!Enum.IsDefined(typeof(TypeEnum), value))
+                    throw new Exception("Enum input illegal");
                 type = value;
             }
 
@@ -134,6 +164,8 @@ namespace BE
             get { return pool; }
             set
             {
+                if (!Enum.IsDefined(typeof(AttractionsEnum), value))
+                    throw new Exception("Enum input illegal");
                 pool = value;
             }
         }
@@ -145,6 +177,8 @@ namespace BE
             get { return jacuzzi; }
             set
             {
+                if (!Enum.IsDefined(typeof(AttractionsEnum), value))
+                    throw new Exception("Enum input illegal");
                 jacuzzi = value;
             }
         }
@@ -156,6 +190,8 @@ namespace BE
             get { return garden; }
             set
             {
+                if (!Enum.IsDefined(typeof(AttractionsEnum), value))
+                    throw new Exception("Enum input illegal");
                 garden = value;
             }
         }
@@ -167,6 +203,8 @@ namespace BE
             get { return childrensAttractions; }
             set
             {
+                if (!Enum.IsDefined(typeof(AttractionsEnum), value))
+                    throw new Exception("Enum input illegal");
                 childrensAttractions = value;
             }
         }
@@ -177,6 +215,10 @@ namespace BE
             get { return adults;  }
             set
             {
+                if (value < 0)
+                    throw new Exception(/*מספר מבוגרים אינו יכול להיות שלילי"*/"Number of adults cannot be negative");
+                if (value == 0)
+                    throw new Exception(/*מספר מבוגרים אינוי יכול להיות 0"*/"Number of adults cannot be 0");
                 adults = value;
             }
         }
@@ -189,6 +231,8 @@ namespace BE
             get { return children; }
             set
             {
+                if (value < 0)
+                    throw new Exception(/*מספר ילדים אינו יכול להיות שלילי"*/"Number of children cannot be negative");
                 children = value;
             }
         }
@@ -197,9 +241,11 @@ namespace BE
         {
             return xx.GuestRequestKey == GuestRequestKey;
         }
+
+
         public void updateStatus(string status1)
         {
-            status = status1;
+            //status = status1;
 
         }
 

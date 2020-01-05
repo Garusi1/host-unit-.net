@@ -43,6 +43,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ConsoleMenus.cs" />
+    <Compile Include="enumsConsloe.cs" />
     <Compile Include="MyPL.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

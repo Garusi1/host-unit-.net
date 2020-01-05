@@ -1,10 +1,11 @@
-﻿using BE;
+﻿
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 //using DS;
+using BE;
 
 namespace DAL
 {
@@ -12,30 +13,29 @@ namespace DAL
     {
         DataSource ds = new DataSource();
 
-        public static List<BE.GuestRequest> GuestRequestList1 = new List<GuestRequest>();
+        public static List<BE.GuestRequest> GuestRequestList1 = new List<BE.GuestRequest>();
 
-        public static List<BE.HostingUnit> HostingUnitList1 = new List<HostingUnit>();
+        public static List<BE.HostingUnit> HostingUnitList1 = new List<BE.HostingUnit>();
 
-        public static List<BE.Order> OrderList1 = new List<Order>();
+        public static List<BE.Order> OrderList1 = new List<BE.Order>();
 
 
                 
         public void addGuestRequest(BE.GuestRequest guest)
         {
-
-            foreach(GuestRequest element in ds.getGuestRequestList()) // צריך לבדוק שהלולאות האלה באמת עובדות
+            guest.GuestRequestKey = BE.Configuration.geustReqID++;// לוודא שאכן מקדם אותו
+            foreach (BE.GuestRequest element in ds.getGuestRequestList()) // צריך לבדוק שהלולאות האלה באמת עובדות
             {
                 if (element.isEqual(guest))
-                { return; } //צריך להקפיץ פה איזה הודעה על זה שהוא כבר קיים
+                    throw new Exception(/* "ישנו מספר זהה של דרישת אירוח"*/"Cannot add.duplicate GuestRequest key on data ");
             }
 
-           GuestRequestList1.Add(guest);
-
+            GuestRequestList1.Add(guest.Clone());
         }
         public void updateGuestRequest(BE.GuestRequest guest)
 
         {
-            foreach (GuestRequest element in GuestRequestList1)
+            foreach (BE.GuestRequest element in GuestRequestList1)
             {
                 if (element.isEqual(guest))
                     element.updateStatus(guest.Status);
@@ -45,16 +45,20 @@ namespace DAL
         //HostingUnit
         public void addHostingUnit(BE.HostingUnit hostUnit)
         {
-            foreach (HostingUnit element in HostingUnitList1)
+            hostUnit.HostingUnitKey = BE.Configuration.hostUnitID++;// לוודא שאכן מקדם אותו
+
+            foreach (BE.HostingUnit element in HostingUnitList1)
             {
-                if (element.isEqual(hostUnit)) return; //צריך להקפיץ פה איזה הודעה על זה שהוא כבר קיים
+                if (element.isEqual(hostUnit))
+                    throw new Exception(/* "ישנו מספר זהה של יחידת אירוח"*/"Cannot add.duplicate HostingUnit key on data ");
+
             }
 
-            HostingUnitList1.Add(hostUnit);
+            HostingUnitList1.Add(hostUnit.Clone());
         }
         public void delHostingUnit(int hostUnitID)
         {
-            foreach (HostingUnit element in HostingUnitList1)
+            foreach (BE.HostingUnit element in HostingUnitList1)
             {
                 if (element.isEqualID(hostUnitID))
                 {
@@ -66,7 +70,7 @@ namespace DAL
         }
         public void updateHostingUnit(BE.HostingUnit hostUnit)
         {
-            foreach(HostingUnit element in HostingUnitList1)
+            foreach(BE.HostingUnit element in HostingUnitList1)
         }
 
         //Order
@@ -80,20 +84,20 @@ namespace DAL
         }
 
         //lists
-        public List<BE.GuestRequest> GetGuestRequestList(List<BE.GuestRequest> GuestRequestList)
+        public List<BE.GuestRequest> GetGuestRequestList()
         {
-            return ds.getGuestRequestList();
+            return ds.getGuestRequestList().Clone() ;
         }
-        public List<BE.HostingUnit> GetHostingUnit(List<BE.HostingUnit> HostingUnitList)
+        public List<BE.HostingUnit> GetHostingUnit()
         {
-            return ds.getHostingUnitList();
+            return ds.getHostingUnitList().Clone();
         }
-        public List<BE.Order> GetOrderList(List<BE.Order> OrderList)
+        public List<BE.Order> GetOrderList()
         {
-            return ds.getOrderList();
+            return ds.getOrderList().Clone();
         }
-        public List<BE.BankBranch> GetBankBranchList(List<BE.BankBranch> BankBranchList)
-        { return ds.getBankBranchList();  }
+        public List<BE.BankBranch> GetBankBranchList()
+        { return ds.getBankBranchList().Clone();  }
 
 
 

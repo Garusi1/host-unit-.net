@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 
 namespace BE
 {
+    [Serializable]
     public class Order //מחלקה בשם Order שמייצגת הזמנה )כלומר את הקשר בין לקוח ליחידת אירוח( ותכלול:
     {
         private int hostingUnitKey;
@@ -14,7 +15,9 @@ namespace BE
             get { return hostingUnitKey; }
             set
             {
-                //to define
+                if (value < 10000000) //from number with 8 letters 
+                    throw new Exception(/*מספר זיהוי אינו תקין"*/"Incorrect key!");
+                hostingUnitKey = value;
             }
 
         }
@@ -28,13 +31,14 @@ namespace BE
             set
             {
                 //to define
+                guestRequestKey = value;
             }
 
         }
 
 
 
-        private static int serialKey = 10000000;
+
 
 
         private int orderKey;
@@ -44,7 +48,10 @@ namespace BE
             set
             {
                 //to define
-                /// put attention
+                if (value < 10000000) //from number with 8 letters 
+                    throw new Exception(/*מספר זיהוי אינו תקין"*/"Incorrect key!");
+                orderKey = value;
+
             }
         }
 
@@ -58,7 +65,9 @@ namespace BE
             get { return status; }
             set
             {
-                //to define
+                if (!Enum.IsDefined(typeof(StatusEnum), value))
+                    throw new Exception("Enum input illegal");
+                status = value;
             }
         }
 
@@ -70,6 +79,7 @@ namespace BE
             set
             {
                 //to define
+                createDate = value;
             }
 
         }
@@ -82,6 +92,7 @@ namespace BE
             set
             {
                 //to define
+                orderDate = value;
             }
 
         }

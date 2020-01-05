@@ -6,6 +6,8 @@ using System.Threading.Tasks;
 
 namespace BE
 {
+
+    [Serializable]
     public class BankBranch
     {
         // capital letter its for the public function.
