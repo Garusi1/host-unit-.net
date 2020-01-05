@@ -370,6 +370,22 @@ namespace PL
         public void PersonalArea() //2.2
         {
             int number = -1;
+            Console.WriteLine("please enter youtr HostingUnit ID");
+            string input = Console.ReadLine();
+            if (!Int32.TryParse(input, out number))
+            {
+                number = -1;
+                throw new System.ArgumentException(string.Format("worng input {0} not llegal int", number));
+
+            }
+            BE.HostingUnit HU = bl.getHostingUnitByID(number);
+            if(HU==null) //אין יחידת אירוח עם מספר זיהוי זה
+            {
+                throw new System.ArgumentException(string.Format("worng input {0} this HostingUnit id not exsists", number));
+
+            }
+
+
             PersoanlAreaEnum choosMenuEnum;
 
             do
@@ -383,7 +399,7 @@ namespace PL
                 Console.WriteLine("Enter 3 to to enter to orders menu");
                 Console.WriteLine("Enter 0 to return to the previous menu");
 
-                string input = Console.ReadLine();
+                 input = Console.ReadLine();
 
 
                 if (!Int32.TryParse(input, out number))
@@ -404,13 +420,13 @@ namespace PL
                 switch (choosMenuEnum)
                 {
                     case PersoanlAreaEnum.Update_Hosting_Unit:
-                        conMenu.PL_UpdateHostingUnit();//2.2.1
+                        conMenu.PL_UpdateHostingUnit(HU);//2.2.1
                         break;
                     case PersoanlAreaEnum.Delete_Hosting_Unit:
-                        conMenu.PL_DeleteHostingUnit();//2.3
+                        conMenu.PL_DeleteHostingUnit(HU);//2.3
                         break;
                     case PersoanlAreaEnum.Orders_Menu:
-                        conMenu.PL_OrdersMenu();//3.0
+                        conMenu.PL_OrdersMenu(HU);//3.0
                         break;
                     case PersoanlAreaEnum.Exit:
                         break;
@@ -423,19 +439,19 @@ namespace PL
 
         }
 
-        public void PL_UpdateHostingUnit() //2.2.1
+        public void PL_UpdateHostingUnit(BE.HostingUnit HU) //2.2.1
         {
             //לקבל יחידת אירוח כמובן בהעתק
             //לממש עדכון יחידת אירוח ולשלוח לביסניס לוגיק
         }
 
-        public void PL_DeleteHostingUnit()//2.3
+        public void PL_DeleteHostingUnit(BE.HostingUnit HU)//2.3
         {
             //לקבל יחידת אירוח כמובן בהעתק
             //לממש מחיקת יחידת אירוח ולשלוח לביסניס לוגיק
         }
 
-        public void PL_OrdersMenu()//3.0
+        public void PL_OrdersMenu(BE.HostingUnit HU)//3.0
         {
             int number = -1;
             OrdersMenuEnum choosMenuEnum;
@@ -470,10 +486,11 @@ namespace PL
                 switch (choosMenuEnum)
                 {
                     case OrdersMenuEnum.Queries_For_Customer_List:
-                        conMenu.PL_QueriesForCustomerList();//4.1
+                        conMenu.PL_QueriesForCustomerList();//4.1 ///לממש כאן הדפסה בלבד ואחריה 
+                        addOrder //במילוי ידני של מספר לקוח. מספר יחידת אירוח לקבל
                         break;
                     case OrdersMenuEnum.Orders_List:
-                        conMenu.PL_OrdersList();//3.4
+                        conMenu.PL_OrdersList(HU);//3.4
                         break;
                     case OrdersMenuEnum.Exit:
                         break;
@@ -560,11 +577,11 @@ namespace PL
 
 
 
-        public void PL_OrdersList()//3.4
+        public void PL_OrdersList(BE.HostingUnit HU)//3.4
         {
 
                 ///לקבל יחידת רשימת הזמנות כמובן בהעתק
-                ///לבצע הדפסה למסך של רשימת ההזמנות 
+                ///לבצע הדפסה למסך של רשימת ההזמנות הקיימות בהתאם ליחדית אירוח הזאת.
               
             //3.2  
                 ///לאפשר עדכון הזמנה וכמובן להוריד לביסניס לוגיק
@@ -575,8 +592,7 @@ namespace PL
 
         public void PL_QueriesForCustomerList()//4.1
         {
-            ///3.1
-            // לממש אפשרת להוספת הזמנה 
+
         }
 
         public void PL_QueriesForHostingUnitList()//4.2

@@ -99,7 +99,7 @@ namespace DAL
             return (List<BE.GuestRequest>)li.Clone() ;
 
         }
-        public List<BE.HostingUnit> GetHostingUnit()
+        public List<BE.HostingUnit> GetHostingUnitList()
         {
 
             var li = from item in ds.getHostingUnitList()

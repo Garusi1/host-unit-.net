@@ -40,8 +40,14 @@ namespace BL
 
         //get lists from DataBase
         List<BE.GuestRequest> GetGuestRequestList();
-        List<BE.HostingUnit> GetHostingUnit();
+        List<BE.HostingUnit> GetHostingUnitList();
         List<BE.Order> GetOrderList();
         List<BE.BankBranch> GetBankBranchList();
+
+
+
+        //תוספות
+
+         BE.HostingUnit getHostingUnitByID(int ID);
     }
 }

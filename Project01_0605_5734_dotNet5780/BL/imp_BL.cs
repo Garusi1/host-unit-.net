@@ -16,13 +16,13 @@ namespace BL
         {
             IDAL = DAL.Factory.GetInstance();
         }
-        
-        
+
+
         public void addGuestRequest(BE.GuestRequest guest)
         {
 
             //אם לא הושלם מילוי
-            if (guest.PrivateName == "" || guest.FamilyName == "" || guest.MailAddress==null || guest.EntryDate==null|| guest.ReleaseDate == null)
+            if (guest.PrivateName == "" || guest.FamilyName == "" || guest.MailAddress == null || guest.EntryDate == null || guest.ReleaseDate == null)
                 throw new Exception("חובה למלא את כל השדות");
             if (!checkRequestDates(guest))// if the dates are not legal
                 throw new System.ArgumentException("Dates are not legal!");
@@ -34,7 +34,7 @@ namespace BL
                 throw new Exception(/*מספר מבוגרים אינו יכול להיות שלילי"*/"Number of adults cannot be negative");
             if (guest.Adults == 0)
                 throw new Exception(/*מספר מבוגרים אינוי יכול להיות 0"*/"Number of adults cannot be 0");
-            if(guest.Type==BE.TypeEnum.Unknown)
+            if (guest.Type == BE.TypeEnum.Unknown)
                 throw new Exception(/*חובה לבחור סוג יחידת יחידת אירוח"*/"Select unit type of hosting unit is required");
 
             //AttractionsEnum // Unknown,הכרחי, אפשרי, לא_מעוניין
@@ -44,7 +44,7 @@ namespace BL
                 throw new Exception(/*חובה לבחור האם מעוניין בג'קוזי"*/"Must choose whether you want a jacuzzi");
             if (guest.Garden == BE.AttractionsEnum.Unknown)
                 throw new Exception(/*חובה לבחור האם מעוניין בגינה"*/"Must choose whether you want a garden");
-            if ((guest.ChildrensAttractions == BE.AttractionsEnum.Unknown)&&(guest.Children>0))
+            if ((guest.ChildrensAttractions == BE.AttractionsEnum.Unknown) && (guest.Children > 0))
                 throw new Exception(/*חובה לבחור האם מעוניין באטראקציות לילדים"*/"Must choose whether you want a Childrens Attractions");
 
             checkDateLegallOneYear(DateTime generalDate);
@@ -54,13 +54,13 @@ namespace BL
             DateTime theDateToday = new DateTime();
             theDateToday = DateTime.Now;
             theDateToday = new DateTime(theDateToday.Year, theDateToday.Month, theDateToday.Day); //איפוס שעון ל00:00:00
-            if (guest.EntryDate < theDateToday) 
+            if (guest.EntryDate < theDateToday)
                 throw new Exception(/*תאריך כניסה אינו יכול להיות  מוקדם מעכשיו"*/"EntryDate cannot be earlier from now ");
 
             if (guest.ReleaseDate < theDateToday.AddDays(1))
                 throw new Exception(/*תאריך יציאה אינו יכול להיות  מוקדם מעוד יום"*/"ReleaseDate cannot be earlier from tomorrow ");
 
-            if (guest.Status!= BE.StatusGREnum.פתוחה)
+            if (guest.Status != BE.StatusGREnum.פתוחה)
                 throw new Exception(/* "סטטוס דרישת לקוח שגוי.סטטוס דרישה חדשה יהיה תמיד פתוח"*/"Incorrect GuestRequest status. New GuestRequest status will always be open ");
 
 
@@ -77,13 +77,13 @@ namespace BL
         {
 
             //אם לא הושלם מילוי
-            if (hostUnit.Owner == null || hostUnit.HostingUnitName == "" )
+            if (hostUnit.Owner == null || hostUnit.HostingUnitName == "")
                 throw new Exception("חובה למלא את כל השדות");
             if (!Enum.IsDefined(typeof(AreaEnum), hostUnit.Area))
                 throw new Exception("Enum input illegal");
             if (hostUnit.Area == AreaEnum.All)
                 throw new Exception("Enum input illegal. HostingUnit cannot be in All regions");
-           
+
 
 
 
@@ -126,7 +126,7 @@ namespace BL
                             ///יש לממש 
                             ///
                             ///לבדוק לוגיקה
-                      select new Order()/*{GS.GuestRequestKey,HU.HostingUnitKey };*/{GuestRequestKey= GS.GuestRequestKey,HostingUnitKey = HU.HostingUnitKey ,Status=BE.StatusEnum.טרם_טופל ,CreateDate=DateTime.Now} ;
+                      select new Order()/*{GS.GuestRequestKey,HU.HostingUnitKey };*/{ GuestRequestKey = GS.GuestRequestKey, HostingUnitKey = HU.HostingUnitKey, Status = BE.StatusEnum.טרם_טופל, CreateDate = DateTime.Now };
 
 
             throw new NotImplementedException();
@@ -154,10 +154,10 @@ namespace BL
         }
 
 
-        public List<BE.HostingUnit> GetHostingUnit()
+        public List<BE.HostingUnit> GetHostingUnitList()
         {
             //throw new NotImplementedException();
-            return IDAL.GetHostingUnit().Clone();
+            return IDAL.GetHostingUnitList().Clone();
         }
 
         public List<BE.Order> GetOrderList()
@@ -182,11 +182,11 @@ namespace BL
         {
             throw new NotImplementedException();
         }
-    
-        
-        public bool checkRequestDates (BE.GuestRequest guest)
+
+
+        public bool checkRequestDates(BE.GuestRequest guest)
         {
-            if(guest.EntryDate<= guest.ReleaseDate) // check if the dates are not equal and if the relase date are not bigger then EntryDate
+            if (guest.EntryDate <= guest.ReleaseDate) // check if the dates are not equal and if the relase date are not bigger then EntryDate
                 return false;
             return true;
 
@@ -216,8 +216,82 @@ namespace BL
                 throw new System.ArgumentException(string.Format("worng input {0} not llegal ", generalDate));
 
             }
+            
             return true;
         }
+
+
+        public BE.HostingUnit getHostingUnitByID(int ID)
+        {
+
+            var list = from item in GetHostingUnitList()
+                       where item.HostingUnitKey == ID
+                       select item;
+            foreach (var item in list)
+            {
+                return item.Clone();
+            }
+
+            return null;
+
+        }
+
+
+
+
+
+        public static bool Add<T>(List<T> list, T t) where T : IComparable
+        {
+
+            foreach (T item in list)
+            {
+                if (t.CompareTo(item) == 0)
+                {
+                    return false;
+                }
+            }
+            list.Add(t);
+            return true;
+
+        }
+
+
+
+
+        public static void Remove<T>(List<T> list, T t) where T : IComparable
+        {
+            T temp = default(T);
+            foreach (T item in list)
+            {
+                if (t.CompareTo(item) == 0)
+                {
+                    temp = item;
+                    break;
+                }
+            }
+
+            if (temp != null)
+                list.Remove(temp);
+        }
+
+
+
+
+        public static T Find<T>(List<T> list, T t) where T : class, IComparable
+        {
+
+            foreach (T item in list)
+            {
+                if (t.CompareTo(item) == 0)
+                {
+                    return item;
+                }
+
+            }
+            return null;
+        }
+
+
 
 
     }
