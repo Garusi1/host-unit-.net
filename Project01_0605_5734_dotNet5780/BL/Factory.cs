@@ -8,14 +8,14 @@ namespace BL
     /// <summary>
     /// get the singelton instance of BL
     /// </summary>
-     static public class Factory
+    public static class Factory
     {
-         static IBL show = null;
-        public static IBL GetShow()
+        private static IBL instance = null;
+        public static IBL GetInstance()
         {
-            if (show == null)
-                show = new imp_BL();
-            return show;
+            if (instance == null)
+                instance = new imp_BL();
+            return instance;
         }
     }
 

@@ -10,23 +10,25 @@ namespace PL
 {
     public class ConsoleMenus
     {
-
+        BL.IBL bl;
 
         /// <summary>
         /// start menu
         /// </summary>
         public void clientMenu()//עבור לקוח ...
         {
+            bl = BL.Factory.GetInstance();
+
 
             CultureInfo CultureInfo = new CultureInfo("de-DE");
 
-            Console.WriteLine("add geust request, for exit click 0");
-            string data = Console.ReadLine();
+            string data = "";
             BE.GuestRequest gr = new GuestRequest();
 
             while (!data.Equals("0"))
             {
-
+                Console.WriteLine("add geust request, for exit click 0");
+                if (data.Equals("0")) break;
                 //  private name
 
                 Console.WriteLine("\n please enter your private name");
@@ -283,7 +285,8 @@ namespace PL
                     gr.Pool = choosEnum4;
                 }
 
-
+                // 
+                
             }
 
 
@@ -353,9 +356,16 @@ namespace PL
         //Hosting Unit Menu 
         public void Pl_AddHostingUnit() //2.1
         {
-            //לממש הוספת יחידת אירוח ולשלוח לביסניס לוגיק
-        }
 
+            Console.WriteLine("add Hosting Unit, for exit click 0");
+            string data = "";
+            BE.GuestRequest gr = new GuestRequest();
+
+            while (!data.Equals("0"))
+            {
+                //לממש הוספת יחידת אירוח ולשלוח לביסניס לוגיק
+            }
+        }
         
         public void PersonalArea() //2.2
         {
