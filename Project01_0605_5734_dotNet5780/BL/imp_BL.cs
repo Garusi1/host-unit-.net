@@ -123,29 +123,57 @@ namespace BL
 
             if (GR.Type!=HU.Type)
             {
-                throw new System.ArgumentNullException(string.Format("the Guest request and the Hosting Unit are not fit in Type parmater  "));
+                throw new System.ArgumentException(string.Format("the Guest request and the Hosting Unit are not fit in Type parmater  "));
             }
             if ((!(GR.Area == BE.AreaEnum.All)) && (!(GR.Area == HU.Area)) )
             {
-                throw new System.ArgumentNullException(string.Format("the Guest request and the Hosting Unit are not fit in Area parmater  "));
+                throw new System.ArgumentException(string.Format("the Guest request and the Hosting Unit are not fit in Area parmater  "));
             }
 
 
-            //לבדוק לוגית
-            if ((!((HU.Pool) && (GR.Pool == BE.AttractionsEnum.הכרחי)) ||   !(((HU.Pool)) && (GR.Pool == BE.AttractionsEnum.לא_מעוניין))))
+            if ((!(HU.Pool) && (GR.Pool == BE.AttractionsEnum.הכרחי)) ||(((HU.Pool) && (GR.Pool == BE.AttractionsEnum.לא_מעוניין))))
             {
-
+                throw new System.ArgumentException(string.Format("the Guest request and the Hosting Unit are not fit in the Pool parmater  "));
             }
 
+            if ((!(HU.Jacuzzi) && (GR.Jacuzzi == BE.AttractionsEnum.הכרחי)) || (((HU.Jacuzzi) && (GR.Jacuzzi == BE.AttractionsEnum.לא_מעוניין))))
+            {
+                throw new System.ArgumentException(string.Format("the Guest request and the Hosting Unit are not fit in the Jacuzzi parmater  "));
+            }
+            if ((!(HU.Garden) && (GR.Garden == BE.AttractionsEnum.הכרחי)) || (((HU.Garden) && (GR.Garden == BE.AttractionsEnum.לא_מעוניין))))
+            {
+                throw new System.ArgumentException(string.Format("the Guest request and the Hosting Unit are not fit in the Garden parmater  "));
+            }
+            if ((!(HU.ChildrensAttractions) && (GR.ChildrensAttractions == BE.AttractionsEnum.הכרחי)) || (((HU.ChildrensAttractions) && (GR.ChildrensAttractions == BE.AttractionsEnum.לא_מעוניין))))
+            {
+                throw new System.ArgumentException(string.Format("the Guest request and the Hosting Unit are not fit in the ChildrensAttractions parmater  "));
+            }
 
-            // &&
-            //////                            (((HU.Jacuzzi) && (GS.Jacuzzi == BE.AttractionsEnum.הכרחי)) || (GS.Jacuzzi == BE.AttractionsEnum.אפשרי) || ((!(HU.Jacuzzi)) && (GS.Jacuzzi == BE.AttractionsEnum.לא_מעוניין))) &&
-            //////                            (((HU.Garden) && (GS.Garden == BE.AttractionsEnum.הכרחי)) || (GS.Garden == BE.AttractionsEnum.אפשרי) || ((!(HU.Garden)) && (GS.Garden == BE.AttractionsEnum.לא_מעוניין))) &&
-            //////                            (((HU.ChildrensAttractions) && (GS.ChildrensAttractions == BE.AttractionsEnum.הכרחי)) || (GS.ChildrensAttractions == BE.AttractionsEnum.אפשרי) || ((!(HU.ChildrensAttractions)) && (GS.ChildrensAttractions == BE.AttractionsEnum.לא_מעוניין))) &&
+            //ליתר חרום
+            if (checkDateLegallOneYear(GR.EntryDate)) //אם התאריכים חורגים מהטווח של חודש אחורה ו11 חודש קדימה
+            {
+                throw new System.ArgumentException(string.Format("worng input {0} not in the span of dates ", GR.EntryDate));
+
+            }
+            if (checkDateLegallOneYear(GR.ReleaseDate))
+            {
+                throw new System.ArgumentException(string.Format("worng input {0} not in the span of dates ", GR.ReleaseDate));
+            }
+
+          
+         
+            if (!ApproveRequest( GR, HU))  //check if the dates are available on matrix.   // if not, return false.
+            {
+                throw new Exception(string.Format("The dates on Hosting unit are not available"));
+            }
+
+            // if the dates are available on matrix update the Hosint Unit
 
 
 
-            throw new NotImplementedException();
+            IDAL.addOrder(order.Clone());
+
+
         }
 
         public void delHostingUnit(int hostUnitID)
@@ -196,6 +224,25 @@ namespace BL
 
         public void UpdateOrder(BE.Order order)
         {
+
+            BE.GuestRequest GR = getGuestRequestByID(order.GuestRequestKey);
+            BE.HostingUnit HU = getHostingUnitByID(order.HostingUnitKey); // בהנחה שזה קיים אחרת לא נשלחה בקשה לפונקציה זו
+
+            if (!(ApproveRequest(GR,  HU))) //check if the dates are available on matrix.   // if not, return false.)
+            {
+                throw new Exception(string.Format("The dates on Hosting unit are not available"));
+
+
+            }
+
+            //לממש רק כאשר סטטוס ההזמנה משתנה לסגירת עסקה
+
+            DateTime LastNight = GR.RegistrationDate.AddDays(-2);
+            for (DateTime tempDate = GR.EntryDate; tempDate <= LastNight; tempDate = tempDate.AddDays(1))
+                this[tempDate, HU] = true;//put the nights on matrix
+
+
+
             throw new NotImplementedException();
         }
 
@@ -270,6 +317,24 @@ namespace BL
 
 
 
+        public bool this[DateTime generalDate, BE.HostingUnit HU] // define indexer 
+        {
+            private set => HU.Diary[generalDate.Day - 1, generalDate.Month - 1] = value;
+            get => HU.Diary[generalDate.Day - 1, generalDate.Month - 1];
+        }
+
+        public bool ApproveRequest(BE.GuestRequest guestReq,BE.HostingUnit HU) //check if the dates are available on matrix.   // if not, return false.
+        {
+            DateTime LastNight = guestReq.RegistrationDate.AddDays(- 2);
+
+            for (DateTime tempDate = guestReq.EntryDate; tempDate <=LastNight; tempDate = tempDate.AddDays(1))
+                if (this[tempDate,HU]) { return false; }// check if the days are avaiable
+
+            return true;
+        }
+
+
+        
 
 
         public static bool Add<T>(List<T> list, T t) where T : IComparable

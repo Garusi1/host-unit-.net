@@ -83,6 +83,14 @@ namespace DAL
         //Order
         public void addOrder(BE.Order order)
         {
+            order.HostingUnitKey = BE.Configuration.orderID++;
+
+            Add(ds.getOrderList(), order);
+
+            if ())
+            {
+                add
+            }
 
         }
         public void UpdateOrder(BE.Order order)
@@ -132,62 +140,75 @@ namespace DAL
 
 
 
-
- 
-
-        public static bool Add<T>(List<T> list, T t) where T : IComparable
+        public BE.Order GetOrder(int id)
         {
+
+            BE.Order temp = DataSource.getOrderList().FirstOrDefault(temp->temp.OrderKey == id);
             
-            foreach (T item in list)
-            {
-                if (t.CompareTo(item) == 0)
-                {
-                    return false;
-                }
-            }
-            list.Add(t);
-            return true;
+            return temp == null ? null : temp.Clone();
+        }
+
+        //public T GetItem<T>(int id)
+        //{
+        //    T Temp = DataSource.T.FirstOrDefault(stud->stud.Id == id);
+        //    return stud == null ? null : stud.Clone();
+        //}
+
+
+
+        //    public static bool Add<T>(List<T> list, T t) where T : IComparable
+        //    {
+
+        //        foreach (T item in list)
+        //        {
+        //            if (t.CompareTo(item) == 0)
+        //            {
+        //                return false;
+        //            }
+        //        }
+        //        list.Add(t);
+        //        return true;
+
+        //    }
+
+
+
+
+        //    public static void Remove<T>(List<T> list, T t) where T : IComparable
+        //    {
+        //        T temp = default(T);
+        //        foreach (T item in list)
+        //        {
+        //            if (t.CompareTo(item) == 0)
+        //            {
+        //                temp = item;
+        //                break;
+        //            }
+        //        }
+
+        //        if (temp != null)
+        //            list.Remove(temp);
+        //    }
+
+
+
+
+        //public static T Find<T>(List<T> list, T t) where T : class, IComparable
+        //    {
+
+        //        foreach (T item in list)
+        //        {
+        //            if (t.CompareTo(item) == 0)
+        //            {
+        //                return item;
+        //            }
+
+        //        }
+        //        return null;
+        //    }
 
         }
 
 
-
-
-        public static void Remove<T>(List<T> list, T t) where T : IComparable
-        {
-            T temp = default(T);
-            foreach (T item in list)
-            {
-                if (t.CompareTo(item) == 0)
-                {
-                    temp = item;
-                    break;
-                }
-            }
-
-            if (temp != null)
-                list.Remove(temp);
-        }
-
-
-
-
-        public static T Find<T>(List<T> list, T t) where T : class, IComparable
-        {
-
-            foreach (T item in list)
-            {
-                if (t.CompareTo(item) == 0)
-                {
-                    return item;
-                }
-
-            }
-            return null;
-        }
 
     }
-
-
-
-}
