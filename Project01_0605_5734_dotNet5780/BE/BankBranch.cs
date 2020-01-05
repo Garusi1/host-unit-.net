@@ -17,7 +17,7 @@ namespace BE
             get { return bankNumber; }
             set
             {
-                //to define
+                bankNumber = value;
             }
         }
 
@@ -28,7 +28,7 @@ namespace BE
             get { return bankName; }
             set
             {
-                //to define
+                bankName = value;
             }
 
         }
@@ -40,7 +40,7 @@ namespace BE
             get { return branchNumber; }
             set
             {
-                //to define
+                branchNumber = value;
             }
 
         }
@@ -53,7 +53,7 @@ namespace BE
             get { return branchAddress; }
             set
             {
-                //to define
+                branchAddress = value;
             }
 
         }
@@ -65,7 +65,7 @@ namespace BE
             get { return branchCity; }
             set
             {
-                //to define
+                branchCity = value;
             }
 
         }
