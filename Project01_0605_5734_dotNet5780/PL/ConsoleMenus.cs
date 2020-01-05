@@ -678,8 +678,7 @@ namespace PL
 
                 }
 
-
-
+                bl.addHostingUnit(BE.Tools.Clone(hu)); // add copy of gr to the BL layer
                 //לממש הוספת יחידת אירוח ולשלוח לביסניס לוגיק
             }
         }
