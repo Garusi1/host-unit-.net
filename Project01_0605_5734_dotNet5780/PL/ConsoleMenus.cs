@@ -461,7 +461,7 @@ namespace PL
 
 
                 Console.WriteLine("Choose one from the following options");
-                Console.WriteLine("Enter 1 to enter to Queries For Customer List");
+                Console.WriteLine("Enter 1 to enter to Queries For Customer List and add New order ");
                 Console.WriteLine("Enter 2 to to enter to List of Orders");
                 Console.WriteLine("Enter 0 to return to the previous menu");
 
@@ -487,7 +487,7 @@ namespace PL
                 {
                     case OrdersMenuEnum.Queries_For_Customer_List:
                         conMenu.PL_QueriesForCustomerList();//4.1 ///לממש כאן הדפסה בלבד ואחריה 
-                        addOrder //במילוי ידני של מספר לקוח. מספר יחידת אירוח לקבל
+                        menuAddOrder(HU); //במילוי ידני של מספר לקוח. מספר יחידת אירוח לקבל
                         break;
                     case OrdersMenuEnum.Orders_List:
                         conMenu.PL_OrdersList(HU);//3.4
@@ -612,5 +612,25 @@ namespace PL
 
 
 
+
+        public void menuAddOrder(BE.HostingUnit HU)
+        {
+
+            Console.WriteLine("enter number key of guest request");
+            string input = Console.ReadLine();
+            int GRkey = -1;
+            if (!Int32.TryParse(input, out GRkey))
+            {
+                GRkey = -1;
+                Console.WriteLine("Wrong input");
+                throw new System.ArgumentException(string.Format("worng input {0} not llegal int ", input));
+            }
+
+            BE.Order orderToAdd = new BE.Order() { CreateDate = DateTime.Now, HostingUnitKey = HU.HostingUnitKey, GuestRequestKey = GRkey,Status=BE.StatusEnum.טרם_טופל };
+            //מילוי פרטים עבור הזמנה חדשה לא כולל מספר הזמנה
+            //בשכבת לוגיק מתבצעת בדיקת עבור התאמה עם דרישות לקוח
+            bl.addOrder(orderToAdd.Clone());
+
+        }
     }
 }
