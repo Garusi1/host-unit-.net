@@ -23,7 +23,7 @@ namespace PL
                 Console.WriteLine("Enter 1 to add new Guest Request");
                 Console.WriteLine("Enter 2 to to enter to HostingUnit menu");
                 Console.WriteLine("Enter 3 to to enter to web manger menu");
-                Console.WriteLine("Enter 0 to exit from the program");
+                Console.WriteLine("Enter 0 to exit from the program\n");
 
                 string input = Console.ReadLine();
 

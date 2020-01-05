@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Globalization;
+using BE;
 
 namespace PL
 {
@@ -15,7 +17,79 @@ namespace PL
         /// </summary>
         public void clientMenu()//עבור לקוח ...
         {
+            CultureInfo CultureInfo = new CultureInfo("de-DE");
+
             Console.WriteLine("add geust request");
+            string data = "";
+            BE.GuestRequest gr = new GuestRequest();
+            Console.WriteLine("\n please enter your private name");
+            data = Console.ReadLine();
+            gr.PrivateName = data;
+
+            Console.WriteLine("\n please enter your last name");
+            data = Console.ReadLine();
+            gr.FamilyName = data;
+
+            Console.WriteLine("\n please enter your e-mail");
+            data = Console.ReadLine(); // להוסיף בדיקת מייל
+            gr.MailAddress = data;
+            
+
+            DateTime RegistrationddateTime = new DateTime();
+            RegistrationddateTime = DateTime.Now;
+            gr.RegistrationDate = RegistrationddateTime;
+
+
+            //  entry date
+
+            Console.WriteLine("\n please enter your entry date");
+            data = Console.ReadLine();
+            DateTime entryDate = new DateTime();
+            try
+            {
+                entryDate = DateTime.Parse(data, CultureInfo);
+                gr.RegistrationDate = entryDate;
+            }
+            catch (FormatException)
+            {
+                Console.WriteLine($"Unable to parse '{"error wrong input, enter date in this format: dd mm yyyy"}'");
+            }
+            //  releaseDate
+            Console.WriteLine("\n please enter your release date");
+            data = Console.ReadLine();
+            DateTime releaseDate = new DateTime();
+            try
+            {
+                releaseDate = DateTime.Parse(data, CultureInfo);
+                gr.RegistrationDate = releaseDate;
+            }
+            catch (FormatException)
+            {
+                Console.WriteLine($"Unable to parse '{"error wrong input, enter date in this format: dd mm yyyy"}'");
+            }
+            
+            
+            //  children 
+
+
+            Console.WriteLine("\n please enter number of children");
+            data = Console.ReadLine();
+            int number = -1;
+            if (!Int32.TryParse(data, out number))
+            {
+                number = -1;
+                Console.WriteLine("Wrong input");
+            }
+            else if (number < 0)
+            {
+                Console.WriteLine("Wrong input");
+            }
+            else 
+            {
+                gr.Children = number;
+            }
+
+
             // לממש הוספה של דרישת אירות ולשלוח לשכבת ביסניס לוגיק
         }
 
