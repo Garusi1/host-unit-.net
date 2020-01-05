@@ -17,77 +17,275 @@ namespace PL
         /// </summary>
         public void clientMenu()//עבור לקוח ...
         {
+
             CultureInfo CultureInfo = new CultureInfo("de-DE");
 
-            Console.WriteLine("add geust request");
-            string data = "";
+            Console.WriteLine("add geust request, for exit click 0");
+            string data = Console.ReadLine();
             BE.GuestRequest gr = new GuestRequest();
-            Console.WriteLine("\n please enter your private name");
-            data = Console.ReadLine();
-            gr.PrivateName = data;
 
-            Console.WriteLine("\n please enter your last name");
-            data = Console.ReadLine();
-            gr.FamilyName = data;
-
-            Console.WriteLine("\n please enter your e-mail");
-            data = Console.ReadLine(); // להוסיף בדיקת מייל
-            gr.MailAddress = data;
-            
-
-            DateTime RegistrationddateTime = new DateTime();
-            RegistrationddateTime = DateTime.Now;
-            gr.RegistrationDate = RegistrationddateTime;
-
-
-            //  entry date
-
-            Console.WriteLine("\n please enter your entry date");
-            data = Console.ReadLine();
-            DateTime entryDate = new DateTime();
-            try
+            while (!data.Equals("0"))
             {
-                entryDate = DateTime.Parse(data, CultureInfo);
-                gr.RegistrationDate = entryDate;
-            }
-            catch (FormatException)
-            {
-                Console.WriteLine($"Unable to parse '{"error wrong input, enter date in this format: dd mm yyyy"}'");
-            }
-            //  releaseDate
-            Console.WriteLine("\n please enter your release date");
-            data = Console.ReadLine();
-            DateTime releaseDate = new DateTime();
-            try
-            {
-                releaseDate = DateTime.Parse(data, CultureInfo);
-                gr.RegistrationDate = releaseDate;
-            }
-            catch (FormatException)
-            {
-                Console.WriteLine($"Unable to parse '{"error wrong input, enter date in this format: dd mm yyyy"}'");
-            }
-            
-            
-            //  children 
+
+                //  private name
+
+                Console.WriteLine("\n please enter your private name");
+                data = Console.ReadLine();
+                gr.PrivateName = data;
+
+                //  last name
+
+                Console.WriteLine("\n please enter your last name");
+                data = Console.ReadLine();
+                gr.FamilyName = data;
+
+                // email
+
+                Console.WriteLine("\n please enter your e-mail");
+                data = Console.ReadLine(); // להוסיף בדיקת מייל
+                gr.MailAddress = data;
+
+                //  Registration date
+
+                DateTime RegistrationddateTime = new DateTime();
+                RegistrationddateTime = DateTime.Now;
+                gr.RegistrationDate = RegistrationddateTime;
 
 
-            Console.WriteLine("\n please enter number of children");
-            data = Console.ReadLine();
-            int number = -1;
-            if (!Int32.TryParse(data, out number))
-            {
+                //  entry date
+
+                Console.WriteLine("\n please enter your entry date");
+                data = Console.ReadLine();
+                DateTime entryDate = new DateTime();
+                try
+                {
+                    entryDate = DateTime.Parse(data, CultureInfo);
+                    gr.RegistrationDate = entryDate;
+                }
+                catch (FormatException)
+                {
+                    Console.WriteLine($"Unable to parse '{"error wrong input, enter date in this format: dd mm yyyy"}'");
+                }
+
+
+                //  releaseDate
+
+
+                Console.WriteLine("\n please enter your release date");
+                data = Console.ReadLine();
+                DateTime releaseDate = new DateTime();
+                try
+                {
+                    releaseDate = DateTime.Parse(data, CultureInfo);
+                    gr.RegistrationDate = releaseDate;
+                }
+                catch (FormatException)
+                {
+                    Console.WriteLine($"Unable to parse '{"error wrong input, enter date in this format: dd mm yyyy"}'");
+                }
+
+
+                //  children 
+
+
+                Console.WriteLine("\n please enter number of children");
+                data = Console.ReadLine();
+                int number = -1;
+                if (!Int32.TryParse(data, out number))
+                {
+                    number = -1;
+                    Console.WriteLine("Wrong input");
+                }
+                else if (number < 0)
+                {
+                    Console.WriteLine("Wrong input");
+                }
+                else
+                {
+                    gr.Children = number;
+                }
+
+                // adults
+
+                Console.WriteLine("\n please enter number of adults");
+                data = Console.ReadLine();
                 number = -1;
-                Console.WriteLine("Wrong input");
+                if (!Int32.TryParse(data, out number))
+                {
+                    number = -1;
+                    Console.WriteLine("Wrong input");
+                }
+                else if (number < 0)
+                {
+                    Console.WriteLine("Wrong input");
+                }
+                else
+                {
+                    gr.Adults = number;
+                }
+
+                //  area
+
+                Console.WriteLine("please enter the area:");
+                Console.WriteLine("Choose one from the following options");
+                Console.WriteLine("Enter 0 for All areas");
+                Console.WriteLine("Enter 1 for North area");
+                Console.WriteLine("Enter 2 for South area");
+                Console.WriteLine("Enter 3 for Center area");
+                Console.WriteLine("Enter 4 for Jerusalem area");
+
+                data = Console.ReadLine();
+
+                if (!Int32.TryParse(data, out number))
+                {
+                    number = -1;
+                    Console.WriteLine("Wrong input");
+                    break;
+
+                }
+                else if (number > 4 || number < 0)
+                {
+                    Console.WriteLine("Wrong number");
+                    break;
+
+                }
+                else
+                {
+
+                    BE.AreaEnum choosEnum;
+                    choosEnum = (BE.AreaEnum)number;
+                    gr.Area = choosEnum;
+
+
+                }
+
+                // TYPE
+                
+                Console.WriteLine("please enter the Type:");
+                Console.WriteLine("Choose one from the following options");
+                Console.WriteLine("Enter 0 for Unknown");
+                Console.WriteLine("Enter 1 for Zimmer");
+                Console.WriteLine("Enter 2 for Hotel");
+                Console.WriteLine("Enter 3 for Camping");
+
+                data = Console.ReadLine();
+
+                if (!Int32.TryParse(data, out number))
+                {
+                    number = -1;
+                    Console.WriteLine("Wrong input");
+                    break;
+
+                }
+                else if (number > 3 || number < 0)
+                {
+                    Console.WriteLine("Wrong number");
+                    break;
+                }
+                else
+                {
+                    BE.TypeEnum choosEnum1;
+                    choosEnum1 = (BE.TypeEnum)number;
+                    gr.Type = choosEnum1;
+                }
+
+
+                //  pool
+
+                Console.WriteLine("do you want to have a pool:");
+                Console.WriteLine("Choose one from the following options");
+                Console.WriteLine("Enter 0 for Unknown");
+                Console.WriteLine("Enter 1 for הכרחי");
+                Console.WriteLine("Enter 2 for אפשרי");
+                Console.WriteLine("Enter 3 for לא_מעוניין");
+
+                data = Console.ReadLine();
+
+                if (!Int32.TryParse(data, out number))
+                {
+                    number = -1;
+                    Console.WriteLine("Wrong input");
+                    break;
+
+                }
+                else if (number > 3 || number < 0)
+                {
+                    Console.WriteLine("Wrong number");
+                    break;
+                }
+                else
+                {
+                    BE.AttractionsEnum choosEnum2;
+                    choosEnum2 = (BE.AttractionsEnum)number;
+                    gr.Pool = choosEnum2;
+                }
+
+                // jacuzzi
+
+
+                Console.WriteLine("do you want to have a jacuzzi:");
+                Console.WriteLine("Choose one from the following options");
+                Console.WriteLine("Enter 0 for Unknown");
+                Console.WriteLine("Enter 1 for הכרחי");
+                Console.WriteLine("Enter 2 for אפשרי");
+                Console.WriteLine("Enter 3 for לא_מעוניין");
+
+                data = Console.ReadLine();
+
+                if (!Int32.TryParse(data, out number))
+                {
+                    number = -1;
+                    Console.WriteLine("Wrong input");
+                    break;
+
+                }
+                else if (number > 3 || number < 0)
+                {
+                    Console.WriteLine("Wrong number");
+                    break;
+                }
+                else
+                {
+                    BE.AttractionsEnum choosEnum3;
+                    choosEnum3 = (BE.AttractionsEnum)number;
+                    gr.Pool = choosEnum3;
+                }
+
+
+                //  garden
+
+
+                Console.WriteLine("do you want to have a garden:");
+                Console.WriteLine("Choose one from the following options");
+                Console.WriteLine("Enter 0 for Unknown");
+                Console.WriteLine("Enter 1 for הכרחי");
+                Console.WriteLine("Enter 2 for אפשרי");
+                Console.WriteLine("Enter 3 for לא_מעוניין");
+
+                data = Console.ReadLine();
+
+                if (!Int32.TryParse(data, out number))
+                {
+                    number = -1;
+                    Console.WriteLine("Wrong input");
+                    break;
+
+                }
+                else if (number > 3 || number < 0)
+                {
+                    Console.WriteLine("Wrong number");
+                    break;
+                }
+                else
+                {
+                    BE.AttractionsEnum choosEnum4;
+                    choosEnum4 = (BE.AttractionsEnum)number;
+                    gr.Pool = choosEnum4;
+                }
+
+
             }
-            else if (number < 0)
-            {
-                Console.WriteLine("Wrong input");
-            }
-            else 
-            {
-                gr.Children = number;
-            }
+
 
 
             // לממש הוספה של דרישת אירות ולשלוח לשכבת ביסניס לוגיק
