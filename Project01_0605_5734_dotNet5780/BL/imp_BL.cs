@@ -21,11 +21,14 @@ namespace BL
         public void addGuestRequest(BE.GuestRequest guest)
         {
 
-            //לא הושלם מילוי
+            //אם לא הושלם מילוי
             if (guest.PrivateName == "" || guest.FamilyName == "" || guest.MailAddress==null || guest.EntryDate==null|| guest.ReleaseDate == null)
                 throw new Exception("חובה למלא את כל השדות");
             if (!checkRequestDates(guest))// if the dates are not legal
                 throw new System.ArgumentException("Dates are not legal!");
+
+            ///throw new System.ArgumentException(string.Format("worng input {0} not llegal ", generalDate));
+
 
             if (guest.Adults < 0)
                 throw new Exception(/*מספר מבוגרים אינו יכול להיות שלילי"*/"Number of adults cannot be negative");
@@ -44,7 +47,7 @@ namespace BL
             if ((guest.ChildrensAttractions == BE.AttractionsEnum.Unknown)&&(guest.Children>0))
                 throw new Exception(/*חובה לבחור האם מעוניין באטראקציות לילדים"*/"Must choose whether you want a Childrens Attractions");
 
-
+            checkDateLegallOneYear(DateTime generalDate);
 
 
             //מילוי ערכים שגויים
@@ -73,13 +76,15 @@ namespace BL
         public void addHostingUnit(BE.HostingUnit hostUnit)
         {
 
-            //לא הושלם מילוי
+            //אם לא הושלם מילוי
             if (hostUnit.Owner == null || hostUnit.HostingUnitName == "" )
                 throw new Exception("חובה למלא את כל השדות");
             if (!Enum.IsDefined(typeof(AreaEnum), hostUnit.Area))
                 throw new Exception("Enum input illegal");
             if (hostUnit.Area == AreaEnum.All)
                 throw new Exception("Enum input illegal. HostingUnit cannot be in All regions");
+           
+
 
 
 
@@ -93,6 +98,15 @@ namespace BL
         public void addOrder(BE.Order order)
         {
 
+            BE.HostingUnit unit = DAL.getUnitByKey(order.HostingUnitKey);
+
+            BE.GuestRequest unitK = DAL.getUnitByKey(order.HostingUnitKey);
+
+            //ליצור השוואת שדות. אם זה לא מתאים לזרוק אקספשיין
+
+
+
+            // ייצוג הזמנות רלוונטיות בלבד 
 
             var fit = from GS in GetGuestRequestList()
                       from HU in GetHostingUnit()
@@ -112,12 +126,7 @@ namespace BL
                             ///יש לממש 
                             ///
                             ///לבדוק לוגיקה
-                      select new Order()/*{GS.GuestRequestKey,HU.HostingUnitKey };*/{GuestRequestKey= GS.GuestRequestKey,HostingUnitKey = HU.HostingUnitKey ,Status=BE.StatusEnum.טרם_טופל ,CreateDate=DateTime.Now}
-
-
-
-
-                      ;
+                      select new Order()/*{GS.GuestRequestKey,HU.HostingUnitKey };*/{GuestRequestKey= GS.GuestRequestKey,HostingUnitKey = HU.HostingUnitKey ,Status=BE.StatusEnum.טרם_טופל ,CreateDate=DateTime.Now} ;
 
 
             throw new NotImplementedException();
@@ -188,6 +197,27 @@ namespace BL
 
 
 
+
+
+
+
+        public bool checkDateLegallOneYear(DateTime generalDate)
+        {
+            DateTime lastMonth = DateTime.Now.Date.AddMonths(-1);
+            if (generalDate < lastMonth)
+            {
+                throw new System.ArgumentException(string.Format("worng input {0} not llegal ", generalDate));
+
+            }
+            lastMonth = DateTime.Now.Date.AddMonths(11);
+
+            if (generalDate > lastMonth)
+            {
+                throw new System.ArgumentException(string.Format("worng input {0} not llegal ", generalDate));
+
+            }
+            return true;
+        }
 
 
     }

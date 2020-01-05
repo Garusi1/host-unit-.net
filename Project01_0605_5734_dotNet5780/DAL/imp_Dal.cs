@@ -35,10 +35,12 @@ namespace DAL
         public void updateGuestRequest(BE.GuestRequest guest)
 
         {
+            if (guest.GuestRequestKey==0)//זה אומר שאין קוד ייחודי שהרי הערך לא מאותחל על ברירת מחדל
+                BE.Configuration.geustReqID++; //הענק לו קוד ייחודי
             foreach (BE.GuestRequest element in GuestRequestList1)
             {
                 if (element.isEqual(guest))
-                    element.updateStatus(guest.Status);
+                    element.updateStatus(guest);
             }
         }
 
@@ -70,7 +72,12 @@ namespace DAL
         }
         public void updateHostingUnit(BE.HostingUnit hostUnit)
         {
-            foreach(BE.HostingUnit element in HostingUnitList1)
+            if (hostUnit.HostingUnitKey == 0)//זה אומר שאין קוד ייחודי שהרי הערך לא מאותחל על ברירת מחדל
+                hostUnit.HostingUnitKey = BE.Configuration.geustReqID++; //הענק לו קוד ייחודי
+            foreach (BE.HostingUnit element in HostingUnitList1)
+            {
+                ///
+            }
         }
 
         //Order
@@ -86,18 +93,42 @@ namespace DAL
         //lists
         public List<BE.GuestRequest> GetGuestRequestList()
         {
-            return ds.getGuestRequestList().Clone() ;
+            var li = from item in ds.getGuestRequestList()
+                     select item; 
+            
+            return (List<BE.GuestRequest>)li.Clone() ;
+
         }
         public List<BE.HostingUnit> GetHostingUnit()
         {
-            return ds.getHostingUnitList().Clone();
+
+            var li = from item in ds.getHostingUnitList()
+                     select item.Clone();
+
+            return (List<BE.HostingUnit>)li;
+
         }
         public List<BE.Order> GetOrderList()
         {
-            return ds.getOrderList().Clone();
+            var li = from item in ds.getOrderList()
+                     select item.Clone();
+
+            return (List<BE.Order>)li;
         }
+
+
+
         public List<BE.BankBranch> GetBankBranchList()
-        { return ds.getBankBranchList().Clone();  }
+        {
+
+            
+                var li = from item in ds.getBankBranchList()
+                         select item.Clone();
+
+                return (List<BE.BankBranch>)li;
+
+        
+        }
 
 
 

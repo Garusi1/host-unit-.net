@@ -237,15 +237,17 @@ namespace BE
             }
         }
 
-        public bool isEqual(GuestRequest xx)
+        public bool isEqual(BE.GuestRequest GR)
         {
-            return xx.GuestRequestKey == GuestRequestKey;
+            return GR.GuestRequestKey == GuestRequestKey;
         }
 
 
-        public void updateStatus(string status1)
+        public void updateStatus(BE.GuestRequest GR)
         {
-            //status = status1;
+            ///לממש
+            
+            GR.Status = 
 
         }
 

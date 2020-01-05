@@ -7,16 +7,23 @@ using System.Threading.Tasks;
 
 namespace DAL
 {
+
+
+
     public class DataSource
     {
+
+        #region אתחול רשימות  
+        //   #endregion
+
         public static List<BE.GuestRequest> GuestRequestList = new List<BE.GuestRequest>()
         {new BE.GuestRequest()
             {// יש לערוך ולממש כמו שצריך
-        GuestRequestKey=BE.Configuration.getGeustReqID(),
+        GuestRequestKey=BE.Configuration.geustReqID++,
         PrivateName="Michael",
         FamilyName="Garusi",
         MailAddress=/*@*/"mgarusi101@gmail.com",
-        Status="Active",
+        Status=StatusGREnum.פתוחה,
         RegistrationDate=DateTime.Now,
         EntryDate=DateTime.Now.AddDays(10),// סתם לצורך הדוגמה -
         ReleaseDate=DateTime.Now.AddDays(20),
@@ -34,7 +41,7 @@ namespace DAL
         public static List<BE.HostingUnit> HostingUnitList = new List<BE.HostingUnit>()
         {new BE.HostingUnit()
         {
-            HostingUnitKey=BE.Configuration.getHostUnitID(), /// זה מספר רץ. יש לממש נכון
+            HostingUnitKey=BE.Configuration.hostUnitID++, /// זה מספר רץ. יש לממש נכון
             Owner=new Host(),// כמובן שבמימוש בפועל צריך לקשר למארח קיים שכבר מוגדר בנתונים
             HostingUnitName="Gal Banof",
             //Diary,// יש לממש
@@ -47,7 +54,7 @@ namespace DAL
         {
             HostingUnitKey=2,/// יש לממש  לפי הקשר
             GuestRequestKey=1,///יש לממש בהתאם לבקשה
-            OrderKey=BE.Configuration.getOrderId(), /// יש לממש בעזרת מספר רץ
+            OrderKey=BE.Configuration.orderID++, /// יש לממש בעזרת מספר רץ
             Status=StatusEnum.טרם_טופל,
             CreateDate=DateTime.Now,
             OrderDate=DateTime.Now.AddDays(5), //תלוי שליחת מיילץ 
@@ -65,6 +72,7 @@ namespace DAL
 
         };
 
+        #endregion
 
         //clone to the BL
         public List<BE.GuestRequest> getGuestRequestList() { return GuestRequestList.Clone(); }

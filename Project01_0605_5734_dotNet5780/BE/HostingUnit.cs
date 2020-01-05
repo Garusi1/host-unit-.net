@@ -181,5 +181,38 @@ namespace BE
 
 
 
+        public bool this[DateTime generalDate] // define indexer 
+        {
+            private set => Diary[generalDate.Day - 1, generalDate.Month - 1] = value;
+            get => Diary[generalDate.Day - 1, generalDate.Month - 1];
+        }
+
+
+
+
+        //public bool this[DateTime generalDate] // define indexer 
+        //{
+        //    get
+        //    {
+        //        if (checkDateLegallOneYear(generalDate))
+        //            return Diary[generalDate.Day - 1, generalDate.Month - 1];
+        //        return false;
+
+        //    }
+        //    set {
+        //        if(checkDateLegallOneYear(generalDate))
+        //            Diary[generalDate.Day - 1, generalDate.Month - 1] = value;
+
+
+        //    }
+
+        //    //get => Diary[generalDate.Day - 1, generalDate.Month - 1];
+
+
+        //}
+
+
+
+
     }
 }
