@@ -13,14 +13,14 @@ namespace DAL
     {
         DataSource ds = new DataSource();
 
-        public static List<BE.GuestRequest> GuestRequestList1 = new List<BE.GuestRequest>();
+        //public static List<BE.GuestRequest> GuestRequestList1 = new List<BE.GuestRequest>();
 
-        public static List<BE.HostingUnit> HostingUnitList1 = new List<BE.HostingUnit>();
+        //public static List<BE.HostingUnit> HostingUnitList1 = new List<BE.HostingUnit>();
 
-        public static List<BE.Order> OrderList1 = new List<BE.Order>();
+        //public static List<BE.Order> OrderList1 = new List<BE.Order>();
 
 
-                
+
         public void addGuestRequest(BE.GuestRequest guest)
         {
             guest.GuestRequestKey = BE.Configuration.geustReqID++;// לוודא שאכן מקדם אותו
@@ -30,18 +30,32 @@ namespace DAL
                     throw new Exception(/* "ישנו מספר זהה של דרישת אירוח"*/"Cannot add.duplicate GuestRequest key on data ");
             }
 
-            GuestRequestList1.Add(guest.Clone());
+            ds.getGuestRequestList().Add(guest.Clone());
+
         }
         public void updateGuestRequest(BE.GuestRequest guest)
 
         {
-            if (guest.GuestRequestKey==0)//זה אומר שאין קוד ייחודי שהרי הערך לא מאותחל על ברירת מחדל
+
+            if (guest.GuestRequestKey == 0)//זה אומר שאין קוד ייחודי שהרי הערך לא מאותחל על ברירת מחדל
                 BE.Configuration.geustReqID++; //הענק לו קוד ייחודי
-            foreach (BE.GuestRequest element in GuestRequestList1)
-            {
-                if (element.isEqual(guest))
-                    element.updateStatus(guest);
-            }
+
+            ////עדכון כללי כאן. 
+            //var ls = from item in ds.getGuestRequestList()
+            //         where guest.GuestRequestKey == item.GuestRequestKey
+            //         select new { item = guest };
+
+            var obj = ds.getGuestRequestList().FirstOrDefault(x => x.GuestRequestKey == guest.GuestRequestKey);
+            if (obj != null) obj.Status = guest.Status;
+
+
+
+            //אם איו מופע כנ"ל משמע שלא מצא אותו ברשימה
+
+            addGuestRequest(guest);
+
+
+
         }
 
         //HostingUnit
@@ -49,22 +63,23 @@ namespace DAL
         {
             hostUnit.HostingUnitKey = BE.Configuration.hostUnitID++;// לוודא שאכן מקדם אותו
 
-            foreach (BE.HostingUnit element in HostingUnitList1)
+            foreach (BE.HostingUnit element in GetHostingUnitList())
             {
                 if (element.isEqual(hostUnit))
                     throw new Exception(/* "ישנו מספר זהה של יחידת אירוח"*/"Cannot add.duplicate HostingUnit key on data ");
 
             }
 
-            HostingUnitList1.Add(hostUnit.Clone());
+            ds.getHostingUnitList().Add(hostUnit.Clone());
         }
+
         public void delHostingUnit(int hostUnitID)
         {
-            foreach (BE.HostingUnit element in HostingUnitList1)
+            foreach (BE.HostingUnit element in ds.getHostingUnitList())
             {
                 if (element.isEqualID(hostUnitID))
                 {
-                    HostingUnitList1.Remove(element);
+                    ds.getHostingUnitList().Remove(element);
                     return;
                 }
             }
@@ -74,10 +89,19 @@ namespace DAL
         {
             if (hostUnit.HostingUnitKey == 0)//זה אומר שאין קוד ייחודי שהרי הערך לא מאותחל על ברירת מחדל
                 hostUnit.HostingUnitKey = BE.Configuration.geustReqID++; //הענק לו קוד ייחודי
-            foreach (BE.HostingUnit element in HostingUnitList1)
+
+
+
+            //עדכון כללי כאן. 
+
+            var obj = ds.getHostingUnitList().FirstOrDefault(x => x.HostingUnitKey == hostUnit.HostingUnitKey);
+            if (obj != null) obj = hostUnit;
+            if (obj == null)            //אם איו מופע כנ"ל משמע שלא מצא אותו ברשימה
             {
-                ///
+                throw new ArgumentNullException(string.Format("Hosting Unit  {0} not exsits in getHostingUnitList data ", hostUnit));
             }
+
+
         }
 
         //Order
@@ -85,16 +109,37 @@ namespace DAL
         {
             order.HostingUnitKey = BE.Configuration.orderID++;
 
-            Add(ds.getOrderList(), order);
 
-            if ())
+            foreach (var item in ds.getOrderList())
             {
-                add
+                if (item.OrderKey == order.OrderKey)
+                {
+                    throw new ArgumentException(string.Format("the order key {0} is already exists", order.OrderKey));
+                }
+
             }
+            ds.getOrderList().Add(order.Clone());
+
 
         }
-        public void UpdateOrder(BE.Order order)
+        public void UpdateOrder(BE.Order order)//עדכון סטטוס הזמנה 
         {
+
+            if (order.OrderKey == 0)//זה אומר שאין קוד ייחודי שהרי הערך לא מאותחל על ברירת מחדל
+                order.OrderKey = BE.Configuration.orderID++; //הענק לו קוד ייחודי
+
+
+
+            //עדכון כללי כאן. 
+
+            var obj = ds.getOrderList().FirstOrDefault(x => x.OrderKey == order.OrderKey);
+            if (obj != null) obj.Status = order.Status;
+            if (obj == null)            //אם איו מופע כנ"ל משמע שלא מצא אותו ברשימה
+            {
+                throw new ArgumentNullException(string.Format("Order  {0} not exsits in getOrderList data ", order));
+            }
+
+
 
         }
 
@@ -102,9 +147,9 @@ namespace DAL
         public List<BE.GuestRequest> GetGuestRequestList()
         {
             var li = from item in ds.getGuestRequestList()
-                     select item; 
-            
-            return (List<BE.GuestRequest>)li.Clone() ;
+                     select item;
+
+            return (List<BE.GuestRequest>)li.Clone();
 
         }
         public List<BE.HostingUnit> GetHostingUnitList()
@@ -129,86 +174,70 @@ namespace DAL
         public List<BE.BankBranch> GetBankBranchList()
         {
 
-            
-                var li = from item in ds.getBankBranchList()
-                         select item.Clone();
 
-                return (List<BE.BankBranch>)li;
+            var li = from item in ds.getBankBranchList()
+                     select item.Clone();
 
-        
+            return (List<BE.BankBranch>)li;
+
+
         }
 
 
-
-        public BE.Order GetOrder(int id)
+        public BE.HostingUnit getHostingUnitByID(int ID)
         {
 
-            BE.Order temp = DataSource.getOrderList().FirstOrDefault(temp->temp.OrderKey == id);
-            
-            return temp == null ? null : temp.Clone();
-        }
+            var list = from item in GetHostingUnitList()
+                       where item.HostingUnitKey == ID
+                       select item;
+            foreach (var item in list)
+            {
+                return item.Clone();
+            }
 
-        //public T GetItem<T>(int id)
-        //{
-        //    T Temp = DataSource.T.FirstOrDefault(stud->stud.Id == id);
-        //    return stud == null ? null : stud.Clone();
-        //}
-
-
-
-        //    public static bool Add<T>(List<T> list, T t) where T : IComparable
-        //    {
-
-        //        foreach (T item in list)
-        //        {
-        //            if (t.CompareTo(item) == 0)
-        //            {
-        //                return false;
-        //            }
-        //        }
-        //        list.Add(t);
-        //        return true;
-
-        //    }
-
-
-
-
-        //    public static void Remove<T>(List<T> list, T t) where T : IComparable
-        //    {
-        //        T temp = default(T);
-        //        foreach (T item in list)
-        //        {
-        //            if (t.CompareTo(item) == 0)
-        //            {
-        //                temp = item;
-        //                break;
-        //            }
-        //        }
-
-        //        if (temp != null)
-        //            list.Remove(temp);
-        //    }
-
-
-
-
-        //public static T Find<T>(List<T> list, T t) where T : class, IComparable
-        //    {
-
-        //        foreach (T item in list)
-        //        {
-        //            if (t.CompareTo(item) == 0)
-        //            {
-        //                return item;
-        //            }
-
-        //        }
-        //        return null;
-        //    }
+            return null;
 
         }
 
 
+        public BE.GuestRequest getGuestRequestByID(int ID)
+        {
+
+            var list = from item in GetGuestRequestList()
+                       where item.GuestRequestKey == ID
+                       select item;
+            foreach (var item in list)
+            {
+                return item.Clone();
+            }
+
+            return null;
+
+        }
+
+
+
+        public BE.Order GetOrderById(int id)
+        {
+
+            var list = from item in GetOrderList()
+                       where item.GuestRequestKey == id
+                       select item;
+            foreach (var item in list)
+            {
+                return item.Clone();
+            }
+
+            return null;
+
+        }
+
+
+
+       
 
     }
+
+
+
+}

@@ -16,14 +16,14 @@ namespace BE
     [Serializable]
     public class Host
     {
-        private int hostKey;
-        public int HostKey
+        private string hostKey;
+        public string HostKey
         {
             get { return hostKey; }
             set
             {
-                if(value< 10000000) //from number with 8 letters 
-                    throw new Exception(/*מספר זיהוי אינו תקין"*/"Incorrect key!");
+                if (!Tools.ValidateID(value))
+                    throw new Exception("תעודת זהות לא תקינה.");
                 hostKey = value;
             }
         }
@@ -105,8 +105,12 @@ namespace BE
         {
             get { return bankAccountNumber; }
             set
-            { // לממש בדיקה
+            {
+                if (value < 0)
+                    throw new Exception("מספר חשבון בנק לא יכול להיות שלילי.");
                 bankAccountNumber = value;
+
+
             }
         }
 

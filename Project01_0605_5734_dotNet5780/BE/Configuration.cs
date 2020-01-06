@@ -10,7 +10,7 @@ namespace BE
     {
         public static int orderID = 10000000;
         public static int hostUnitID = 20000000;
-        public static int hostID = 30000000;
+        //public static int hostID = 30000000; //זה ת"ז של מארח. אפשר שתהיה כפולה
         public static int geustReqID = 40000000;
         public static int Commission = 10;
 

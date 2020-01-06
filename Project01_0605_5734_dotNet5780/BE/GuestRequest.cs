@@ -94,7 +94,8 @@ namespace BE
             get { return registrationDate; }
             set
             {// to define
-                registrationDate = value;
+                if (registrationDate == null)
+                    registrationDate = value;
             }
         }
 
@@ -243,13 +244,7 @@ namespace BE
         }
 
 
-        public void updateStatus(BE.GuestRequest GR)
-        {
-            ///לממש
-            
-            GR.Status = 
 
-        }
 
 
         public override string ToString()  // יש לממש בהתאם לדרישות הפרוייקט.

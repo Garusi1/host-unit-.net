@@ -35,7 +35,16 @@ namespace DAL
         List<BE.BankBranch> GetBankBranchList();
 
 
+        //תוספות
 
+
+        BE.HostingUnit getHostingUnitByID(int ID);
+
+
+        BE.GuestRequest getGuestRequestByID(int ID);
+
+
+        BE.Order GetOrderById(int id);
 
 
     }

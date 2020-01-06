@@ -31,7 +31,8 @@ namespace BE
             set
             {
                 //to define
-                guestRequestKey = value;
+                if(GuestRequestKey==0)
+                    guestRequestKey = value;
             }
 
         }
@@ -67,6 +68,9 @@ namespace BE
             {
                 if (!Enum.IsDefined(typeof(StatusEnum), value))
                     throw new Exception("Enum input illegal");
+                if (status == StatusEnum.נסגר_מחוסר_הענות_הלקוח || status == StatusEnum.נסגר_בהיענות_הלקוח)
+                    throw new ArgumentException("לא ניתן לשנות עסקה שנסגרה");
+
                 status = value;
             }
         }
@@ -80,6 +84,8 @@ namespace BE
             {
                 //to define
                 createDate = value;
+                
+               
             }
 
         }
