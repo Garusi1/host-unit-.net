@@ -126,7 +126,7 @@ namespace BE
 
 
 
-        private AreaEnum area;//All,North,South,Center,Jerusalem
+        public AreaEnum area;//All,North,South,Center,Jerusalem
 
         public AreaEnum Area
         {

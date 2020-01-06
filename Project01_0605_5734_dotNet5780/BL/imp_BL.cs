@@ -534,25 +534,25 @@ namespace BL
 
         //תופסות בBL
 
-        public List<BE.HostingUnit> availableUnits(DateTime enteryDate,int numOfDayes)//פונקציה שמקבלת תאריך ומספר ימי נופש ומחזירה את רשימת היחידות הפנויות בתאריך זה
+        public List<BE.HostingUnit> availableUnits(DateTime enteryDate, int numOfDayes)//פונקציה שמקבלת תאריך ומספר ימי נופש ומחזירה את רשימת היחידות הפנויות בתאריך זה
         {
 
 
             var list = from item in GetHostingUnitList()
-                       where (checkAvailability(enteryDate, numOfDayes,item))
-                     select item;
+                       where (checkAvailability(enteryDate, numOfDayes, item))
+                       select item;
 
-            List<BE.HostingUnit> newList=new List<HostingUnit>();
+            List<BE.HostingUnit> newList = new List<HostingUnit>();
             foreach (var item in list)
             {
                 newList.Add(item);
             }
-            
+
             return newList;
         }
 
 
-        bool checkAvailability(DateTime enteryDate, int numOfDayes,BE.HostingUnit HU) //check if the dates are available on matrix.   // if not, return false.
+        bool checkAvailability(DateTime enteryDate, int numOfDayes, BE.HostingUnit HU) //check if the dates are available on matrix.   // if not, return false.
         {
             DateTime LastNight = enteryDate.AddDays(numOfDayes - 2);
             for (DateTime tempDate = enteryDate; tempDate <= LastNight; tempDate = tempDate.AddDays(1))
@@ -562,13 +562,13 @@ namespace BL
         }
 
 
-        public int numberOfDayes(params DateTime [] arr) //מספר הימים שעברו שטווח תאריכים מסוים או מתאריך מסוים ועד היום.
+        public int numberOfDayes(params DateTime[] arr) //מספר הימים שעברו שטווח תאריכים מסוים או מתאריך מסוים ועד היום.
         {
             int number = 0;
             int indexer = 0;
 
-            DateTime start=new DateTime();
-            DateTime end =  DateTime.Now;
+            DateTime start = new DateTime();
+            DateTime end = DateTime.Now;
 
             var List = from item in arr
                        where ((indexer == 0) || (indexer == 1))
@@ -576,7 +576,7 @@ namespace BL
 
             foreach (var item in arr)
             {
-                if (indexer==0)
+                if (indexer == 0)
                 {
 
                 }
@@ -592,12 +592,12 @@ namespace BL
             //פונקציה שמקבלת מספר ימים ומחזירה רשימה של הזמנות שמשך הזמן שעבר מאז שנוצרו ועד היום גדול או שווה למספר שהתקבל
 
             List<BE.Order> ls = new List<BE.Order>();
-                
+
             DateTime date = DateTime.Now.Date;//היום - באפוס שניות
             TimeSpan timeSpan;
 
             var list = from item in GetOrderList()
-                       where (((int.Parse((timeSpan = date - item.CreateDate.Date).ToString())) >= numOfDays))||
+                       where (((int.Parse((timeSpan = date - item.CreateDate.Date).ToString())) >= numOfDays)) ||
                              (((int.Parse((timeSpan = date - item.OrderDate.Date).ToString())) >= numOfDays))
                        select item;
             foreach (var item in list)
@@ -607,6 +607,79 @@ namespace BL
 
             return ls;
         }
+
+
+
+        public delegate bool funcCondition(BE.GuestRequest GR);
+
+
+
+        public List<BE.GuestRequest> fitToCondition()
+        {
+
+
+            var ls = from item in GetGuestRequestList()
+                     where 
+                     select item;
+           
+            return null;
+        }
+
+
+                         
+
+
+
+
+        public int numeberOfOrderSendToGuestRequest(BE.GuestRequest guest)
+        {
+
+            int number = 0;
+            var ls = from item in GetOrderList()
+                     where ((item.GuestRequestKey == guest.GuestRequestKey) &&
+                           ((item.Status == BE.StatusEnum.נשלח_מייל)))//סימון נשלח מייל
+                     select item;
+            foreach (var item in ls)
+            {
+                number ++;
+            }
+            return number;
+        }
+
+
+        public int numeberOfOrderSendFromHostingUnit(BE.HostingUnit HU)
+        {
+
+            int number = 0;
+            var ls = from item in GetOrderList()
+                     where ((item.HostingUnitKey == HU.HostingUnitKey) &&
+                           ((item.Status == BE.StatusEnum.נשלח_מייל)||
+                           (item.Status == BE.StatusEnum.נסגר_בהיענות_הלקוח)))//משמע הזמנה נסגרה דרך האתר ויחידה נתפסה
+                     select item;
+            foreach (var item in ls)
+            {
+                number++;
+            }
+            return number;
+        }
+
+
+
+        #region Grouping
+        public List<IGrouping<BE.AreaEnum,GuestRequest>> groupByAreaGR ()
+        {
+            var result = from item in GetGuestRequestList()
+                         group item by item.Area;
+
+            return result.ToList();
+
+        }
+
+
+
+
+
+           #endregion
 
 
 
