@@ -562,27 +562,18 @@ namespace BL
         }
 
 
-        public int numberOfDayes(params DateTime[] arr) //מספר הימים שעברו שטווח תאריכים מסוים או מתאריך מסוים ועד היום.
-        {
-            int number = 0;
-            int indexer = 0;
+        public int numberOfDayes( DateTime start,DateTime end=default(DateTime)) //מספר הימים שעברו בטווח תאריכים מסוים או מתאריך מסוים ועד היום.
+        {//default(DateTime) =01/01/0001
 
-            DateTime start = new DateTime();
-            DateTime end = DateTime.Now;
-
-            var List = from item in arr
-                       where ((indexer == 0) || (indexer == 1))
-                       select (indexer == 0 ? start = item)
-
-            foreach (var item in arr)
+            if (start< end)
             {
-                if (indexer == 0)
-                {
-
-                }
+                end = DateTime.Now;
             }
 
+            int number = 0;
 
+            TimeSpan timeSpan;
+            number = int.Parse((timeSpan = start.Date - end.Date).ToString()); //חישוב טווח תאריכים
 
             return number;
         }
@@ -609,24 +600,26 @@ namespace BL
         }
 
 
-
-        public delegate bool funcCondition(BE.GuestRequest GR);
-
-
-
-        public List<BE.GuestRequest> fitToCondition()
+        // מתשאל דרישת לקוח לפי תנאי 
+        public IEnumerable<BE.GuestRequest> getAllGRwithCondition(Func<BE.GuestRequest, bool> predicat = null)
         {
+            return IDAL.getAllGRwithCondition(predicat);
+            throw new NotImplementedException();
 
-
-            var ls = from item in GetGuestRequestList()
-                     where 
-                     select item;
-           
-            return null;
         }
 
 
-                         
+
+        /*
+
+  
+
+                                 IEnumerable<BE.GuestRequest> GR = bl.getAllGRwithCondition();
+                                 foreach(var item in GR)
+                                 {
+                                     Console.WriteLine("{0}\n\n",item);
+                                 }
+      */
 
 
 
@@ -683,21 +676,72 @@ namespace BL
 
         }
 
-        public List<IGrouping<int, BE.Host>> groupByNumberOfHosintgUnitForHos() // סידור מארחים לפי מספר יחידות אירוח שמשוייכות אליהם
+        //public List<IGrouping<string, BE.Host>> groupByNumberOfHosintgUnitForHost() // סידור מארחים לפי מספר יחידות אירוח שמשוייכות אליהם
+        //{
+
+        //    List<BE.Host> tempHostList = new List<BE.Host>();
+
+        //    foreach (var item in GetHostingUnitList())
+        //    {
+        //        tempHostList.Add(item.Owner.HostKey);
+
+        //        item.Owner.NumberOfHostingUnits++;
+
+        //    }
+
+        //    List<string> tempHostKeyList = new List<string>();
+
+        //    foreach (var item in GetHostingUnitList())
+        //    {
+        //        tempHostKeyList.Add(item.Owner.HostKey);
+
+        //    }
+
+        //    var lss=from item in GetHostingUnitList()
+                    
+
+
+
+
+        //    var ls = from item in GetHostingUnitList()
+        //             group item by (item.Owner.HostKey)
+        //                  into g
+        //             select new { hostkey = g };
+
+        //    var result=from h in ls
+
+
+        //    return result.ToList();
+
+        //}
+
+
+
+
+
+        public IEnumerable<IGrouping<int, Host>> groupByNumberOfHosintgUnitForHost()
         {
+            var hostingUnits = GetHostingUnitList();
+
+            return from Unit in hostingUnits
+                   group Unit by Unit.Owner.HostKey into Units
+                   let Owner = Units.FirstOrDefault().Owner
+                   let num_of_Unit = Units.Count() //לוודא שסופר נכון
+                   group Owner by num_of_Unit;
+        }
 
 
+
+
+
+        public List<IGrouping<BE.AreaEnum, BE.HostingUnit>> groupByAreaHontingUnit()
+        {
             var result = from item in GetHostingUnitList()
-                         group item by (item.Owner.HostKey) into g
-                         select new { hostkey = g };
-                
-
+                         group item by item.Area;
 
             return result.ToList();
 
         }
-
-
 
 
 

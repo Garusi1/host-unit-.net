@@ -45,7 +45,7 @@ namespace PL
                 // email
 
                 Console.WriteLine("\n please enter your e-mail");
-                data = Console.ReadLine(); // להוסיף בדיקת מייל
+                data = Console.ReadLine(); 
                 gr.MailAddress = data;
 
                 //  Registration date
@@ -294,13 +294,13 @@ namespace PL
                 }
                 bl.addGuestRequest(BE.Tools.Clone(gr)); // add copy of gr to the BL layer
 
-                // 
+                
                 
             }
 
 
 
-            // לממש הוספה של דרישת אירות ולשלוח לשכבת ביסניס לוגיק
+            
         }
 
 
@@ -758,6 +758,8 @@ namespace PL
         public void PL_UpdateHostingUnit(BE.HostingUnit HU) //2.2.1
         {
             //לקבל יחידת אירוח כמובן בהעתק
+
+            
             //לממש עדכון יחידת אירוח ולשלוח לביסניס לוגיק
         }
 
@@ -802,8 +804,10 @@ namespace PL
                 switch (choosMenuEnum)
                 {
                     case OrdersMenuEnum.Queries_For_Customer_List:
-                        conMenu.PL_QueriesForCustomerList();//4.1 ///לממש כאן הדפסה בלבד ואחריה 
-                        addOrder //במילוי ידני של מספר לקוח. מספר יחידת אירוח לקבל
+                        conMenu.PL_QueriesForCustomerList();//4.1 הדספה בלבד בשלב זה.
+                        addOrder(HU); ///במילוי ידני של מספר לקוח. מספר יחידת אירוח לקבל
+                                     ///            //3.1  
+                                     ///לאפשר עדכון הזמנה וכמובן להוריד לביסניס לוגיק
                         break;
                     case OrdersMenuEnum.Orders_List:
                         conMenu.PL_OrdersList(HU);//3.4
@@ -896,28 +900,121 @@ namespace PL
         public void PL_OrdersList(BE.HostingUnit HU)//3.4
         {
 
-                ///לקבל יחידת רשימת הזמנות כמובן בהעתק
-                ///לבצע הדפסה למסך של רשימת ההזמנות הקיימות בהתאם ליחדית אירוח הזאת.
-              
-            //3.2  
-                ///לאפשר עדכון הזמנה וכמובן להוריד לביסניס לוגיק
-            
+
+
+            Console.WriteLine("list of all order List");
+            foreach (var item in bl.GetOrderList().Clone())
+            {
+                Console.WriteLine(item);
+            }
+            Console.WriteLine("enter order ID of order to update  ");
+
+
+            string input = Console.ReadLine();
+
+            int number = -1;
+
+            // בדיקת קלט
+
+            if (!Int32.TryParse(input, out number))
+            {
+                number = -1;
+                throw new ArgumentException(("Wrong input . the type need to be int"));
+            }
+
+
+            BE.Order order = bl.getOrderByID(number);
+
+            if (order.HostingUnitKey!=HU.HostingUnitKey)
+            {
+
+                throw new ArgumentException(string.Format("this order , {0} not belong to this {1} Hosting Unit  ", order.OrderKey, HU.HostingUnitKey));
+
+            }
+
+
+            //next statement for update order status (only status)
+
+
+            if (order.Status == StatusEnum.נסגר_מחוסר_הענות_הלקוח || order.Status == StatusEnum.נסגר_בהיענות_הלקוח)
+                throw new ArgumentException("לא ניתן לשנות עסקה שנסגרה");
+
+
+
+
+
+            Console.WriteLine("enter the new status of the order ,0 - ative(not relevant), 1- send mail, 2- close after client not respone, 3 -close with client ");
+
+
+
+                BE.StatusEnum choosEnum;
+
+                if (number > 3 || number < 0)
+                {
+                    throw new ArgumentException("Wrong number");
+                       
+                }
+
+                choosEnum = (BE.StatusEnum)number; //cast
+
+
+            bl.UpdateOrder(order);
+
+
+
+            ///בהמשך בשלב הבא נוסיף את השאילתות שמיממשנו כבר בשכבת ביסניק לוגיקה
+
 
         }
 
 
         public void PL_QueriesForCustomerList()//4.1
         {
+            Console.WriteLine("list of all GuestRequest List");
+            foreach (var item in bl.GetGuestRequestList().Clone())
+            {
+                Console.WriteLine(item);
+            }
+
+
+            /*  תשאול אפשרי לדרישת לקוח
+                         IEnumerable<BE.GuestRequest> GR = bl.getAllGRwithCondition();
+                         foreach(var item in GR)
+                         {
+                             Console.WriteLine("{0}\n\n",item);
+                         }
+                            */
+
+
+            ///בהמשך בשלב הבא נוסיף את השאילתות שמיממשנו כבר בשכבת ביסניק לוגיקה
 
         }
 
         public void PL_QueriesForHostingUnitList()//4.2
         {
 
+            Console.WriteLine("list of all HostingUnit List");
+            foreach (var item in bl.GetHostingUnitList().Clone())
+            {
+                Console.WriteLine(item);
+            }
+
+
+            ///בהמשך בשלב הבא נוסיף את השאילתות שמיממשנו כבר בשכבת ביסניק לוגיקה
+
         }
 
         public void PL_QueriesForOrderList()//4.3
         {
+
+            Console.WriteLine("list of all Order List");
+            foreach (var item in bl.GetOrderList().Clone())
+            {
+                Console.WriteLine(item);
+            }
+
+
+            ///בהמשך בשלב הבא נוסיף את השאילתות שמיממשנו כבר בשכבת ביסניק לוגיקה
 
         }
 
@@ -926,6 +1023,51 @@ namespace PL
 
         }
 
+        public void addOrder(BE.HostingUnit HU) //מקבל יחידת אירוח וממש הוספה
+        {
+            BE.Order order = new Order() { HostingUnitKey = HU.HostingUnitKey };
+
+            Console.WriteLine("enter the key of the GeustRequest");
+
+            string input = Console.ReadLine();
+            int number = -1;
+
+            if (!Int32.TryParse(input, out number))
+            {
+                number = -1;
+                throw new ArgumentException("Wrong input");
+                
+            }
+
+            BE.GuestRequest GR = bl.getGuestRequestByID(number);
+            if (GR==null)
+            {
+                throw new ArgumentException(string.Format("There is not GuestRequest ID with this number {0}", number));
+
+            }
+
+            order.GuestRequestKey = GR.GuestRequestKey;
+
+
+            addOrder(order);
+
+
+
+
+        }
+
+
+        public void addOrder(BE.Order order)//שולח לביסניס לוגיק
+        {
+
+            bl.addOrder(order.Clone());
+        }
+
+        //addOrder(HU); 
+
+        ///במילוי ידני של מספר לקוח. מספר יחידת אירוח לקבל
+        ///            //3.2  
+        ///לאפשר עדכון הזמנה וכמובן להוריד לביסניס לוגיק
 
 
     }

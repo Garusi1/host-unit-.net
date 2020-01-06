@@ -49,5 +49,14 @@ namespace BL
         //תוספות
 
          BE.HostingUnit getHostingUnitByID(int ID);
+
+
+
+       IEnumerable<BE.GuestRequest> getAllGRwithCondition(Func<BE.GuestRequest, bool> predicat = null);
+
+        BE.Order getOrderByID(int ID);
+
+        BE.GuestRequest getGuestRequestByID(int ID);
+
     }
 }

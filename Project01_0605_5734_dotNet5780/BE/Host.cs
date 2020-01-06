@@ -149,6 +149,16 @@ namespace BE
             return str1;
         }
 
+
+        //תוספת
+        //תוספת רק עבור שליחת רשימת של מאחרים. עבור גרופינג
+        private int numberOfHostingUnits;
+        public int NumberOfHostingUnits
+        {
+            get=> numberOfHostingUnits;
+            set => numberOfHostingUnits = value;
+        }
+
     }
 
 }

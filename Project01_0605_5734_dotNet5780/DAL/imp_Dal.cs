@@ -233,8 +233,19 @@ namespace DAL
         }
 
 
+        // מתשאל דרישת לקוח לפי תנאי 
 
-       
+        public IEnumerable<BE.GuestRequest> getAllGRwithCondition(Func<BE.GuestRequest, bool> predicat = null)
+        {
+            return from gst in GetGuestRequestList()
+                   where predicat == null ? true : predicat(gst)
+                   select gst.Clone();
+        }
+
+
+
+
+
 
     }
 

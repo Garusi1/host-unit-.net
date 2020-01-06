@@ -68,7 +68,40 @@ namespace DAL
             BranchNumber=510,
             BranchAddress="Har'el St 1, 9079129",
             BranchCity="Mevaseret Zion"
-        }
+        },
+            new BankBranch()
+        {
+            BankNumber=11,
+            BankName="Discount",
+            BranchNumber=69,
+            BranchAddress="Beit Hakerem St. 29",
+            BranchCity="Jerusalem"
+        },
+            new BankBranch()
+        {
+            BankNumber=11,
+            BankName="Discount",
+            BranchNumber=159,
+            BranchAddress="Yaffo St. 97, Jerusalem",
+            BranchCity="Jerusalem"
+        },
+            new BankBranch()
+        {
+            BankNumber=11,
+            BankName="Discount",
+            BranchNumber=64,
+            BranchAddress="ehezkel St. 11, Jerusalem",
+            BranchCity="Jerusalem"
+        },
+            new BankBranch()
+        {
+            BankNumber=11,
+            BankName="Discount",
+            BranchNumber=321,
+            BranchAddress="Sderot Rabin 10, Jerusalem",
+            BranchCity="Jerusalem"
+        },
+
 
         };
 
