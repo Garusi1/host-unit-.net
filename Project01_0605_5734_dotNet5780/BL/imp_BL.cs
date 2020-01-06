@@ -666,10 +666,31 @@ namespace BL
 
 
         #region Grouping
-        public List<IGrouping<BE.AreaEnum,GuestRequest>> groupByAreaGR ()
+        public List<IGrouping<BE.AreaEnum, BE.GuestRequest>> groupByAreaGR ()
         {
             var result = from item in GetGuestRequestList()
                          group item by item.Area;
+
+            return result.ToList();
+
+        }
+
+        public List<IGrouping<int, BE.GuestRequest>> groupByNumberOfPeopleInGR() // סידור לפי מספר הנופשים - מבוגרים וילדים
+        {
+            var result = from item in GetGuestRequestList()
+                         group item by (item.Adults+item.Children);
+            return result.ToList();
+
+        }
+
+        public List<IGrouping<int, BE.Host>> groupByNumberOfHosintgUnitForHos() // סידור מארחים לפי מספר יחידות אירוח שמשוייכות אליהם
+        {
+
+            
+            var result = from item in GetHostingUnitList()
+                        group item by (item.Owner.HostKey) into 
+                
+
 
             return result.ToList();
 
@@ -679,7 +700,7 @@ namespace BL
 
 
 
-           #endregion
+        #endregion
 
 
 
