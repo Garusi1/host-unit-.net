@@ -47,5 +47,11 @@ namespace DAL
         BE.Order GetOrderById(int id);
 
 
+
+        IEnumerable<BE.GuestRequest> getAllGRwithCondition(Func<BE.GuestRequest, bool> predicat = null);
+
+
+
+
     }
 }
