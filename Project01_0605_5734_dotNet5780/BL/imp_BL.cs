@@ -686,9 +686,10 @@ namespace BL
         public List<IGrouping<int, BE.Host>> groupByNumberOfHosintgUnitForHos() // סידור מארחים לפי מספר יחידות אירוח שמשוייכות אליהם
         {
 
-            
+
             var result = from item in GetHostingUnitList()
-                        group item by (item.Owner.HostKey) into 
+                         group item by (item.Owner.HostKey) into g
+                         select new { hostkey = g };
                 
 
 
