@@ -292,7 +292,10 @@ namespace PL
                     choosEnum4 = (BE.AttractionsEnum)number;
                     gr.Garden = choosEnum4;
                 }
-                bl.addGuestRequest(BE.Tools.Clone(gr)); // add copy of gr to the BL layer
+                bl.addGuestRequest(gr.Clone()); // add copy of gr to the BL layer
+
+                //bl.addGuestRequest(BE.Tools.Clone(gr)); // add copy of gr to the BL layer
+
 
                 
                 
