@@ -15,8 +15,8 @@ namespace BE
             get { return hostingUnitKey; }
             set
             {
-                if (value < 10000000) //from number with 8 letters 
-                    throw new Exception(/*מספר זיהוי אינו תקין"*/"Incorrect key!");
+                //if (value < 10000000) //from number with 8 letters 
+                 //   throw new Exception(/*מספר זיהוי אינו תקין"*/"Incorrect key!");
                 hostingUnitKey = value;
             }
 
