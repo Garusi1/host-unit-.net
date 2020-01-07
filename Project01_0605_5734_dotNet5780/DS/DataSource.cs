@@ -42,8 +42,16 @@ namespace DAL
         {new BE.HostingUnit()
         {
             HostingUnitKey=BE.Configuration.hostUnitID++, /// זה מספר רץ. יש לממש נכון
-            Owner=new Host(),// כמובן שבמימוש בפועל צריך לקשר למארח קיים שכבר מוגדר בנתונים
+            Owner=new BE.Host(){HostKey="311600654",PrivateName="shimon",FamilyName="miz",
+                PhoneNumber="055-555-5555",MailAddress="a@a.com",BankAccountNumber=1123,CollectionClearance="Yes",
+                BankBranchDetails=new BE.BankBranch(){
+            BankNumber=11,
+            BankName="Discount",
+            BranchNumber=510,
+            BranchAddress="Har'el St 1, 9079129",
+            BranchCity="Mevaseret Zion"} },
             HostingUnitName="Gal Banof",
+            Area=BE.AreaEnum.Center
             //Diary,// יש לממש
 
         } };

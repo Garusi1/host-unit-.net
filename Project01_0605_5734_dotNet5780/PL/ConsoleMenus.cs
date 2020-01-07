@@ -7,6 +7,9 @@ using System.Globalization;
 using BE;
 using System.Text.RegularExpressions;
 
+
+
+
 namespace PL
 {
     public class ConsoleMenus
@@ -16,15 +19,19 @@ namespace PL
         /// <summary>
         /// start menu
         /// </summary>
+
+
+        #region GuestRequest 
+        //   #endregion
         public void clientMenu()//עבור לקוח ...
         {
             bl = BL.Factory.GetInstance();
 
 
-            CultureInfo CultureInfo = new CultureInfo("de-DE");
+            //CultureInfo CultureInfo = new CultureInfo("de-DE");
 
             string data = "";
-            BE.GuestRequest gr = new GuestRequest();
+            BE.GuestRequest gr = new BE.GuestRequest();
 
             while (!data.Equals("0"))
             {
@@ -50,42 +57,106 @@ namespace PL
 
                 //  Registration date
 
-                DateTime RegistrationddateTime = new DateTime();
-                RegistrationddateTime = DateTime.Now;
-                gr.RegistrationDate = RegistrationddateTime;
+                //DateTime RegistrationddateTime = new DateTime();
+                //RegistrationddateTime = DateTime.Now;
+                //gr.RegistrationDate = RegistrationddateTime;
 
+
+                gr.RegistrationDate = DateTime.Now;
 
                 //  entry date
 
-                Console.WriteLine("\n please enter your entry date");
-                data = Console.ReadLine();
-                DateTime entryDate = new DateTime();
-                try
+                ////Console.WriteLine("\n please enter your entry date");
+                ////data = Console.ReadLine();
+                ////DateTime entryDate = new DateTime();
+                ////try
+                ////{
+                ////    entryDate = DateTime.Parse(data, CultureInfo);
+                ////    gr.RegistrationDate = entryDate;
+                ////}
+                ////catch (FormatException)
+                ////{
+                ////    Console.WriteLine($"Unable to parse '{"error wrong input, enter date in this format: dd mm yyyy"}'");
+                ////}
+
+
+                //////  releaseDate
+
+
+                ////Console.WriteLine("\n please enter your release date");
+                ////data = Console.ReadLine();
+                ////DateTime releaseDate = new DateTime();
+                ////try
+                ////{
+                ////    releaseDate = DateTime.Parse(data, CultureInfo);
+                ////    gr.RegistrationDate = releaseDate;
+                ////}
+                ////catch (FormatException)
+                ////{
+                ////    Console.WriteLine($"Unable to parse '{"error wrong input, enter date in this format: dd mm yyyy"}'");
+                ////}
+
+
+
+
+
+
+
+
+                Console.WriteLine(" Enter the start date of hosting in the following format:");// הכנס תאריך תחילת אירוח בפורמט הבא 
+                Console.WriteLine("dd/mm/yyyy");
+
+                DateTime beginDate = default(DateTime);
+
+                string dateFormat = Console.ReadLine();
+                bool isSuccess = DateTime.TryParse(dateFormat, out beginDate);//check if the input is llegal 
+
+                while (!isSuccess)
                 {
-                    entryDate = DateTime.Parse(data, CultureInfo);
-                    gr.RegistrationDate = entryDate;
-                }
-                catch (FormatException)
-                {
-                    Console.WriteLine($"Unable to parse '{"error wrong input, enter date in this format: dd mm yyyy"}'");
+                    Console.WriteLine("Error! incorrect date input was entered ");
+                    Console.WriteLine(" Enter the start date of hosting in the following format:");// הכנס תאריך תחילת אירוח בפורמט הבא 
+                    Console.WriteLine("dd/mm/yyyy");
+                    dateFormat = Console.ReadLine();
+                    isSuccess = DateTime.TryParse(dateFormat, out beginDate);
                 }
 
 
-                //  releaseDate
 
 
-                Console.WriteLine("\n please enter your release date");
-                data = Console.ReadLine();
-                DateTime releaseDate = new DateTime();
-                try
+
+
+                Console.WriteLine(" Enter the end date of hosting in the following format:");// הכנס תאריך סוף אירוח בפורמט הבא 
+                Console.WriteLine("dd/mm/yyyy");
+
+                DateTime endDate = default(DateTime);
+
+                dateFormat = Console.ReadLine();
+                isSuccess = DateTime.TryParse(dateFormat, out endDate);//check if the input is llegal 
+
+                while (!isSuccess)
                 {
-                    releaseDate = DateTime.Parse(data, CultureInfo);
-                    gr.RegistrationDate = releaseDate;
+                    Console.WriteLine("Error! incorrect date input was entered ");
+                    Console.WriteLine(" Enter the end date of hosting in the following format:");// הכנס תאריך סוף אירוח בפורמט הבא 
+                    Console.WriteLine("dd/mm/yyyy");
+                    dateFormat = Console.ReadLine();
+                    isSuccess = DateTime.TryParse(dateFormat, out endDate);
                 }
-                catch (FormatException)
-                {
-                    Console.WriteLine($"Unable to parse '{"error wrong input, enter date in this format: dd mm yyyy"}'");
-                }
+
+                gr.EntryDate = beginDate;
+                gr.ReleaseDate = endDate;
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
                 //  children 
@@ -173,7 +244,7 @@ namespace PL
                 
                 Console.WriteLine("please enter the Type:");
                 Console.WriteLine("Choose one from the following options");
-                Console.WriteLine("Enter 0 for Unknown");
+                //Console.WriteLine("Enter 0 for Unknown");
                 Console.WriteLine("Enter 1 for Zimmer");
                 Console.WriteLine("Enter 2 for Hotel");
                 Console.WriteLine("Enter 3 for Camping");
@@ -187,7 +258,7 @@ namespace PL
                     break;
 
                 }
-                else if (number > 3 || number < 0)
+                else if (number > 3 || number <= 0)
                 {
                     Console.WriteLine("Wrong number");
                     break;
@@ -204,7 +275,7 @@ namespace PL
 
                 Console.WriteLine("do you want to have a pool:");
                 Console.WriteLine("Choose one from the following options");
-                Console.WriteLine("Enter 0 for Unknown");
+                //Console.WriteLine("Enter 0 for Unknown");
                 Console.WriteLine("Enter 1 for הכרחי");
                 Console.WriteLine("Enter 2 for אפשרי");
                 Console.WriteLine("Enter 3 for לא_מעוניין");
@@ -218,7 +289,7 @@ namespace PL
                     break;
 
                 }
-                else if (number > 3 || number < 0)
+                else if (number > 3 || number <= 0)
                 {
                     Console.WriteLine("Wrong number");
                     break;
@@ -235,7 +306,7 @@ namespace PL
 
                 Console.WriteLine("do you want to have a jacuzzi:");
                 Console.WriteLine("Choose one from the following options");
-                Console.WriteLine("Enter 0 for Unknown");
+                //Console.WriteLine("Enter 0 for Unknown");
                 Console.WriteLine("Enter 1 for הכרחי");
                 Console.WriteLine("Enter 2 for אפשרי");
                 Console.WriteLine("Enter 3 for לא_מעוניין");
@@ -249,7 +320,7 @@ namespace PL
                     break;
 
                 }
-                else if (number > 3 || number < 0)
+                else if (number > 3 || number <= 0)
                 {
                     Console.WriteLine("Wrong number");
                     break;
@@ -258,7 +329,7 @@ namespace PL
                 {
                     BE.AttractionsEnum choosEnum3;
                     choosEnum3 = (BE.AttractionsEnum)number;
-                    gr.Pool = choosEnum3;
+                    gr.Jacuzzi = choosEnum3;
                 }
 
 
@@ -267,7 +338,7 @@ namespace PL
 
                 Console.WriteLine("do you want to have a garden:");
                 Console.WriteLine("Choose one from the following options");
-                Console.WriteLine("Enter 0 for Unknown");
+                //Console.WriteLine("Enter 0 for Unknown");
                 Console.WriteLine("Enter 1 for הכרחי");
                 Console.WriteLine("Enter 2 for אפשרי");
                 Console.WriteLine("Enter 3 for לא_מעוניין");
@@ -281,7 +352,7 @@ namespace PL
                     break;
 
                 }
-                else if (number > 3 || number < 0)
+                else if (number > 3 || number <= 0)
                 {
                     Console.WriteLine("Wrong number");
                     break;
@@ -292,21 +363,30 @@ namespace PL
                     choosEnum4 = (BE.AttractionsEnum)number;
                     gr.Garden = choosEnum4;
                 }
+
+
+
+
+
+
                 bl.addGuestRequest(gr.Clone()); // add copy of gr to the BL layer
 
                 //bl.addGuestRequest(BE.Tools.Clone(gr)); // add copy of gr to the BL layer
 
+                //Console.WriteLine("if you dont want to add more GuestRequst enter 0");
+                //data = Console.ReadLine();
+                break;
 
-                
-                
             }
 
 
 
             
         }
+        #endregion
 
-
+        #region HostingUnit 
+      
         public void HostingUnitMenu()//2.0
         {
             int number = -1;
@@ -369,7 +449,7 @@ namespace PL
         public void Pl_AddHostingUnit() //2.1
         {
 
-            Console.WriteLine("add Hosting Unit, for exit click 0");
+
             string data = "";
             BE.HostingUnit hu = new HostingUnit();
 
@@ -380,14 +460,21 @@ namespace PL
                 Console.WriteLine("please enter host details:");
                 
                 //host name
-                Console.WriteLine("please enter hots private name");
+                Console.WriteLine("please enter Host private name");
                 data = Console.ReadLine();
+                hu.Owner = new BE.Host();
+                hu.Owner.BankBranchDetails = new BE.BankBranch();
+
                 hu.Owner.PrivateName = data;
                 
                 //host last name
-                Console.WriteLine("please enter hots last name");
+                Console.WriteLine("please enter Host last name");
                 data = Console.ReadLine();
                 hu.Owner.FamilyName = data;
+
+                Console.WriteLine("please enter Host personal ID");
+                data = Console.ReadLine();
+                hu.Owner.HostKey = data;
 
                 //host phone
 
@@ -508,7 +595,7 @@ namespace PL
 
                 Console.WriteLine("please enter the area:");
                 Console.WriteLine("Choose one from the following options");
-                Console.WriteLine("Enter 0 for All areas");
+               // Console.WriteLine("Enter 0 for All areas");
                 Console.WriteLine("Enter 1 for North area");
                 Console.WriteLine("Enter 2 for South area");
                 Console.WriteLine("Enter 3 for Center area");
@@ -523,7 +610,7 @@ namespace PL
                     break;
 
                 }
-                else if (number > 4 || number < 0)
+                else if (number > 4 || number <= 0)
                 {
                     Console.WriteLine("Wrong number");
                     break;
@@ -544,7 +631,7 @@ namespace PL
 
                 Console.WriteLine("please enter the Type:");
                 Console.WriteLine("Choose one from the following options");
-                Console.WriteLine("Enter 0 for Unknown");
+                //Console.WriteLine("Enter 0 for Unknown");
                 Console.WriteLine("Enter 1 for Zimmer");
                 Console.WriteLine("Enter 2 for Hotel");
                 Console.WriteLine("Enter 3 for Camping");
@@ -558,7 +645,7 @@ namespace PL
                     break;
 
                 }
-                else if (number > 3 || number < 0)
+                else if (number > 3 || number <=0)
                 {
                     Console.WriteLine("Wrong number");
                     break;
@@ -586,7 +673,7 @@ namespace PL
                     break;
 
                 }
-                else if (number != 0 || number != 1)
+                else if (number < 0 || number > 1)
                 {
                     Console.WriteLine("Wrong number");
                     break;
@@ -614,7 +701,7 @@ namespace PL
                     break;
 
                 }
-                else if (number != 0 || number != 1)
+                else if (number < 0 || number > 1)
                 {
                     Console.WriteLine("Wrong number");
                     break;
@@ -643,7 +730,7 @@ namespace PL
                     break;
 
                 }
-                else if (number > 3 || number < 0)
+                else if (number > 1 || number < 0)
                 {
                     Console.WriteLine("Wrong number");
                     break;
@@ -668,7 +755,7 @@ namespace PL
                     break;
 
                 }
-                else if (number > 3 || number < 0)
+                else if (number > 1 || number < 0)
                 {
                     Console.WriteLine("Wrong number");
                     break;
@@ -680,16 +767,26 @@ namespace PL
                     else hu.ChildrensAttractions = false;
 
                 }
+                bl = BL.Factory.GetInstance();
 
-                bl.addHostingUnit(BE.Tools.Clone(hu)); // add copy of gr to the BL layer
+                bl.addHostingUnit(hu.Clone());
+
+                //bl.addHostingUnit(BE.Tools.Clone(hu)); // add copy of gr to the BL layer
                 //לממש הוספת יחידת אירוח ולשלוח לביסניס לוגיק
+
+                Console.WriteLine("you successfully add Hosting Unit. ");
+                //Console.WriteLine("we continue to add Hosting Unit, for exit click 0");
+                //data = Console.ReadLine();
+                break;
             }
         }
         
         public void PersonalArea() //2.2
         {
+            bl = BL.Factory.GetInstance();
+
             int number = -1;
-            Console.WriteLine("please enter youtr HostingUnit ID");
+            Console.WriteLine("please enter your HostingUnit ID");
             string input = Console.ReadLine();
             if (!Int32.TryParse(input, out number))
             {
@@ -714,7 +811,7 @@ namespace PL
 
                 Console.WriteLine("Choose one from the following options");
                 Console.WriteLine("Enter 1 to update Hosting Unit");
-                Console.WriteLine("Enter 2 to to delete Hosting Unit");
+                Console.WriteLine("Enter 2 to to delete !THIS! Hosting Unit");
                 Console.WriteLine("Enter 3 to to enter to orders menu");
                 Console.WriteLine("Enter 0 to return to the previous menu");
 
@@ -743,6 +840,7 @@ namespace PL
                         break;
                     case PersoanlAreaEnum.Delete_Hosting_Unit:
                         conMenu.PL_DeleteHostingUnit(HU);//2.3
+                        number = 0;//ברגע שנמחק מופע אין מה לעשות כאן... 
                         break;
                     case PersoanlAreaEnum.Orders_Menu:
                         conMenu.PL_OrdersMenu(HU);//3.0
@@ -758,22 +856,391 @@ namespace PL
 
         }
 
-        public void PL_UpdateHostingUnit(BE.HostingUnit HU) //2.2.1
+        public void PL_UpdateHostingUnit(BE.HostingUnit hu) //2.2.1
         {
+            bl = BL.Factory.GetInstance();
+
+
+            string data = "";
+
+
+            while (!data.Equals("0"))
+            {
+
+                //host
+
+                Console.WriteLine("the following this is the Hosting Unit correct details");
+                Console.WriteLine(hu);
+
+                Console.WriteLine("please enter Hosting update details");
+
+                //host name
+                Console.WriteLine("if you want to change Host details enter 1");
+                string choose = Console.ReadLine();
+                if (choose.Equals("1"))
+                {
+                    Console.WriteLine("please enter Host private name");
+                    data = Console.ReadLine();
+                  
+                    hu.Owner.BankBranchDetails = new BE.BankBranch();
+
+                    hu.Owner.PrivateName = data;
+
+                    //host last name
+                    Console.WriteLine("please enter Host last name");
+                    data = Console.ReadLine();
+                    hu.Owner.FamilyName = data;
+
+                    Console.WriteLine("please enter Host personal ID");
+                    data = Console.ReadLine();
+                    hu.Owner.HostKey = data;
+
+                    //host phone
+
+                    Console.WriteLine("please enter Host phone-number");
+                    data = Console.ReadLine();
+                    int number = -1;
+                    Regex r = new Regex("(^0(5|7)[0-9]-{0,1}[0-9]{7}$)|(^0(5|7)[0-9]-{0,1}[0-9]{3}-{0,1}[0-9]{4}$)|(^0(2|3|4|7|8|9)-{0,1}[0-9]{7}$)|(^0(2|3|4|7|8|9)-{0,1}[0-9]{3}-{0,1}[0-9]{4}$)");
+                    if (!r.IsMatch(data))
+                        throw new Exception(/*"מספר טלפון אינו חוקי"*/"Phone number is not legal ");
+                    hu.Owner.PhoneNumber = data;
+
+                    //bank details
+
+                    Console.WriteLine("\n host bank details:");
+                    Console.WriteLine("please enter your bank number");
+
+                    data = Console.ReadLine();
+
+                    number = -1;
+                    if (!Int32.TryParse(data, out number))
+                    {
+                        number = -1;
+                        Console.WriteLine("Wrong input");
+                        break;
+
+                    }
+                    else if (number < 0)
+                    {
+                        Console.WriteLine("Wrong input");
+                        break;
+
+                    }
+                    else
+                    {
+                        hu.Owner.BankBranchDetails.BankNumber = number;
+                    }
+
+                    // bank name
+
+                    Console.WriteLine("please enter your bank name");
+                    data = Console.ReadLine();
+                    hu.Owner.BankBranchDetails.BankName = data;
+
+                    // branch number
+
+                    Console.WriteLine("please enter your branch number");
+                    data = Console.ReadLine();
+                    number = -1;
+                    if (!Int32.TryParse(data, out number))
+                    {
+                        number = -1;
+                        Console.WriteLine("Wrong input");
+                        break;
+
+                    }
+                    else if (number < 0)
+                    {
+                        Console.WriteLine("Wrong input");
+                        break;
+
+                    }
+                    else
+                    {
+                        hu.Owner.BankBranchDetails.BranchNumber = number;
+                    }
+
+                    // branch addrees
+
+                    Console.WriteLine("please enter your brach address");
+                    data = Console.ReadLine();
+                    hu.Owner.BankBranchDetails.BranchAddress = data;
+
+                    // branch city
+
+                    Console.WriteLine("please enter your branch city");
+                    data = Console.ReadLine();
+                    hu.Owner.BankBranchDetails.BranchCity = data;
+
+                    //bank account number
+
+                    Console.WriteLine("please enter your bank account number");
+                    data = Console.ReadLine();
+                    number = -1;
+                    if (!Int32.TryParse(data, out number))
+                    {
+                        number = -1;
+                        Console.WriteLine("Wrong input");
+                        break;
+
+                    }
+                    else if (number < 0)
+                    {
+                        Console.WriteLine("Wrong input");
+                        break;
+
+                    }
+                    else
+                    {
+                        hu.Owner.BankAccountNumber = number;
+                    }
+
+                    //mail address
+
+                    Console.WriteLine("please enter your mail address");
+                    data = Console.ReadLine();
+                    hu.Owner.MailAddress = data;
+
+                }
+                else
+                {
+                    Console.WriteLine("if you want to change only Hosting Unit details enter 1");
+
+                }
+
+                Console.WriteLine("for change Hosting Unit details enter 1");
+
+
+                choose = Console.ReadLine();
+                if (choose.Equals("1"))
+
+                {
+                    //hosting unit name
+
+                    Console.WriteLine("please enter your hosting unit name");
+                    data = Console.ReadLine();
+                    hu.HostingUnitName = data;
+
+                    int number = -1;
+
+
+                    //area
+                    Console.WriteLine("please enter the area:");
+                    Console.WriteLine("Choose one from the following options");
+                    // Console.WriteLine("Enter 0 for All areas");
+                    Console.WriteLine("Enter 1 for North area");
+                    Console.WriteLine("Enter 2 for South area");
+                    Console.WriteLine("Enter 3 for Center area");
+                    Console.WriteLine("Enter 4 for Jerusalem area");
+
+                    data = Console.ReadLine();
+
+                    if (!Int32.TryParse(data, out number))
+                    {
+                        number = -1;
+                        Console.WriteLine("Wrong input");
+                        break;
+
+                    }
+                    else if (number > 4 || number <= 0)
+                    {
+                        Console.WriteLine("Wrong number");
+                        break;
+
+                    }
+                    else
+                    {
+
+                        BE.AreaEnum choosEnum;
+                        choosEnum = (BE.AreaEnum)number;
+                        hu.Area = choosEnum;
+
+
+                    }
+
+
+                    // TYPE
+
+                    Console.WriteLine("please enter the Type:");
+                    Console.WriteLine("Choose one from the following options");
+                    //Console.WriteLine("Enter 0 for Unknown");
+                    Console.WriteLine("Enter 1 for Zimmer");
+                    Console.WriteLine("Enter 2 for Hotel");
+                    Console.WriteLine("Enter 3 for Camping");
+
+                    data = Console.ReadLine();
+
+                    if (!Int32.TryParse(data, out number))
+                    {
+                        number = -1;
+                        Console.WriteLine("Wrong input");
+                        break;
+
+                    }
+                    else if (number > 3 || number <= 0)
+                    {
+                        Console.WriteLine("Wrong number");
+                        break;
+                    }
+                    else
+                    {
+                        BE.TypeEnum choosEnum1;
+                        choosEnum1 = (BE.TypeEnum)number;
+                        hu.Type = choosEnum1;
+                    }
+
+
+                    //  pool
+
+                    Console.WriteLine("do you want to have a pool:" +
+                        " \n enter 1 for yes" +
+                        " \n enter 0 for no");
+
+                    data = Console.ReadLine();
+
+                    if (!Int32.TryParse(data, out number))
+                    {
+                        number = -1;
+                        Console.WriteLine("Wrong input");
+                        break;
+
+                    }
+                    else if (number < 0 || number > 1)
+                    {
+                        Console.WriteLine("Wrong number");
+                        break;
+                    }
+                    else
+                    {
+                        if (data.Equals("1")) hu.Pool = true;
+
+                        else hu.Pool = false;
+                    }
+
+                    // jacuzzi
+
+
+                    Console.WriteLine("do you have a jacuzzi:" +
+                        " \n enter 1 for yes" +
+                        " \n enter 0 for no");
+
+                    data = Console.ReadLine();
+
+                    if (!Int32.TryParse(data, out number))
+                    {
+                        number = -1;
+                        Console.WriteLine("Wrong input");
+                        break;
+
+                    }
+                    else if (number < 0 || number > 1)
+                    {
+                        Console.WriteLine("Wrong number");
+                        break;
+                    }
+                    else
+                    {
+                        if (data.Equals("1")) hu.Jacuzzi = true;
+
+                        else hu.Jacuzzi = false;
+                    }
+
+
+
+                    //  garden
+
+
+                    Console.WriteLine("do you have a garden:" +
+                        " \n enter 1 for yes" +
+                        " \n enter 0 for no");
+                    data = Console.ReadLine();
+
+                    if (!Int32.TryParse(data, out number))
+                    {
+                        number = -1;
+                        Console.WriteLine("Wrong input");
+                        break;
+
+                    }
+                    else if (number > 1 || number < 0)
+                    {
+                        Console.WriteLine("Wrong number");
+                        break;
+                    }
+                    else
+                    {
+                        if (data.Equals("1")) hu.Garden = true;
+
+                        else hu.Garden = false;
+
+                    }
+
+                    Console.WriteLine("do you have a children attractions?" +
+                        " \n enter 1 for yes" +
+                        " \n enter 0 for no");
+                    data = Console.ReadLine();
+
+                    if (!Int32.TryParse(data, out number))
+                    {
+                        number = -1;
+                        Console.WriteLine("Wrong input");
+                        break;
+
+                    }
+                    else if (number > 1 || number < 0)
+                    {
+                        Console.WriteLine("Wrong number");
+                        break;
+                    }
+                    else
+                    {
+                        if (data.Equals("1")) hu.ChildrensAttractions = true;
+
+                        else hu.ChildrensAttractions = false;
+
+                    }
+                }
+
+
+   
+                bl = BL.Factory.GetInstance();
+
+                bl.updateHostingUnit(hu.Clone());
+
+
+                break;
+            }
+
+
+
+
+
+
+
             //לקבל יחידת אירוח כמובן בהעתק
 
-            
+
             //לממש עדכון יחידת אירוח ולשלוח לביסניס לוגיק
         }
 
         public void PL_DeleteHostingUnit(BE.HostingUnit HU)//2.3
         {
-            //לקבל יחידת אירוח כמובן בהעתק
-            //לממש מחיקת יחידת אירוח ולשלוח לביסניס לוגיק
+            bl = BL.Factory.GetInstance();
+
+
+            bl.delHostingUnit(HU.HostingUnitKey);
+
         }
 
+
+        #endregion
+
+        #region Order 
+        //   #endregion
         public void PL_OrdersMenu(BE.HostingUnit HU)//3.0
         {
+            bl = BL.Factory.GetInstance();
+
             int number = -1;
             OrdersMenuEnum choosMenuEnum;
 
@@ -808,9 +1275,13 @@ namespace PL
                 {
                     case OrdersMenuEnum.Queries_For_Customer_List:
                         conMenu.PL_QueriesForCustomerList();//4.1 הדספה בלבד בשלב זה.
-                        addOrder(HU); ///במילוי ידני של מספר לקוח. מספר יחידת אירוח לקבל
-                                     ///            //3.1  
-                                     ///לאפשר עדכון הזמנה וכמובן להוריד לביסניס לוגיק
+                        string d = Console.ReadLine();
+                        Console.WriteLine("enter 1 to by geust request key");
+                        if (d.Equals("1"))
+                            addOrder(HU); //3.1  
+
+
+
                         break;
                     case OrdersMenuEnum.Orders_List:
                         conMenu.PL_OrdersList(HU);//3.4
@@ -830,10 +1301,131 @@ namespace PL
         }
 
 
+        public void PL_OrdersList(BE.HostingUnit HU)//3.4
+        {
+
+
+            bl = BL.Factory.GetInstance();
+            Console.WriteLine("list of all order List");
+            foreach (var item in bl.GetOrderList().Clone())
+            {
+                Console.WriteLine(item);
+            }
+            Console.WriteLine("enter order ID of order to update  ");
+
+
+            string input = Console.ReadLine();
+
+            int number = -1;
+
+            // בדיקת קלט
+
+            if (!Int32.TryParse(input, out number))
+            {
+                number = -1;
+                throw new ArgumentException(("Wrong input . the type need to be int"));
+            }
+
+
+            BE.Order order = bl.getOrderByID(number);
+
+            if (order.HostingUnitKey != HU.HostingUnitKey)
+            {
+
+                throw new ArgumentException(string.Format("this order , {0} not belong to this {1} Hosting Unit  ", order.OrderKey, HU.HostingUnitKey));
+
+            }
+
+
+            //next statement for update order status (only status)
+
+
+            if (order.Status == StatusEnum.נסגר_מחוסר_הענות_הלקוח || order.Status == StatusEnum.נסגר_בהיענות_הלקוח)
+                throw new ArgumentException("לא ניתן לשנות עסקה שנסגרה");
 
 
 
 
+
+            Console.WriteLine("enter the new status of the order ,0 - ative(not relevant), 1- send mail, 2- close after client not respone, 3 -close with client ");
+
+
+
+            BE.StatusEnum choosEnum;
+
+            if (number > 3 || number < 0)
+            {
+                throw new ArgumentException("Wrong number");
+
+            }
+
+            choosEnum = (BE.StatusEnum)number; //cast
+
+
+            bl.UpdateOrder(order);
+
+
+
+            ///בהמשך בשלב הבא נוסיף את השאילתות שמיממשנו כבר בשכבת ביסניק לוגיקה
+
+
+        }
+
+
+
+        public void addOrder(BE.HostingUnit HU) //מקבל יחידת אירוח וממש הוספה
+        {
+
+            BE.Order order = new Order() { HostingUnitKey = HU.HostingUnitKey };
+
+            Console.WriteLine("enter the key of the GeustRequest");
+
+            string input = Console.ReadLine();
+            int number = -1;
+
+            if (!Int32.TryParse(input, out number))
+            {
+                number = -1;
+                throw new ArgumentException("Wrong input");
+
+            }
+
+            BE.GuestRequest GR = bl.getGuestRequestByID(number);
+            if (GR == null)
+            {
+                throw new ArgumentException(string.Format("There is notBE.GuestRequest ID with this number {0}", number));
+
+            }
+
+            order.GuestRequestKey = GR.GuestRequestKey;
+
+
+            addOrder(order);
+
+
+
+
+        }
+
+
+        public void addOrder(BE.Order order)//שולח לביסניס לוגיק
+        {
+            bl = BL.Factory.GetInstance();
+            bl.addOrder(order.Clone());
+        }
+
+        //addOrder(HU); 
+
+        ///במילוי ידני של מספר לקוח. מספר יחידת אירוח לקבל
+        ///            //3.2  
+        ///לאפשר עדכון הזמנה וכמובן להוריד לביסניס לוגיק
+
+
+        #endregion
+
+
+        #region Web Manager Menu 
+        //   #endregion
         //Web  Manager  Menu
 
 
@@ -897,83 +1489,18 @@ namespace PL
 
 
         }
+        #endregion
 
+        #region Queries
+        //   #endregion
 
-
-        public void PL_OrdersList(BE.HostingUnit HU)//3.4
-        {
-
-
-
-            Console.WriteLine("list of all order List");
-            foreach (var item in bl.GetOrderList().Clone())
-            {
-                Console.WriteLine(item);
-            }
-            Console.WriteLine("enter order ID of order to update  ");
-
-
-            string input = Console.ReadLine();
-
-            int number = -1;
-
-            // בדיקת קלט
-
-            if (!Int32.TryParse(input, out number))
-            {
-                number = -1;
-                throw new ArgumentException(("Wrong input . the type need to be int"));
-            }
-
-
-            BE.Order order = bl.getOrderByID(number);
-
-            if (order.HostingUnitKey!=HU.HostingUnitKey)
-            {
-
-                throw new ArgumentException(string.Format("this order , {0} not belong to this {1} Hosting Unit  ", order.OrderKey, HU.HostingUnitKey));
-
-            }
-
-
-            //next statement for update order status (only status)
-
-
-            if (order.Status == StatusEnum.נסגר_מחוסר_הענות_הלקוח || order.Status == StatusEnum.נסגר_בהיענות_הלקוח)
-                throw new ArgumentException("לא ניתן לשנות עסקה שנסגרה");
-
-
-
-
-
-            Console.WriteLine("enter the new status of the order ,0 - ative(not relevant), 1- send mail, 2- close after client not respone, 3 -close with client ");
-
-
-
-                BE.StatusEnum choosEnum;
-
-                if (number > 3 || number < 0)
-                {
-                    throw new ArgumentException("Wrong number");
-                       
-                }
-
-                choosEnum = (BE.StatusEnum)number; //cast
-
-
-            bl.UpdateOrder(order);
-
-
-
-            ///בהמשך בשלב הבא נוסיף את השאילתות שמיממשנו כבר בשכבת ביסניק לוגיקה
-
-
-        }
 
 
         public void PL_QueriesForCustomerList()//4.1
         {
-            Console.WriteLine("list of all GuestRequest List");
+            bl = BL.Factory.GetInstance();
+
+            Console.WriteLine("list of allBE.GuestRequest List");
             foreach (var item in bl.GetGuestRequestList().Clone())
             {
                 Console.WriteLine(item);
@@ -995,6 +1522,7 @@ namespace PL
 
         public void PL_QueriesForHostingUnitList()//4.2
         {
+            bl = BL.Factory.GetInstance();
 
             Console.WriteLine("list of all HostingUnit List");
             foreach (var item in bl.GetHostingUnitList().Clone())
@@ -1009,6 +1537,8 @@ namespace PL
 
         public void PL_QueriesForOrderList()//4.3
         {
+            bl = BL.Factory.GetInstance();
+
 
             Console.WriteLine("list of all Order List");
             foreach (var item in bl.GetOrderList().Clone())
@@ -1023,54 +1553,12 @@ namespace PL
 
         public void PL_AdditionalQueries()//4.4
         {
-
-        }
-
-        public void addOrder(BE.HostingUnit HU) //מקבל יחידת אירוח וממש הוספה
-        {
-            BE.Order order = new Order() { HostingUnitKey = HU.HostingUnitKey };
-
-            Console.WriteLine("enter the key of the GeustRequest");
-
-            string input = Console.ReadLine();
-            int number = -1;
-
-            if (!Int32.TryParse(input, out number))
-            {
-                number = -1;
-                throw new ArgumentException("Wrong input");
-                
-            }
-
-            BE.GuestRequest GR = bl.getGuestRequestByID(number);
-            if (GR==null)
-            {
-                throw new ArgumentException(string.Format("There is not GuestRequest ID with this number {0}", number));
-
-            }
-
-            order.GuestRequestKey = GR.GuestRequestKey;
-
-
-            addOrder(order);
-
-
-
+            Console.WriteLine("empty for this stage of project");
 
         }
 
 
-        public void addOrder(BE.Order order)//שולח לביסניס לוגיק
-        {
-
-            bl.addOrder(order.Clone());
-        }
-
-        //addOrder(HU); 
-
-        ///במילוי ידני של מספר לקוח. מספר יחידת אירוח לקבל
-        ///            //3.2  
-        ///לאפשר עדכון הזמנה וכמובן להוריד לביסניס לוגיק
+          #endregion
 
 
     }

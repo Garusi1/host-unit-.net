@@ -12,7 +12,7 @@ namespace BE
     [Serializable]
     public class GuestRequest
     {
-        BE.Configuration r = new BE.Configuration();
+        //BE.Configuration r = new BE.Configuration(); //אחי היקר שורת הקוד הזו דופקת את המערכת
 
         private int guestRequestKey;
         public int GuestRequestKey
@@ -94,7 +94,7 @@ namespace BE
             get { return registrationDate; }
             set
             {// to define
-                if (registrationDate == null)
+                if (registrationDate == default(DateTime))
                     registrationDate = value;
             }
         }
@@ -250,7 +250,7 @@ namespace BE
         public override string ToString()  // יש לממש בהתאם לדרישות הפרוייקט.
         {
             string str = "";
-            str += "Geust name: " + PrivateName + " " + FamilyName + "\n" +
+            str +="Guest request key : "+GuestRequestKey+ "\n" + "Geust name: " + PrivateName + " " + FamilyName + "\n" +
                 "MailAddress: " + MailAddress + "\n" +
                 "Status: " + Status + "\n" +
                 "Registration Date: " + RegistrationDate.ToString() + "\n" +

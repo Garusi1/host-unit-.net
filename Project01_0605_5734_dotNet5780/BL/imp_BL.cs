@@ -49,12 +49,12 @@ namespace BL
             if ((guest.ChildrensAttractions == BE.AttractionsEnum.Unknown) && (guest.Children > 0))
                 throw new System.ArgumentException(/*חובה לבחור האם מעוניין באטראקציות לילדים"*/"Must choose whether you want a Childrens Attractions");
 
-            if (checkDateLegallOneYear(guest.EntryDate)) //אם התאריכים חורגים מהטווח של חודש אחורה ו11 חודש קדימה
+            if (!(checkDateLegallOneYear(guest.EntryDate))) //אם התאריכים חורגים מהטווח של חודש אחורה ו11 חודש קדימה
             {
                 throw new System.ArgumentException(string.Format("worng input {0} not in the span of dates ", guest.EntryDate));
 
             }
-            if (checkDateLegallOneYear(guest.ReleaseDate))
+            if (!(checkDateLegallOneYear(guest.ReleaseDate)))
             {
                 throw new System.ArgumentException(string.Format("worng input {0} not in the span of dates ", guest.ReleaseDate));
             }
@@ -92,14 +92,14 @@ namespace BL
 
         public bool checkRequestDates(BE.GuestRequest guest)
         {
-            if (guest.EntryDate <= guest.ReleaseDate) // check if the dates are not equal and if the relase date are not bigger then EntryDate
+            if (guest.EntryDate >= guest.ReleaseDate) // check if the dates are not equal and if the relase date are not bigger then EntryDate
                 return false;
             return true;
 
         }
 
 
-        public bool checkDateLegallOneYear(DateTime generalDate)
+        public bool checkDateLegallOneYear(DateTime generalDate) //return true if its ok
         {
             DateTime lastMonth = DateTime.Now.Date.AddMonths(-1);
             if (generalDate < lastMonth)
@@ -246,7 +246,7 @@ namespace BL
 
             IDAL.delHostingUnit(hostUnitID);
 
-            throw new NotImplementedException();
+            //throw new NotImplementedException();
         }
 
         public void updateHostingUnit(BE.HostingUnit hostUnit)
@@ -294,6 +294,7 @@ namespace BL
 
         public BE.HostingUnit getHostingUnitByID(int ID)
         {
+            
             return IDAL.getHostingUnitByID(ID).Clone();
         }
 
@@ -425,8 +426,16 @@ namespace BL
 
         public List<BE.Order> GetOrderList()
         {
+
+            List<BE.Order> list = IDAL.GetOrderList().Clone(); ;
+            //foreach (var item in IDAL.GetOrderList().Clone())
+            //{
+            //    list.Add(item);
+            //}
+            return list;
             //throw new NotImplementedException();
-            return IDAL.GetOrderList().Clone();
+
+
         }
 
 

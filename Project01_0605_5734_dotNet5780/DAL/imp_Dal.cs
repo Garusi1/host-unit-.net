@@ -23,7 +23,7 @@ namespace DAL
 
         public void addGuestRequest(BE.GuestRequest guest)
         {
-            guest.GuestRequestKey = BE.Configuration.geustReqID++;// לוודא שאכן מקדם אותו
+            guest.GuestRequestKey = BE.Configuration.geustReqID++;
             foreach (BE.GuestRequest element in ds.getGuestRequestList()) // צריך לבדוק שהלולאות האלה באמת עובדות
             {
                 if (element.isEqual(guest))
@@ -147,9 +147,18 @@ namespace DAL
         public List<BE.GuestRequest> GetGuestRequestList()
         {
             var li = from item in ds.getGuestRequestList()
-                     select item;
+                     select item.Clone();
 
-            return (List<BE.GuestRequest>)li.Clone();
+
+            List<BE.GuestRequest> list = new List<BE.GuestRequest>();
+
+            foreach (var item in li)
+            {
+                list.Add(item);
+            }
+
+
+            return list;
 
         }
         public List<BE.HostingUnit> GetHostingUnitList()
@@ -158,7 +167,14 @@ namespace DAL
             var li = from item in ds.getHostingUnitList()
                      select item.Clone();
 
-            return (List<BE.HostingUnit>)li;
+            List<BE.HostingUnit> list = new List<BE.HostingUnit>();
+
+            foreach (var item in li)
+            {
+                list.Add(item);
+            }
+
+            return list;
 
         }
         public List<BE.Order> GetOrderList()
@@ -166,7 +182,13 @@ namespace DAL
             var li = from item in ds.getOrderList()
                      select item.Clone();
 
-            return (List<BE.Order>)li;
+            List<BE.Order> list = new List<BE.Order>();
+            foreach (var item in li)
+            {
+                list.Add(item);
+            }
+            return list.Clone();
+
         }
 
 
