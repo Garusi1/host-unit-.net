@@ -541,7 +541,7 @@ namespace BL
 
 
 
-        //תופסות בBL
+        //תוספות  בBL
 
         public List<BE.HostingUnit> availableUnits(DateTime enteryDate, int numOfDayes)//פונקציה שמקבלת תאריך ומספר ימי נופש ומחזירה את רשימת היחידות הפנויות בתאריך זה
         {
@@ -728,7 +728,7 @@ namespace BL
 
 
 
-        public IEnumerable<IGrouping<int, Host>> groupByNumberOfHosintgUnitForHost()
+        public IEnumerable<IGrouping<int, BE.Host>> groupByNumberOfHosintgUnitForHost()
         {
             var hostingUnits = GetHostingUnitList();
 
