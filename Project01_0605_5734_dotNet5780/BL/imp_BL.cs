@@ -25,9 +25,9 @@ namespace BL
 
             //אם לא הושלם מילוי
             if (guest.PrivateName == "" || guest.FamilyName == "" || guest.MailAddress == null || guest.EntryDate == null || guest.ReleaseDate == null)
-                throw new Exception("חובה למלא את כל השדות");
+                throw new ArgumentException("חובה למלא את כל השדות");
             if (!checkRequestDates(guest))// if the dates are not legal
-                throw new System.ArgumentException("Dates are not legal!");
+                throw new ArgumentException("Dates are not legal!");
 
             ///throw new System.ArgumentException(string.Format("worng input {0} not llegal ", generalDate));
 
@@ -49,6 +49,7 @@ namespace BL
             if ((guest.ChildrensAttractions == BE.AttractionsEnum.Unknown) && (guest.Children > 0))
                 throw new System.ArgumentException(/*חובה לבחור האם מעוניין באטראקציות לילדים"*/"Must choose whether you want a Childrens Attractions");
 
+
             if (!(checkDateLegallOneYear(guest.EntryDate))) //אם התאריכים חורגים מהטווח של חודש אחורה ו11 חודש קדימה
             {
                 throw new System.ArgumentException(string.Format("worng input {0} not in the span of dates ", guest.EntryDate));
@@ -58,6 +59,8 @@ namespace BL
             {
                 throw new System.ArgumentException(string.Format("worng input {0} not in the span of dates ", guest.ReleaseDate));
             }
+
+
 
 
 
@@ -78,7 +81,16 @@ namespace BL
             // after we cheek all the possible problems we can transfer the data to DAL layer
 
             guest.RegistrationDate = DateTime.Now;
-            IDAL.addGuestRequest(guest.Clone());
+            try
+            {
+                IDAL.addGuestRequest(guest.Clone());
+            }
+            catch (DuplicateWaitObjectException e)
+            {
+
+                throw e;
+            }
+
 
             //throw new NotImplementedException();
         }
@@ -99,19 +111,26 @@ namespace BL
         }
 
 
+        /// <summary>
+        /// //אם התאריך חורג מהטווח של חודש אחורה ו11 חודש קדימה
+        /// </summary>
+        /// <param name="generalDate"></param>
+        /// <returns></returns>
         public bool checkDateLegallOneYear(DateTime generalDate) //return true if its ok
         {
             DateTime lastMonth = DateTime.Now.Date.AddMonths(-1);
             if (generalDate < lastMonth)
             {
-                throw new System.ArgumentException(string.Format("worng input {0} not llegal ", generalDate));
+                return false;
+                //throw new System.ArgumentException(string.Format("worng input {0} not llegal ", generalDate));
 
             }
             lastMonth = DateTime.Now.Date.AddMonths(11);
 
             if (generalDate > lastMonth)
             {
-                throw new System.ArgumentException(string.Format("worng input {0} not llegal ", generalDate));
+                return false;
+                //throw new System.ArgumentException(string.Format("worng input {0} not llegal ", generalDate));
 
             }
 
@@ -119,7 +138,7 @@ namespace BL
         }
 
 
-        public void updateGuestRequest(BE.GuestRequest guest) //בהנחה שמעדכנים אך ורק סטטוס הזמנה
+        public void updateGuestRequest(BE.GuestRequest guest) //בהנחה שמעדכנים אך ורק סטטוס הזמנה 
         {
             BE.GuestRequest oldGuest = getGuestRequestByID(guest.GuestRequestKey);
             if (oldGuest == null)
@@ -182,18 +201,24 @@ namespace BL
 
             if (!(oldGuest.Status == BE.StatusGREnum.פתוחה))
             {
-                throw new Exception(string.Format("לא ניתן לשנות דרישת לקוח שאינה פתוחה"));
+                throw new ArgumentException(string.Format("לא ניתן לשנות דרישת לקוח שאינה פתוחה"));
             }
 
+            try
+            {
+                IDAL.updateGuestRequest(guest.Clone());
+            }
+            catch (KeyNotFoundException e)
+            {
 
-            IDAL.updateGuestRequest(guest.Clone());
+                throw e;
+            }
+
 
         }
 
 
         #endregion
-
-
 
 
         #region HostingUnit methods
@@ -206,19 +231,28 @@ namespace BL
                 hostUnit.Owner.PrivateName == "" || hostUnit.Owner.FamilyName == "" ||
                 hostUnit.Owner.PhoneNumber == "" || hostUnit.Owner.MailAddress == null ||
                 hostUnit.Owner.BankBranchDetails == null || hostUnit.Owner.BankAccountNumber == 0)
+                throw new ArgumentException("חובה למלא את כל השדות");
 
-                throw new Exception("חובה למלא את כל השדות");
             if (!BE.Tools.ValidateID(hostUnit.Owner.HostKey))
-                throw new Exception("תעודת זהות של מארח לא תקינה.");
+                throw new System.IO.InvalidDataException("תעודת זהות של מארח לא תקינה.");
             if (!Enum.IsDefined(typeof(BE.AreaEnum), hostUnit.Area))
-                throw new System.ArgumentException("Enum input illegal");
+                throw new System.IO.InvalidDataException("Enum input illegal");
             if (hostUnit.Area == BE.AreaEnum.All)
-                throw new System.ArgumentException("Enum input illegal. HostingUnit cannot be in All regions");
+                throw new System.IO.InvalidDataException("Enum input illegal. HostingUnit cannot be in All regions");
 
 
             // after we cheek all the possible problems we can transfer the data to DAL layer
 
-            IDAL.addHostingUnit(hostUnit.Clone());
+            try
+            {
+                IDAL.addHostingUnit(hostUnit.Clone());
+            }
+            catch (DuplicateWaitObjectException e)
+            {
+
+                throw e;
+            }
+
 
             // throw new NotImplementedException();
         }
@@ -229,7 +263,7 @@ namespace BL
         {
             if (getHostingUnitByID(hostUnitID) == null)
             {
-                throw new Exception(string.Format("Hosting Unit with {0} key is not exists ", hostUnitID));
+                throw new KeyNotFoundException(string.Format("Hosting Unit with {0} key is not exists ", hostUnitID));
             }
 
             // check if there is "open" order connect to this Hosting Unit
@@ -239,14 +273,20 @@ namespace BL
                      select hostUnitID;
             foreach (var item in ls)
             {
-                throw new Exception(string.Format("this Hosting {0} has open order (order key : {1}) ", hostUnitID, item));
-
+                throw new BE.Tools.UnLogicException(string.Format("this Hosting {0} has open order (order key : {1}) ", hostUnitID, item));
+                
             }
 
+            try
+            {
+                IDAL.delHostingUnit(hostUnitID);
+            }
+            catch (KeyNotFoundException e)
+            {
 
-            IDAL.delHostingUnit(hostUnitID);
+                throw e;
+            }
 
-            //throw new NotImplementedException();
         }
 
         public void updateHostingUnit(BE.HostingUnit hostUnit)
@@ -258,13 +298,13 @@ namespace BL
                 hostUnit.Owner.PhoneNumber == "" || hostUnit.Owner.MailAddress == null ||
                 hostUnit.Owner.BankBranchDetails == null || hostUnit.Owner.BankAccountNumber == 0)
 
-                throw new Exception("חובה למלא את כל השדות");
+                throw new ArgumentException("חובה למלא את כל השדות");
             if (!BE.Tools.ValidateID(hostUnit.Owner.HostKey))
-                throw new Exception("תעודת זהות של מארח לא תקינה.");
+                throw new System.IO.InvalidDataException("תעודת זהות של מארח לא תקינה.");
             if (!Enum.IsDefined(typeof(BE.AreaEnum), hostUnit.Area))
-                throw new System.ArgumentException("Enum input illegal");
+                throw new System.IO.InvalidDataException("Enum input illegal");
             if (hostUnit.Area == BE.AreaEnum.All)
-                throw new System.ArgumentException("Enum input illegal. HostingUnit cannot be in All regions");
+                throw new System.IO.InvalidDataException("Enum input illegal. HostingUnit cannot be in All regions");
 
             if (beforeChangeHostUnit.Owner.CollectionClearance.Equals("Yes") && (hostUnit.Owner.CollectionClearance.Equals("No")))//אם רוצה לשנות הרשאת חשבון בנק
             {
@@ -273,11 +313,10 @@ namespace BL
                                  ((item.Status == BE.StatusEnum.טרם_טופל) ||
                                  (item.Status == BE.StatusEnum.נשלח_מייל))
                                  select item;
+
                 foreach (var item in checkOrder)
                 {
-                    throw new System.ArgumentException("לא ניתן ל");
-
-
+                    throw new System.ArgumentException("לא ניתן לבטל הראשאת חיוב חשבון כל עוד יש הזמנה פתוחה");
                 }
 
 
@@ -285,16 +324,23 @@ namespace BL
 
             // after we cheek all the possible problems we can transfer the data to DAL layer
 
-            IDAL.updateHostingUnit(hostUnit.Clone());
+            try
+            {
+                IDAL.updateHostingUnit(hostUnit.Clone());
+            }
+            catch (KeyNotFoundException e)
+            {
 
-            //throw new NotImplementedException();
+                throw e;
+            }
+
         }
 
 
 
         public BE.HostingUnit getHostingUnitByID(int ID)
         {
-            
+
             return IDAL.getHostingUnitByID(ID).Clone();
         }
 
@@ -326,7 +372,8 @@ namespace BL
 
         #endregion
 
-
+        #region Order methods
+        //   #endregion
         public void addOrder(BE.Order order)
         {
             BE.GuestRequest GR = getGuestRequestByID(order.GuestRequestKey);
@@ -340,7 +387,9 @@ namespace BL
 
             if (!(GR.Status == BE.StatusGREnum.פתוחה))
             {
-                throw new System.Diagnostics.Eventing.Reader.EventLogInvalidDataException(string.Format("This Guest request {0} are close ", order.GuestRequestKey));
+                throw new BE.Tools.UnLogicException(string.Format("This Guest request {0} are close ", order.GuestRequestKey));
+
+              //throw new System.Diagnostics.Eventing.Reader.EventLogInvalidDataException(string.Format("This Guest request {0} are close ", order.GuestRequestKey));
 
             }
 
@@ -372,7 +421,7 @@ namespace BL
                 throw new System.ArgumentException(string.Format("the Guest request and the Hosting Unit are not fit in the ChildrensAttractions parmater  "));
             }
 
-            //ליתר חרום
+            //ליתר ביטחון
             if (checkDateLegallOneYear(GR.EntryDate)) //אם התאריכים חורגים מהטווח של חודש אחורה ו11 חודש קדימה
             {
                 throw new System.ArgumentException(string.Format("worng input {0} not in the span of dates ", GR.EntryDate));
@@ -387,22 +436,138 @@ namespace BL
 
             if (!ApproveRequest(GR, HU))  //check if the dates are available on matrix.   // if not, return false.
             {
-                throw new Exception(string.Format("The dates on Hosting unit are not available"));
+                throw new BE.Tools.UnLogicException(string.Format("The dates on Hosting unit are not available"));
             }
 
             // if the dates are available on matrix update the Hosint Unit
 
 
+            try
+            {
+                IDAL.addOrder(order.Clone());
+            }
+            catch (DuplicateWaitObjectException e)
+            {
 
-            IDAL.addOrder(order.Clone());
+                throw e;
+            }
+
 
 
         }
 
 
 
+        public void UpdateOrder(BE.Order order)
+        {
+
+            BE.GuestRequest GR = getGuestRequestByID(order.GuestRequestKey);
+            BE.HostingUnit HU = getHostingUnitByID(order.HostingUnitKey); // בהנחה שזה קיים אחרת לא נשלחה בקשה לפונקציה זו
+            BE.Order orderBeforeChange = getOrderByID(order.OrderKey);
+
+            if (!(ApproveRequest(GR, HU))) //check if the dates are available on matrix.   // if not, return false.)
+            {
+                throw new BE.Tools.UnLogicException(string.Format("The dates on Hosting unit are not available"));
+            }
 
 
+            if ((HU.Owner.CollectionClearance == "No") && (order.Status == BE.StatusEnum.נשלח_מייל))
+                throw new BE.Tools.UnLogicException(string.Format("בעל יחידת דיור אינו מורשה לשלוח מייל כל עוד לא חתם על הרשאה לחיוב חשבון בנק"));
+
+
+            if (orderBeforeChange.Status == BE.StatusEnum.נסגר_בהיענות_הלקוח || orderBeforeChange.Status == BE.StatusEnum.נסגר_מחוסר_הענות_הלקוח)
+            {
+                throw new BE.Tools.UnLogicException(string.Format("לא ניתן לשנות סטטוס הזמנה שנסגרה"));
+
+            }
+
+            if ((HU.Owner.CollectionClearance == "No") && (order.Status == BE.StatusEnum.נסגר_בהיענות_הלקוח))
+                throw new BE.Tools.UnLogicException(string.Format("בעל יחידת דיור אינו מורשה לסגור עסקה כל עוד לא חתם על הרשאה לחיוב חשבון בנק"));
+
+
+            if (GR.Status == BE.StatusGREnum.נסגרה_כי_פג_תוקפה || GR.Status == BE.StatusGREnum.נסגרה_עסקה_דרך_האתר)
+            {
+                throw new BE.Tools.UnLogicException(string.Format("דרישת הלקוח נסגרה"));
+
+            }
+
+            if ((HU.Owner.CollectionClearance == "Yes") && (order.Status == BE.StatusEnum.נשלח_מייל))
+            {
+                sendMail(order); //שליחת מייל עם פרטי הזמנה
+                order.OrderDate = DateTime.Now;
+
+            }
+
+            if ((HU.Owner.CollectionClearance == "Yes") && (order.Status == BE.StatusEnum.נסגר_בהיענות_הלקוח))
+            {
+                int Chargeamount = 0;
+                //תפיסת היחידה
+                DateTime LastNight = GR.RegistrationDate.AddDays(-2);
+                for (DateTime tempDate = GR.EntryDate; tempDate <= LastNight; tempDate = tempDate.AddDays(1))
+                {
+                    this[tempDate, HU] = true;//put the nights on matrix
+                    Chargeamount += BE.Configuration.Commission; //חישוב עמלה על כיום שנתפס
+                }
+
+                bankAccountDebit(HU, Chargeamount);
+                GR.Status = StatusGREnum.נסגרה_עסקה_דרך_האתר;
+                try
+                {
+                    updateGuestRequest(GR);
+
+                }
+                catch (ArgumentException e)
+                {
+
+                    throw e;
+                }
+                catch (KeyNotFoundException e)
+                {
+
+                    throw e;
+                }
+
+
+
+
+
+
+                var fit = from orderShow in GetOrderList()
+                          where (GR.GuestRequestKey == orderShow.GuestRequestKey) && (order.OrderKey != orderShow.OrderKey)//לוקח את כל הרשימה מלבד אותו מופע של הזמנה
+                          select /*{GS.GuestRequestKey,HU.HostingUnitKey };*/orderShow.Status == BE.StatusEnum.נסגר_מחוסר_הענות_הלקוח;
+
+                try
+                {
+                    foreach (var item in GetOrderList())
+                    {
+                        IDAL.UpdateOrder(item.Clone());
+                    }
+                }
+                catch (KeyNotFoundException e)
+                {
+
+                    throw e;
+                }
+
+            }
+
+            try
+            {
+                IDAL.UpdateOrder(order.Clone());
+            }
+            catch (KeyNotFoundException e)
+            {
+
+                throw e;
+            }
+
+        }
+
+
+        #endregion
+
+
+        #region return lists
 
         public List<BE.BankBranch> GetBankBranchList()
         {
@@ -438,85 +603,9 @@ namespace BL
 
         }
 
+        #endregion
 
-
-
-        public void UpdateOrder(BE.Order order)
-        {
-
-            BE.GuestRequest GR = getGuestRequestByID(order.GuestRequestKey);
-            BE.HostingUnit HU = getHostingUnitByID(order.HostingUnitKey); // בהנחה שזה קיים אחרת לא נשלחה בקשה לפונקציה זו
-            BE.Order orderBeforeChange = getOrderByID(order.OrderKey);
-
-            if (!(ApproveRequest(GR, HU))) //check if the dates are available on matrix.   // if not, return false.)
-            {
-                throw new Exception(string.Format("The dates on Hosting unit are not available"));
-            }
-
-
-            if ((HU.Owner.CollectionClearance == "No") && (order.Status == BE.StatusEnum.נשלח_מייל))
-                throw new Exception(string.Format("בעל יחידת דיור אינו מורשה לשלוח מייל כל עוד לא חתם על הרשאה לחיוב חשבון בנק"));
-
-
-            if (orderBeforeChange.Status == BE.StatusEnum.נסגר_בהיענות_הלקוח || orderBeforeChange.Status == BE.StatusEnum.נסגר_מחוסר_הענות_הלקוח)
-            {
-                throw new Exception(string.Format("לא ניתן לשנות סטטוס הזמנה שנסגרה"));
-
-            }
-
-            if ((HU.Owner.CollectionClearance == "No") && (order.Status == BE.StatusEnum.נסגר_בהיענות_הלקוח))
-                throw new Exception(string.Format("בעל יחידת דיור אינו מורשה לסגור עסקה כל עוד לא חתם על הרשאה לחיוב חשבון בנק"));
-
-
-            if (GR.Status == BE.StatusGREnum.נסגרה_כי_פג_תוקפה || GR.Status == BE.StatusGREnum.נסגרה_עסקה_דרך_האתר)
-            {
-                throw new Exception(string.Format("דרישת הלקוח נסגרה"));
-
-            }
-
-            if ((HU.Owner.CollectionClearance == "Yes") && (order.Status == BE.StatusEnum.נשלח_מייל))
-            {
-                sendMail(order); //שליחת מייל עם פרטי הזמנה
-                order.OrderDate = DateTime.Now;
-
-            }
-
-            if ((HU.Owner.CollectionClearance == "Yes") && (order.Status == BE.StatusEnum.נסגר_בהיענות_הלקוח))
-            {
-                int Chargeamount = 0;
-                //תפיסת היחידה
-                DateTime LastNight = GR.RegistrationDate.AddDays(-2);
-                for (DateTime tempDate = GR.EntryDate; tempDate <= LastNight; tempDate = tempDate.AddDays(1))
-                {
-                    this[tempDate, HU] = true;//put the nights on matrix
-                    Chargeamount += BE.Configuration.Commission; //חישוב עמלה על כיום שנתפס
-                }
-
-                bankAccountDebit(HU, Chargeamount);
-                GR.Status = StatusGREnum.נסגרה_עסקה_דרך_האתר;
-                updateGuestRequest(GR);
-
-
-
-
-                var fit = from orderShow in GetOrderList()
-                          where (GR.GuestRequestKey == orderShow.GuestRequestKey) && (order.OrderKey != orderShow.OrderKey)//לוקח את כל הרשימה מלבד אותו מופע של הזמנה
-                          select /*{GS.GuestRequestKey,HU.HostingUnitKey };*/orderShow.Status == BE.StatusEnum.נסגר_מחוסר_הענות_הלקוח;
-
-                foreach (var item in GetOrderList())
-                {
-                    IDAL.UpdateOrder(item.Clone());
-                }
-            }
-            IDAL.UpdateOrder(order.Clone());
-
-
-
-
-
-            throw new NotImplementedException();
-        }
-
+        #region other methods
 
 
 
@@ -571,10 +660,10 @@ namespace BL
         }
 
 
-        public int numberOfDayes( DateTime start,DateTime end=default(DateTime)) //מספר הימים שעברו בטווח תאריכים מסוים או מתאריך מסוים ועד היום.
+        public int numberOfDayes(DateTime start, DateTime end = default(DateTime)) //מספר הימים שעברו בטווח תאריכים מסוים או מתאריך מסוים ועד היום.
         {//default(DateTime) =01/01/0001
 
-            if (start< end)
+            if (start < end)
             {
                 end = DateTime.Now;
             }
@@ -643,7 +732,7 @@ namespace BL
                      select item;
             foreach (var item in ls)
             {
-                number ++;
+                number++;
             }
             return number;
         }
@@ -655,7 +744,7 @@ namespace BL
             int number = 0;
             var ls = from item in GetOrderList()
                      where ((item.HostingUnitKey == HU.HostingUnitKey) &&
-                           ((item.Status == BE.StatusEnum.נשלח_מייל)||
+                           ((item.Status == BE.StatusEnum.נשלח_מייל) ||
                            (item.Status == BE.StatusEnum.נסגר_בהיענות_הלקוח)))//משמע הזמנה נסגרה דרך האתר ויחידה נתפסה
                      select item;
             foreach (var item in ls)
@@ -665,10 +754,15 @@ namespace BL
             return number;
         }
 
-
+        #endregion
 
         #region Grouping
-        public List<IGrouping<BE.AreaEnum, BE.GuestRequest>> groupByAreaGR ()
+
+        /// <summary>
+        /// מחזיר גרופינג של דרישות לקוח לפי איזור. 
+        /// </summary>
+        /// <returns> ערך אחד. יש לבצע בפונקציה המזמנת forech</returns>
+        public List<IGrouping<BE.AreaEnum, BE.GuestRequest>> groupByAreaGR()
         {
             var result = from item in GetGuestRequestList()
                          group item by item.Area;
@@ -677,10 +771,14 @@ namespace BL
 
         }
 
+        /// <summary>
+        /// מחזיר גרופינג של דרישות לקוח לפי מספר הנופשים. 
+        /// </summary>
+        /// <returns> ערך אחד. יש לבצע בפונקציה המזמנת forech</returns>
         public List<IGrouping<int, BE.GuestRequest>> groupByNumberOfPeopleInGR() // סידור לפי מספר הנופשים - מבוגרים וילדים
         {
             var result = from item in GetGuestRequestList()
-                         group item by (item.Adults+item.Children);
+                         group item by (item.Adults + item.Children);
             return result.ToList();
 
         }
@@ -707,7 +805,7 @@ namespace BL
         //    }
 
         //    var lss=from item in GetHostingUnitList()
-                    
+
 
 
 
@@ -727,7 +825,10 @@ namespace BL
 
 
 
-
+        /// <summary>
+        /// מחזיר גרופינג של מארחים מסודר לפי מספר יחידת אירוח של כל מארח. 
+        /// </summary>
+        /// <returns> ערך אחד. יש לבצע בפונקציה המזמנת forech</returns>
         public IEnumerable<IGrouping<int, BE.Host>> groupByNumberOfHosintgUnitForHost()
         {
             var hostingUnits = GetHostingUnitList();
@@ -743,7 +844,11 @@ namespace BL
 
 
 
-        public List<IGrouping<BE.AreaEnum, BE.HostingUnit>> groupByAreaHontingUnit()
+        /// <summary>
+        /// מחזיר גרופינג של יחידת אירוח מסודר לפי איזור. 
+        /// </summary>
+        /// <returns> ערך אחד. יש לבצע בפונקציה המזמנת forech</returns>
+        public List<IGrouping<BE.AreaEnum, BE.HostingUnit>> groupByAreaHostingUnit()
         {
             var result = from item in GetHostingUnitList()
                          group item by item.Area;
@@ -755,8 +860,6 @@ namespace BL
 
 
         #endregion
-
-
 
 
         //public static bool Add<T>(List<T> list, T t) where T : IComparable

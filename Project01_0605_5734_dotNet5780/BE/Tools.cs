@@ -109,6 +109,27 @@ namespace BE
         }
 
 
+        [Serializable]
+        public class UnLogicException : Exception
+        {
+            public int capacity { get; private set; }
+            public UnLogicException() : base() { }
+            public UnLogicException(string message) : base(message) { }
+            public UnLogicException(string message, Exception inner) : base(message, inner) { }
+            protected UnLogicException(SerializationInfo info, StreamingContext context)
+            : base(info, context) { }
+            // special constructor for our custom exception
+            public UnLogicException(int capacity, string message) : base(message)
+            {
+                this.capacity = capacity;
+            }
+            override public string ToString()
+            {
+                return "UnLogicException: שגיאה לוגית  " + Message;
+            }
+        }
+
+
 
     }
 }

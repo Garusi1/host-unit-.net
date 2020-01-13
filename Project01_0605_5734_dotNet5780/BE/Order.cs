@@ -50,7 +50,7 @@ namespace BE
             {
                 //to define
                 if (value < 10000000) //from number with 8 letters 
-                    throw new Exception(/*מספר זיהוי אינו תקין"*/"Incorrect key!");
+                    throw new System.IO.InvalidDataException(/*מספר זיהוי אינו תקין"*/"Incorrect key!");
                 orderKey = value;
 
             }
@@ -67,7 +67,7 @@ namespace BE
             set
             {
                 if (!Enum.IsDefined(typeof(StatusEnum), value))
-                    throw new Exception("Enum input illegal");
+                    throw new System.IO.InvalidDataException("Enum input illegal");
                 if (status == StatusEnum.נסגר_מחוסר_הענות_הלקוח || status == StatusEnum.נסגר_בהיענות_הלקוח)
                     throw new ArgumentException("לא ניתן לשנות עסקה שנסגרה");
 

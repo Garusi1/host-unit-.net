@@ -23,7 +23,7 @@ namespace BE
             set
             {
                 if (!Tools.ValidateID(value))
-                    throw new Exception("תעודת זהות לא תקינה.");
+                    throw new System.IO.InvalidDataException("תעודת זהות לא תקינה.");
                 hostKey = value;
             }
         }
@@ -36,7 +36,7 @@ namespace BE
             {
                 Regex r = new Regex("^([^20]|[a-zA-Zא-ת]){2,20}$");
                 if (!r.IsMatch(value))
-                    throw new Exception(/*"שם פרטי צריך להכיל 2-20 אותיות."*/"Private name need to contain 2-20 letters ");
+                    throw new System.IO.InvalidDataException(/*"שם פרטי צריך להכיל 2-20 אותיות."*/"Private name need to contain 2-20 letters ");
                 privateName = value;
             }
         }
@@ -50,7 +50,7 @@ namespace BE
             {
                 Regex r = new Regex("^([^20]|[a-zA-Zא-ת]){2,20}$");
                 if (!r.IsMatch(value))
-                    throw new Exception(/*"שם משפחה צריך להכיל 2-20 אותיות."*/"Family name need to contain 2-20 letters ");
+                    throw new System.IO.InvalidDataException(/*"שם משפחה צריך להכיל 2-20 אותיות."*/"Family name need to contain 2-20 letters ");
                 familyName = value;
             }
         }
@@ -64,7 +64,7 @@ namespace BE
             {// support all israel numbers //for exampale support 0508771340 / 050-8771340 / 050-877-1340 / 025334750/ 02-5334750 / 02-533-4750
                 Regex r = new Regex("(^0(5|7)[0-9]-{0,1}[0-9]{7}$)|(^0(5|7)[0-9]-{0,1}[0-9]{3}-{0,1}[0-9]{4}$)|(^0(2|3|4|7|8|9)-{0,1}[0-9]{7}$)|(^0(2|3|4|7|8|9)-{0,1}[0-9]{3}-{0,1}[0-9]{4}$)");
                 if (!r.IsMatch(value))
-                    throw new Exception(/*"מספר טלפון אינו חוקי"*/"Phone number is not legal ");
+                    throw new System.IO.InvalidDataException(/*"מספר טלפון אינו חוקי"*/"Phone number is not legal ");
                 phoneNumber = value;
 
             }
@@ -82,7 +82,7 @@ namespace BE
                 }
                 catch (Exception)
                 {
-                    throw new Exception(/*"כתובת המייל לא תקינה."*/"Email address incorrect");
+                    throw new System.IO.InvalidDataException(/*"כתובת המייל לא תקינה."*/"Email address incorrect");
                 }
                 mailAddress = value;
             }
@@ -107,7 +107,7 @@ namespace BE
             set
             {
                 if (value < 0)
-                    throw new Exception("מספר חשבון בנק לא יכול להיות שלילי.");
+                    throw new System.IO.InvalidDataException("מספר חשבון בנק לא יכול להיות שלילי.");
                 bankAccountNumber = value;
 
 

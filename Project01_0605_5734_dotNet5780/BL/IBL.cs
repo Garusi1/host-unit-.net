@@ -140,7 +140,7 @@ namespace BL
         /// רשימת יחידות אירוח מקובצת  ע"פ אזור הנופש הנדרש.
         /// </summary>
         /// <returns></returns>
-        List<IGrouping<BE.AreaEnum, BE.HostingUnit>> groupByAreaHontingUnit();
+        List<IGrouping<BE.AreaEnum, BE.HostingUnit>> groupByAreaHostingUnit();
 
 
         }

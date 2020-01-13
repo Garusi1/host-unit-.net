@@ -38,365 +38,371 @@ namespace PL
             while (!data.Equals("0"))
             {
 
-            try
-            {
-
-                Console.WriteLine("add geust request, for exit click 0");
-                if (data.Equals("0")) break;
-                //  private name
-
-                Console.WriteLine("\n please enter your private name");
-                data = Console.ReadLine();
-                gr.PrivateName = data;
-
-                //  last name
-
-                Console.WriteLine("\n please enter your last name");
-                data = Console.ReadLine();
-                gr.FamilyName = data;
-
-                // email
-
-                Console.WriteLine("\n please enter your e-mail");
-                data = Console.ReadLine(); 
-                gr.MailAddress = data;
-
-                //  Registration date
-
-                //DateTime RegistrationddateTime = new DateTime();
-                //RegistrationddateTime = DateTime.Now;
-                //gr.RegistrationDate = RegistrationddateTime;
-
-
-                gr.RegistrationDate = DateTime.Now;
-
-                //  entry date
-
-                ////Console.WriteLine("\n please enter your entry date");
-                ////data = Console.ReadLine();
-                ////DateTime entryDate = new DateTime();
-                ////try
-                ////{
-                ////    entryDate = DateTime.Parse(data, CultureInfo);
-                ////    gr.RegistrationDate = entryDate;
-                ////}
-                ////catch (FormatException)
-                ////{
-                ////    Console.WriteLine($"Unable to parse '{"error wrong input, enter date in this format: dd mm yyyy"}'");
-                ////}
-
-
-                //////  releaseDate
-
-
-                ////Console.WriteLine("\n please enter your release date");
-                ////data = Console.ReadLine();
-                ////DateTime releaseDate = new DateTime();
-                ////try
-                ////{
-                ////    releaseDate = DateTime.Parse(data, CultureInfo);
-                ////    gr.RegistrationDate = releaseDate;
-                ////}
-                ////catch (FormatException)
-                ////{
-                ////    Console.WriteLine($"Unable to parse '{"error wrong input, enter date in this format: dd mm yyyy"}'");
-                ////}
-
-
-
-
-
-
-
-
-                Console.WriteLine(" Enter the start date of hosting in the following format:");// הכנס תאריך תחילת אירוח בפורמט הבא 
-                Console.WriteLine("dd/mm/yyyy");
-
-                DateTime beginDate = default(DateTime);
-
-                string dateFormat = Console.ReadLine();
-                bool isSuccess = DateTime.TryParse(dateFormat, out beginDate);//check if the input is llegal 
-
-                while (!isSuccess)
-                {
-                    Console.WriteLine("Error! incorrect date input was entered ");
-                    Console.WriteLine(" Enter the start date of hosting in the following format:");// הכנס תאריך תחילת אירוח בפורמט הבא 
-                    Console.WriteLine("dd/mm/yyyy");
-                    dateFormat = Console.ReadLine();
-                    isSuccess = DateTime.TryParse(dateFormat, out beginDate);
-                }
-
-
-
-
-
-
-                Console.WriteLine(" Enter the end date of hosting in the following format:");// הכנס תאריך סוף אירוח בפורמט הבא 
-                Console.WriteLine("dd/mm/yyyy");
-
-                DateTime endDate = default(DateTime);
-
-                dateFormat = Console.ReadLine();
-                isSuccess = DateTime.TryParse(dateFormat, out endDate);//check if the input is llegal 
-
-                while (!isSuccess)
-                {
-                    Console.WriteLine("Error! incorrect date input was entered ");
-                    Console.WriteLine(" Enter the end date of hosting in the following format:");// הכנס תאריך סוף אירוח בפורמט הבא 
-                    Console.WriteLine("dd/mm/yyyy");
-                    dateFormat = Console.ReadLine();
-                    isSuccess = DateTime.TryParse(dateFormat, out endDate);
-                }
-
-                gr.EntryDate = beginDate;
-                gr.ReleaseDate = endDate;
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                //  children 
-
-
-                Console.WriteLine("\n please enter number of children");
-                data = Console.ReadLine();
-                int number = -1;
-                if (!Int32.TryParse(data, out number))
-                {
-                    number = -1;
-                    Console.WriteLine("Wrong input");
-                    break;
-
-                }
-                else if (number < 0)
-                {
-                    Console.WriteLine("Wrong input");
-                    break;
-
-                }
-                else
-                {
-                    gr.Children = number;
-                }
-
-                // adults
-
-                Console.WriteLine("\n please enter number of adults");
-                data = Console.ReadLine();
-                number = -1;
-                if (!Int32.TryParse(data, out number))
-                {
-                    number = -1;
-                    Console.WriteLine("Wrong input");
-                    break;
-                }
-                else if (number < 0)
-                {
-                    Console.WriteLine("Wrong input");
-                    break;
-
-                }
-                else
-                {
-                    gr.Adults = number;
-                }
-
-                //  area
-
-                Console.WriteLine("please enter the area:");
-                Console.WriteLine("Choose one from the following options");
-                Console.WriteLine("Enter 0 for All areas");
-                Console.WriteLine("Enter 1 for North area");
-                Console.WriteLine("Enter 2 for South area");
-                Console.WriteLine("Enter 3 for Center area");
-                Console.WriteLine("Enter 4 for Jerusalem area");
-
-                data = Console.ReadLine();
-
-                if (!Int32.TryParse(data, out number))
-                {
-                    number = -1;
-                    Console.WriteLine("Wrong input");
-                    break;
-
-                }
-                else if (number > 4 || number < 0)
-                {
-                    Console.WriteLine("Wrong number");
-                    break;
-
-                }
-                else
-                {
-
-                    BE.AreaEnum choosEnum;
-                    choosEnum = (BE.AreaEnum)number;
-                    gr.Area = choosEnum;
-
-
-                }
-
-                // TYPE
-                
-                Console.WriteLine("please enter the Type:");
-                Console.WriteLine("Choose one from the following options");
-                //Console.WriteLine("Enter 0 for Unknown");
-                Console.WriteLine("Enter 1 for Zimmer");
-                Console.WriteLine("Enter 2 for Hotel");
-                Console.WriteLine("Enter 3 for Camping");
-
-                data = Console.ReadLine();
-
-                if (!Int32.TryParse(data, out number))
-                {
-                    number = -1;
-                    Console.WriteLine("Wrong input");
-                    break;
-
-                }
-                else if (number > 3 || number <= 0)
-                {
-                    Console.WriteLine("Wrong number");
-                    break;
-                }
-                else
-                {
-                    BE.TypeEnum choosEnum1;
-                    choosEnum1 = (BE.TypeEnum)number;
-                    gr.Type = choosEnum1;
-                }
-
-
-                //  pool
-
-                Console.WriteLine("do you want to have a pool:");
-                Console.WriteLine("Choose one from the following options");
-                //Console.WriteLine("Enter 0 for Unknown");
-                Console.WriteLine("Enter 1 for הכרחי");
-                Console.WriteLine("Enter 2 for אפשרי");
-                Console.WriteLine("Enter 3 for לא_מעוניין");
-
-                data = Console.ReadLine();
-
-                if (!Int32.TryParse(data, out number))
-                {
-                    number = -1;
-                    Console.WriteLine("Wrong input");
-                    break;
-
-                }
-                else if (number > 3 || number <= 0)
-                {
-                    Console.WriteLine("Wrong number");
-                    break;
-                }
-                else
-                {
-                    BE.AttractionsEnum choosEnum2;
-                    choosEnum2 = (BE.AttractionsEnum)number;
-                    gr.Pool = choosEnum2;
-                }
-
-                // jacuzzi
-
-
-                Console.WriteLine("do you want to have a jacuzzi:");
-                Console.WriteLine("Choose one from the following options");
-                //Console.WriteLine("Enter 0 for Unknown");
-                Console.WriteLine("Enter 1 for הכרחי");
-                Console.WriteLine("Enter 2 for אפשרי");
-                Console.WriteLine("Enter 3 for לא_מעוניין");
-
-                data = Console.ReadLine();
-
-                if (!Int32.TryParse(data, out number))
-                {
-                    number = -1;
-                    Console.WriteLine("Wrong input");
-                    break;
-
-                }
-                else if (number > 3 || number <= 0)
-                {
-                    Console.WriteLine("Wrong number");
-                    break;
-                }
-                else
-                {
-                    BE.AttractionsEnum choosEnum3;
-                    choosEnum3 = (BE.AttractionsEnum)number;
-                    gr.Jacuzzi = choosEnum3;
-                }
-
-
-                //  garden
-
-
-                Console.WriteLine("do you want to have a garden:");
-                Console.WriteLine("Choose one from the following options");
-                //Console.WriteLine("Enter 0 for Unknown");
-                Console.WriteLine("Enter 1 for הכרחי");
-                Console.WriteLine("Enter 2 for אפשרי");
-                Console.WriteLine("Enter 3 for לא_מעוניין");
-
-                data = Console.ReadLine();
-
-                if (!Int32.TryParse(data, out number))
-                {
-                    number = -1;
-                    Console.WriteLine("Wrong input");
-                    break;
-
-                }
-                else if (number > 3 || number <= 0)
-                {
-                    Console.WriteLine("Wrong number");
-                    break;
-                }
-                else
-                {
-                    BE.AttractionsEnum choosEnum4;
-                    choosEnum4 = (BE.AttractionsEnum)number;
-                    gr.Garden = choosEnum4;
-                }
-
-
-
-
-
                 try
                 {
-                    bl.addGuestRequest(gr.Clone()); // add copy of gr to the BL layer
+
+                    Console.WriteLine("add geust request, for exit click 0");
+                    if (data.Equals("0")) break;
+                    //  private name
+
+                    Console.WriteLine("\n please enter your private name");
+                    data = Console.ReadLine();
+                    gr.PrivateName = data;
+
+                    //  last name
+
+                    Console.WriteLine("\n please enter your last name");
+                    data = Console.ReadLine();
+                    gr.FamilyName = data;
+
+                    // email
+
+                    Console.WriteLine("\n please enter your e-mail");
+                    data = Console.ReadLine();
+                    gr.MailAddress = data;
+
+                    //  Registration date
+
+                    //DateTime RegistrationddateTime = new DateTime();
+                    //RegistrationddateTime = DateTime.Now;
+                    //gr.RegistrationDate = RegistrationddateTime;
+
+
+                    gr.RegistrationDate = DateTime.Now;
+
+                    //  entry date
+
+                    ////Console.WriteLine("\n please enter your entry date");
+                    ////data = Console.ReadLine();
+                    ////DateTime entryDate = new DateTime();
+                    ////try
+                    ////{
+                    ////    entryDate = DateTime.Parse(data, CultureInfo);
+                    ////    gr.RegistrationDate = entryDate;
+                    ////}
+                    ////catch (FormatException)
+                    ////{
+                    ////    Console.WriteLine($"Unable to parse '{"error wrong input, enter date in this format: dd mm yyyy"}'");
+                    ////}
+
+
+                    //////  releaseDate
+
+
+                    ////Console.WriteLine("\n please enter your release date");
+                    ////data = Console.ReadLine();
+                    ////DateTime releaseDate = new DateTime();
+                    ////try
+                    ////{
+                    ////    releaseDate = DateTime.Parse(data, CultureInfo);
+                    ////    gr.RegistrationDate = releaseDate;
+                    ////}
+                    ////catch (FormatException)
+                    ////{
+                    ////    Console.WriteLine($"Unable to parse '{"error wrong input, enter date in this format: dd mm yyyy"}'");
+                    ////}
+
+
+
+
+
+
+
+
+                    Console.WriteLine(" Enter the start date of hosting in the following format:");// הכנס תאריך תחילת אירוח בפורמט הבא 
+                    Console.WriteLine("dd/mm/yyyy");
+
+                    DateTime beginDate = default(DateTime);
+
+                    string dateFormat = Console.ReadLine();
+                    bool isSuccess = DateTime.TryParse(dateFormat, out beginDate);//check if the input is llegal 
+
+                    while (!isSuccess)
+                    {
+                        Console.WriteLine("Error! incorrect date input was entered ");
+                        Console.WriteLine(" Enter the start date of hosting in the following format:");// הכנס תאריך תחילת אירוח בפורמט הבא 
+                        Console.WriteLine("dd/mm/yyyy");
+                        dateFormat = Console.ReadLine();
+                        isSuccess = DateTime.TryParse(dateFormat, out beginDate);
+                    }
+
+
+
+
+
+
+                    Console.WriteLine(" Enter the end date of hosting in the following format:");// הכנס תאריך סוף אירוח בפורמט הבא 
+                    Console.WriteLine("dd/mm/yyyy");
+
+                    DateTime endDate = default(DateTime);
+
+                    dateFormat = Console.ReadLine();
+                    isSuccess = DateTime.TryParse(dateFormat, out endDate);//check if the input is llegal 
+
+                    while (!isSuccess)
+                    {
+                        Console.WriteLine("Error! incorrect date input was entered ");
+                        Console.WriteLine(" Enter the end date of hosting in the following format:");// הכנס תאריך סוף אירוח בפורמט הבא 
+                        Console.WriteLine("dd/mm/yyyy");
+                        dateFormat = Console.ReadLine();
+                        isSuccess = DateTime.TryParse(dateFormat, out endDate);
+                    }
+
+                    gr.EntryDate = beginDate;
+                    gr.ReleaseDate = endDate;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                    //  children 
+
+
+                    Console.WriteLine("\n please enter number of children");
+                    data = Console.ReadLine();
+                    int number = -1;
+                    if (!Int32.TryParse(data, out number))
+                    {
+                        number = -1;
+                        Console.WriteLine("Wrong input");
+                        break;
+
+                    }
+                    else if (number < 0)
+                    {
+                        Console.WriteLine("Wrong input");
+                        break;
+
+                    }
+                    else
+                    {
+                        gr.Children = number;
+                    }
+
+                    // adults
+
+                    Console.WriteLine("\n please enter number of adults");
+                    data = Console.ReadLine();
+                    number = -1;
+                    if (!Int32.TryParse(data, out number))
+                    {
+                        number = -1;
+                        Console.WriteLine("Wrong input");
+                        break;
+                    }
+                    else if (number < 0)
+                    {
+                        Console.WriteLine("Wrong input");
+                        break;
+
+                    }
+                    else
+                    {
+                        gr.Adults = number;
+                    }
+
+                    //  area
+
+                    Console.WriteLine("please enter the area:");
+                    Console.WriteLine("Choose one from the following options");
+                    Console.WriteLine("Enter 0 for All areas");
+                    Console.WriteLine("Enter 1 for North area");
+                    Console.WriteLine("Enter 2 for South area");
+                    Console.WriteLine("Enter 3 for Center area");
+                    Console.WriteLine("Enter 4 for Jerusalem area");
+
+                    data = Console.ReadLine();
+
+                    if (!Int32.TryParse(data, out number))
+                    {
+                        number = -1;
+                        Console.WriteLine("Wrong input");
+                        break;
+
+                    }
+                    else if (number > 4 || number < 0)
+                    {
+                        Console.WriteLine("Wrong number");
+                        break;
+
+                    }
+                    else
+                    {
+
+                        BE.AreaEnum choosEnum;
+                        choosEnum = (BE.AreaEnum)number;
+                        gr.Area = choosEnum;
+
+
+                    }
+
+                    // TYPE
+
+                    Console.WriteLine("please enter the Type:");
+                    Console.WriteLine("Choose one from the following options");
+                    //Console.WriteLine("Enter 0 for Unknown");
+                    Console.WriteLine("Enter 1 for Zimmer");
+                    Console.WriteLine("Enter 2 for Hotel");
+                    Console.WriteLine("Enter 3 for Camping");
+
+                    data = Console.ReadLine();
+
+                    if (!Int32.TryParse(data, out number))
+                    {
+                        number = -1;
+                        Console.WriteLine("Wrong input");
+                        break;
+
+                    }
+                    else if (number > 3 || number <= 0)
+                    {
+                        Console.WriteLine("Wrong number");
+                        break;
+                    }
+                    else
+                    {
+                        BE.TypeEnum choosEnum1;
+                        choosEnum1 = (BE.TypeEnum)number;
+                        gr.Type = choosEnum1;
+                    }
+
+
+                    //  pool
+
+                    Console.WriteLine("do you want to have a pool:");
+                    Console.WriteLine("Choose one from the following options");
+                    //Console.WriteLine("Enter 0 for Unknown");
+                    Console.WriteLine("Enter 1 for הכרחי");
+                    Console.WriteLine("Enter 2 for אפשרי");
+                    Console.WriteLine("Enter 3 for לא_מעוניין");
+
+                    data = Console.ReadLine();
+
+                    if (!Int32.TryParse(data, out number))
+                    {
+                        number = -1;
+                        Console.WriteLine("Wrong input");
+                        break;
+
+                    }
+                    else if (number > 3 || number <= 0)
+                    {
+                        Console.WriteLine("Wrong number");
+                        break;
+                    }
+                    else
+                    {
+                        BE.AttractionsEnum choosEnum2;
+                        choosEnum2 = (BE.AttractionsEnum)number;
+                        gr.Pool = choosEnum2;
+                    }
+
+                    // jacuzzi
+
+
+                    Console.WriteLine("do you want to have a jacuzzi:");
+                    Console.WriteLine("Choose one from the following options");
+                    //Console.WriteLine("Enter 0 for Unknown");
+                    Console.WriteLine("Enter 1 for הכרחי");
+                    Console.WriteLine("Enter 2 for אפשרי");
+                    Console.WriteLine("Enter 3 for לא_מעוניין");
+
+                    data = Console.ReadLine();
+
+                    if (!Int32.TryParse(data, out number))
+                    {
+                        number = -1;
+                        Console.WriteLine("Wrong input");
+                        break;
+
+                    }
+                    else if (number > 3 || number <= 0)
+                    {
+                        Console.WriteLine("Wrong number");
+                        break;
+                    }
+                    else
+                    {
+                        BE.AttractionsEnum choosEnum3;
+                        choosEnum3 = (BE.AttractionsEnum)number;
+                        gr.Jacuzzi = choosEnum3;
+                    }
+
+
+                    //  garden
+
+
+                    Console.WriteLine("do you want to have a garden:");
+                    Console.WriteLine("Choose one from the following options");
+                    //Console.WriteLine("Enter 0 for Unknown");
+                    Console.WriteLine("Enter 1 for הכרחי");
+                    Console.WriteLine("Enter 2 for אפשרי");
+                    Console.WriteLine("Enter 3 for לא_מעוניין");
+
+                    data = Console.ReadLine();
+
+                    if (!Int32.TryParse(data, out number))
+                    {
+                        number = -1;
+                        Console.WriteLine("Wrong input");
+                        break;
+
+                    }
+                    else if (number > 3 || number <= 0)
+                    {
+                        Console.WriteLine("Wrong number");
+                        break;
+                    }
+                    else
+                    {
+                        BE.AttractionsEnum choosEnum4;
+                        choosEnum4 = (BE.AttractionsEnum)number;
+                        gr.Garden = choosEnum4;
+                    }
+
+
+
+
+
+                    try
+                    {
+                        bl.addGuestRequest(gr.Clone()); // add copy of gr to the BL layer
+                    }
+                    catch (DuplicateWaitObjectException e)
+                    {
+
+                        Console.WriteLine(e.Message);
+                    }
+                    catch (ArgumentException e)
+                    {
+
+                        Console.WriteLine(e.Message);
+                    }
+
+
+
+                    //bl.addGuestRequest(BE.Tools.Clone(gr)); // add copy of gr to the BL layer
+
+                    //Console.WriteLine("if you dont want to add more GuestRequst enter 0");
+                    //data = Console.ReadLine();
+                    break;
+
                 }
-                catch (Exception)
+                catch (System.IO.InvalidDataException ex)
                 {
+                    Console.WriteLine(ex.Message);
 
-                   // throw;
                 }
-               
-
-                //bl.addGuestRequest(BE.Tools.Clone(gr)); // add copy of gr to the BL layer
-
-                //Console.WriteLine("if you dont want to add more GuestRequst enter 0");
-                //data = Console.ReadLine();
-                break;
-
-            }
-            catch (Exception ex)
-            {
-                Console.WriteLine(ex.Message);
-
-            }
 
             }
 
@@ -405,7 +411,7 @@ namespace PL
         #endregion
 
         #region HostingUnit 
-      
+
         public void HostingUnitMenu()//2.0
         {
             int number = -1;
@@ -480,338 +486,352 @@ namespace PL
                 {
 
 
-                //host
-                Console.WriteLine("please enter host details:");
-                
-                //host name
-                Console.WriteLine("please enter Host private name");
-                data = Console.ReadLine();
-                hu.Owner = new BE.Host();
-                hu.Owner.BankBranchDetails = new BE.BankBranch();
+                    //host
+                    Console.WriteLine("please enter host details:");
 
-                hu.Owner.PrivateName = data;
-                
-                //host last name
-                Console.WriteLine("please enter Host last name");
-                data = Console.ReadLine();
-                hu.Owner.FamilyName = data;
+                    //host name
+                    Console.WriteLine("please enter Host private name");
+                    data = Console.ReadLine();
+                    hu.Owner = new BE.Host();
+                    hu.Owner.BankBranchDetails = new BE.BankBranch();
 
-                Console.WriteLine("please enter Host personal ID");
-                data = Console.ReadLine();
-                hu.Owner.HostKey = data;
+                    hu.Owner.PrivateName = data;
 
-                //host phone
+                    //host last name
+                    Console.WriteLine("please enter Host last name");
+                    data = Console.ReadLine();
+                    hu.Owner.FamilyName = data;
 
-                Console.WriteLine("please enter hots phone-number");
-                data = Console.ReadLine();
-                int number = -1;
-                //////Regex r = new Regex("(^0(5|7)[0-9]-{0,1}[0-9]{7}$)|(^0(5|7)[0-9]-{0,1}[0-9]{3}-{0,1}[0-9]{4}$)|(^0(2|3|4|7|8|9)-{0,1}[0-9]{7}$)|(^0(2|3|4|7|8|9)-{0,1}[0-9]{3}-{0,1}[0-9]{4}$)");
-                //////if (!r.IsMatch(data))
-                //////    throw new Exception(/*"מספר טלפון אינו חוקי"*/"Phone number is not legal ");
-                hu.Owner.PhoneNumber = data;
+                    Console.WriteLine("please enter Host personal ID");
+                    data = Console.ReadLine();
+                    hu.Owner.HostKey = data;
 
-                //bank details
+                    //host phone
 
-                Console.WriteLine("\n host bank details:");
-                Console.WriteLine("please enter your bank number");
+                    Console.WriteLine("please enter hots phone-number");
+                    data = Console.ReadLine();
+                    int number = -1;
+                    //////Regex r = new Regex("(^0(5|7)[0-9]-{0,1}[0-9]{7}$)|(^0(5|7)[0-9]-{0,1}[0-9]{3}-{0,1}[0-9]{4}$)|(^0(2|3|4|7|8|9)-{0,1}[0-9]{7}$)|(^0(2|3|4|7|8|9)-{0,1}[0-9]{3}-{0,1}[0-9]{4}$)");
+                    //////if (!r.IsMatch(data))
+                    //////    throw new Exception(/*"מספר טלפון אינו חוקי"*/"Phone number is not legal ");
+                    hu.Owner.PhoneNumber = data;
 
-                data = Console.ReadLine();
-                
-                number = -1;
-                if (!Int32.TryParse(data, out number))
-                {
+                    //bank details
+
+                    Console.WriteLine("\n host bank details:");
+                    Console.WriteLine("please enter your bank number");
+
+                    data = Console.ReadLine();
+
                     number = -1;
-                    Console.WriteLine("Wrong input");
-                    break;
+                    if (!Int32.TryParse(data, out number))
+                    {
+                        number = -1;
+                        Console.WriteLine("Wrong input");
+                        break;
 
-                }
-                else if (number < 0)
-                {
-                    Console.WriteLine("Wrong input");
-                    break;
+                    }
+                    else if (number < 0)
+                    {
+                        Console.WriteLine("Wrong input");
+                        break;
 
-                }
-                else
-                {
-                    hu.Owner.BankBranchDetails.BankNumber = number;
-                }
+                    }
+                    else
+                    {
+                        hu.Owner.BankBranchDetails.BankNumber = number;
+                    }
 
-                // bank name
+                    // bank name
 
-                Console.WriteLine("please enter your bank name");
-                data = Console.ReadLine();
-                hu.Owner.BankBranchDetails.BankName = data;
+                    Console.WriteLine("please enter your bank name");
+                    data = Console.ReadLine();
+                    hu.Owner.BankBranchDetails.BankName = data;
 
-                // branch number
+                    // branch number
 
-                Console.WriteLine("please enter your branch number");
-                data = Console.ReadLine();
-                number = -1;
-                if (!Int32.TryParse(data, out number))
-                {
+                    Console.WriteLine("please enter your branch number");
+                    data = Console.ReadLine();
                     number = -1;
-                    Console.WriteLine("Wrong input");
-                    break;
+                    if (!Int32.TryParse(data, out number))
+                    {
+                        number = -1;
+                        Console.WriteLine("Wrong input");
+                        break;
 
-                }
-                else if (number < 0)
-                {
-                    Console.WriteLine("Wrong input");
-                    break;
+                    }
+                    else if (number < 0)
+                    {
+                        Console.WriteLine("Wrong input");
+                        break;
 
-                }
-                else
-                {
-                    hu.Owner.BankBranchDetails.BranchNumber = number;
-                }
+                    }
+                    else
+                    {
+                        hu.Owner.BankBranchDetails.BranchNumber = number;
+                    }
 
-                // branch addrees
+                    // branch addrees
 
-                Console.WriteLine( "please enter your brach address");
-                data = Console.ReadLine();
-                hu.Owner.BankBranchDetails.BranchAddress = data;
+                    Console.WriteLine("please enter your brach address");
+                    data = Console.ReadLine();
+                    hu.Owner.BankBranchDetails.BranchAddress = data;
 
-                // branch city
+                    // branch city
 
-                Console.WriteLine("please enter your branch city");
-                data = Console.ReadLine();
-                hu.Owner.BankBranchDetails.BranchCity = data;
+                    Console.WriteLine("please enter your branch city");
+                    data = Console.ReadLine();
+                    hu.Owner.BankBranchDetails.BranchCity = data;
 
-                //bank account number
+                    //bank account number
 
-                Console.WriteLine("please enter your bank account number");
-                data = Console.ReadLine();
-                number = -1;
-                if (!Int32.TryParse(data, out number))
-                {
+                    Console.WriteLine("please enter your bank account number");
+                    data = Console.ReadLine();
                     number = -1;
-                    Console.WriteLine("Wrong input");
+                    if (!Int32.TryParse(data, out number))
+                    {
+                        number = -1;
+                        Console.WriteLine("Wrong input");
+                        break;
+
+                    }
+                    else if (number < 0)
+                    {
+                        Console.WriteLine("Wrong input");
+                        break;
+
+                    }
+                    else
+                    {
+                        hu.Owner.BankAccountNumber = number;
+                    }
+
+                    //mail address
+
+                    Console.WriteLine("please enter your mail address");
+                    data = Console.ReadLine();
+                    hu.Owner.MailAddress = data;
+
+                    //CollectionClearance - לא הוספתי
+
+                    //hosting unit name
+
+                    Console.WriteLine("please enter your hosting unit name");
+                    data = Console.ReadLine();
+                    hu.HostingUnitName = data;
+
+                    //area
+
+
+                    Console.WriteLine("please enter the area:");
+                    Console.WriteLine("Choose one from the following options");
+                    // Console.WriteLine("Enter 0 for All areas");
+                    Console.WriteLine("Enter 1 for North area");
+                    Console.WriteLine("Enter 2 for South area");
+                    Console.WriteLine("Enter 3 for Center area");
+                    Console.WriteLine("Enter 4 for Jerusalem area");
+
+                    data = Console.ReadLine();
+
+                    if (!Int32.TryParse(data, out number))
+                    {
+                        number = -1;
+                        Console.WriteLine("Wrong input");
+                        break;
+
+                    }
+                    else if (number > 4 || number <= 0)
+                    {
+                        Console.WriteLine("Wrong number");
+                        break;
+
+                    }
+                    else
+                    {
+
+                        BE.AreaEnum choosEnum;
+                        choosEnum = (BE.AreaEnum)number;
+                        hu.Area = choosEnum;
+
+
+                    }
+
+
+                    // TYPE
+
+                    Console.WriteLine("please enter the Type:");
+                    Console.WriteLine("Choose one from the following options");
+                    //Console.WriteLine("Enter 0 for Unknown");
+                    Console.WriteLine("Enter 1 for Zimmer");
+                    Console.WriteLine("Enter 2 for Hotel");
+                    Console.WriteLine("Enter 3 for Camping");
+
+                    data = Console.ReadLine();
+
+                    if (!Int32.TryParse(data, out number))
+                    {
+                        number = -1;
+                        Console.WriteLine("Wrong input");
+                        break;
+
+                    }
+                    else if (number > 3 || number <= 0)
+                    {
+                        Console.WriteLine("Wrong number");
+                        break;
+                    }
+                    else
+                    {
+                        BE.TypeEnum choosEnum1;
+                        choosEnum1 = (BE.TypeEnum)number;
+                        hu.Type = choosEnum1;
+                    }
+
+
+                    //  pool
+
+                    Console.WriteLine("do you want to have a pool:" +
+                        " \n enter 1 for yes" +
+                        " \n enter 0 for no");
+
+                    data = Console.ReadLine();
+
+                    if (!Int32.TryParse(data, out number))
+                    {
+                        number = -1;
+                        Console.WriteLine("Wrong input");
+                        break;
+
+                    }
+                    else if (number < 0 || number > 1)
+                    {
+                        Console.WriteLine("Wrong number");
+                        break;
+                    }
+                    else
+                    {
+                        if (data.Equals("1")) hu.Pool = true;
+
+                        else hu.Pool = false;
+                    }
+
+                    // jacuzzi
+
+
+                    Console.WriteLine("do you have a jacuzzi:" +
+                        " \n enter 1 for yes" +
+                        " \n enter 0 for no");
+
+                    data = Console.ReadLine();
+
+                    if (!Int32.TryParse(data, out number))
+                    {
+                        number = -1;
+                        Console.WriteLine("Wrong input");
+                        break;
+
+                    }
+                    else if (number < 0 || number > 1)
+                    {
+                        Console.WriteLine("Wrong number");
+                        break;
+                    }
+                    else
+                    {
+                        if (data.Equals("1")) hu.Jacuzzi = true;
+
+                        else hu.Jacuzzi = false;
+                    }
+
+
+
+                    //  garden
+
+
+                    Console.WriteLine("do you have a garden:" +
+                        " \n enter 1 for yes" +
+                        " \n enter 0 for no");
+                    data = Console.ReadLine();
+
+                    if (!Int32.TryParse(data, out number))
+                    {
+                        number = -1;
+                        Console.WriteLine("Wrong input");
+                        break;
+
+                    }
+                    else if (number > 1 || number < 0)
+                    {
+                        Console.WriteLine("Wrong number");
+                        break;
+                    }
+                    else
+                    {
+                        if (data.Equals("1")) hu.Garden = true;
+
+                        else hu.Garden = false;
+
+                    }
+
+                    Console.WriteLine("do you have a children attractions?" +
+                        " \n enter 1 for yes" +
+                        " \n enter 0 for no");
+                    data = Console.ReadLine();
+
+                    if (!Int32.TryParse(data, out number))
+                    {
+                        number = -1;
+                        Console.WriteLine("Wrong input");
+                        break;
+
+                    }
+                    else if (number > 1 || number < 0)
+                    {
+                        Console.WriteLine("Wrong number");
+                        break;
+                    }
+                    else
+                    {
+                        if (data.Equals("1")) hu.ChildrensAttractions = true;
+
+                        else hu.ChildrensAttractions = false;
+
+                    }
+                    bl = BL.Factory.GetInstance();
+
+                    try
+                    {
+                        bl.addHostingUnit(hu.Clone());
+                    }
+                    catch (System.IO.InvalidDataException e)
+                    {
+                        Console.WriteLine(string.Format("שגיאה בהזנת נתונים: \n {0}", e.Message));
+                    }
+                    catch (DuplicateWaitObjectException e)
+                    {
+                        Console.WriteLine(string.Format("יחידת אירוח עם מספר זהה קיימת כבר במערכת \n {0}", e.Message));
+                    }
+                    catch (ArgumentException e)
+                    {
+                        Console.WriteLine(e.Message);
+                    }
+
+
+
+                    //Console.WriteLine("you successfully add Hosting Unit. ");
+                    //Console.WriteLine("we continue to add Hosting Unit, for exit click 0");
+                    //data = Console.ReadLine();
                     break;
 
                 }
-                else if (number < 0)
-                {
-                    Console.WriteLine("Wrong input");
-                    break;
-
-                }
-                else
-                {
-                    hu.Owner.BankAccountNumber = number;
-                }
-
-                //mail address
-
-                Console.WriteLine(  "please enter your mail address");
-                data = Console.ReadLine();
-                hu.Owner.MailAddress = data;
-
-                //CollectionClearance - לא הוספתי
-
-                //hosting unit name
-
-                Console.WriteLine("please enter your hosting unit name");
-                data = Console.ReadLine();
-                hu.HostingUnitName = data;
-
-                //area
-
-
-                Console.WriteLine("please enter the area:");
-                Console.WriteLine("Choose one from the following options");
-               // Console.WriteLine("Enter 0 for All areas");
-                Console.WriteLine("Enter 1 for North area");
-                Console.WriteLine("Enter 2 for South area");
-                Console.WriteLine("Enter 3 for Center area");
-                Console.WriteLine("Enter 4 for Jerusalem area");
-
-                data = Console.ReadLine();
-
-                if (!Int32.TryParse(data, out number))
-                {
-                    number = -1;
-                    Console.WriteLine("Wrong input");
-                    break;
-
-                }
-                else if (number > 4 || number <= 0)
-                {
-                    Console.WriteLine("Wrong number");
-                    break;
-
-                }
-                else
-                {
-
-                    BE.AreaEnum choosEnum;
-                    choosEnum = (BE.AreaEnum)number;
-                    hu.Area = choosEnum;
-
-
-                }
-
-
-                // TYPE
-
-                Console.WriteLine("please enter the Type:");
-                Console.WriteLine("Choose one from the following options");
-                //Console.WriteLine("Enter 0 for Unknown");
-                Console.WriteLine("Enter 1 for Zimmer");
-                Console.WriteLine("Enter 2 for Hotel");
-                Console.WriteLine("Enter 3 for Camping");
-
-                data = Console.ReadLine();
-
-                if (!Int32.TryParse(data, out number))
-                {
-                    number = -1;
-                    Console.WriteLine("Wrong input");
-                    break;
-
-                }
-                else if (number > 3 || number <=0)
-                {
-                    Console.WriteLine("Wrong number");
-                    break;
-                }
-                else
-                {
-                    BE.TypeEnum choosEnum1;
-                    choosEnum1 = (BE.TypeEnum)number;
-                    hu.Type = choosEnum1;
-                }
-
-
-                //  pool
-
-                Console.WriteLine("do you want to have a pool:" +
-                    " \n enter 1 for yes" +
-                    " \n enter 0 for no");
-                
-                data = Console.ReadLine();
-
-                if (!Int32.TryParse(data, out number))
-                {
-                    number = -1;
-                    Console.WriteLine("Wrong input");
-                    break;
-
-                }
-                else if (number < 0 || number > 1)
-                {
-                    Console.WriteLine("Wrong number");
-                    break;
-                }
-                else
-                {
-                    if (data.Equals("1")) hu.Pool = true;
-
-                    else hu.Pool = false;
-                }
-
-                // jacuzzi
-
-
-                Console.WriteLine("do you have a jacuzzi:"+
-                    " \n enter 1 for yes" +
-                    " \n enter 0 for no");
-               
-                data = Console.ReadLine();
-
-                if (!Int32.TryParse(data, out number))
-                {
-                    number = -1;
-                    Console.WriteLine("Wrong input");
-                    break;
-
-                }
-                else if (number < 0 || number > 1)
-                {
-                    Console.WriteLine("Wrong number");
-                    break;
-                }
-                else
-                {
-                    if (data.Equals("1")) hu.Jacuzzi = true;
-
-                    else hu.Jacuzzi = false;
-                }
-                
-
-
-                //  garden
-
-
-                Console.WriteLine("do you have a garden:" +
-                    " \n enter 1 for yes" +
-                    " \n enter 0 for no");
-                data = Console.ReadLine();
-
-                if (!Int32.TryParse(data, out number))
-                {
-                    number = -1;
-                    Console.WriteLine("Wrong input");
-                    break;
-
-                }
-                else if (number > 1 || number < 0)
-                {
-                    Console.WriteLine("Wrong number");
-                    break;
-                }
-                else
-                {
-                    if (data.Equals("1")) hu.Garden = true;
-
-                    else hu.Garden = false;
-                    
-                }
-
-                Console.WriteLine("do you have a children attractions?" +
-                    " \n enter 1 for yes" +
-                    " \n enter 0 for no");
-                data = Console.ReadLine();
-
-                if (!Int32.TryParse(data, out number))
-                {
-                    number = -1;
-                    Console.WriteLine("Wrong input");
-                    break;
-
-                }
-                else if (number > 1 || number < 0)
-                {
-                    Console.WriteLine("Wrong number");
-                    break;
-                }
-                else
-                {
-                    if (data.Equals("1")) hu.ChildrensAttractions = true;
-
-                    else hu.ChildrensAttractions = false;
-
-                }
-                bl = BL.Factory.GetInstance();
-
-                bl.addHostingUnit(hu.Clone());
-
-                //bl.addHostingUnit(BE.Tools.Clone(hu)); // add copy of gr to the BL layer
-                //לממש הוספת יחידת אירוח ולשלוח לביסניס לוגיק
-
-                Console.WriteLine("you successfully add Hosting Unit. ");
-                //Console.WriteLine("we continue to add Hosting Unit, for exit click 0");
-                //data = Console.ReadLine();
-                break;
-
-                }
-                catch (Exception e)
+                catch (System.IO.InvalidDataException e)
                 {
 
                     Console.WriteLine(e.Message);
                 }
             }
         }
-        
+
         public void PersonalArea() //2.2
         {
             bl = BL.Factory.GetInstance();
@@ -823,74 +843,74 @@ namespace PL
 
 
 
-            Console.WriteLine("please enter your HostingUnit ID");
-            string input = Console.ReadLine();
-            if (!Int32.TryParse(input, out number))
-            {
-                number = -1;
-                throw new System.ArgumentException(string.Format("worng input {0} not llegal int", number));
-
-            }
-            BE.HostingUnit HU = bl.getHostingUnitByID(number);
-            if(HU==null) //אין יחידת אירוח עם מספר זיהוי זה
-            {
-                throw new System.ArgumentException(string.Format("worng input {0} this HostingUnit id not exsists", number));
-
-            }
-
-
-            PersoanlAreaEnum choosMenuEnum;
-
-            do
-            {
-
-
-
-                Console.WriteLine("Choose one from the following options");
-                Console.WriteLine("Enter 1 to update Hosting Unit");
-                Console.WriteLine("Enter 2 to to delete !THIS! Hosting Unit");
-                Console.WriteLine("Enter 3 to to enter to orders menu");
-                Console.WriteLine("Enter 0 to return to the previous menu");
-
-                 input = Console.ReadLine();
-
-
+                Console.WriteLine("please enter your HostingUnit ID");
+                string input = Console.ReadLine();
                 if (!Int32.TryParse(input, out number))
                 {
                     number = -1;
-                    Console.WriteLine("Wrong input");
-                    continue;
+                    throw new System.ArgumentException(string.Format("worng input {0} not llegal int", number));
+
                 }
-                if (number > 3 || number < 0)
+                BE.HostingUnit HU = bl.getHostingUnitByID(number);
+                if (HU == null) //אין יחידת אירוח עם מספר זיהוי זה
                 {
-                    Console.WriteLine("Wrong number");
-                    continue;
+                    throw new System.ArgumentException(string.Format("worng input {0} this HostingUnit id not exsists", number));
+
                 }
 
-                choosMenuEnum = (PersoanlAreaEnum)number;
 
-                ConsoleMenus conMenu = new ConsoleMenus();
-                switch (choosMenuEnum)
+                PersoanlAreaEnum choosMenuEnum;
+
+                do
                 {
-                    case PersoanlAreaEnum.Update_Hosting_Unit:
-                        conMenu.PL_UpdateHostingUnit(HU);//2.2.1
-                        break;
-                    case PersoanlAreaEnum.Delete_Hosting_Unit:
-                        conMenu.PL_DeleteHostingUnit(HU);//2.3
-                        number = 0;//ברגע שנמחק מופע אין מה לעשות כאן... 
-                        break;
-                    case PersoanlAreaEnum.Orders_Menu:
-                        conMenu.PL_OrdersMenu(HU);//3.0
-                        break;
-                    case PersoanlAreaEnum.Exit:
-                        break;
-                }
 
 
-            } while (number != 0);
+
+                    Console.WriteLine("Choose one from the following options");
+                    Console.WriteLine("Enter 1 to update Hosting Unit");
+                    Console.WriteLine("Enter 2 to to delete !THIS! Hosting Unit");
+                    Console.WriteLine("Enter 3 to to enter to orders menu");
+                    Console.WriteLine("Enter 0 to return to the previous menu");
+
+                    input = Console.ReadLine();
+
+
+                    if (!Int32.TryParse(input, out number))
+                    {
+                        number = -1;
+                        Console.WriteLine("Wrong input");
+                        continue;
+                    }
+                    if (number > 3 || number < 0)
+                    {
+                        Console.WriteLine("Wrong number");
+                        continue;
+                    }
+
+                    choosMenuEnum = (PersoanlAreaEnum)number;
+
+                    ConsoleMenus conMenu = new ConsoleMenus();
+                    switch (choosMenuEnum)
+                    {
+                        case PersoanlAreaEnum.Update_Hosting_Unit:
+                            conMenu.PL_UpdateHostingUnit(HU);//2.2.1
+                            break;
+                        case PersoanlAreaEnum.Delete_Hosting_Unit:
+                            conMenu.PL_DeleteHostingUnit(HU);//2.3
+                            number = 0;//ברגע שנמחק מופע אין מה לעשות כאן... 
+                            break;
+                        case PersoanlAreaEnum.Orders_Menu:
+                            conMenu.PL_OrdersMenu(HU);//3.0
+                            break;
+                        case PersoanlAreaEnum.Exit:
+                            break;
+                    }
+
+
+                } while (number != 0);
 
             }
-            catch (Exception e)
+            catch (ArgumentException e)
             {
 
                 Console.WriteLine(e.Message);
@@ -918,7 +938,7 @@ namespace PL
 
                 //host name
                 Console.WriteLine("if you want to change Host details enter 1");
-                
+
                 string choose = Console.ReadLine();
 
                 try
@@ -1251,7 +1271,7 @@ namespace PL
 
 
                 }
-                catch (Exception e)
+                catch (System.IO.InvalidDataException e)
                 {
 
                     Console.WriteLine(e.Message);
@@ -1263,14 +1283,21 @@ namespace PL
                 {
                     bl.updateHostingUnit(hu.Clone());
                 }
-                catch (Exception e)
+                catch (System.IO.InvalidDataException e)
                 {
 
                     Console.WriteLine(e.Message);
                 }
+                catch (KeyNotFoundException e)
+                {
 
+                    Console.WriteLine(e.Message);
+                }
+                catch (ArgumentException e)
+                {
 
-
+                    Console.WriteLine(e.Message);
+                }
 
 
                 break;
@@ -1287,7 +1314,12 @@ namespace PL
             {
                 bl.delHostingUnit(HU.HostingUnitKey);
             }
-            catch (Exception e)
+            catch (KeyNotFoundException e)
+            {
+
+                Console.WriteLine(e.Message);
+            }
+            catch (BE.Tools.UnLogicException e) 
             {
 
                 Console.WriteLine(e.Message);
@@ -1378,7 +1410,7 @@ namespace PL
             Console.WriteLine("enter order ID of order to update  ");
 
 
-            
+
 
             string input = Console.ReadLine();
 
@@ -1397,7 +1429,7 @@ namespace PL
                     throw new ArgumentException(("Wrong input . the type need to be int"));
                 }
             }
-            catch (Exception e)
+            catch (ArgumentException e)
             {
 
                 Console.WriteLine(e.Message);
@@ -1419,7 +1451,7 @@ namespace PL
 
                 }
             }
-            catch (Exception e)
+            catch (ArgumentException e)
             {
 
                 Console.WriteLine(e.Message);
@@ -1438,7 +1470,7 @@ namespace PL
                 if (order.Status == StatusEnum.נסגר_מחוסר_הענות_הלקוח || order.Status == StatusEnum.נסגר_בהיענות_הלקוח)
                     throw new ArgumentException("לא ניתן לשנות עסקה שנסגרה");
             }
-            catch (Exception e)
+            catch (ArgumentException e)
             {
 
                 Console.WriteLine(e.Message);
@@ -1460,10 +1492,10 @@ namespace PL
                 if (number > 3 || number < 0)
                 {
                     throw new ArgumentException("Wrong number");
-                    ;
+                    
                 }
             }
-            catch (Exception e)
+            catch (ArgumentException e)
             {
 
                 Console.WriteLine(e.Message);
@@ -1477,12 +1509,22 @@ namespace PL
             {
                 bl.UpdateOrder(order.Clone());
             }
-            catch (Exception e)
+            catch (KeyNotFoundException e)
             {
 
                 Console.WriteLine(e.Message);
             }
-     
+            catch (ArgumentException e)
+            {
+
+                Console.WriteLine(e.Message);
+            }
+
+            catch (BE.Tools.UnLogicException e)
+            {
+
+                Console.WriteLine(e.Message);
+            }
 
 
 
@@ -1514,23 +1556,30 @@ namespace PL
                 }
 
                 BE.GuestRequest GR = bl.getGuestRequestByID(number);
-                if (GR == null)
+                if (GR==null)
                 {
-                    throw new ArgumentException(string.Format("There is notBE.GuestRequest ID with this number {0}", number));
-
+                    throw new ArgumentNullException(string.Format("לא קיימת דרישת לקוח מספר {0} ולכן לא ניתן ליצור הזמנה", number));
                 }
+
 
                 order.GuestRequestKey = GR.GuestRequestKey;
 
 
                 addOrder(order);
             }
-            catch (Exception e)
+            catch (ArgumentNullException e)
             {
 
                 Console.WriteLine(e.Message);
             }
-   
+
+
+            catch (ArgumentException e)
+            {
+
+                Console.WriteLine(e.Message);
+            }
+
 
 
 
@@ -1545,7 +1594,17 @@ namespace PL
             {
                 bl.addOrder(order.Clone());
             }
-            catch (Exception e)
+            catch (DuplicateWaitObjectException e)
+            {
+
+                Console.WriteLine(e.Message);
+            }
+            catch (ArgumentException e)
+            {
+
+                Console.WriteLine(e.Message);
+            }
+            catch (BE.Tools.UnLogicException e)
             {
 
                 Console.WriteLine(e.Message);
@@ -1697,7 +1756,7 @@ namespace PL
         }
 
 
-          #endregion
+        #endregion
 
 
     }

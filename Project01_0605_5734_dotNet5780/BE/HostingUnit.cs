@@ -20,7 +20,7 @@ namespace BE
             set
             {
                 if (value < 10000000) //from number with 8 letters 
-                    throw new Exception(/*מספר זיהוי אינו תקין"*/"Incorrect key!");
+                    throw new System.IO.InvalidDataException(/*מספר זיהוי אינו תקין"*/"Incorrect key!");
                 hostingUnitKey = value;
             }
         }
@@ -46,7 +46,7 @@ namespace BE
             {
                 Regex r = new Regex("^([^20]|[0-9a-zA-Zא-ת]){2,30}$");
                 if (!r.IsMatch(value))
-                    throw new Exception(/*"שם יחידה צריך להכיל 2-30 אותיות."*/"HostingUnitName name need to contain 2-30 letters ");
+                    throw new System.IO.InvalidDataException(/*"שם יחידה צריך להכיל 2-30 אותיות."*/"HostingUnitName name need to contain 2-30 letters ");
                 hostingUnitName = value;
             }
 
@@ -103,9 +103,9 @@ namespace BE
             set
             {
                 if (!Enum.IsDefined(typeof(AreaEnum), value))
-                    throw new Exception("Enum input illegal");
+                    throw new System.IO.InvalidDataException("Enum input illegal");
                 if (value== AreaEnum.All)
-                    throw new Exception("Enum input illegal. HostingUnit cannot be in All regions");
+                    throw new System.IO.InvalidDataException("Enum input illegal. HostingUnit cannot be in All regions");
 
                 area = value;
             }
@@ -124,7 +124,7 @@ namespace BE
             set
             {
                 if (!Enum.IsDefined(typeof(TypeEnum), value))
-                    throw new Exception("Enum input illegal");
+                    throw new System.IO.InvalidDataException("Enum input illegal");
                 type = value;
             }
 
