@@ -130,7 +130,7 @@ namespace BL
             if (generalDate > lastMonth)
             {
                 return false;
-                //throw new System.ArgumentException(string.Format("worng input {0} not llegal ", generalDate));
+                throw new System.ArgumentException(string.Format("worng input {0} not llegal ", generalDate));
 
             }
 
