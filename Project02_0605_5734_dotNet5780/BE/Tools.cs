@@ -6,6 +6,9 @@ using System.Threading.Tasks;
 using System.Runtime.Serialization;
 using System.Runtime.Serialization.Formatters.Binary;
 using System.IO;
+using System.Net;
+using System.Net.Mail;
+using System.Threading;
 
 
 
@@ -129,7 +132,11 @@ namespace BE
             }
         }
 
+        public static void sendAnEmail(){
+          
+         
 
+        }
 
     }
 }
