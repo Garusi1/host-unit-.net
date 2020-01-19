@@ -124,11 +124,5 @@ namespace DAL
         public List<BE.BankBranch> getBankBranchList() { return BankBranchList/*.Clone()*/; }
 
 
-
-
-
-
-
-
     }
 }

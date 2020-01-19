@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using BE;
-
+using DAL; // יש להוריד על פניה מלאה לclone  שנמצא בdal . 
 namespace BL
 {
     public class imp_BL : IBL
@@ -83,7 +83,7 @@ namespace BL
             guest.RegistrationDate = DateTime.Now;
             try
             {
-                IDAL.addGuestRequest(guest.Clone());
+                IDAL.addGuestRequest(guest/*.Clone()*/);
             }
             catch (DuplicateWaitObjectException e)
             {
@@ -110,7 +110,7 @@ namespace BL
 
         }
 
-
+        
         /// <summary>
         /// //אם התאריך חורג מהטווח של חודש אחורה ו11 חודש קדימה
         /// </summary>
@@ -274,7 +274,7 @@ namespace BL
             foreach (var item in ls)
             {
                 throw new BE.Tools.UnLogicException(string.Format("this Hosting {0} has open order (order key : {1}) ", hostUnitID, item));
-                
+
             }
 
             try
@@ -361,11 +361,10 @@ namespace BL
 
         public bool ApproveRequest(BE.GuestRequest guestReq, BE.HostingUnit HU) //check if the dates are available on matrix.   // if not, return false.
         {
-            DateTime LastNight = guestReq.RegistrationDate.AddDays(-2);
+            //DateTime LastNight = guestReq.EntryDate.AddDays(-2);
 
-            for (DateTime tempDate = guestReq.EntryDate; tempDate <= LastNight; tempDate = tempDate.AddDays(1))
+            for (DateTime tempDate = guestReq.EntryDate; tempDate < guestReq.ReleaseDate; tempDate = tempDate.AddDays(1))
                 if (this[tempDate, HU]) { return false; }// check if the days are avaiable
-
             return true;
         }
 
@@ -502,11 +501,12 @@ namespace BL
             {
                 int Chargeamount = 0;
                 //תפיסת היחידה
-                DateTime LastNight = GR.RegistrationDate.AddDays(-2);
-                for (DateTime tempDate = GR.EntryDate; tempDate <= LastNight; tempDate = tempDate.AddDays(1))
+                //DateTime LastNight = GR.RegistrationDate.AddDays(-2);
+
+                for (DateTime tempDate = GR.EntryDate; tempDate < GR.RegistrationDate; tempDate = tempDate.AddDays(1))
                 {
                     this[tempDate, HU] = true;//put the nights on matrix
-                    Chargeamount += BE.Configuration.Commission; //חישוב עמלה על כיום שנתפס
+                    Chargeamount += BE.Configuration.Commission; //חישוב עמלה על כל יום שנתפס
                 }
 
                 bankAccountDebit(HU, Chargeamount);
@@ -569,13 +569,13 @@ namespace BL
 
         #region return lists
 
-        public List<BE.BankBranch> GetBankBranchList()
+        public IEnumerable<BE.BankBranch> GetBankBranchList()
         {
             //throw new NotImplementedException();
             return IDAL.GetBankBranchList().Clone();
         }
 
-        public List<BE.GuestRequest> GetGuestRequestList()
+        public IEnumerable<BE.GuestRequest> GetGuestRequestList()
         {
             //throw new NotImplementedException();
             return IDAL.GetGuestRequestList().Clone();
@@ -583,16 +583,16 @@ namespace BL
         }
 
 
-        public List<BE.HostingUnit> GetHostingUnitList()
+        public IEnumerable<BE.HostingUnit> GetHostingUnitList()
         {
             //throw new NotImplementedException();
             return IDAL.GetHostingUnitList().Clone();
         }
 
-        public List<BE.Order> GetOrderList()
+        public IEnumerable<BE.Order> GetOrderList()
         {
 
-            List<BE.Order> list = IDAL.GetOrderList().Clone(); ;
+            IEnumerable<BE.Order> list = IDAL.GetOrderList().Clone(); ;
             //foreach (var item in IDAL.GetOrderList().Clone())
             //{
             //    list.Add(item);
@@ -615,7 +615,10 @@ namespace BL
         public void bankAccountDebit(BE.HostingUnit HU, int Chargeamount)
         {
 
-            //לוקח חשבון ומחייב אותו איכשהו...
+            //לוקח חשבון ומחייב אותו איכשהו... 
+            // חיים מציע ליצור string  ערוך שייצג עיסקה ולשלוח אותו לפונקצייה 
+            // ששולחת לבנק הודעה ב tread - בפועל לא שולחים לבנק. 
+            
         }
 
 
@@ -632,7 +635,7 @@ namespace BL
 
         //תוספות  בBL
 
-        public List<BE.HostingUnit> availableUnits(DateTime enteryDate, int numOfDayes)//פונקציה שמקבלת תאריך ומספר ימי נופש ומחזירה את רשימת היחידות הפנויות בתאריך זה
+        public IEnumerable<BE.HostingUnit> availableUnits(DateTime enteryDate, int numOfDayes)//פונקציה שמקבלת תאריך ומספר ימי נופש ומחזירה את רשימת היחידות הפנויות בתאריך זה
         {
 
 
@@ -676,7 +679,7 @@ namespace BL
             return number;
         }
 
-        public List<BE.Order> ordersDayesPast(int numOfDays)
+        public IEnumerable<BE.Order> ordersDayesPast(int numOfDays)
         {
             //פונקציה שמקבלת מספר ימים ומחזירה רשימה של הזמנות שמשך הזמן שעבר מאז שנוצרו ועד היום גדול או שווה למספר שהתקבל
 
@@ -709,8 +712,6 @@ namespace BL
 
 
         /*
-
-  
 
                                  IEnumerable<BE.GuestRequest> GR = bl.getAllGRwithCondition();
                                  foreach(var item in GR)
@@ -764,7 +765,7 @@ namespace BL
         /// מחזיר גרופינג של דרישות לקוח לפי איזור. 
         /// </summary>
         /// <returns> ערך אחד. יש לבצע בפונקציה המזמנת forech</returns>
-        public List<IGrouping<BE.AreaEnum, BE.GuestRequest>> groupByAreaGR()
+        public IEnumerable<IGrouping<BE.AreaEnum, BE.GuestRequest>> groupByAreaGR()
         {
             var result = from item in GetGuestRequestList()
                          group item by item.Area;
@@ -779,7 +780,7 @@ namespace BL
         /// מחזיר גרופינג של דרישות לקוח לפי מספר הנופשים. 
         /// </summary>
         /// <returns> ערך אחד. יש לבצע בפונקציה המזמנת forech</returns>
-        public List<IGrouping<int, BE.GuestRequest>> groupByNumberOfPeopleInGR() // סידור לפי מספר הנופשים - מבוגרים וילדים
+        public IEnumerable<IGrouping<int, BE.GuestRequest>> groupByNumberOfPeopleInGR() // סידור לפי מספר הנופשים - מבוגרים וילדים
         {
             var result = from item in GetGuestRequestList()
                          group item by (item.Adults + item.Children);
@@ -852,7 +853,7 @@ namespace BL
         /// מחזיר גרופינג של יחידת אירוח מסודר לפי איזור. 
         /// </summary>
         /// <returns> ערך אחד. יש לבצע בפונקציה המזמנת forech</returns>
-        public List<IGrouping<BE.AreaEnum, BE.HostingUnit>> groupByAreaHostingUnit()
+        public IEnumerable<IGrouping<BE.AreaEnum, BE.HostingUnit>> groupByAreaHostingUnit()
         {
             var result = from item in GetHostingUnitList()
                          group item by item.Area;
@@ -869,7 +870,7 @@ namespace BL
         ///  מחזיר רשימת יחידות אירוח עבור מאחר ספיצפי
         /// </summary>
         /// <returns> ערך אחד. יש לבצע בפונקציה המזמנת forech</returns>
-        public List<BE.HostingUnit> hostsHostingUnit(string IDHost) 
+        public IEnumerable<BE.HostingUnit> hostsHostingUnit(string IDHost) 
         {
             List <BE.HostingUnit> list= new List<BE.HostingUnit>();
 
@@ -947,9 +948,6 @@ namespace BL
 
 
     }
-
-
-
 
 
 

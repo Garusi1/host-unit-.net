@@ -10,26 +10,18 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
 using System.Windows.Shapes;
 
 namespace PLWPF
 {
     /// <summary>
-    /// Interaction logic for MainWindow.xaml
+    /// Interaction logic for GuestGUI.xaml
     /// </summary>
-    public partial class MainWindow : Window
+    public partial class GuestGUI : Window
     {
-        public MainWindow()
+        public GuestGUI()
         {
             InitializeComponent();
-        }
-
-
-        private void openGuestGui(object sender, RoutedEventArgs e)
-        {
-
-
         }
     }
 }

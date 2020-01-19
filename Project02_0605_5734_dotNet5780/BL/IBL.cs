@@ -39,10 +39,10 @@ namespace BL
         //lists
 
         //get lists from DataBase
-        List<BE.GuestRequest> GetGuestRequestList();
-        List<BE.HostingUnit> GetHostingUnitList();
-        List<BE.Order> GetOrderList();
-        List<BE.BankBranch> GetBankBranchList();
+        IEnumerable<BE.GuestRequest> GetGuestRequestList();
+        IEnumerable<BE.HostingUnit> GetHostingUnitList();
+        IEnumerable<BE.Order> GetOrderList();
+        IEnumerable<BE.BankBranch> GetBankBranchList();
 
 
 
@@ -70,7 +70,7 @@ namespace BL
         /// <param name="enteryDate">תאריך כניסה</param>
         /// <param name="numOfDayes">מספר ימים לשהות</param>
         /// <returns></returns>
-        List<BE.HostingUnit> availableUnits(DateTime enteryDate, int numOfDayes);
+        IEnumerable<BE.HostingUnit> availableUnits(DateTime enteryDate, int numOfDayes);
 
 
         /// <summary>
@@ -87,7 +87,7 @@ namespace BL
         /// </summary>
         /// <param name="numOfDays">מספר ימים</param>
         /// <returns>רשימת הזמנות שעונות לדרישה</returns>
-        List<BE.Order> ordersDayesPast(int numOfDays);
+        IEnumerable<BE.Order> ordersDayesPast(int numOfDays);
 
 
 
@@ -115,14 +115,14 @@ namespace BL
         /// רשימת דרישות לקוח מקובצת ע"פ אזור הנופש הנדרש.
         /// </summary>
         /// <returns></returns>
-        List<IGrouping<BE.AreaEnum, BE.GuestRequest>> groupByAreaGR();
+        IEnumerable<IGrouping<BE.AreaEnum, BE.GuestRequest>> groupByAreaGR();
 
 
         /// <summary>
         /// רשימת דרישות לקוח מקובצת ע"פ מספר הנופשים.
         /// </summary>
         /// <returns></returns>
-        List<IGrouping<int, BE.GuestRequest>> groupByNumberOfPeopleInGR(); // סידור לפי מספר הנופשים - מבוגרים וילדים
+        IEnumerable<IGrouping<int, BE.GuestRequest>> groupByNumberOfPeopleInGR(); // סידור לפי מספר הנופשים - מבוגרים וילדים
 
 
 
@@ -140,7 +140,7 @@ namespace BL
         /// רשימת יחידות אירוח מקובצת  ע"פ אזור הנופש הנדרש.
         /// </summary>
         /// <returns></returns>
-        List<IGrouping<BE.AreaEnum, BE.HostingUnit>> groupByAreaHostingUnit();
+        IEnumerable<IGrouping<BE.AreaEnum, BE.HostingUnit>> groupByAreaHostingUnit();
 
 
 
@@ -148,7 +148,7 @@ namespace BL
         ///  מחזיר רשימת יחידות אירוח עבור מאחר ספיצפי
         /// </summary>
         /// <returns> ערך אחד. יש לבצע בפונקציה המזמנת forech</returns>
-        List<BE.HostingUnit> hostsHostingUnit(string IDHost);
+        IEnumerable<BE.HostingUnit> hostsHostingUnit(string IDHost);
 
 
         }

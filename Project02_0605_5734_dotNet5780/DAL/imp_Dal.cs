@@ -67,13 +67,16 @@ namespace DAL
 
             var list = from item in GetGuestRequestList()
                        where item.GuestRequestKey == ID
-                       select item;
-            foreach (var item in list)
-            {
-                return item.Clone();
-            }
+                       select item.Clone();
+            
+            return list.FirstOrDefault();
 
-            return null;
+            //foreach (var item in list)
+            //{
+            //    return item.Clone();
+            //}
+
+            //return null;
 
         }
 
@@ -87,7 +90,7 @@ namespace DAL
         //HostingUnit
         public void addHostingUnit(BE.HostingUnit hostUnit)
         {
-            hostUnit.HostingUnitKey = BE.Configuration.hostUnitID++;// לוודא שאכן מקדם אותו
+            hostUnit.HostingUnitKey = BE.Configuration.hostUnitID++;
 
             foreach (BE.HostingUnit element in GetHostingUnitList())
             {
@@ -150,13 +153,15 @@ namespace DAL
 
             var list = from item in GetHostingUnitList()
                        where item.HostingUnitKey == ID
-                       select item;
-            foreach (var item in list)
-            {
-                return item.Clone();
-            }
+                       select item.Clone();
+            return list.FirstOrDefault();
 
-            return null;
+            //foreach (var item in list)
+            //{
+            //    return item.Clone();
+            //}
+
+            //return null;
 
         }
 
@@ -170,7 +175,8 @@ namespace DAL
         //Order
         public void addOrder(BE.Order order)
         {
-            order.HostingUnitKey = BE.Configuration.orderID++;
+            if (order.OrderKey == 0)
+            { order.OrderKey = BE.Configuration.orderID++; }
 
 
             foreach (var item in ds.getOrderList())
@@ -185,6 +191,8 @@ namespace DAL
 
 
         }
+
+
         public void UpdateOrder(BE.Order order)//עדכון סטטוס הזמנה 
         {
 
@@ -212,13 +220,14 @@ namespace DAL
 
             var list = from item in GetOrderList()
                        where item.GuestRequestKey == id
-                       select item;
-            foreach (var item in list)
-            {
-                return item.Clone();
-            }
+                       select item.Clone();
+            return list.FirstOrDefault();
+            //foreach (var item in list)
+            //{
+            //    return item.Clone();
+            //}
 
-            return null;
+            //return null;
 
         }
 
@@ -231,12 +240,14 @@ namespace DAL
 
         #region Lists
 
-        public List<BE.GuestRequest> GetGuestRequestList()
+           
+
+        public IEnumerable<BE.GuestRequest> GetGuestRequestList()
         {
             var li = from item in ds.getGuestRequestList()
                      select item.Clone();
 
-
+            
             List<BE.GuestRequest> list = new List<BE.GuestRequest>();
 
             foreach (var item in li)
@@ -248,7 +259,7 @@ namespace DAL
             return list;
 
         }
-        public List<BE.HostingUnit> GetHostingUnitList()
+        public IEnumerable<BE.HostingUnit> GetHostingUnitList()
         {
 
             var li = from item in ds.getHostingUnitList()
@@ -264,7 +275,7 @@ namespace DAL
             return list;
 
         }
-        public List<BE.Order> GetOrderList()
+        public IEnumerable<BE.Order> GetOrderList()
         {
             var li = from item in ds.getOrderList()
                      select item.Clone();
@@ -279,13 +290,24 @@ namespace DAL
         }
 
 
+        /// <summary>
+        /// list l 
+        /// </summary>
+        /// <returns></returns>
+        /// 
+        //IEnumerable<BE.BankBranch>
 
-        public List<BE.BankBranch> GetBankBranchList()
+
+
+        public IEnumerable<BE.BankBranch> GetBankBranchList()
         {
 
-
+            
             var li = from item in ds.getBankBranchList()
                      select item.Clone();
+            //קורא רק ב foreach 
+
+            
 
             return (List<BE.BankBranch>)li;
 
@@ -305,10 +327,21 @@ namespace DAL
             return from gst in GetGuestRequestList()
                    where predicat == null ? true : predicat(gst)
                    select gst.Clone();
+
+
         }
+
+   
+
+
+
 
 
     }
+
+
+
+
 
 
 

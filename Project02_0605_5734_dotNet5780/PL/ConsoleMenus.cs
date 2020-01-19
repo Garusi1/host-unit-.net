@@ -376,7 +376,7 @@ namespace PL
 
                     try
                     {
-                        bl.addGuestRequest(gr.Clone()); // add copy of gr to the BL layer
+                        bl.addGuestRequest(gr); // add copy of gr to the BL layer
                     }
                     catch (DuplicateWaitObjectException e)
                     {
@@ -801,7 +801,7 @@ namespace PL
 
                     try
                     {
-                        bl.addHostingUnit(hu.Clone());
+                        bl.addHostingUnit(hu);
                     }
                     catch (System.IO.InvalidDataException e)
                     {
@@ -1281,7 +1281,7 @@ namespace PL
                 bl = BL.Factory.GetInstance();
                 try
                 {
-                    bl.updateHostingUnit(hu.Clone());
+                    bl.updateHostingUnit(hu);
                 }
                 catch (System.IO.InvalidDataException e)
                 {
@@ -1403,7 +1403,7 @@ namespace PL
 
             bl = BL.Factory.GetInstance();
             Console.WriteLine("list of all order List");
-            foreach (var item in bl.GetOrderList().Clone())
+            foreach (var item in bl.GetOrderList())
             {
                 Console.WriteLine(item);
             }
@@ -1507,7 +1507,7 @@ namespace PL
 
             try
             {
-                bl.UpdateOrder(order.Clone());
+                bl.UpdateOrder(order);
             }
             catch (KeyNotFoundException e)
             {
@@ -1592,7 +1592,7 @@ namespace PL
             bl = BL.Factory.GetInstance();
             try
             {
-                bl.addOrder(order.Clone());
+                bl.addOrder(order);
             }
             catch (DuplicateWaitObjectException e)
             {
@@ -1699,7 +1699,7 @@ namespace PL
             bl = BL.Factory.GetInstance();
 
             Console.WriteLine("list of allBE.GuestRequest List");
-            foreach (var item in bl.GetGuestRequestList().Clone())
+            foreach (var item in bl.GetGuestRequestList())
             {
                 Console.WriteLine(item);
             }
@@ -1723,7 +1723,7 @@ namespace PL
             bl = BL.Factory.GetInstance();
 
             Console.WriteLine("list of all HostingUnit List");
-            foreach (var item in bl.GetHostingUnitList().Clone())
+            foreach (var item in bl.GetHostingUnitList())
             {
                 Console.WriteLine(item);
             }
@@ -1739,7 +1739,7 @@ namespace PL
 
 
             Console.WriteLine("list of all Order List");
-            foreach (var item in bl.GetOrderList().Clone())
+            foreach (var item in bl.GetOrderList())
             {
                 Console.WriteLine(item);
             }

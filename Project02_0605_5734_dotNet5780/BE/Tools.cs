@@ -21,27 +21,27 @@ namespace BE
 
 
 
-        /// <summary>
-        /// deep cloning
-        /// </summary>
-        /// <typeparam name="T"></typeparam>
-        /// <param name="source"></param>
-        /// <returns></returns>
-        public static T Clone<T>(this T source)
-        {
-            if (source == null)
-                return default(T);
-            if (!typeof(T).IsSerializable)
-                throw new ArgumentException("The type must be serializable.", "source");
-            IFormatter formatter = new BinaryFormatter();  // serialize or convert the object to a binary format
-            Stream stream = new MemoryStream(); //כאן אפשר גם לשלח לקובץ עם נשמתמש בזרימה בהפנייה אחרת
-            using (stream)
-            {
-                formatter.Serialize(stream, source); //מעבירים מהמקור לזרימת הנתונים
-                stream.Seek(0, SeekOrigin.Begin);
-                return (T)formatter.Deserialize(stream);
-            }
-        }
+        ///// <summary>
+        ///// deep cloning
+        ///// </summary>
+        ///// <typeparam name="T"></typeparam>
+        ///// <param name="source"></param>
+        ///// <returns></returns>
+        //public static T Clone<T>(this T source)
+        //{
+        //    if (source == null)
+        //        return default(T);
+        //    if (!typeof(T).IsSerializable)
+        //        throw new ArgumentException("The type must be serializable.", "source");
+        //    IFormatter formatter = new BinaryFormatter();  // serialize or convert the object to a binary format
+        //    Stream stream = new MemoryStream(); //כאן אפשר גם לשלח לקובץ עם נשמתמש בזרימה בהפנייה אחרת
+        //    using (stream)
+        //    {
+        //        formatter.Serialize(stream, source); //מעבירים מהמקור לזרימת הנתונים
+        //        stream.Seek(0, SeekOrigin.Begin);
+        //        return (T)formatter.Deserialize(stream);
+        //    }
+        //}
 
 
         //public static T Clone<T>(this T source)
@@ -87,7 +87,11 @@ namespace BE
         //}
 
 
-
+         /// <summary>
+         /// להעביר לשכבת bl 
+         /// </summary>
+         /// <param name="IDNum"></param>
+         /// <returns></returns>
         public static bool ValidateID(string IDNum)
         {
             // Validate correct input
@@ -112,6 +116,22 @@ namespace BE
         }
 
 
+
+        /// <summary>
+        /// להעביר לbl 
+        /// </summary>
+        public static void sendAnEmail()
+        {
+
+
+
+        }
+
+
+
+        /// <summary>
+        /// 
+        /// </summary>
         [Serializable]
         public class UnLogicException : Exception
         {
@@ -122,21 +142,13 @@ namespace BE
             protected UnLogicException(SerializationInfo info, StreamingContext context)
             : base(info, context) { }
             // special constructor for our custom exception
-            public UnLogicException(int capacity, string message) : base(message)
-            {
-                this.capacity = capacity;
-            }
+
             override public string ToString()
             {
                 return "UnLogicException: שגיאה לוגית  " + Message;
             }
         }
 
-        public static void sendAnEmail(){
-          
-         
-
-        }
 
     }
 }
