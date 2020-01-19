@@ -32,6 +32,8 @@ namespace PLWPF
             GRShow = new BE.GuestRequest();
             this.GuestRequestGrid.DataContext =GRShow; //הקשר הדטה לפי GuestRequest
 
+            this.typeComboBox.ItemsSource = Enum.GetValues(typeof(BE.TypeEnum));
+
         }
 
         private void Button_Click_Save_GuestRequest(object sender, RoutedEventArgs e)
@@ -44,7 +46,9 @@ namespace PLWPF
                 bl.addGuestRequest(GRShow); // add copy of gr to the BL layer
                // GRShow = new BE.GuestRequest();
                 //this.GuestRequestGrid.DataContext = GRShow; //הקשר הדטה לפי GuestRequest
-
+                
+                // אם אין זריקה 
+                MessageBox.Show("יחידת אירוח נוספה בהצלחה");
             }
 
             catch (DuplicateWaitObjectException ex)
@@ -74,12 +78,7 @@ namespace PLWPF
 
         }
 
-        private void Window_Loaded(object sender, RoutedEventArgs e)
-        {
 
-            System.Windows.Data.CollectionViewSource guestRequestViewSource = ((System.Windows.Data.CollectionViewSource)(this.FindResource("guestRequestViewSource")));
-            // Load data by setting the CollectionViewSource.Source property:
-            // guestRequestViewSource.Source = [generic data source]
-        }
+   
     }
 }
