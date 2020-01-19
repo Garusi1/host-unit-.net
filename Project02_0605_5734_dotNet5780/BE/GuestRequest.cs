@@ -258,7 +258,7 @@ namespace BE
                 "Release date: " + ReleaseDate.Date.ToString() + "\n"
                 + "Area: " + Area + "\n" +
                 "type: " + type + "\n" +
-                "Adults: " + Adults + "\n" +
+                "מבוגרים: " + Adults + "\n" +
                 "Children" + Children + "\n" +
                 "Pool: " + Pool + "\n" +
                 "Jacuzzi: " + Jacuzzi + "\n" +

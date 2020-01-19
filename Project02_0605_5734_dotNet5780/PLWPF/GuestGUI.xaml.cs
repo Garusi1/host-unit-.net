@@ -30,9 +30,15 @@ namespace PLWPF
             InitializeComponent();
             bl = BL.Factory.GetInstance();
             GRShow = new BE.GuestRequest();
-            this.GuestRequestGrid.DataContext =GRShow; //הקשר הדטה לפי GuestRequest
+            this.DataContext = GRShow;
+            //this.GuestRequestGrid.DataContext =GRShow; //הקשר הדטה לפי GuestRequest
 
             this.typeComboBox.ItemsSource = Enum.GetValues(typeof(BE.TypeEnum));
+            this.areaComboBox.ItemsSource = Enum.GetValues(typeof(BE.AreaEnum));
+            this.poolComboBox.ItemsSource = Enum.GetValues(typeof(BE.AttractionsEnum));
+            this.jacuzziComboBox.ItemsSource = Enum.GetValues(typeof(BE.AttractionsEnum));
+            this.gardenComboBox.ItemsSource = Enum.GetValues(typeof(BE.AttractionsEnum));
+            this.childrensAttractionsComboBox.ItemsSource = Enum.GetValues(typeof(BE.AttractionsEnum));
 
         }
 
@@ -48,7 +54,7 @@ namespace PLWPF
                 //this.GuestRequestGrid.DataContext = GRShow; //הקשר הדטה לפי GuestRequest
                 
                 // אם אין זריקה 
-                MessageBox.Show("יחידת אירוח נוספה בהצלחה");
+                MessageBox.Show("דרישת אירוח נוספה בהצלחה");
             }
 
             catch (DuplicateWaitObjectException ex)
@@ -68,17 +74,7 @@ namespace PLWPF
             }
 
 
-
-
-
-
-
-
-
-
         }
 
-
-   
     }
 }
