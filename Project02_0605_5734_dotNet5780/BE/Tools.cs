@@ -117,15 +117,6 @@ namespace BE
 
 
 
-        /// <summary>
-        /// להעביר לbl 
-        /// </summary>
-        public static void sendAnEmail()
-        {
-
-
-
-        }
 
 
 

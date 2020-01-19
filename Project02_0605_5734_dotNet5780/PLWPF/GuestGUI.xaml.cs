@@ -19,9 +19,67 @@ namespace PLWPF
     /// </summary>
     public partial class GuestGUI : Window
     {
+        BL.IBL bl;
+        BE.GuestRequest GRShow;
+        //BE.GuestRequest GRShow =new BE.GuestRequest();//לבדוק 
+        List<string> errorMessages = new List<string>(); // לממש 
+
+
         public GuestGUI()
         {
             InitializeComponent();
+            bl = BL.Factory.GetInstance();
+            GRShow = new BE.GuestRequest();
+            this.GuestRequestGrid.DataContext =GRShow; //הקשר הדטה לפי GuestRequest
+
+        }
+
+        private void Button_Click_Save_GuestRequest(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                //GRShow.PrivateName = this.firstNameTextBox.Text;  //קישור על ידי binding 
+
+
+                bl.addGuestRequest(GRShow); // add copy of gr to the BL layer
+               // GRShow = new BE.GuestRequest();
+                //this.GuestRequestGrid.DataContext = GRShow; //הקשר הדטה לפי GuestRequest
+
+            }
+
+            catch (DuplicateWaitObjectException ex)
+            {
+                MessageBox.Show(ex.Message);
+
+            }
+            catch (ArgumentException ex)
+            {
+                MessageBox.Show(ex.Message);
+
+            }
+            catch (System.IO.InvalidDataException ex)
+            {
+                MessageBox.Show(ex.Message);
+
+            }
+
+
+
+
+
+
+
+
+
+
+        }
+
+        private void Window_Loaded(object sender, RoutedEventArgs e)
+        {
+
+            System.Windows.Data.CollectionViewSource guestRequestViewSource = ((System.Windows.Data.CollectionViewSource)(this.FindResource("guestRequestViewSource")));
+            // Load data by setting the CollectionViewSource.Source property:
+            // guestRequestViewSource.Source = [generic data source]
         }
     }
 }

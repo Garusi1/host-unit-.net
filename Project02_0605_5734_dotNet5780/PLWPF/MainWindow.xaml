@@ -6,8 +6,17 @@
         xmlns:local="clr-namespace:PLWPF"
         mc:Ignorable="d"
         Title="הזמנת חופשות" Height="450" Width="800">
-    <Grid>
-        <Button Name="addGuestreqest"  Content="לקוח" HorizontalAlignment="Left" VerticalAlignment="Top" Width="133" Margin="314,35,0,0" Height="67" Click="openGuestGui"/>
-        <!-- לשים פתיחה והקפאת חלון קורה. --!>
+
+    <Grid Name="MainGrid">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <Button Name="addGuestreqest"  Content="לקוח" HorizontalAlignment="Left" VerticalAlignment="Top" Width="133" Margin="314,35,0,0" Height="67" Click="openGuestGui" FontSize="20" Grid.Row="0"/>
+        <Button Name="HostingUnitMainGUIButton"  Content="יחידת אירוח" HorizontalAlignment="Left" VerticalAlignment="Top" Width="133" Margin="314,30.429,0,0" Height="67" Click="openMainHostingUnitGUI" Grid.Row="1" FontSize="20" />
+        <Button Name="WebManagerMainGUIButton"  Content="בעל האתר" HorizontalAlignment="Left" VerticalAlignment="Top" Width="133" Margin="314,30.857,0,0" Height="67" Click="openMainWebManagerGUI" Grid.Row="2" FontSize="20"/>
+
     </Grid>
 </Window>

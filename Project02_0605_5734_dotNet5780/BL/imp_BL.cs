@@ -233,7 +233,7 @@ namespace BL
                 hostUnit.Owner.BankBranchDetails == null || hostUnit.Owner.BankAccountNumber == 0)
                 throw new ArgumentException("חובה למלא את כל השדות");
 
-            if (!BE.Tools.ValidateID(hostUnit.Owner.HostKey))
+            if (!ValidateID(hostUnit.Owner.HostKey))
                 throw new System.IO.InvalidDataException("תעודת זהות של מארח לא תקינה.");
             if (!Enum.IsDefined(typeof(BE.AreaEnum), hostUnit.Area))
                 throw new System.IO.InvalidDataException("Enum input illegal");
@@ -299,7 +299,7 @@ namespace BL
                 hostUnit.Owner.BankBranchDetails == null || hostUnit.Owner.BankAccountNumber == 0)
 
                 throw new ArgumentException("חובה למלא את כל השדות");
-            if (!BE.Tools.ValidateID(hostUnit.Owner.HostKey))
+            if (!ValidateID(hostUnit.Owner.HostKey))
                 throw new System.IO.InvalidDataException("תעודת זהות של מארח לא תקינה.");
             if (!Enum.IsDefined(typeof(BE.AreaEnum), hostUnit.Area))
                 throw new System.IO.InvalidDataException("Enum input illegal");
@@ -946,7 +946,45 @@ namespace BL
 
 
 
+        /// <summary>
+        /// בדיקת חוקיות ת"ז בישראל
+        /// </summary>
+        /// <param name="IDNum"></param>
+        /// <returns></returns>
+        public static bool ValidateID(string IDNum)
+        {
+            // Validate correct input
+            if (!System.Text.RegularExpressions.Regex.IsMatch(IDNum, @"^\d{5,9}$"))
+                return false;
 
+            // The number is too short - add leading 0000
+            while (IDNum.Length < 9)
+                IDNum = '0' + IDNum;
+
+            // CHECK THE ID NUMBER
+            int mone = 0;
+            int incNum;
+            for (int i = 0; i < 9; i++)
+            {
+                incNum = Convert.ToInt32(IDNum[i].ToString()) * ((i % 2) + 1);
+                if (incNum > 9)
+                    incNum -= 9;
+                mone += incNum;
+            }
+            return (mone % 10 == 0);
+        }
+
+
+
+        /// <summary>
+        /// מימוש שליחת מייל 
+        /// </summary>
+        public void sendAnEmail()
+        {
+
+
+
+        }
     }
 
 
