@@ -1,0 +1,14 @@
+﻿<Window x:Class="PLWPF.MainHostingUnitGUI"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:PLWPF"
+        mc:Ignorable="d"
+        Title="יחידות אירוח" Height="450" Width="800">
+    <Grid>
+        <Button Content="הוסף יחידת אירוח" HorizontalAlignment="Left" Margin="312,97,0,0" VerticalAlignment="Top" Width="165" Click="Add_Hosting_Unit_Button"/>
+        <Button Content="איזור אישי" HorizontalAlignment="Left" Margin="312,123,0,0" VerticalAlignment="Top" Width="165" Click="Personal_Area_Hosting_Unit_Button"/>
+
+    </Grid>
+</Window>

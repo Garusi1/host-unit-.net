@@ -12,7 +12,7 @@ namespace BE
     [Serializable]
     public class GuestRequest
     {
-        BE.Configuration r = new BE.Configuration();
+        //BE.Configuration r = new BE.Configuration(); //אחי היקר שורת הקוד הזו דופקת את המערכת
 
         private int guestRequestKey;
         public int GuestRequestKey
@@ -21,7 +21,7 @@ namespace BE
             set
             {
                 if (value < 10000000) //from number with 8 letters 
-                    throw new Exception(/*מספר זיהוי אינו תקין"*/"Incorrect key!");
+                    throw new System.IO.InvalidDataException(/*מספר זיהוי אינו תקין"*/"Incorrect key!");
                 guestRequestKey = value;
             }
         }
@@ -35,7 +35,7 @@ namespace BE
             {
                 Regex r = new Regex("^([^20]|[a-zA-Zא-ת]){2,20}$");
                 if (!r.IsMatch(value))
-                    throw new Exception(/*"שם פרטי צריך להכיל 2-20 אותיות בלבד."*/"Private name need to contain 2-20 letters only ");
+                    throw new System.IO.InvalidDataException(/*"שם פרטי צריך להכיל 2-20 אותיות בלבד."*/"Private name need to contain 2-20 letters only ");
                 privateName = value;
             }
         }
@@ -49,7 +49,7 @@ namespace BE
             {
                 Regex r = new Regex("^([^20]|[a-zA-Zא-ת]){2,20}$");
                 if (!r.IsMatch(value))
-                    throw new Exception(/*"שם משפחה צריך להכיל 2-20 אותיות בלבד."*/"Family name need to contain 2-20 letters only ");
+                    throw new System.IO.InvalidDataException(/*"שם משפחה צריך להכיל 2-20 אותיות בלבד."*/"Family name need to contain 2-20 letters only ");
                 familyName = value;
             }
         }
@@ -68,7 +68,7 @@ namespace BE
                 }
                 catch (Exception)
                 {
-                    throw new Exception(/*"כתובת המייל לא תקינה."*/"Email address incorrect");
+                    throw new System.IO.InvalidDataException(/*"כתובת המייל לא תקינה."*/"Email address incorrect");
                 }
                 mailAddress = value;
             }
@@ -82,7 +82,7 @@ namespace BE
             set
             {
                 if (!Enum.IsDefined(typeof(StatusGREnum), value))
-                    throw new Exception("Enum input illegal");
+                    throw new System.IO.InvalidDataException("Enum input illegal");
                 status = value;
             }
         }
@@ -94,7 +94,8 @@ namespace BE
             get { return registrationDate; }
             set
             {// to define
-                registrationDate = value;
+                if (registrationDate == default(DateTime))
+                    registrationDate = value;
             }
         }
 
@@ -125,7 +126,7 @@ namespace BE
 
 
 
-        private AreaEnum area;//All,North,South,Center,Jerusalem
+        public AreaEnum area;//All,North,South,Center,Jerusalem
 
         public AreaEnum Area
         {
@@ -133,7 +134,7 @@ namespace BE
             set
             {
                 if (!Enum.IsDefined(typeof(AreaEnum), value))
-                    throw new Exception("Enum input illegal");
+                    throw new System.IO.InvalidDataException("Enum input illegal");
                 area = value;
             }
 
@@ -149,7 +150,7 @@ namespace BE
             set
             {
                 if (!Enum.IsDefined(typeof(TypeEnum), value))
-                    throw new Exception("Enum input illegal");
+                    throw new System.IO.InvalidDataException("Enum input illegal");
                 type = value;
             }
 
@@ -165,7 +166,7 @@ namespace BE
             set
             {
                 if (!Enum.IsDefined(typeof(AttractionsEnum), value))
-                    throw new Exception("Enum input illegal");
+                    throw new System.IO.InvalidDataException("Enum input illegal");
                 pool = value;
             }
         }
@@ -178,7 +179,7 @@ namespace BE
             set
             {
                 if (!Enum.IsDefined(typeof(AttractionsEnum), value))
-                    throw new Exception("Enum input illegal");
+                    throw new System.IO.InvalidDataException("Enum input illegal");
                 jacuzzi = value;
             }
         }
@@ -191,7 +192,7 @@ namespace BE
             set
             {
                 if (!Enum.IsDefined(typeof(AttractionsEnum), value))
-                    throw new Exception("Enum input illegal");
+                    throw new System.IO.InvalidDataException("Enum input illegal");
                 garden = value;
             }
         }
@@ -204,7 +205,7 @@ namespace BE
             set
             {
                 if (!Enum.IsDefined(typeof(AttractionsEnum), value))
-                    throw new Exception("Enum input illegal");
+                    throw new System.IO.InvalidDataException("Enum input illegal");
                 childrensAttractions = value;
             }
         }
@@ -216,9 +217,9 @@ namespace BE
             set
             {
                 if (value < 0)
-                    throw new Exception(/*מספר מבוגרים אינו יכול להיות שלילי"*/"Number of adults cannot be negative");
+                    throw new System.IO.InvalidDataException(/*מספר מבוגרים אינו יכול להיות שלילי"*/"Number of adults cannot be negative");
                 if (value == 0)
-                    throw new Exception(/*מספר מבוגרים אינוי יכול להיות 0"*/"Number of adults cannot be 0");
+                    throw new System.IO.InvalidDataException(/*מספר מבוגרים אינוי יכול להיות 0"*/"Number of adults cannot be 0");
                 adults = value;
             }
         }
@@ -232,7 +233,7 @@ namespace BE
             set
             {
                 if (value < 0)
-                    throw new Exception(/*מספר ילדים אינו יכול להיות שלילי"*/"Number of children cannot be negative");
+                    throw new System.IO.InvalidDataException(/*מספר ילדים אינו יכול להיות שלילי"*/"Number of children cannot be negative");
                 children = value;
             }
         }
@@ -243,19 +244,13 @@ namespace BE
         }
 
 
-        public void updateStatus(BE.GuestRequest GR)
-        {
-            ///לממש
-            
-            GR.Status = 
 
-        }
 
 
         public override string ToString()  // יש לממש בהתאם לדרישות הפרוייקט.
         {
             string str = "";
-            str += "Geust name: " + PrivateName + " " + FamilyName + "\n" +
+            str +="Guest request key : "+GuestRequestKey+ "\n" + "Geust name: " + PrivateName + " " + FamilyName + "\n" +
                 "MailAddress: " + MailAddress + "\n" +
                 "Status: " + Status + "\n" +
                 "Registration Date: " + RegistrationDate.ToString() + "\n" +

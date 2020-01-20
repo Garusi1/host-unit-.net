@@ -35,6 +35,21 @@ namespace DAL
         List<BE.BankBranch> GetBankBranchList();
 
 
+        //תוספות
+
+
+        BE.HostingUnit getHostingUnitByID(int ID);
+
+
+        BE.GuestRequest getGuestRequestByID(int ID);
+
+
+        BE.Order GetOrderById(int id);
+
+
+
+        IEnumerable<BE.GuestRequest> getAllGRwithCondition(Func<BE.GuestRequest, bool> predicat = null);
+
 
 
 
