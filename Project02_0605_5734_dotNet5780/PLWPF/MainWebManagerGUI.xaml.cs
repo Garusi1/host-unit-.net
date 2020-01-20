@@ -19,9 +19,14 @@ namespace PLWPF
     /// </summary>
     public partial class MainWebManagerGUI : Window
     {
+        BL.IBL bl;
+
         public MainWebManagerGUI()
         {
             InitializeComponent();
+            bl = BL.Factory.GetInstance();
         }
+
+
     }
 }

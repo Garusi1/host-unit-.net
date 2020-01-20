@@ -48,14 +48,14 @@ namespace DAL
 
             var obj = ds.getGuestRequestList().FirstOrDefault(x => x.GuestRequestKey == guest.GuestRequestKey);
             if (obj != null) obj.Status = guest.Status;
-            else if (obj==null)
+            else if (obj == null)
             {
                 throw new KeyNotFoundException(string.Format("מספר דרישת לקוח:  {0} לא נמצא בבסיס הנתונים ", guest.GuestRequestKey));
             }
 
 
             //אם איו מופע כנ"ל משמע שלא מצא אותו ברשימה
-           // addGuestRequest(guest);
+            // addGuestRequest(guest);
 
         }
 
@@ -68,7 +68,7 @@ namespace DAL
             var list = from item in GetGuestRequestList()
                        where item.GuestRequestKey == ID
                        select item.Clone();
-            
+
             return list.FirstOrDefault();
 
             //foreach (var item in list)
@@ -105,16 +105,16 @@ namespace DAL
         public void delHostingUnit(int hostUnitID)
         {
             bool found = false;
- 
-                foreach (BE.HostingUnit element in ds.getHostingUnitList())
+
+            foreach (BE.HostingUnit element in ds.getHostingUnitList())
+            {
+                if (element.isEqualID(hostUnitID))
                 {
-                    if (element.isEqualID(hostUnitID))
-                    {
-                        ds.getHostingUnitList().Remove(element);
-                        found = true;
-                        return;
-                    }
+                    ds.getHostingUnitList().Remove(element);
+                    found = true;
+                    return;
                 }
+            }
 
 
             if (!found)
@@ -123,7 +123,7 @@ namespace DAL
                 throw new KeyNotFoundException(string.Format("מחיקה נכשלה! לא נמצאה יחידת אירוח {0}", hostUnitID));
             }
 
-            
+
 
 
         }
@@ -138,12 +138,19 @@ namespace DAL
 
             var obj = ds.getHostingUnitList().FirstOrDefault(x => x.HostingUnitKey == hostUnit.HostingUnitKey);
             if (obj != null) obj = hostUnit;
-            if (obj == null)            //אם איו מופע כנ"ל משמע שלא מצא אותו ברשימה
+            else if (obj == null)            //אם איו מופע כנ"ל משמע שלא מצא אותו ברשימה
             {
                 throw new KeyNotFoundException(string.Format("Hosting Unit  {0} not exsits in getHostingUnitList data ", hostUnit));
             }
 
+            //מחיקת קודם ונעדכן חדש... 
+            var itemToRemove = ds.getHostingUnitList().SingleOrDefault(r => r.HostingUnitKey == hostUnit.HostingUnitKey);
+            if (itemToRemove != null)
+            {
+                ds.getHostingUnitList().Remove(itemToRemove); //מחיקת הערך
+                ds.getHostingUnitList().Add(hostUnit.Clone()); // עדכון חדש
 
+            }
         }
 
 
@@ -240,14 +247,14 @@ namespace DAL
 
         #region Lists
 
-           
+
 
         public IEnumerable<BE.GuestRequest> GetGuestRequestList()
         {
             var li = from item in ds.getGuestRequestList()
                      select item.Clone();
 
-            
+
             List<BE.GuestRequest> list = new List<BE.GuestRequest>();
 
             foreach (var item in li)
@@ -280,12 +287,13 @@ namespace DAL
             var li = from item in ds.getOrderList()
                      select item.Clone();
 
+            // IEnumerable<BE.Order> list = new IEnumerable<BE.Order>();
             List<BE.Order> list = new List<BE.Order>();
             foreach (var item in li)
             {
                 list.Add(item);
             }
-            return list.Clone();
+            return list;
 
         }
 
@@ -302,12 +310,12 @@ namespace DAL
         public IEnumerable<BE.BankBranch> GetBankBranchList()
         {
 
-            
+
             var li = from item in ds.getBankBranchList()
                      select item.Clone();
             //קורא רק ב foreach 
 
-            
+
 
             return (List<BE.BankBranch>)li;
 
@@ -331,7 +339,7 @@ namespace DAL
 
         }
 
-   
+
 
 
 

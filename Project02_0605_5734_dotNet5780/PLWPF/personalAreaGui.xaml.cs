@@ -20,16 +20,18 @@ namespace PLWPF
     public partial class personalAreaGui : Window
     {
         BL.IBL bl;
-        BE.HostingUnit HUshow; // מקבל את ההוסטינג יוניט מהדיאלוג
+        BE.HostingUnit HUSource; // מקבל את ההוסטינג יוניט מהדיאלוג
+        BE.HostingUnit HUShow;
 
-
-        public personalAreaGui(BE.HostingUnit HUFromData)
+        public personalAreaGui(int hostkey)
         {
+
             InitializeComponent();
-            //בדיקה
             bl = BL.Factory.GetInstance();
-            HUshow = bl.getHostingUnitByID(20000000); //זמני - לשנות...
-            this.DataContext = HUshow;
+            HUSource =bl.getHostingUnitByID(hostkey);
+
+            //HUShow = HUSource;
+            this.DataContext = HUSource;
 
 
 
@@ -43,7 +45,9 @@ namespace PLWPF
         {
             try
             {
-                bl.updateHostingUnit(HUshow);
+                bl.updateHostingUnit(HUSource);
+
+                MessageBox.Show("יחידת אירוח מספר" + HUSource.HostingUnitKey+ " !עודכנה בהצלחה ");
             }
             catch (System.IO.InvalidDataException ex)
             {
@@ -66,8 +70,12 @@ namespace PLWPF
         {
             try
             {
-                bl.delHostingUnit(HUshow.HostingUnitKey);
+                bl.delHostingUnit(HUSource.HostingUnitKey);
+                MessageBox.Show("יחידת אירוח מספר" + HUSource.HostingUnitKey + " !נמחקה בהצלחה ");
+
+                this.Close();
             }
+
             catch (KeyNotFoundException ex)
             {
 
@@ -80,7 +88,7 @@ namespace PLWPF
             }
 
 
-            this.Close();
+
         }
 
         private void Button_Click_order(object sender, RoutedEventArgs e)

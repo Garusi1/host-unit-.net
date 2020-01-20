@@ -340,10 +340,7 @@ namespace BL
 
         public BE.HostingUnit getHostingUnitByID(int ID)
         {
-            if (true)
-            {
 
-            }
 
             return IDAL.getHostingUnitByID(ID).Clone();
         }
@@ -596,7 +593,7 @@ namespace BL
         public IEnumerable<BE.Order> GetOrderList()
         {
 
-            IEnumerable<BE.Order> list = IDAL.GetOrderList().Clone(); ;
+            IEnumerable<BE.Order> list = IDAL.GetOrderList(); ;
             //foreach (var item in IDAL.GetOrderList().Clone())
             //{
             //    list.Add(item);

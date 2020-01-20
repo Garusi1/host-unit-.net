@@ -92,6 +92,7 @@ namespace BE
          /// </summary>
          /// <param name="IDNum"></param>
          /// <returns></returns>
+         
         public static bool ValidateID(string IDNum)
         {
             // Validate correct input

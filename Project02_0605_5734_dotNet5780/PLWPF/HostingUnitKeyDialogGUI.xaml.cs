@@ -53,7 +53,7 @@ namespace PLWPF
                 }
 
                 
-                personalAreaGui HUDialogGui = new personalAreaGui(HUshow);
+                personalAreaGui HUDialogGui = new personalAreaGui(number);
                 this.Close();
                 HUDialogGui.ShowDialog();
                 
