@@ -89,12 +89,5 @@ namespace PLWPF
             //פותח חלון הוסף הזמנה לפי מספר יחידת אירוח
         }
 
-        private void Window_Loaded(object sender, RoutedEventArgs e)
-        {
-
-            System.Windows.Data.CollectionViewSource hostingUnitViewSource = ((System.Windows.Data.CollectionViewSource)(this.FindResource("hostingUnitViewSource")));
-            // Load data by setting the CollectionViewSource.Source property:
-            // hostingUnitViewSource.Source = [generic data source]
-        }
     }
 }

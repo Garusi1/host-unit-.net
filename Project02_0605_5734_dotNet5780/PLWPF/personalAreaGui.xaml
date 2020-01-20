@@ -12,7 +12,7 @@
 
 
         <Button Content="מחק יחידת אירוח" HorizontalAlignment="Left" Margin="150,503,0,0" VerticalAlignment="Top" Width="116" Click="Button_Click_Delete_HostingUint"/>
-        <Button Content="ערוך יחידת אירוח" HorizontalAlignment="Left" Margin="361,503,0,0" VerticalAlignment="Top" Width="123" Click="Button_Click_edit_hostingUnit"/>
+        <Button Content="עדכן יחידת אירוח" HorizontalAlignment="Left" Margin="361,503,0,0" VerticalAlignment="Top" Width="123" Click="Button_Click_edit_hostingUnit"/>
         <Button Content="הוצא הזמנה" HorizontalAlignment="Left" Margin="555,503,0,0" VerticalAlignment="Top" Width="117" Click="Button_Click_order"/>
 
         <Grid x:Name="grid1"  HorizontalAlignment="Left" Margin="82,51,0,0" VerticalAlignment="Top">
@@ -33,18 +33,14 @@
             </Grid.RowDefinitions>
             <Label Content="Area:" Grid.Column="0" HorizontalAlignment="Left" Margin="3,3,0,3" Grid.Row="0" VerticalAlignment="Center"/>
             <ComboBox x:Name="areaComboBox" Grid.Column="1" DisplayMemberPath="{Binding Area}" HorizontalAlignment="Left" Height="Auto"  Margin="3.333,5,0,5" Grid.Row="0" VerticalAlignment="Center" Width="120" Grid.ColumnSpan="2">
-                <ComboBox.ItemsPanel>
-                    <ItemsPanelTemplate>
-                        <VirtualizingStackPanel/>
-                    </ItemsPanelTemplate>
-                </ComboBox.ItemsPanel>
+
             </ComboBox>
             <Label Content="Childrens Attractions:" Grid.Column="0" HorizontalAlignment="Left" Margin="3,3,0,3" Grid.Row="1" VerticalAlignment="Center"/>
             <CheckBox x:Name="childrensAttractionsCheckBox" Content="" Grid.Column="1" HorizontalAlignment="Left" IsChecked="{Binding ChildrensAttractions, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" Margin="3.333,8,0,8" Grid.Row="1" VerticalAlignment="Center" Grid.ColumnSpan="2"/>
             <Label Content="Garden:" Grid.Column="0" HorizontalAlignment="Left" Margin="3,3,0,3" Grid.Row="2" VerticalAlignment="Center"/>
             <CheckBox x:Name="gardenCheckBox" Content="" Grid.Column="1" HorizontalAlignment="Left" IsChecked="{Binding Garden, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" Margin="3.333,8,0,8" Grid.Row="2" VerticalAlignment="Center" Grid.ColumnSpan="2"/>
             <Label Content="Hosting Unit Key:" Grid.Column="0" HorizontalAlignment="Left" Margin="3,3,0,3" Grid.Row="3" VerticalAlignment="Center"/>
-            <TextBox x:Name="hostingUnitKeyTextBox" Grid.Column="1" HorizontalAlignment="Left" Height="24" Margin="3.333,4,0,4" Grid.Row="3" Text="{Binding HostingUnitKey, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" VerticalAlignment="Center" Width="120" Grid.ColumnSpan="2"/>
+            <TextBox x:Name="hostingUnitKeyTextBox" IsReadOnly="True" Grid.Column="1" HorizontalAlignment="Left" Height="24" Margin="3.333,4,0,4" Grid.Row="3" Text="{Binding HostingUnitKey, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" VerticalAlignment="Center" Width="120" Grid.ColumnSpan="2"/>
             <Label Content="Hosting Unit Name:" Grid.Column="0" HorizontalAlignment="Left" Margin="3,3,0,3" Grid.Row="4" VerticalAlignment="Center"/>
             <TextBox x:Name="hostingUnitNameTextBox" Grid.Column="1" HorizontalAlignment="Left" Height="24" Margin="3.333,4,0,4" Grid.Row="4" Text="{Binding HostingUnitName, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" VerticalAlignment="Center" Width="120" Grid.ColumnSpan="2"/>
             <Label Content="Jacuzzi:" Grid.Column="0" HorizontalAlignment="Left" Margin="3,3,0,3" Grid.Row="5" VerticalAlignment="Center"/>
