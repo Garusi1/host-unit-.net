@@ -31,7 +31,7 @@
                 <RowDefinition Height="Auto"/>
             </Grid.RowDefinitions>
             <Label Content="Area:" Grid.Column="0" HorizontalAlignment="Left" Margin="3" Grid.Row="0" VerticalAlignment="Center"/>
-            <ComboBox x:Name="areaComboBox" Grid.Column="1" DisplayMemberPath="{Binding Area}" HorizontalAlignment="Left" Height="Auto" Margin="3" Grid.Row="0" VerticalAlignment="Center" Width="120">
+            <ComboBox x:Name="areaComboBox" Grid.Column="1" SelectedItem="{Binding Area}" HorizontalAlignment="Left" Height="Auto" Margin="3" Grid.Row="0" VerticalAlignment="Center" Width="120">
                
             </ComboBox>
             <Label Content="Childrens Attractions:" Grid.Column="0" HorizontalAlignment="Left" Margin="3" Grid.Row="1" VerticalAlignment="Center"/>
@@ -47,7 +47,7 @@
             <Label Content="Pool:" Grid.Column="0" HorizontalAlignment="Left" Margin="3" Grid.Row="6" VerticalAlignment="Center"/>
             <CheckBox x:Name="poolCheckBox" Content="" Grid.Column="1" HorizontalAlignment="Left" IsChecked="{Binding Pool, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" Margin="3" Grid.Row="6" VerticalAlignment="Center"/>
             <Label Content="Type:" Grid.Column="0" HorizontalAlignment="Left" Margin="3" Grid.Row="7" VerticalAlignment="Center"/>
-            <ComboBox x:Name="typeComboBox" Grid.Column="1" DisplayMemberPath="Type" HorizontalAlignment="Left" Height="Auto" ItemsSource="{Binding}" Margin="3" Grid.Row="7" VerticalAlignment="Center" Width="120">
+            <ComboBox x:Name="typeComboBox" Grid.Column="1" SelectedItem= "{Binding Type}" HorizontalAlignment="Left" Height="Auto"  Margin="3" Grid.Row="7" VerticalAlignment="Center" Width="120">
                
             </ComboBox>
         </Grid>
