@@ -125,6 +125,8 @@ namespace BE
             {
                 if (!Enum.IsDefined(typeof(TypeEnum), value))
                     throw new System.IO.InvalidDataException("Enum input illegal");
+                if (value == TypeEnum.Unknown)
+                    throw new System.IO.InvalidDataException("חייב להגיד סוג יחידת אירוח");
                 type = value;
             }
 

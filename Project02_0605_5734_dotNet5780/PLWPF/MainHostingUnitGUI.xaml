@@ -7,6 +7,8 @@
         mc:Ignorable="d"
         Title="יחידות אירוח" Height="450" Width="800">
     <Grid>
-        
+        <Button Content="הוסף יחידת אירוח" HorizontalAlignment="Left" Margin="312,97,0,0" VerticalAlignment="Top" Width="165" Click="Add_Hosting_Unit_Button"/>
+        <Button Content="איזור אישי" HorizontalAlignment="Left" Margin="312,123,0,0" VerticalAlignment="Top" Width="165" Click="Personal_Area_Hosting_Unit_Button"/>
+
     </Grid>
 </Window>

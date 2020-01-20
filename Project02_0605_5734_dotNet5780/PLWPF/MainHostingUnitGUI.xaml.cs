@@ -23,5 +23,17 @@ namespace PLWPF
         {
             InitializeComponent();
         }
+
+        private void Add_Hosting_Unit_Button(object sender, RoutedEventArgs e)
+        {
+            AddHostingUnitGUI GuestGUIShow = new AddHostingUnitGUI();
+            GuestGUIShow.ShowDialog();//פתיחה באופן זה במחייב התייחסות לחלון זה ולא מאפשר להשתמש בחלון שקרא לו.
+
+        }
+
+        private void Personal_Area_Hosting_Unit_Button(object sender, RoutedEventArgs e)
+        {
+
+        }
     }
 }
