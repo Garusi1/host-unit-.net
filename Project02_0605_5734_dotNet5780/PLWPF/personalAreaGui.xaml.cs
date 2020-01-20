@@ -20,14 +20,21 @@ namespace PLWPF
     public partial class personalAreaGui : Window
     {
         BL.IBL bl;
-        BE.HostingUnit HUshow; // מקבל את ההוסטינג יוניט מהטריגר
-        //BE.GuestRequest GRShow =new BE.GuestRequest();//לבדוק 
+        BE.HostingUnit HUshow; // מקבל את ההוסטינג יוניט מהדיאלוג
 
-        public personalAreaGui()
+
+        public personalAreaGui(BE.HostingUnit HUFromData)
         {
             InitializeComponent();
             //בדיקה
-            HUshow=bl.getHostingUnitByID(20000000);
+            bl = BL.Factory.GetInstance();
+            HUshow = bl.getHostingUnitByID(20000000); //זמני - לשנות...
+
+
+            this.DataContext = HUshow;
+
+
+
             this.typeComboBox.ItemsSource = Enum.GetValues(typeof(BE.TypeEnum));
             this.areaComboBox.ItemsSource = Enum.GetValues(typeof(BE.AreaEnum));
         }

@@ -340,6 +340,10 @@ namespace BL
 
         public BE.HostingUnit getHostingUnitByID(int ID)
         {
+            if (true)
+            {
+
+            }
 
             return IDAL.getHostingUnitByID(ID).Clone();
         }

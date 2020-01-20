@@ -2,8 +2,8 @@
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                     xmlns:local="clr-namespace:PLWPF.res.languages" xmlns:System="clr-namespace:System;assembly=mscorlib">
 
-    <System:String x:Key="client">client</System:String>
-    <System:String x:Key="HostingUnitString">Hosting Unit</System:String>
-    <System:String x:Key="WebManagerString">Web Manager</System:String>
+    <System:String x:Key="client">לקוח</System:String>
+    <System:String x:Key="HostingUnitString">יחידת אירוח</System:String>
+    <System:String x:Key="WebManagerString">ניהול אתר</System:String>
 
 </ResourceDictionary>

@@ -14,7 +14,23 @@
             <RowDefinition/>
             <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
-        <Button Content="שמור"   Margin="10"  FontSize="30" Grid.Row="2" Click="Button_Click_Save_GuestRequest"/>
+        
+        
+        <Button Content="שמור"   Margin="10"  FontSize="30" Grid.Row="2" Click="Button_Click_Save_GuestRequest">
+            
+            <!--
+            <Button.Style>
+                <Style>
+                    <Style.Triggers>
+                        <DataTrigger Binding="{Binding ElementName=adultsTextBox, Path=Text}" Value="">
+                            <Setter Property="Button.IsEnabled" Value="false"/>
+                        </DataTrigger>
+                    </Style.Triggers>
+                </Style>
+            </Button.Style>
+            יש להגדיר כמו שצריך - בהמשך
+            -->
+        </Button>
         <Label x:Name="label" Content="הוסף דרישת אירוח חדשה"  FontSize="30" Margin="0" HorizontalAlignment="Center"/>
         <Grid x:Name="grid1"  HorizontalAlignment="Left" Margin="400,14.714,0,0" Grid.Row="1" VerticalAlignment="Top" FlowDirection="RightToLeft">
             <Grid.ColumnDefinitions>

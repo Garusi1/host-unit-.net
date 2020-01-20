@@ -23,6 +23,13 @@ namespace PLWPF
         public MainWindow()
         {
             InitializeComponent();
+
+            /// טעינת שפה עברית לחלון זה  ---
+            Uri dictUri = new Uri(@"/res/languages/AppStrings_HE.xaml", UriKind.Relative); 
+            ResourceDictionary resourceDict = Application.LoadComponent(dictUri) as ResourceDictionary;
+            Application.Current.Resources.MergedDictionaries.Clear();
+            Application.Current.Resources.MergedDictionaries.Add(resourceDict);
+            // ---- עד כאן שפה
         }
 
 

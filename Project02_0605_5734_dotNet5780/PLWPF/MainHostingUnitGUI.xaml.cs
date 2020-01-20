@@ -33,6 +33,8 @@ namespace PLWPF
 
         private void Personal_Area_Hosting_Unit_Button(object sender, RoutedEventArgs e)
         {
+            HostingUnitKeyDialogGUI HUDialogGui = new HostingUnitKeyDialogGUI();
+            HUDialogGui.ShowDialog();
 
         }
     }
