@@ -105,7 +105,7 @@ namespace BE
                 if (!Enum.IsDefined(typeof(AreaEnum), value))
                     throw new System.IO.InvalidDataException("Enum input illegal");
                 if (value== AreaEnum.All)
-                    throw new System.IO.InvalidDataException("Enum input illegal. HostingUnit cannot be in All regions");
+                    throw new System.IO.InvalidDataException("Enum input illegal. HostingUnit cannot be in All regions!!!");
 
                 area = value;
             }
@@ -126,7 +126,7 @@ namespace BE
                 if (!Enum.IsDefined(typeof(TypeEnum), value))
                     throw new System.IO.InvalidDataException("Enum input illegal");
                 if (value == TypeEnum.Unknown)
-                    throw new System.IO.InvalidDataException("חייב להגיד סוג יחידת אירוח");
+                    throw new System.IO.InvalidDataException("סוג יחידת אירוח אינו יכול להיות לא ידוע");
                 type = value;
             }
 

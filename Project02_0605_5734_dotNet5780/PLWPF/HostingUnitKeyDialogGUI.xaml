@@ -8,7 +8,7 @@
         Title="הזן מספר יחידת אירוח" Height="150" Width="250">
 
     <Grid x:Name="DialogGrid" FlowDirection="RightToLeft">
-        <StackPanel>
+        <StackPanel Margin="0,21,-0.429,0.143">
             <TextBlock Text="הזן מספר יחידת אירוח שקיימת במערכת:" HorizontalAlignment="Center" />
             <TextBox x:Name="ResponseTextBox"/>
             <Button Content="OK" Click="OKButton_Click" />

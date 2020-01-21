@@ -24,7 +24,7 @@ namespace PLWPF
         {
             InitializeComponent();
 
-            /// טעינת שפה עברית לחלון זה  ---
+            /// טעינת שפה עברית לחלונות  ---
             Uri dictUri = new Uri(@"/res/languages/AppStrings_HE.xaml", UriKind.Relative); 
             ResourceDictionary resourceDict = Application.LoadComponent(dictUri) as ResourceDictionary;
             Application.Current.Resources.MergedDictionaries.Clear();

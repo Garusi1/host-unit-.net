@@ -88,7 +88,7 @@ namespace DAL
 
 
         //HostingUnit
-        public void addHostingUnit(BE.HostingUnit hostUnit)
+        public int addHostingUnit(BE.HostingUnit hostUnit)
         {
             hostUnit.HostingUnitKey = BE.Configuration.hostUnitID++;
 
@@ -100,6 +100,8 @@ namespace DAL
             }
 
             ds.getHostingUnitList().Add(hostUnit.Clone());
+
+            return hostUnit.HostingUnitKey;
         }
 
         public void delHostingUnit(int hostUnitID)

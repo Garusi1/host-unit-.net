@@ -7,14 +7,22 @@
         xmlns:BE="clr-namespace:BE;assembly=BE" x:Class="PLWPF.personalAreaGui"
         mc:Ignorable="d"
         Title="אזור אישי" Height="650" Width="800" >
-   
-
-    <Grid >
 
 
-        <Button Content="מחק יחידת אירוח" HorizontalAlignment="Left" Margin="150,503,0,0" VerticalAlignment="Top" Width="116" Click="Button_Click_Delete_HostingUint"/>
-        <Button Content="עדכן יחידת אירוח" HorizontalAlignment="Left" Margin="361,503,0,0" VerticalAlignment="Top" Width="123" Click="Button_Click_edit_hostingUnit"/>
-        <Button Content="צור הזמנה" HorizontalAlignment="Left" Margin="555,503,0,0" VerticalAlignment="Top" Width="117" Click="Button_Click_order"/>
+    <Grid FlowDirection="RightToLeft">
+
+
+        <Button Content="מחק יחידת אירוח" HorizontalAlignment="Left" Margin="172,488,0,0" VerticalAlignment="Top" Width="116" Click="Button_Click_Delete_HostingUint"/>
+        <Button Content="עדכן יחידת אירוח" HorizontalAlignment="Left" Margin="329,493,0,0" VerticalAlignment="Top" Width="123" Click="Button_Click_edit_hostingUnit"/>
+        <Button Content="הזמנות עבור יחידה זו" HorizontalAlignment="Left" Margin="594,473,0,0" VerticalAlignment="Top" Width="149" Click="Button_Click_Orders_For_HostingUnit"/>
+
+       
+        <!--<Button Content="צור הזמנה" HorizontalAlignment="Left" Margin="329,556,0,0" VerticalAlignment="Top" Width="117" Click="Button_Click_New_Order"/>
+        <Button Content="דרישות אירות מתאימות" HorizontalAlignment="Left" Margin="626,516,0,0" VerticalAlignment="Top" Width="136"/>
+        <Button Content="עדכן סטטוס הזמנה" HorizontalAlignment="Left" Margin="172,556,0,0" VerticalAlignment="Top" Width="121" Click="Button_Click"/>
+        <Button Content="רשימת הזמנות" HorizontalAlignment="Left" Margin="626,556,0,0" VerticalAlignment="Top" Width="136" Click="Button_Click"/>-->
+
+
         <Grid x:Name="grid1" HorizontalAlignment="Left" Margin="76,47,0,0" VerticalAlignment="Top">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="Auto"/>
@@ -32,7 +40,7 @@
             </Grid.RowDefinitions>
             <Label Content="Area:" Grid.Column="0" HorizontalAlignment="Left" Margin="3" Grid.Row="0" VerticalAlignment="Center"/>
             <ComboBox x:Name="areaComboBox" Grid.Column="1" SelectedItem="{Binding Area}" HorizontalAlignment="Left" Height="Auto" Margin="3" Grid.Row="0" VerticalAlignment="Center" Width="120">
-               
+
             </ComboBox>
             <Label Content="Childrens Attractions:" Grid.Column="0" HorizontalAlignment="Left" Margin="3" Grid.Row="1" VerticalAlignment="Center"/>
             <CheckBox x:Name="childrensAttractionsCheckBox" Content="" Grid.Column="1" HorizontalAlignment="Left" IsChecked="{Binding ChildrensAttractions, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" Margin="3" Grid.Row="1" VerticalAlignment="Center"/>
@@ -48,7 +56,7 @@
             <CheckBox x:Name="poolCheckBox" Content="" Grid.Column="1" HorizontalAlignment="Left" IsChecked="{Binding Pool, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" Margin="3" Grid.Row="6" VerticalAlignment="Center"/>
             <Label Content="Type:" Grid.Column="0" HorizontalAlignment="Left" Margin="3" Grid.Row="7" VerticalAlignment="Center"/>
             <ComboBox x:Name="typeComboBox" Grid.Column="1" SelectedItem= "{Binding Type}" HorizontalAlignment="Left" Height="Auto"  Margin="3" Grid.Row="7" VerticalAlignment="Center" Width="120">
-               
+
             </ComboBox>
         </Grid>
         <Grid x:Name="grid2" HorizontalAlignment="Left" Margin="471,47,0,0" VerticalAlignment="Top">

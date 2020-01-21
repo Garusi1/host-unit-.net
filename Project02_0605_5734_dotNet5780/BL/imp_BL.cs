@@ -1,7 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
+using System.Net.Mail;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using BE;
 using DAL; // יש להוריד על פניה מלאה לclone  שנמצא בdal . 
@@ -223,7 +226,7 @@ namespace BL
 
         #region HostingUnit methods
         //   #endregion
-        public void addHostingUnit(BE.HostingUnit hostUnit)
+        public int addHostingUnit(BE.HostingUnit hostUnit)
         {
 
             //אם לא הושלם מילוי
@@ -240,12 +243,19 @@ namespace BL
             if (hostUnit.Area == BE.AreaEnum.All)
                 throw new System.IO.InvalidDataException("Enum input illegal. HostingUnit cannot be in All regions");
 
+            if (hostUnit.Type == BE.TypeEnum.Unknown)
+                throw new System.IO.InvalidDataException("חובה להגיד סוג יחידת אירוח");
+
+
+
+
 
             // after we cheek all the possible problems we can transfer the data to DAL layer
-
+            int id;
             try
             {
-                IDAL.addHostingUnit(hostUnit.Clone());
+                id=IDAL.addHostingUnit(hostUnit.Clone());
+                return id;
             }
             catch (DuplicateWaitObjectException e)
             {
@@ -253,7 +263,7 @@ namespace BL
                 throw e;
             }
 
-
+            
             // throw new NotImplementedException();
         }
 
@@ -305,6 +315,10 @@ namespace BL
                 throw new System.IO.InvalidDataException("Enum input illegal");
             if (hostUnit.Area == BE.AreaEnum.All)
                 throw new System.IO.InvalidDataException("Enum input illegal. HostingUnit cannot be in All regions");
+
+            if (hostUnit.Type == BE.TypeEnum.Unknown)
+                throw new System.IO.InvalidDataException("חובה להגיד סוג יחידת אירוח");
+
 
             if (beforeChangeHostUnit.Owner.CollectionClearance.Equals("Yes") && (hostUnit.Owner.CollectionClearance.Equals("No")))//אם רוצה לשנות הרשאת חשבון בנק
             {
@@ -493,6 +507,9 @@ namespace BL
 
             if ((HU.Owner.CollectionClearance == "Yes") && (order.Status == BE.StatusEnum.נשלח_מייל))
             {
+                Thread thr = new Thread(sendAnEamil);
+                thr.Start();
+
                 sendMail(order); //שליחת מייל עם פרטי הזמנה
                 order.OrderDate = DateTime.Now;
 
@@ -629,14 +646,25 @@ namespace BL
             Console.WriteLine("the mail as been sent");
         }
 
+        public  void sendAnEamil()
+        {
+            var client = new SmtpClient("smtp.gmail.com", 587)
+            {
+                Credentials = new NetworkCredential("zimmerisrael123@gmail.com", "Aa12345678910"),
+                EnableSsl = true
+            };
+
+            client.Send("shuker@g.jct.ac.il", "shuker@g.jct.ac.il", "hi behrooz, how was your nohrooz?", "this is a messege from your iranian friend. \n messege number: ");
+            Console.WriteLine("Sent");
+        }
 
 
 
 
 
-        //תוספות  בBL
+            //תוספות  בBL
 
-        public IEnumerable<BE.HostingUnit> availableUnits(DateTime enteryDate, int numOfDayes)//פונקציה שמקבלת תאריך ומספר ימי נופש ומחזירה את רשימת היחידות הפנויות בתאריך זה
+            public IEnumerable<BE.HostingUnit> availableUnits(DateTime enteryDate, int numOfDayes)//פונקציה שמקבלת תאריך ומספר ימי נופש ומחזירה את רשימת היחידות הפנויות בתאריך זה
         {
 
 

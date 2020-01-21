@@ -17,7 +17,7 @@ namespace DAL
         void updateGuestRequest(BE.GuestRequest guest);
 
         //HostingUnit
-        void addHostingUnit(BE.HostingUnit hostUnit);
+        int addHostingUnit(BE.HostingUnit hostUnit);
         void delHostingUnit(int hostUnitID);
         void updateHostingUnit(BE.HostingUnit hostUnit);
 

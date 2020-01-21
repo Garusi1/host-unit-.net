@@ -2,8 +2,25 @@
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                     xmlns:local="clr-namespace:PLWPF.res.languages" xmlns:System="clr-namespace:System;assembly=mscorlib">
 
+    <!--menu-->
     <System:String x:Key="client">client</System:String>
     <System:String x:Key="HostingUnitString">Hosting Unit</System:String>
     <System:String x:Key="WebManagerString">Web Manager</System:String>
+
+    <!--general strings-->
+    
+    <System:String x:Key="Private Name:">Private Name:</System:String>
+    <System:String x:Key="Family Name:">Family Name:</System:String>
+    <System:String x:Key="Mail Address:">Mail Address:</System:String>
+    <System:String x:Key="Type:">Type:</System:String>
+    <System:String x:Key="Area:">Area:</System:String>
+    <System:String x:Key="Pool:">Pool:</System:String>
+    <System:String x:Key="Jacuzzi:">Jacuzzi:</System:String>
+    <System:String x:Key="Garden:">Garden:</System:String>
+    <System:String x:Key="Childrens Attractions:">Childrens Attractions:</System:String>
+
+    <!--Guest Request special strings-->
+    <System:String x:Key="Adults:">Adults:</System:String>
+    <System:String x:Key="Children:">Children:</System:String>
 
 </ResourceDictionary>

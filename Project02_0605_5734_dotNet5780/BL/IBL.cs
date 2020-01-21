@@ -22,7 +22,7 @@ namespace BL
         //HostingUnit
 
         /// add HostingUnit to DataBase
-        void addHostingUnit(BE.HostingUnit hostUnit);
+        int addHostingUnit(BE.HostingUnit hostUnit);
         /// del HostingUnit to DataBase
         void delHostingUnit(int hostUnitID);
         /// update HostingUnit on DataBase

@@ -1,0 +1,38 @@
+
+
+שינוי עברית אנגלית - גם לפי ימין לשמאל - לשים איכשהו בכל מה שקשור לשפות - data proprty או משהו כזה. 
+
+
+20000000
+
+
+        <Button Content="Button" HorizontalAlignment="Left" Margin="544,556,0,0" VerticalAlignment="Top" Width="75" Click="Button_Click"/>
+
+
+
+בעיות - בעת בחירת משהו מ combobox , גם אם נשנה לאחר מכן זה לא אפשרי. 
+
+clone - כתוב ביותר מדי שכבות. צריך לכתוב רק בשכבת dal
+חיים כתב על זה משהו... 
+
+צריך לממש כמו שצריך Ieumerable ו Linq 
+
+
+
+לשלב 3 
+
+https://stackoverflow.com/questions/10018957/how-to-remove-item-from-list-in-c
+
+
+
+פרק 9 עמוד 37 tab control 
+
+
+להוסיף לכל  grid content
+
+פרק 6 עמוד 18
+
+
+
+
+

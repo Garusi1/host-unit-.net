@@ -25,6 +25,9 @@ namespace PLWPF
         List<string> errorMessages = new List<string>(); // לממש 
 
 
+        private Calendar MyCalendar;
+
+
         public GuestGUI()
         {
             InitializeComponent();
@@ -40,10 +43,62 @@ namespace PLWPF
             this.gardenComboBox.ItemsSource = Enum.GetValues(typeof(BE.AttractionsEnum));
             this.childrensAttractionsComboBox.ItemsSource = Enum.GetValues(typeof(BE.AttractionsEnum));
 
+
+
+            #region calander
+            //עבור לוח שנה
+            MyCalendar = CreateCalendar();
+            vbCalendar.Child = null; //מחיקה מהתצוגה של החלון הקודם
+            vbCalendar.Child = MyCalendar;// הצגה של החלון הנוכחי שיצרנו
+            //SetBlackOutDates();
+
         }
+
+
+        /// <summary>
+        /// הסבר הפעולה CreateCalendar :
+        /// צור לוח, הצגה 'חודשית', ניתן לבחור רצף אחד, סמן את היום הנוכחי.
+        /// </summary>
+        /// <returns></returns>
+        private Calendar CreateCalendar()
+        {
+            Calendar MonthlyCalendar = new Calendar();// צור לוח
+            MonthlyCalendar.Name = "MonthlyCalendar";//הצגחה חודשית
+            MonthlyCalendar.DisplayMode = CalendarMode.Month;//ניתן לבחור רצף אחד
+            MonthlyCalendar.SelectionMode = CalendarSelectionMode.SingleRange;
+            MonthlyCalendar.IsTodayHighlighted = true;
+            return MonthlyCalendar;
+        }
+
+
+        //private void SetBlackOutDates()
+        //{
+
+            
+        //}
+
+
+
+
+
+
 
         private void Button_Click_Save_GuestRequest(object sender, RoutedEventArgs e)
         {
+
+            List<DateTime> myList = MyCalendar.SelectedDates.ToList();
+            this.GRShow.EntryDate = myList.First();
+            this.GRShow.ReleaseDate = myList.Last();
+
+            MyCalendar = CreateCalendar();
+            vbCalendar.Child = null;
+            vbCalendar.Child = MyCalendar;
+
+            //SetBlackOutDates();
+            #endregion
+
+
+
             try
             {
                 //GRShow.PrivateName = this.firstNameTextBox.Text;  //קישור על ידי binding 

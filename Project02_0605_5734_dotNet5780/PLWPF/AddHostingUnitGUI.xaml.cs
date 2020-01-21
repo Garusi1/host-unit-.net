@@ -53,12 +53,14 @@ namespace PLWPF
                 //GRShow.PrivateName = this.firstNameTextBox.Text;  //קישור על ידי binding 
 
 
-                bl.addHostingUnit(HUshow); // add copy of gr to the BL layer
+                int id=bl.addHostingUnit(HUshow); // add copy of gr to the BL layer
                                            // GRShow = new BE.GuestRequest();
                                            //this.GuestRequestGrid.DataContext = GRShow; //הקשר הדטה לפי GuestRequest
 
                 // אם אין זריקה 
-                MessageBox.Show("יחידת אירוח נוספה בהצלחה");
+                MessageBox.Show("יחידת אירוח נוספה בהצלחה .\n נא לשמור את מספר יחידת האירוח : "+ id);
+
+                this.Close();
             }
 
             catch (DuplicateWaitObjectException ex)

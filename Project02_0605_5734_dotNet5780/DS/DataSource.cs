@@ -51,7 +51,9 @@ namespace DAL
             BranchAddress="Har'el St 1, 9079129",
             BranchCity="Mevaseret Zion"} },
             HostingUnitName="Gal Banof",
-            Area=BE.AreaEnum.Center
+            Area=BE.AreaEnum.Center,
+            Type=BE.TypeEnum.Zimmer
+            
             //Diary,// יש לממש
 
         } };

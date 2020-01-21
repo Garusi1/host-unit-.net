@@ -2,8 +2,31 @@
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                     xmlns:local="clr-namespace:PLWPF.res.languages" xmlns:System="clr-namespace:System;assembly=mscorlib">
 
+    <!--menu-->
     <System:String x:Key="client">לקוח</System:String>
     <System:String x:Key="HostingUnitString">יחידת אירוח</System:String>
     <System:String x:Key="WebManagerString">ניהול אתר</System:String>
+
+
+    <!--general strings-->
+
+
+    <System:String x:Key="Private Name:">שם פרטי:</System:String>
+    <System:String x:Key="Family Name:">שם משפחה:</System:String>
+    <System:String x:Key="Mail Address:">כתובת אימייל:</System:String>
+    <System:String x:Key="Type:">סוג יחידת אירוח:</System:String>
+    <System:String x:Key="Area:">איזור:</System:String>
+    <System:String x:Key="Pool:">בריכה:</System:String>
+    <System:String x:Key="Jacuzzi:">ג'קוזי:</System:String>
+    <System:String x:Key="Garden:">גינה:</System:String>
+    <System:String x:Key="Childrens Attractions:">אטראקציות לילדים:</System:String>
+
+
+
+    <!--Guest Request special strings-->
+    <System:String x:Key="Adults:">מספר מבוגרים:</System:String>
+    <System:String x:Key="Children:">מספר ילדים:</System:String>
+
+
 
 </ResourceDictionary>

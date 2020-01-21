@@ -8,7 +8,7 @@
         mc:Ignorable="d"
         Title="AddHostingUnitGUI" Height="800" Width="800">
     
-    <Grid Margin="0,0,0.286,-167.286">
+    <Grid Margin="0,0,0.286,-167.286" >
         <Grid.RowDefinitions>
             <RowDefinition Height="506*"/>
             <RowDefinition Height="433*"/>

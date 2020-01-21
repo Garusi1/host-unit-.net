@@ -27,7 +27,7 @@ namespace mysendemail
                 EnableSsl = true
             };
            
-                client.Send("srayapash@gmail.com", "srayapash@gmail.com", "hi behrooz, how was your nohrooz?", "this is a messege from your iranian friend. \n messege number: ");
+                client.Send("shuker@g.jct.ac.il", "shuker@g.jct.ac.il", "hi behrooz, how was your nohrooz?", "this is a messege from your iranian friend. \n messege number: ");
                 Console.WriteLine("Sent");
         
 
