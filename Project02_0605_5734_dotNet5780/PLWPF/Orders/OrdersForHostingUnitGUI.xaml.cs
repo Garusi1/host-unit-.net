@@ -26,7 +26,7 @@ namespace PLWPF.Orders
         List<BE.GuestRequest> nn = new List<BE.GuestRequest>();
         public OrdersForHostingUnitGUI(BE.HostingUnit HUshow1)
         {
-            bl.GetGuestRequestList
+         //   bl.GetGuestRequestList
             InitializeComponent();
             HUshow = HUshow1;
             List<BE.GuestRequest> hhg = new List<BE.GuestRequest>();
