@@ -19,6 +19,9 @@ namespace BL
         /// <param name="guest"></param>
         void updateGuestRequest(BE.GuestRequest guest);
 
+        BE.GuestRequest getGuestRequestByID(int ID);
+
+
         //HostingUnit
 
         /// add HostingUnit to DataBase
@@ -28,6 +31,15 @@ namespace BL
         /// update HostingUnit on DataBase
         void updateHostingUnit(BE.HostingUnit hostUnit);
 
+        /// <summary>
+        /// מחיר דרישת אירוח לפי מספר זיהוי שלה.
+        /// </summary>
+        /// <param name="ID"></param>
+        /// <returns></returns>
+        BE.HostingUnit getHostingUnitByID(int ID);
+
+
+
         //Order
         ///add Order to DataBase
 
@@ -35,20 +47,21 @@ namespace BL
         ///update Order on DataBase
         void UpdateOrder(BE.Order order);
 
-
+        BE.Order getOrderByID(int ID);
         //lists
 
         //get lists from DataBase
-        IEnumerable<BE.GuestRequest> GetGuestRequestList();
-        IEnumerable<BE.HostingUnit> GetHostingUnitList();
-        IEnumerable<BE.Order> GetOrderList();
-        IEnumerable<BE.BankBranch> GetBankBranchList();
+
+
+        IEnumerable<BE.GuestRequest> GetGuestRequestList(Func<BE.GuestRequest, bool> predicat = null);
+
+        IEnumerable<BE.HostingUnit> GetHostingUnitList(Func<BE.HostingUnit, bool> predicat = null);
+        IEnumerable<BE.Order> GetOrderList(Func<BE.Order, bool> predicat = null);
+        IEnumerable<BE.BankBranch> GetBankBranchList(Func<BE.BankBranch, bool> predicat = null);
 
 
 
-        //תוספות
 
-         BE.HostingUnit getHostingUnitByID(int ID);
 
 
 
@@ -58,11 +71,8 @@ namespace BL
         /// </summary>
         /// <param name="predicat"></param>
         /// <returns></returns>
-       IEnumerable<BE.GuestRequest> getAllGRwithCondition(Func<BE.GuestRequest, bool> predicat = null);
 
-        BE.Order getOrderByID(int ID);
 
-        BE.GuestRequest getGuestRequestByID(int ID);
 
         /// <summary>
         /// //פונקציה שמקבלת תאריך ומספר ימי נופש ומחזירה את רשימת היחידות הפנויות בתאריך זה

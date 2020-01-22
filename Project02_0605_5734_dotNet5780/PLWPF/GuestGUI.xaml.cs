@@ -110,6 +110,7 @@ namespace PLWPF
                 
                 // אם אין זריקה 
                 MessageBox.Show("דרישת אירוח נוספה בהצלחה");
+                this.Close();
             }
 
             catch (DuplicateWaitObjectException ex)

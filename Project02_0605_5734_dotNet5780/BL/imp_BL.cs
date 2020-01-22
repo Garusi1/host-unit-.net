@@ -9,7 +9,7 @@ using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using BE;
-using DAL; // יש להוריד על פניה מלאה לclone  שנמצא בdal . 
+//using DAL; // יש להוריד על פניה מלאה לclone  שנמצא בdal . 
 namespace BL
 {
     public class imp_BL : IBL
@@ -102,7 +102,7 @@ namespace BL
         public BE.GuestRequest getGuestRequestByID(int ID)
         {
 
-            return IDAL.getGuestRequestByID(ID).Clone();
+            return IDAL.getGuestRequestByID(ID)/*.Clone()*/;
 
         }
 
@@ -211,7 +211,7 @@ namespace BL
 
             try
             {
-                IDAL.updateGuestRequest(guest.Clone());
+                IDAL.updateGuestRequest(guest/*.Clone()*/);
             }
             catch (KeyNotFoundException e)
             {
@@ -256,7 +256,7 @@ namespace BL
             int id;
             try
             {
-                id = IDAL.addHostingUnit(hostUnit.Clone());
+                id = IDAL.addHostingUnit(hostUnit/*.Clone()*/);
                 return id;
             }
             catch (DuplicateWaitObjectException e)
@@ -280,6 +280,7 @@ namespace BL
 
             // check if there is "open" order connect to this Hosting Unit
             //תנאים למחיקה
+
             var ls = from item in GetOrderList()
                      where ((item.HostingUnitKey == hostUnitID) && ((item.Status == BE.StatusEnum.טרם_טופל) || (item.Status == BE.StatusEnum.נשלח_מייל)))
                      select hostUnitID;
@@ -342,7 +343,7 @@ namespace BL
 
             try
             {
-                IDAL.updateHostingUnit(hostUnit.Clone());
+                IDAL.updateHostingUnit(hostUnit/*.Clone()*/);
             }
             catch (KeyNotFoundException e)
             {
@@ -358,12 +359,12 @@ namespace BL
         {
 
 
-            return IDAL.getHostingUnitByID(ID).Clone();
+            return IDAL.getHostingUnitByID(ID)/*.Clone()*/;
         }
 
         public BE.Order getOrderByID(int ID)
         {
-            return IDAL.GetOrderById(ID).Clone();
+            return IDAL.GetOrderById(ID)/*.Clone()*/;
         }
 
 
@@ -375,6 +376,8 @@ namespace BL
             private set => HU.Diary[generalDate.Day - 1, generalDate.Month - 1] = value;
             get => HU.Diary[generalDate.Day - 1, generalDate.Month - 1];
         }
+
+
 
         public bool ApproveRequest(BE.GuestRequest guestReq, BE.HostingUnit HU) //check if the dates are available on matrix.   // if not, return false.
         {
@@ -460,7 +463,7 @@ namespace BL
 
             try
             {
-                IDAL.addOrder(order.Clone());
+                IDAL.addOrder(order/*.Clone()*/);
             }
             catch (DuplicateWaitObjectException e)
             {
@@ -560,7 +563,7 @@ namespace BL
                 {
                     foreach (var item in GetOrderList())
                     {
-                        IDAL.UpdateOrder(item.Clone());
+                        IDAL.UpdateOrder(item/*.Clone()*/);
                     }
                 }
                 catch (KeyNotFoundException e)
@@ -573,7 +576,7 @@ namespace BL
 
             try
             {
-                IDAL.UpdateOrder(order.Clone());
+                IDAL.UpdateOrder(order/*.Clone()*/);
             }
             catch (KeyNotFoundException e)
             {
@@ -589,37 +592,37 @@ namespace BL
 
         #region return lists
 
-        public IEnumerable<BE.BankBranch> GetBankBranchList()
+        public IEnumerable<BE.BankBranch> GetBankBranchList(Func<BE.BankBranch, bool> predicat = null)
         {
             //throw new NotImplementedException();
-            return IDAL.GetBankBranchList()/*.Clone()*/;
+            return IDAL.GetBankBranchList(predicat)/*.Clone()*/;
         }
 
-        public IEnumerable<BE.GuestRequest> GetGuestRequestList()
+        public IEnumerable<BE.GuestRequest> GetGuestRequestList(Func<BE.GuestRequest, bool> predicat = null)
         {
             //throw new NotImplementedException();
-            return IDAL.GetGuestRequestList().Clone();
+            return IDAL.GetGuestRequestList(predicat);
 
         }
 
 
-        public IEnumerable<BE.HostingUnit> GetHostingUnitList()
+        public IEnumerable<BE.HostingUnit> GetHostingUnitList(Func<BE.HostingUnit, bool> predicat = null)
         {
             //throw new NotImplementedException();
-            return IDAL.GetHostingUnitList()/*.Clone()*/;
+            return IDAL.GetHostingUnitList(predicat)/*.Clone()*/;
         }
 
-        public IEnumerable<BE.Order> GetOrderList()
+        public IEnumerable<BE.Order> GetOrderList(Func<BE.Order, bool> predicat = null)
         {
 
 
-            return IDAL.GetOrderList();
+            return IDAL.GetOrderList(predicat);
 
             //IEnumerable<BE.Order> list = IDAL.GetOrderList(); 
             //return list;
 
 
-            //foreach (var item in IDAL.GetOrderList().Clone())
+            //foreach (var item in IDAL.GetOrderList()/*.Clone()*/)
             //{
             //    list.Add(item);
             //}
@@ -644,25 +647,6 @@ namespace BL
             // חיים מציע ליצור string  ערוך שייצג עיסקה ולשלוח אותו לפונקצייה 
             // ששולחת לבנק הודעה ב tread - בפועל לא שולחים לבנק. 
 
-        }
-
-
-
-        public void sendMail(BE.Order order) //לממש שליחת מייל עם פרטי הזמנה בשלב הבא
-        {
-            Console.WriteLine("the mail as been sent");
-        }
-
-        public void sendAnEamil()
-        {
-            var client = new SmtpClient("smtp.gmail.com", 587)
-            {
-                Credentials = new NetworkCredential("zimmerisrael123@gmail.com", "Aa12345678910"),
-                EnableSsl = true
-            };
-
-            client.Send("shuker@g.jct.ac.il", "shuker@g.jct.ac.il", "hi behrooz, how was your nohrooz?", "this is a messege from your iranian friend. \n messege number: ");
-            Console.WriteLine("Sent");
         }
 
 
@@ -737,25 +721,6 @@ namespace BL
         }
 
 
-        // מתשאל דרישת לקוח לפי תנאי 
-        public IEnumerable<BE.GuestRequest> getAllGRwithCondition(Func<BE.GuestRequest, bool> predicat = null)
-        {
-            return IDAL.getAllGRwithCondition(predicat);
-            throw new NotImplementedException();
-
-        }
-
-
-
-        /*
-
-                                 IEnumerable<BE.GuestRequest> GR = bl.getAllGRwithCondition();
-                                 foreach(var item in GR)
-                                 {
-                                     Console.WriteLine("{0}\n\n",item);
-                                 }
-      */
-
 
 
 
@@ -824,44 +789,6 @@ namespace BL
 
         }
 
-        //public List<IGrouping<string, BE.Host>> groupByNumberOfHosintgUnitForHost() // סידור מארחים לפי מספר יחידות אירוח שמשוייכות אליהם
-        //{
-
-        //    List<BE.Host> tempHostList = new List<BE.Host>();
-
-        //    foreach (var item in GetHostingUnitList())
-        //    {
-        //        tempHostList.Add(item.Owner.HostKey);
-
-        //        item.Owner.NumberOfHostingUnits++;
-
-        //    }
-
-        //    List<string> tempHostKeyList = new List<string>();
-
-        //    foreach (var item in GetHostingUnitList())
-        //    {
-        //        tempHostKeyList.Add(item.Owner.HostKey);
-
-        //    }
-
-        //    var lss=from item in GetHostingUnitList()
-
-
-
-
-
-        //    var ls = from item in GetHostingUnitList()
-        //             group item by (item.Owner.HostKey)
-        //                  into g
-        //             select new { hostkey = g };
-
-        //    var result=from h in ls
-
-
-        //    return result.ToList();
-
-        //}
 
 
 
@@ -872,9 +799,9 @@ namespace BL
         /// <returns> ערך אחד. יש לבצע בפונקציה המזמנת forech</returns>
         public IEnumerable<IGrouping<int, BE.Host>> groupByNumberOfHosintgUnitForHost()
         {
-            var hostingUnits = GetHostingUnitList();
+            //var hostingUnits = GetHostingUnitList();
 
-            return from Unit in hostingUnits
+            return from Unit in GetHostingUnitList()
                    group Unit by Unit.Owner.HostKey into Units
                    let Owner = Units.FirstOrDefault().Owner
                    let num_of_Unit = Units.Count() //לוודא שסופר נכון
@@ -891,19 +818,20 @@ namespace BL
         /// <returns> ערך אחד. יש לבצע בפונקציה המזמנת forech</returns>
         public IEnumerable<IGrouping<BE.AreaEnum, BE.HostingUnit>> groupByAreaHostingUnit()
         {
-            var result = from item in GetHostingUnitList()
-                         group item by item.Area;
 
-            return result.ToList();
+            return from item in GetHostingUnitList()
+                   group item by item.Area;
+            //var result = from item in GetHostingUnitList()
+            //             group item by item.Area;
+
+            //return result/*.ToList()*/;
 
         }
 
 
 
-
-
         /// <summary>
-        ///  מחזיר רשימת יחידות אירוח עבור מאחר ספיצפי
+        ///  מחזיר רשימת יחידות אירוח עבור מארח ספיצפי
         /// </summary>
         /// <returns> ערך אחד. יש לבצע בפונקציה המזמנת forech</returns>
         public IEnumerable<BE.HostingUnit> hostsHostingUnit(string IDHost)
@@ -914,12 +842,13 @@ namespace BL
             var li = from item in GetHostingUnitList()
                      where ((item.Owner.HostKey)) == IDHost
                      select item;
-            foreach (var item in li)
-            {
-                list.Add(item);
-            }
+            return li;
+            //foreach (var item in li)
+            //{
+            //    list.Add(item);
+            //}
 
-            return list;
+            //return list;
 
         }
 
@@ -929,56 +858,37 @@ namespace BL
         #endregion
 
 
-        //public static bool Add<T>(List<T> list, T t) where T : IComparable
-        //{
 
-        //    foreach (T item in list)
-        //    {
-        //        if (t.CompareTo(item) == 0)
-        //        {
-        //            return false;
-        //        }
-        //    }
-        //    list.Add(t);
-        //    return true;
+        #region send mail
 
-        //}
+        public void sendMail(BE.Order order) //לממש שליחת מייל עם פרטי הזמנה בשלב הבא
+        {
+            Console.WriteLine("the mail as been sent");
+        }
 
+        public void sendAnEamil()
+        {
+            var client = new SmtpClient("smtp.gmail.com", 587)
+            {
+                Credentials = new NetworkCredential("zimmerisrael123@gmail.com", "Aa12345678910"),
+                EnableSsl = true
+            };
 
+            client.Send("shuker@g.jct.ac.il", "shuker@g.jct.ac.il", "hi behrooz, how was your nohrooz?", "this is a messege from your iranian friend. \n messege number: ");
+            Console.WriteLine("Sent");
+        }
 
-
-        //public static void Remove<T>(List<T> list, T t) where T : IComparable
-        //{
-        //    T temp = default(T);
-        //    foreach (T item in list)
-        //    {
-        //        if (t.CompareTo(item) == 0)
-        //        {
-        //            temp = item;
-        //            break;
-        //        }
-        //    }
-
-        //    if (temp != null)
-        //        list.Remove(temp);
-        //}
+        /// <summary>
+        /// מימוש שליחת מייל 
+        /// </summary>
+        public void sendAnEmail()
+        {
 
 
 
+        }
+        #endregion
 
-        //public static T Find<T>(List<T> list, T t) where T : class, IComparable
-        //{
-
-        //    foreach (T item in list)
-        //    {
-        //        if (t.CompareTo(item) == 0)
-        //        {
-        //            return item;
-        //        }
-
-        //    }
-        //    return null;
-        //}
 
 
 
@@ -1012,15 +922,7 @@ namespace BL
 
 
 
-        /// <summary>
-        /// מימוש שליחת מייל 
-        /// </summary>
-        public void sendAnEmail()
-        {
 
-
-
-        }
     }
 
 
@@ -1030,41 +932,3 @@ namespace BL
 }
 
 
-
-///////*
-////// * 
-////// * 
-////// *            // ייצוג הזמנות רלוונטיות בלבד 
-///
-
-//            //BE.HostingUnit unit = DAL.getUnitByKey(order.HostingUnitKey);
-
-// BE.GuestRequest unitK = DAL.getUnitByKey(order.HostingUnitKey);
-
-//ליצור השוואת שדות. אם זה לא מתאים לזרוק אקספשיין
-
-
-// new Order()/*{GS.GuestRequestKey,HU.HostingUnitKey };*/{ GuestRequestKey = GS.GuestRequestKey, HostingUnitKey = HU.HostingUnitKey, Status = BE.StatusEnum.טרם_טופל, CreateDate = DateTime.Now };
-
-
-//////            var fit = from GS in GetGuestRequestList()
-//////                      from HU in GetHostingUnit()
-//////                      where (GS.Status == BE.StatusGREnum.פתוחה) &&
-//////                            (GS.Type == HU.Type) &&
-//////                            ((GS.Area == BE.AreaEnum.All) || (GS.Area == HU.Area)) &&
-
-//////                            /* ביחידת אירוח או שיש אטרקאציה או שאין. אם יש, אז אם בדירשת אירוח היא הכרחית יש התאמה.
-//////                            אם האטראקציה לא הכרחית אז לא משנה אם יש או אין.
-//////                            אם האורח לא מעוניין, אז נתאים רק אם אין את הארטאקציה.*/
-//////(((HU.Pool) && (GS.Pool == BE.AttractionsEnum.הכרחי)) || (GS.Pool == BE.AttractionsEnum.אפשרי) || ((!(HU.Pool)) && (GS.Pool == BE.AttractionsEnum.לא_מעוניין))) &&
-//////                            (((HU.Jacuzzi) && (GS.Jacuzzi == BE.AttractionsEnum.הכרחי)) || (GS.Jacuzzi == BE.AttractionsEnum.אפשרי) || ((!(HU.Jacuzzi)) && (GS.Jacuzzi == BE.AttractionsEnum.לא_מעוניין))) &&
-//////                            (((HU.Garden) && (GS.Garden == BE.AttractionsEnum.הכרחי)) || (GS.Garden == BE.AttractionsEnum.אפשרי) || ((!(HU.Garden)) && (GS.Garden == BE.AttractionsEnum.לא_מעוניין))) &&
-//////                            (((HU.ChildrensAttractions) && (GS.ChildrensAttractions == BE.AttractionsEnum.הכרחי)) || (GS.ChildrensAttractions == BE.AttractionsEnum.אפשרי) || ((!(HU.ChildrensAttractions)) && (GS.ChildrensAttractions == BE.AttractionsEnum.לא_מעוניין))) &&
-
-//////                            ///יש לממש לפי תאריך - אם פנוי 
-//////                            ///יש לממש 
-//////                            ///
-//////                            ///לבדוק לוגיקה
-//////                      select new Order()/*{GS.GuestRequestKey,HU.HostingUnitKey };*/{ GuestRequestKey = GS.GuestRequestKey, HostingUnitKey = HU.HostingUnitKey, Status = BE.StatusEnum.טרם_טופל, CreateDate = DateTime.Now };
-
-////// */

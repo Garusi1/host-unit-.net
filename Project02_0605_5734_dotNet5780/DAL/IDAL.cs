@@ -28,11 +28,11 @@ namespace DAL
 
         //lists
 
-        IEnumerable<BE.GuestRequest> GetGuestRequestList();
+        IEnumerable<BE.GuestRequest> GetGuestRequestList(Func<BE.GuestRequest, bool> predicat = null);
 
-        IEnumerable<BE.HostingUnit> GetHostingUnitList();
-        IEnumerable<BE.Order> GetOrderList();
-        IEnumerable<BE.BankBranch> GetBankBranchList();
+        IEnumerable<BE.HostingUnit> GetHostingUnitList(Func<BE.HostingUnit, bool> predicat = null);
+        IEnumerable<BE.Order> GetOrderList(Func<BE.Order, bool> predicat = null);
+        IEnumerable<BE.BankBranch> GetBankBranchList(Func<BE.BankBranch, bool> predicat = null);
 
 
         //תוספות
@@ -46,9 +46,6 @@ namespace DAL
 
         BE.Order GetOrderById(int id);
 
-
-
-        IEnumerable<BE.GuestRequest> getAllGRwithCondition(Func<BE.GuestRequest, bool> predicat = null);
 
 
 

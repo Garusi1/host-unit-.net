@@ -49,7 +49,7 @@ namespace DAL
 
         {
   
-            if (guest.GuestRequestKey == 0)//זה אומר שאין קוד ייחודי שהרי הערך לא מאותחל על ברירת מחדל
+            if (guest.GuestRequestKey == 0)//זה אומר שאין קוד ייחודי שהרי הערך לא מאותחל על ברירת מחדל- דרישות דף פרוייקט.
                 BE.Configuration.geustReqID++; //הענק לו קוד ייחודי
 
             ////עדכון כללי כאן. 
@@ -286,54 +286,33 @@ namespace DAL
 
 
 
-        public IEnumerable<BE.GuestRequest> GetGuestRequestList()
+        public IEnumerable<BE.GuestRequest> GetGuestRequestList(Func<BE.GuestRequest, bool> predicat = null)
         {
+
             var li = from item in ds.getGuestRequestList()
+                     where predicat == null ? true : predicat(item)
                      select item.Clone();
 
-
-            List<BE.GuestRequest> list = new List<BE.GuestRequest>();
-
-            foreach (var item in li)
-            {
-                list.Add(item);
-            }
-
-
-            return list;
+            return li;
 
         }
-        public IEnumerable<BE.HostingUnit> GetHostingUnitList()
+        public IEnumerable<BE.HostingUnit> GetHostingUnitList(Func<BE.HostingUnit, bool> predicat = null)
         {
 
             var li = from item in ds.getHostingUnitList()
+                     where predicat == null ? true : predicat(item)
                      select item.Clone();
 
-            //List<BE.HostingUnit> list = new List<BE.HostingUnit>();
-
-            //foreach (var item in li)
-            //{
-            //    list.Add(item);
-            //}
-
-            //return list;
             return li;
 
         }
-        public IEnumerable<BE.Order> GetOrderList()
+        public IEnumerable<BE.Order> GetOrderList(Func<BE.Order, bool> predicat = null)
         {
-            var li = from item in ds.getOrderList()
-                     select item.Clone();
 
-            // IEnumerable<BE.Order> list = new IEnumerable<BE.Order>();
-            //List<BE.Order> list = new List<BE.Order>();
-            //foreach (var item in li)
-            //{
-            //    list.Add(item);
-            //}
-            //return list;
+            var li = from order in ds.getOrderList()
+                     where predicat==null ? true :predicat(order)
+                     select order.Clone();
             return li;
-          
 
         }
 
@@ -347,11 +326,12 @@ namespace DAL
 
 
 
-        public IEnumerable<BE.BankBranch> GetBankBranchList()
+        public IEnumerable<BE.BankBranch> GetBankBranchList(Func<BE.BankBranch, bool> predicat = null)
         {
 
 
             var li = from item in ds.getBankBranchList()
+                     where predicat== null ? true: predicat(item)
                      select item.Clone();
             //קורא רק ב foreach 
 
@@ -370,14 +350,7 @@ namespace DAL
 
         // מתשאל דרישת לקוח לפי תנאי 
 
-        public IEnumerable<BE.GuestRequest> getAllGRwithCondition(Func<BE.GuestRequest, bool> predicat = null)
-        {
-            return from gst in GetGuestRequestList()
-                   where predicat == null ? true : predicat(gst)
-                   select gst.Clone();
-
-
-        }
+  
 
 
 
