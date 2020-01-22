@@ -20,12 +20,14 @@ namespace PLWPF.Orders
     /// </summary>
     public partial class OrdersForHostingUnitGUI : Window
     {
-        BL.imp_BL bl;
+        BL.IBL bl;
+        BE.GuestRequest GRShow;
         BE.HostingUnit HUshow;
         
-        public OrdersForHostingUnitGUI(BE.HostingUnit HUshow)
+        public OrdersForHostingUnitGUI(BE.HostingUnit HUshow1)
         {
             InitializeComponent();
+            HUshow = HUshow1;
             IEnumerable <BE.GuestRequest> GRL = bl.GetGuestRequestList();
             int f = bl.GetGuestRequestList().Count();
             foreach (var item in GRL)
