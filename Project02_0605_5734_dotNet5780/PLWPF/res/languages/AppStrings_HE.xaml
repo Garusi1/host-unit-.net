@@ -7,7 +7,9 @@
     <System:String x:Key="HostingUnitString">יחידת אירוח</System:String>
     <System:String x:Key="WebManagerString">ניהול אתר</System:String>
 
+
     <!--general strings-->
+
 
     <System:String x:Key="Private Name:">שם פרטי:</System:String>
     <System:String x:Key="Family Name:">שם משפחה:</System:String>
@@ -19,22 +21,12 @@
     <System:String x:Key="Garden:">גינה:</System:String>
     <System:String x:Key="Childrens Attractions:">אטראקציות לילדים:</System:String>
 
+
+
     <!--Guest Request special strings-->
     <System:String x:Key="Adults:">מספר מבוגרים:</System:String>
     <System:String x:Key="Children:">מספר ילדים:</System:String>
-    <!--Hosting Unit special strings-->
-    <System:String x:Key="Bank Name:">שם הבנק:</System:String>
-    <System:String x:Key="Phone Number:">מספר טלפון:</System:String>
-    <System:String x:Key="Bank Number:">מספר בנק:</System:String>
-    <System:String x:Key="Branch Address:">כתובת הסניף:</System:String>
-    <System:String x:Key="Branch City:">עיר סניף הבנק:</System:String>
-    <System:String x:Key="Branch Number:">מספר סניף:</System:String>
-    <System:String x:Key="Save">שמור</System:String>
-    <System:String x:Key="ID:">ת"ז</System:String>
-    <System:String x:Key="Collection Clearance:">אישור חיוב חשבון:</System:String>
-    <System:String x:Key="Bank Account Number:">מספר חשבון בנק:</System:String>
-    <System:String x:Key="Hosting Unit Name:">שם יחידת אירוח:</System:String>
-    <System:String x:Key="Hosting Unit Key:">מספר יחידת אירוח</System:String>
-    <System:String x:Key="Host Key:">ת"ז של בעלים:</System:String>
+
+
 
 </ResourceDictionary>
