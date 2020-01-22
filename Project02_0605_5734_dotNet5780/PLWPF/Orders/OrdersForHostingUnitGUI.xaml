@@ -7,6 +7,8 @@
         mc:Ignorable="d"
         Title="OrdersForHostingUnitGUI" Height="450" Width="800">
     <Grid>
-        
+        <ListView Name="list view" Width="600">
+            
+        </ListView>
     </Grid>
 </Window>

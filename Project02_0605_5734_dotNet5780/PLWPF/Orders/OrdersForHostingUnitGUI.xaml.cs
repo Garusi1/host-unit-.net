@@ -29,9 +29,9 @@ namespace PLWPF.Orders
             InitializeComponent();
             HUshow = HUshow1;
             IEnumerable <BE.GuestRequest> GRL = bl.GetGuestRequestList();
-            int f = bl.GetGuestRequestList().Count();
             foreach (var item in GRL)
             {
+                lvUsers.ItemsSource = items;
 
             }
 
