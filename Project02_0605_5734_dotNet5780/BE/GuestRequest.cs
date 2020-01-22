@@ -68,7 +68,7 @@ namespace BE
                 }
                 catch (Exception)
                 {
-                    hthrow new System.IO.InvalidDataException(/*"כתובת המייל לא תקינה."*/"Email address incorrect");
+                    throw new System.IO.InvalidDataException(/*"כתובת המייל לא תקינה."*/"Email address incorrect");
                 }
                 mailAddress = value;
             }
