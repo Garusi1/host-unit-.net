@@ -13,6 +13,14 @@ namespace PL
         {
             int number = -1;
             mainMenuEnum choosMenuEnum;
+            BL.IBL bl;
+            bl= BL.Factory.GetInstance();
+            IEnumerable<BE.Order> sdfsdf = bl.GetOrderList();
+            foreach (var item in sdfsdf)
+            {
+                Console.WriteLine(item);
+            }
+            Console.ReadKey();
 
             do
             {

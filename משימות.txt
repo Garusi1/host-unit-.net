@@ -34,7 +34,7 @@ https://stackoverflow.com/questions/10018957/how-to-remove-item-from-list-in-c
 
 
 20:26 22/01/2020
-שמירת לקוח
+שמירת לקוח -בוצע.
 רשימות - ienumerable .
 
 
