@@ -507,13 +507,22 @@ namespace BL
 
             if ((HU.Owner.CollectionClearance == "Yes") && (order.Status == BE.StatusEnum.נשלח_מייל))
             {
-                Thread thr = new Thread(sendAnEamil);
-                thr.Start();
+                //Thread thr = new Thread(sendAnEamil);
+                //thr.Start();
+
+                //Thread thr = new Thread(sendEmailOrder(order));
+                //thr.Start(order);
 
                 sendMail(order); //שליחת מייל עם פרטי הזמנה
                 order.OrderDate = DateTime.Now;
 
             }
+
+
+
+
+
+
 
             if ((HU.Owner.CollectionClearance == "Yes") && (order.Status == BE.StatusEnum.נסגר_בהיענות_הלקוח))
             {
@@ -581,6 +590,27 @@ namespace BL
 
         }
 
+        #region sendig mail 
+
+        public void sendMail(BE.Order order) //לממש שליחת מייל עם פרטי הזמנה בשלב הבא
+        {
+            Console.WriteLine("the mail as been sent");
+        }
+
+        public void sendAnEamil()
+        {
+            var client = new SmtpClient("smtp.gmail.com", 587)
+            {//פרטי התחברות
+                Credentials = new NetworkCredential("zimmerisrael123@gmail.com", "Aa12345678910"),
+                EnableSsl = true
+            };
+
+            client.Send("shuker@g.jct.ac.il", "shuker@g.jct.ac.il", "hi behrooz, how was your nohrooz?", "this is a messege from your iranian friend. \n messege number: ");
+            Console.WriteLine("Sent");
+        }
+        #endregion
+
+
 
         #endregion
 
@@ -640,23 +670,6 @@ namespace BL
         }
 
 
-
-        public void sendMail(BE.Order order) //לממש שליחת מייל עם פרטי הזמנה בשלב הבא
-        {
-            Console.WriteLine("the mail as been sent");
-        }
-
-        public  void sendAnEamil()
-        {
-            var client = new SmtpClient("smtp.gmail.com", 587)
-            {
-                Credentials = new NetworkCredential("zimmerisrael123@gmail.com", "Aa12345678910"),
-                EnableSsl = true
-            };
-
-            client.Send("shuker@g.jct.ac.il", "shuker@g.jct.ac.il", "hi behrooz, how was your nohrooz?", "this is a messege from your iranian friend. \n messege number: ");
-            Console.WriteLine("Sent");
-        }
 
 
 
@@ -1005,18 +1018,9 @@ namespace BL
 
 
 
-        /// <summary>
-        /// מימוש שליחת מייל 
-        /// </summary>
-        public void sendAnEmail()
-        {
+        
 
-
-
-        }
     }
-
-
 
 
 
