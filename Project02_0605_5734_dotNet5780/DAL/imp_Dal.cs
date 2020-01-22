@@ -24,20 +24,31 @@ namespace DAL
 
         public void addGuestRequest(BE.GuestRequest guest)
         {
-            guest.GuestRequestKey = BE.Configuration.geustReqID++;
-            foreach (BE.GuestRequest element in ds.getGuestRequestList()) // צריך לבדוק שהלולאות האלה באמת עובדות
+            bool exists = ds.getGuestRequestList().Any(x => x.GuestRequestKey == guest.GuestRequestKey);
+            if(exists)
             {
-                if (element.isEqual(guest))
-                    throw new DuplicateWaitObjectException((/* "ישנו מספר זהה של דרישת אירוח"*/"Cannot add.duplicate GuestRequest key on data "));
+                throw new DuplicateWaitObjectException((/* "ישנו מספר זהה של דרישת אירוח"*/"Cannot add.duplicate GuestRequest key on data "));
+
             }
 
+            guest.GuestRequestKey = BE.Configuration.geustReqID++;
+
             ds.getGuestRequestList().Add(guest.Clone());
+
+            //foreach (BE.GuestRequest element in ds.getGuestRequestList()) 
+            //{
+            //    if (element.isEqual(guest))
+            //        throw new DuplicateWaitObjectException((/* "ישנו מספר זהה של דרישת אירוח"*/"Cannot add.duplicate GuestRequest key on data "));
+            //}
+
+
+
 
         }
         public void updateGuestRequest(BE.GuestRequest guest)
 
         {
-            //לשאול מרצה מה הכוונה כאן בתנאי ההוספה הזה. 
+  
             if (guest.GuestRequestKey == 0)//זה אומר שאין קוד ייחודי שהרי הערך לא מאותחל על ברירת מחדל
                 BE.Configuration.geustReqID++; //הענק לו קוד ייחודי
 
@@ -46,13 +57,19 @@ namespace DAL
             //         where guest.GuestRequestKey == item.GuestRequestKey
             //         select new { item = guest };
 
-            var obj = ds.getGuestRequestList().FirstOrDefault(x => x.GuestRequestKey == guest.GuestRequestKey);
-            if (obj != null) obj.Status = guest.Status;
-            else if (obj == null)
-            {
-                throw new KeyNotFoundException(string.Format("מספר דרישת לקוח:  {0} לא נמצא בבסיס הנתונים ", guest.GuestRequestKey));
-            }
+            //var obj = ds.getGuestRequestList().FirstOrDefault(x => x.GuestRequestKey == guest.GuestRequestKey);
+            //if (obj != null) obj.Status = guest.Status;
+            //else if (obj == null)
+            //{
+            //    throw new KeyNotFoundException(string.Format("מספר דרישת לקוח:  {0} לא נמצא בבסיס הנתונים ", guest.GuestRequestKey));
+            //}
 
+
+            //int itExists=(ds.getGuestRequestList().RemoveAll(x => x.GuestRequestKey == guest.GuestRequestKey));
+
+            //אם זה קיים הוא מוחק ישן ושם חדש. אם לא קיים, פשוט יוסיף אותו. 
+            ds.getGuestRequestList().RemoveAll(x => x.GuestRequestKey == guest.GuestRequestKey);
+            addGuestRequest(guest);
 
             //אם איו מופע כנ"ל משמע שלא מצא אותו ברשימה
             // addGuestRequest(guest);
@@ -106,53 +123,62 @@ namespace DAL
 
         public void delHostingUnit(int hostUnitID)
         {
-            bool found = false;
 
-            foreach (BE.HostingUnit element in ds.getHostingUnitList())
-            {
-                if (element.isEqualID(hostUnitID))
-                {
-                    ds.getHostingUnitList().Remove(element);
-                    found = true;
-                    return;
-                }
-            }
-
-
-            if (!found)
-            {
-
+            int count = ds.getHostingUnitList().RemoveAll(x => x.HostingUnitKey == hostUnitID);
+            if (count == 0)
                 throw new KeyNotFoundException(string.Format("מחיקה נכשלה! לא נמצאה יחידת אירוח {0}", hostUnitID));
-            }
+
+            //bool found = false;
+
+            //foreach (BE.HostingUnit element in ds.getHostingUnitList())
+            //{
+            //    if (element.isEqualID(hostUnitID))
+            //    {
+            //        ds.getHostingUnitList().Remove(element);
+            //        found = true;
+            //        return;
+            //    }
+            //}
 
 
+            //if (!found)
+            //{
+
+            //    throw new KeyNotFoundException(string.Format("מחיקה נכשלה! לא נמצאה יחידת אירוח {0}", hostUnitID));
+            //}
 
 
         }
         public void updateHostingUnit(BE.HostingUnit hostUnit)
         {
+
             if (hostUnit.HostingUnitKey == 0)//זה אומר שאין קוד ייחודי שהרי הערך לא מאותחל על ברירת מחדל
                 hostUnit.HostingUnitKey = BE.Configuration.geustReqID++; //הענק לו קוד ייחודי
 
 
+            ds.getHostingUnitList().RemoveAll(x => x.HostingUnitKey == hostUnit.HostingUnitKey);
+            addHostingUnit(hostUnit.Clone());
+
 
             //עדכון כללי כאן. 
 
-            var obj = ds.getHostingUnitList().FirstOrDefault(x => x.HostingUnitKey == hostUnit.HostingUnitKey);
-            if (obj != null) obj = hostUnit;
-            else if (obj == null)            //אם איו מופע כנ"ל משמע שלא מצא אותו ברשימה
-            {
-                throw new KeyNotFoundException(string.Format("Hosting Unit  {0} not exsits in getHostingUnitList data ", hostUnit));
-            }
+            //var obj = ds.getHostingUnitList().FirstOrDefault(x => x.HostingUnitKey == hostUnit.HostingUnitKey);
+            //if (obj != null) obj = hostUnit;
+            //else if (obj == null)            //אם איו מופע כנ"ל משמע שלא מצא אותו ברשימה
+            //{
+            //    throw new KeyNotFoundException(string.Format("Hosting Unit  {0} not exsits in getHostingUnitList data ", hostUnit));
+            //}
 
-            //מחיקת קודם ונעדכן חדש... 
-            var itemToRemove = ds.getHostingUnitList().SingleOrDefault(r => r.HostingUnitKey == hostUnit.HostingUnitKey);
-            if (itemToRemove != null)
-            {
-                ds.getHostingUnitList().Remove(itemToRemove); //מחיקת הערך
-                ds.getHostingUnitList().Add(hostUnit.Clone()); // עדכון חדש
+            ////מחיקת קודם ונעדכן חדש... 
+            //var itemToRemove = ds.getHostingUnitList().SingleOrDefault(r => r.HostingUnitKey == hostUnit.HostingUnitKey);
+            //if (itemToRemove != null)
+            //{
+            //    ds.getHostingUnitList().Remove(itemToRemove); //מחיקת הערך
+            //    ds.getHostingUnitList().Add(hostUnit.Clone()); // עדכון חדש
 
-            }
+            //}
+
+
         }
 
 
@@ -188,6 +214,7 @@ namespace DAL
             { order.OrderKey = BE.Configuration.orderID++; }
 
 
+
             foreach (var item in ds.getOrderList())
             {
                 if (item.OrderKey == order.OrderKey)
@@ -196,6 +223,7 @@ namespace DAL
                 }
 
             }
+
             ds.getOrderList().Add(order.Clone());
 
 
@@ -205,18 +233,25 @@ namespace DAL
         public void UpdateOrder(BE.Order order)//עדכון סטטוס הזמנה 
         {
 
-            if (order.OrderKey == 0)//זה אומר שאין קוד ייחודי שהרי הערך לא מאותחל על ברירת מחדל
-                order.OrderKey = BE.Configuration.orderID++; //הענק לו קוד ייחודי
+            ds.getOrderList().RemoveAll(x => x.OrderKey == order.OrderKey);
+            addOrder(order);
 
-            //עדכון כללי כאן. 
+            ////dataSource.orders.RemoveAll(x => x.OrderKey == ord.OrderKey);
 
-            var obj = ds.getOrderList().FirstOrDefault(x => x.OrderKey == order.OrderKey);
-            if (obj != null) obj.Status = order.Status;
-            if (obj == null)            //אם איו מופע כנ"ל משמע שלא מצא אותו ברשימה
-            {
-                throw new KeyNotFoundException(string.Format("Order  {0} not exsits in getOrderList data ", order));
 
-            }
+
+            ////if (order.OrderKey == 0)//זה אומר שאין קוד ייחודי שהרי הערך לא מאותחל על ברירת מחדל
+            ////    order.OrderKey = BE.Configuration.orderID++; //הענק לו קוד ייחודי
+
+            //////עדכון כללי כאן. 
+
+            ////var obj = ds.getOrderList().FirstOrDefault(x => x.OrderKey == order.OrderKey);
+            ////if (obj != null) obj.Status = order.Status;
+            ////if (obj == null)            //אם איו מופע כנ"ל משמע שלא מצא אותו ברשימה
+            ////{
+            ////    throw new KeyNotFoundException(string.Format("Order  {0} not exsits in getOrderList data ", order));
+
+            ////}
 
         }
 
@@ -274,14 +309,15 @@ namespace DAL
             var li = from item in ds.getHostingUnitList()
                      select item.Clone();
 
-            List<BE.HostingUnit> list = new List<BE.HostingUnit>();
+            //List<BE.HostingUnit> list = new List<BE.HostingUnit>();
 
-            foreach (var item in li)
-            {
-                list.Add(item);
-            }
+            //foreach (var item in li)
+            //{
+            //    list.Add(item);
+            //}
 
-            return list;
+            //return list;
+            return li;
 
         }
         public IEnumerable<BE.Order> GetOrderList()
@@ -290,12 +326,14 @@ namespace DAL
                      select item.Clone();
 
             // IEnumerable<BE.Order> list = new IEnumerable<BE.Order>();
-            List<BE.Order> list = new List<BE.Order>();
-            foreach (var item in li)
-            {
-                list.Add(item);
-            }
-            return list;
+            //List<BE.Order> list = new List<BE.Order>();
+            //foreach (var item in li)
+            //{
+            //    list.Add(item);
+            //}
+            //return list;
+            return li;
+          
 
         }
 
@@ -319,7 +357,7 @@ namespace DAL
 
 
 
-            return (List<BE.BankBranch>)li;
+            return /*(List<BE.BankBranch>)*/li;
 
 
         }

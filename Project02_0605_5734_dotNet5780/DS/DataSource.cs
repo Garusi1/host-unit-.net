@@ -56,19 +56,50 @@ namespace DAL
             
             //Diary,// יש לממש
 
-        } };
+        },
+        new BE.HostingUnit()
+        {
+            HostingUnitKey=BE.Configuration.hostUnitID++, /// זה מספר רץ. יש לממש נכון
+            Owner=new BE.Host(){HostKey="311600605",PrivateName="שלמה",FamilyName="הלוי",
+                PhoneNumber="055-555-5355",MailAddress="a@s.com",BankAccountNumber=1123,CollectionClearance="no",
+                BankBranchDetails=new BE.BankBranch(){
+            BankNumber=11,
+            BankName="Discount",
+            BranchNumber=510,
+            BranchAddress="Har'el St 1, 9079129",
+            BranchCity="Mevaseret Zion"} },
+            HostingUnitName="צימר יפה",
+            Area=BE.AreaEnum.Center,
+            Type=BE.TypeEnum.Zimmer
+        }
+
+
+
+        };
 
 
         public static List<BE.Order> OrderList = new List<BE.Order>()
         {new Order()
         {
-            HostingUnitKey=2,/// יש לממש  לפי הקשר
-            GuestRequestKey=1,///יש לממש בהתאם לבקשה
+            HostingUnitKey=20000000,/// יש לממש  לפי הקשר
+            GuestRequestKey=40000000,///יש לממש בהתאם לבקשה
             OrderKey=BE.Configuration.orderID++, /// יש לממש בעזרת מספר רץ
             Status=StatusEnum.טרם_טופל,
             CreateDate=DateTime.Now,
             OrderDate=DateTime.Now.AddDays(5), //תלוי שליחת מיילץ 
-        }};
+        },
+        new Order()
+        {
+            HostingUnitKey=20000001,/// יש לממש  לפי הקשר
+            GuestRequestKey=40000000,///יש לממש בהתאם לבקשה
+            OrderKey=BE.Configuration.orderID++, /// יש לממש בעזרת מספר רץ
+            Status=StatusEnum.טרם_טופל,
+            CreateDate=DateTime.Now,
+            OrderDate=DateTime.Now.AddDays(5), //תלוי שליחת מיילץ 
+        }
+
+
+        };
 
         public static List<BE.BankBranch> BankBranchList = new List<BE.BankBranch>()
         {new BankBranch()

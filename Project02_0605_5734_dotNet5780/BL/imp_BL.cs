@@ -592,7 +592,7 @@ namespace BL
         public IEnumerable<BE.BankBranch> GetBankBranchList()
         {
             //throw new NotImplementedException();
-            return IDAL.GetBankBranchList().Clone();
+            return IDAL.GetBankBranchList()/*.Clone()*/;
         }
 
         public IEnumerable<BE.GuestRequest> GetGuestRequestList()
@@ -606,18 +606,23 @@ namespace BL
         public IEnumerable<BE.HostingUnit> GetHostingUnitList()
         {
             //throw new NotImplementedException();
-            return IDAL.GetHostingUnitList().Clone();
+            return IDAL.GetHostingUnitList()/*.Clone()*/;
         }
 
         public IEnumerable<BE.Order> GetOrderList()
         {
 
-            IEnumerable<BE.Order> list = IDAL.GetOrderList(); ;
+
+            return IDAL.GetOrderList();
+
+            //IEnumerable<BE.Order> list = IDAL.GetOrderList(); 
+            //return list;
+
+
             //foreach (var item in IDAL.GetOrderList().Clone())
             //{
             //    list.Add(item);
             //}
-            return list;
             //throw new NotImplementedException();
 
 
