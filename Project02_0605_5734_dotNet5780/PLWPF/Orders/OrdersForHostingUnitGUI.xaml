@@ -5,10 +5,28 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:PLWPF.Orders"
         mc:Ignorable="d"
-        Title="OrdersForHostingUnitGUI" Height="450" Width="800">
+        Title="OrdersForHostingUnitGUI" Height="450" Width="1200">
     <Grid>
-        <ListView Name="list view" Width="600">
-            
+        <ListView Name="list" Margin="10,0,0.333,-0.333">
+            <ListView.View>
+                <GridView>
+                    <GridViewColumn Header="First_Name" Width="90" DisplayMemberBinding="{Binding first_name}"></GridViewColumn>
+                    <GridViewColumn Header="Last_Name" Width="90" DisplayMemberBinding="{Binding Last_Name}"></GridViewColumn>
+                    <GridViewColumn Header="Mail_Add" Width="120" DisplayMemberBinding="{Binding Mail_Add}"></GridViewColumn>
+                    <GridViewColumn Header="Registration_Date" Width="120" DisplayMemberBinding="{Binding Registration_Date}"></GridViewColumn>
+                    <GridViewColumn Header="Entry_Date" Width="120" DisplayMemberBinding="{Binding Entry_Date}"></GridViewColumn>
+                    <GridViewColumn Header="Release_Date" Width="120" DisplayMemberBinding="{Binding Release_Date}"></GridViewColumn>
+                    <GridViewColumn Header="Area" Width="60" DisplayMemberBinding="{Binding Area}"></GridViewColumn>
+                    <GridViewColumn Header="Type" Width="60" DisplayMemberBinding="{Binding Type}"></GridViewColumn>
+                    <GridViewColumn Header="Pool" Width="60" DisplayMemberBinding="{Binding Pool}"></GridViewColumn>
+                    <GridViewColumn Header="Jacuzzi" Width="60" DisplayMemberBinding="{Binding Jacuzzi}"></GridViewColumn>
+                    <GridViewColumn Header="Garden" Width="60" DisplayMemberBinding="{Binding Garden}"></GridViewColumn>
+                    <GridViewColumn Header="ChildrensAttractions" Width="120" DisplayMemberBinding="{Binding ChildrensAttractions}"></GridViewColumn>
+                    <GridViewColumn Header="Adults" Width="50" DisplayMemberBinding="{Binding Adults}"></GridViewColumn>
+                    <GridViewColumn Header="Children" Width="50" DisplayMemberBinding="{Binding Children}"></GridViewColumn>
+
+                </GridView>
+            </ListView.View>
         </ListView>
     </Grid>
 </Window>
