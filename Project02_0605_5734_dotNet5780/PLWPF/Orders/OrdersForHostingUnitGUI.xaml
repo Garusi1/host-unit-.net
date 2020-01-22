@@ -7,15 +7,22 @@
         mc:Ignorable="d"
         Title="OrdersForHostingUnitGUI" Height="450" Width="1200">
     <Grid>
-        <ListView Name="list" Margin="10,0,0.333,-0.333">
+
+        <DataGrid HorizontalAlignment="Left" Height="401" Margin="10,10,0,0" VerticalAlignment="Top" Width="1173"/>
+        <ListView ItemsSource="{Binding}" x:Name="list" IsSynchronizedWithCurrentItem="True" SelectionChanged="list_SelectionChanged">
+       
+            
             <ListView.View>
+                
+                
                 <GridView>
-                    <GridViewColumn Header="First_Name" Width="90" DisplayMemberBinding="{Binding first_name}"></GridViewColumn>
-                    <GridViewColumn Header="Last_Name" Width="90" DisplayMemberBinding="{Binding Last_Name}"></GridViewColumn>
-                    <GridViewColumn Header="Mail_Add" Width="120" DisplayMemberBinding="{Binding Mail_Add}"></GridViewColumn>
-                    <GridViewColumn Header="Registration_Date" Width="120" DisplayMemberBinding="{Binding Registration_Date}"></GridViewColumn>
-                    <GridViewColumn Header="Entry_Date" Width="120" DisplayMemberBinding="{Binding Entry_Date}"></GridViewColumn>
-                    <GridViewColumn Header="Release_Date" Width="120" DisplayMemberBinding="{Binding Release_Date}"></GridViewColumn>
+                    
+                    <GridViewColumn Header="PrivateName" Width="90" DisplayMemberBinding="{Binding PrivateName}"></GridViewColumn>
+                    <GridViewColumn Header="FamilyName" Width="90" DisplayMemberBinding="{Binding FamilyName}"></GridViewColumn>
+                    <GridViewColumn Header="MailAddress" Width="120" DisplayMemberBinding="{Binding MailAddress}"></GridViewColumn>
+                    <GridViewColumn Header="RegistrationDate" Width="120" DisplayMemberBinding="{Binding RegistrationDate}"></GridViewColumn>
+                    <GridViewColumn Header="EntryDate" Width="120" DisplayMemberBinding="{Binding EntryDate}"></GridViewColumn>
+                    <GridViewColumn Header="ReleaseDate" Width="120" DisplayMemberBinding="{Binding ReleaseDate}"></GridViewColumn>
                     <GridViewColumn Header="Area" Width="60" DisplayMemberBinding="{Binding Area}"></GridViewColumn>
                     <GridViewColumn Header="Type" Width="60" DisplayMemberBinding="{Binding Type}"></GridViewColumn>
                     <GridViewColumn Header="Pool" Width="60" DisplayMemberBinding="{Binding Pool}"></GridViewColumn>
@@ -28,5 +35,6 @@
                 </GridView>
             </ListView.View>
         </ListView>
+
     </Grid>
 </Window>
