@@ -1,4 +1,6 @@
-﻿using System;
+﻿//imp_BL
+
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net;
@@ -113,7 +115,7 @@ namespace BL
 
         }
 
-        
+
         /// <summary>
         /// //אם התאריך חורג מהטווח של חודש אחורה ו11 חודש קדימה
         /// </summary>
@@ -254,7 +256,7 @@ namespace BL
             int id;
             try
             {
-                id=IDAL.addHostingUnit(hostUnit.Clone());
+                id = IDAL.addHostingUnit(hostUnit.Clone());
                 return id;
             }
             catch (DuplicateWaitObjectException e)
@@ -263,7 +265,7 @@ namespace BL
                 throw e;
             }
 
-            
+
             // throw new NotImplementedException();
         }
 
@@ -403,7 +405,7 @@ namespace BL
             {
                 throw new BE.Tools.UnLogicException(string.Format("This Guest request {0} are close ", order.GuestRequestKey));
 
-              //throw new System.Diagnostics.Eventing.Reader.EventLogInvalidDataException(string.Format("This Guest request {0} are close ", order.GuestRequestKey));
+                //throw new System.Diagnostics.Eventing.Reader.EventLogInvalidDataException(string.Format("This Guest request {0} are close ", order.GuestRequestKey));
 
             }
 
@@ -636,7 +638,7 @@ namespace BL
             //לוקח חשבון ומחייב אותו איכשהו... 
             // חיים מציע ליצור string  ערוך שייצג עיסקה ולשלוח אותו לפונקצייה 
             // ששולחת לבנק הודעה ב tread - בפועל לא שולחים לבנק. 
-            
+
         }
 
 
@@ -646,7 +648,7 @@ namespace BL
             Console.WriteLine("the mail as been sent");
         }
 
-        public  void sendAnEamil()
+        public void sendAnEamil()
         {
             var client = new SmtpClient("smtp.gmail.com", 587)
             {
@@ -662,9 +664,9 @@ namespace BL
 
 
 
-            //תוספות  בBL
+        //תוספות  בBL
 
-            public IEnumerable<BE.HostingUnit> availableUnits(DateTime enteryDate, int numOfDayes)//פונקציה שמקבלת תאריך ומספר ימי נופש ומחזירה את רשימת היחידות הפנויות בתאריך זה
+        public IEnumerable<BE.HostingUnit> availableUnits(DateTime enteryDate, int numOfDayes)//פונקציה שמקבלת תאריך ומספר ימי נופש ומחזירה את רשימת היחידות הפנויות בתאריך זה
         {
 
 
@@ -804,7 +806,7 @@ namespace BL
         }
 
 
-        
+
         /// <summary>
         /// מחזיר גרופינג של דרישות לקוח לפי מספר הנופשים. 
         /// </summary>
@@ -893,20 +895,20 @@ namespace BL
 
 
 
-       
+
 
         /// <summary>
         ///  מחזיר רשימת יחידות אירוח עבור מאחר ספיצפי
         /// </summary>
         /// <returns> ערך אחד. יש לבצע בפונקציה המזמנת forech</returns>
-        public IEnumerable<BE.HostingUnit> hostsHostingUnit(string IDHost) 
+        public IEnumerable<BE.HostingUnit> hostsHostingUnit(string IDHost)
         {
-            List <BE.HostingUnit> list= new List<BE.HostingUnit>();
+            List<BE.HostingUnit> list = new List<BE.HostingUnit>();
 
 
             var li = from item in GetHostingUnitList()
-                       where ((item.Owner.HostKey)) == IDHost
-                       select item;
+                     where ((item.Owner.HostKey)) == IDHost
+                     select item;
             foreach (var item in li)
             {
                 list.Add(item);

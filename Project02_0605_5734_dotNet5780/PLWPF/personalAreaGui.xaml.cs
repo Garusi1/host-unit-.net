@@ -21,7 +21,7 @@ namespace PLWPF
     {
         BL.IBL bl;
         BE.HostingUnit HUSource; // מקבל את ההוסטינג יוניט מהדיאלוג
-        BE.HostingUnit HUShow;
+        //BE.HostingUnit HUShow;
 
         public personalAreaGui(int hostkey)
         {
@@ -99,7 +99,7 @@ namespace PLWPF
             //רשימת הזמנות עבור יחידה זו 
         private void Button_Click_Orders_For_HostingUnit(object sender, RoutedEventArgs e)
         {
-            Orders.OrdersForHostingUnitGUI OrdersForHostingUnitShow = new Orders.OrdersForHostingUnitGUI();
+            Orders.OrdersForHostingUnitGUI OrdersForHostingUnitShow = new Orders.OrdersForHostingUnitGUI(HUSource);
             OrdersForHostingUnitShow.ShowDialog();
 
 
