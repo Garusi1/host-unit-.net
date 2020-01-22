@@ -8,7 +8,7 @@
     <System:String x:Key="WebManagerString">Web Manager</System:String>
 
     <!--general strings-->
-    
+
     <System:String x:Key="Private Name:">Private Name:</System:String>
     <System:String x:Key="Family Name:">Family Name:</System:String>
     <System:String x:Key="Mail Address:">Mail Address:</System:String>
@@ -22,5 +22,19 @@
     <!--Guest Request special strings-->
     <System:String x:Key="Adults:">Adults:</System:String>
     <System:String x:Key="Children:">Children:</System:String>
+    <!--Hosting Unit special strings-->
+    <System:String x:Key="Bank Name:">Bank Name:</System:String>
+    <System:String x:Key="Phone Number:">Phone Number:</System:String>
+    <System:String x:Key="Bank Number:">Bank Number:</System:String>
+    <System:String x:Key="Branch Address:">Branch Address:</System:String>
+    <System:String x:Key="Branch City:">Branch City:</System:String>
+    <System:String x:Key="Branch Number:">Branch Number:</System:String>
+    <System:String x:Key="Save">Save</System:String>
+    <System:String x:Key="ID:">ID:</System:String>
+    <System:String x:Key="Collection Clearance:">Collection Clearance:</System:String>
+    <System:String x:Key="Bank Account Number:">Bank Account Number:</System:String>
+    <System:String x:Key="Hosting Unit Name:">Hosting Unit Name:</System:String>
+    <System:String x:Key="Hosting Unit Key:">Hosting Unit Key:</System:String>
+    <System:String x:Key="Host Key:">Host Key:</System:String>
 
 </ResourceDictionary>
