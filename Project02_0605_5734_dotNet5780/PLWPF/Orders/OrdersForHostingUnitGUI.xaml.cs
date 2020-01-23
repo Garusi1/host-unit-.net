@@ -27,21 +27,21 @@ namespace PLWPF.Orders
         BE.GuestRequest GRShow;
         BE.HostingUnit HUshow;
         List<BE.GuestRequest> nn = new List<BE.GuestRequest>();
-       // BE.Order order = new BE.Order;
+        // BE.Order order = new BE.Order;
 
 
-        //private void list_SelectionChanged(object sender, SelectionChangedEventArgs e)//https://social.msdn.microsoft.com/Forums/vstudio/en-US/194ee5ad-a3cf-48ae-8c0e-1aab84a1df97/how-to-get-wpf-listview-click-event?forum=wpf
-        //  {
-        //      GRShow =(BE.GuestRequest)list.SelectedItem;
+        private void list_SelectionChanged(object sender, SelectionChangedEventArgs e)//https://social.msdn.microsoft.com/Forums/vstudio/en-US/194ee5ad-a3cf-48ae-8c0e-1aab84a1df97/how-to-get-wpf-listview-click-event?forum=wpf
+        {
+            GRShow = (BE.GuestRequest)list.SelectedItem;
 
-        //      if (GRShow != null)
-        //      {
-        //          //int id = int.Parse(selectedrow.Row.ItemArray[0].ToString());
-        //          //Console.WriteLine(id);
-        //          //Console.WriteLine(bl.getGuestRequestByID(40000000 + id));
-        //          ///////////////////////////////////////////Console.WriteLine(GRShow.ToString());
-        //      }
-        //  }
+            if (GRShow != null)
+            {
+                //int id = int.Parse(selectedrow.Row.ItemArray[0].ToString());
+                //Console.WriteLine(id);
+                //Console.WriteLine(bl.getGuestRequestByID(40000000 + id));
+                 Console.WriteLine(GRShow.ToString());
+            }
+        }
 
 
         public OrdersForHostingUnitGUI(BE.HostingUnit HUshow1)
