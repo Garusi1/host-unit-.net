@@ -33,13 +33,31 @@ namespace PLWPF.Orders
         private void list_SelectionChanged(object sender, SelectionChangedEventArgs e)//https://social.msdn.microsoft.com/Forums/vstudio/en-US/194ee5ad-a3cf-48ae-8c0e-1aab84a1df97/how-to-get-wpf-listview-click-event?forum=wpf
         {
             GRShow = (BE.GuestRequest)list.SelectedItem;
-
+            Console.WriteLine(HUshow.ToString());
+            BE.Order order = new BE.Order();
             if (GRShow != null)
             {
                 //int id = int.Parse(selectedrow.Row.ItemArray[0].ToString());
                 //Console.WriteLine(id);
                 //Console.WriteLine(bl.getGuestRequestByID(40000000 + id));
                  Console.WriteLine(GRShow.ToString());
+               
+                    order.GuestRequestKey = GRShow.GuestRequestKey;
+                    order.HostingUnitKey = HUshow.HostingUnitKey;
+                try
+                {
+                //    bl.addOrder(order);
+                }
+                catch (Exception)
+                {
+
+                    throw new ArgumentException(string.Format("אין התאמה"));
+                }
+
+                
+                
+
+                
             }
         }
 
@@ -56,25 +74,25 @@ namespace PLWPF.Orders
             list.ItemsSource = ieGuest;
 
         }
-        private void OnMouseLeftButtonDown(object sender, RoutedEventArgs e)
-        {
-            //var btn = sender as System.Windows.Controls.Button;
-            //list.SelectedItem = btn.DataContext;
-            //GRShow = (BE.GuestRequest)list.SelectedItem;
-            //Console.WriteLine(GRShow.ToString());
-            System.Windows.Controls.ListView list = (System.Windows.Controls.ListView)sender;
-            BE.GuestRequest selectedObject = (BE.GuestRequest)list.SelectedItem;
-            selectedObject.ToString();
+        //private void OnMouseLeftButtonDown(object sender, RoutedEventArgs e)
+        //{
+        //    //var btn = sender as System.Windows.Controls.Button;
+        //    //list.SelectedItem = btn.DataContext;
+        //    //GRShow = (BE.GuestRequest)list.SelectedItem;
+        //    //Console.WriteLine(GRShow.ToString());
+        //    System.Windows.Controls.ListView list = (System.Windows.Controls.ListView)sender;
+        //    BE.GuestRequest selectedObject = (BE.GuestRequest)list.SelectedItem;
+        //    selectedObject.ToString();
            
            
             
             
 
-            Console.WriteLine("fdsfdsfdsfsd");
+        //    Console.WriteLine("fdsfdsfdsfsd");
 
 
 
-        }
+        //}
 
         //private void Window_Loaded_1(object sender, RoutedEventArgs e)
         //{
