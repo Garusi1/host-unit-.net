@@ -67,9 +67,28 @@
     </Grid>
 
 
-    <TabControl HorizontalAlignment="Stretch" VerticalAlignment="Stretch" FlowDirection="RightToLeft">
-        <!--Controls:TabControlHelper.IsUnderlined="False"
+
+        <TabControl HorizontalAlignment="Stretch" VerticalAlignment="Stretch" FlowDirection="RightToLeft">
+            <!--Controls:TabControlHelper.IsUnderlined="False"
                     Controls:TabControlHelper.UnderlineMouseOverBrush="LightSkyBlue" >-->
+            <TabItem Header="  תלמידים" >
+                <local:DataManegmentGrid x:Name="TraineesTabUserControl" />
+            </TabItem>
+            <TabItem Header="  בוחנים  " >
+                <local:DataManegmentGrid x:Name="TestersTabUserControl" />
+            </TabItem>
+            <TabItem Header="טסטים" >
+                <local:DataManegmentGrid x:Name="TestsTabUserControl" />
+            </TabItem>
+            <TabItem Header="d" >
+                <local:DataManegmentGrid x:Name="ddd" />
+            </TabItem>
+        </TabControl>
+
+
+        <!--<TabControl HorizontalAlignment="Stretch" VerticalAlignment="Stretch" FlowDirection="RightToLeft">
+        --><!--Controls:TabControlHelper.IsUnderlined="False"
+                    Controls:TabControlHelper.UnderlineMouseOverBrush="LightSkyBlue" >--><!--
         <TabItem Header="  תלמידים"  >
             <local:DataManegmentGrid x:Name="TraineesTabUserControl" />
 
@@ -83,7 +102,7 @@
         <TabItem Header="d" >
             <local:DataManegmentGrid x:Name="ddd" />
         </TabItem>
-    </TabControl>
+    </TabControl>-->
 
     
 <!--<Grid  x:Name="mainGrid">
