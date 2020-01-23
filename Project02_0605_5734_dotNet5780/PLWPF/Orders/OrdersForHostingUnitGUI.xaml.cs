@@ -72,7 +72,7 @@ namespace PLWPF.Orders
                 order.GuestRequestKey = (selectedObject.GuestRequestKey);
                 order.HostingUnitKey = (HUshow.HostingUnitKey);
                 order.OrderDate = DateTime.Now;
-                order.OrderKey = BE.Configuration.orderID;
+                bl.addOrder(order);
             }
             catch (Exception)
             {
