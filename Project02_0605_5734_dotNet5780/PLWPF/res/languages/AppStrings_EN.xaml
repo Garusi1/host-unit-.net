@@ -54,5 +54,6 @@
     <System:String x:Key="HostingUnitList">HostingUnitList</System:String>
     <System:String x:Key="OrderList">OrderList</System:String>
     <System:String x:Key="HostsList">HostsList</System:String>
+    <System:String x:Key="GuestRequestKey">GuestRequestKey</System:String>
 
 </ResourceDictionary>

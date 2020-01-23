@@ -54,5 +54,5 @@
     <System:String x:Key="HostingUnitList">יחידות אירוח</System:String>
     <System:String x:Key="OrderList">הזמנות</System:String>
     <System:String x:Key="HostsList">מארחים</System:String>
-
+    <System:String x:Key="GuestRequestKey">מספר דרישת אירוח</System:String>
 </ResourceDictionary>
