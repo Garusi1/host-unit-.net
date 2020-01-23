@@ -17,20 +17,21 @@
                 
                 <GridView>
                     
-                    <GridViewColumn Header="PrivateName" Width="90" DisplayMemberBinding="{Binding PrivateName}"></GridViewColumn>
-                    <GridViewColumn Header="FamilyName" Width="90" DisplayMemberBinding="{Binding FamilyName}"></GridViewColumn>
-                    <GridViewColumn Header="MailAddress" Width="120" DisplayMemberBinding="{Binding MailAddress}"></GridViewColumn>
-                    <GridViewColumn Header="RegistrationDate" Width="120" DisplayMemberBinding="{Binding RegistrationDate}"></GridViewColumn>
-                    <GridViewColumn Header="EntryDate" Width="120" DisplayMemberBinding="{Binding EntryDate}"></GridViewColumn>
-                    <GridViewColumn Header="ReleaseDate" Width="120" DisplayMemberBinding="{Binding ReleaseDate}"></GridViewColumn>
-                    <GridViewColumn Header="Area" Width="60" DisplayMemberBinding="{Binding Area}"></GridViewColumn>
-                    <GridViewColumn Header="Type" Width="60" DisplayMemberBinding="{Binding Type}"></GridViewColumn>
-                    <GridViewColumn Header="Pool" Width="60" DisplayMemberBinding="{Binding Pool}"></GridViewColumn>
-                    <GridViewColumn Header="Jacuzzi" Width="60" DisplayMemberBinding="{Binding Jacuzzi}"></GridViewColumn>
-                    <GridViewColumn Header="Garden" Width="60" DisplayMemberBinding="{Binding Garden}"></GridViewColumn>
-                    <GridViewColumn Header="ChildrensAttractions" Width="120" DisplayMemberBinding="{Binding ChildrensAttractions}"></GridViewColumn>
-                    <GridViewColumn Header="Adults" Width="50" DisplayMemberBinding="{Binding Adults}"></GridViewColumn>
-                    <GridViewColumn Header="Children" Width="50" DisplayMemberBinding="{Binding Children}"></GridViewColumn>
+                    <GridViewColumn Header="{DynamicResource PrivateName}" Width="90" DisplayMemberBinding="{Binding PrivateName}"></GridViewColumn>
+                    <GridViewColumn Header="{DynamicResource FamilyName}" Width="90" DisplayMemberBinding="{Binding FamilyName}"></GridViewColumn>
+                    <!--<GridViewColumn Header="{DynamicResource MailAddress}" Width="120" DisplayMemberBinding="{Binding MailAddress}"></GridViewColumn>-->
+                    <!--לפי דרישות הפרוייקט אין להציג למארח מייל של לקוח-->
+                    <GridViewColumn Header="{DynamicResource RegistrationDate}" Width="120" DisplayMemberBinding="{Binding RegistrationDate}"></GridViewColumn>
+                    <GridViewColumn Header="{DynamicResource EntryDate}" Width="120" DisplayMemberBinding="{Binding EntryDate}"></GridViewColumn>
+                    <GridViewColumn Header="{DynamicResource ReleaseDate}" Width="120" DisplayMemberBinding="{Binding ReleaseDate}"></GridViewColumn>
+                    <GridViewColumn Header="{DynamicResource Area}" Width="60" DisplayMemberBinding="{Binding Area}"></GridViewColumn>
+                    <GridViewColumn Header="{DynamicResource Type}" Width="60" DisplayMemberBinding="{Binding Type}"></GridViewColumn>
+                    <GridViewColumn Header="{DynamicResource Pool}" Width="60" DisplayMemberBinding="{Binding Pool}"></GridViewColumn>
+                    <GridViewColumn Header="{DynamicResource Jacuzzi}" Width="60" DisplayMemberBinding="{Binding Jacuzzi}"></GridViewColumn>
+                    <GridViewColumn Header="{DynamicResource Garden}" Width="60" DisplayMemberBinding="{Binding Garden}"></GridViewColumn>
+                    <GridViewColumn Header="{DynamicResource ChildrensAttractions}" Width="120" DisplayMemberBinding="{Binding ChildrensAttractions}"></GridViewColumn>
+                    <GridViewColumn Header="{DynamicResource Adults}" Width="50" DisplayMemberBinding="{Binding Adults}"></GridViewColumn>
+                    <GridViewColumn Header="{DynamicResource Children}" Width="50" DisplayMemberBinding="{Binding Children}"></GridViewColumn>
 
                 </GridView>
             </ListView.View>

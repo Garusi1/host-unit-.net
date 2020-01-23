@@ -10,27 +10,19 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
+using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace PLWPF
+namespace PLWPF.UserControl
 {
     /// <summary>
-    /// Interaction logic for MainWebManagerGUI.xaml
+    /// Interaction logic for HostingListUC.xaml
     /// </summary>
-    public partial class MainWebManagerGUI : Window
+    public partial class HostingListUC : UserControl
     {
-        BL.IBL bl;
-
-        public MainWebManagerGUI()
+        public HostingListUC()
         {
             InitializeComponent();
-            bl = BL.Factory.GetInstance();
-        }
-
-        private void GuestsList_Click(object sender, RoutedEventArgs e)
-        {
-            UserControl.GuestsListUC GLUCObj = new UserControl.GuestsListUC();
-            WMstackPannel.Children.Add(GLUCObj);
         }
     }
 }

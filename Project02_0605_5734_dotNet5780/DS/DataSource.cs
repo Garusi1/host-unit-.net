@@ -34,7 +34,26 @@ namespace DAL
         Garden=AttractionsEnum.הכרחי,
         Adults=2,
         Children=0,
-             }  };
+             },
+        new BE.GuestRequest()
+            {// יש לערוך ולממש כמו שצריך
+        GuestRequestKey=BE.Configuration.geustReqID++,
+        PrivateName="שלמה",
+        FamilyName="שלמה",
+        MailAddress=/*@*/"Aasdaa@gmail.com",
+        Status=StatusGREnum.פתוחה,
+        RegistrationDate=DateTime.Now,
+        EntryDate=DateTime.Now.AddDays(10),// סתם לצורך הדוגמה -
+        ReleaseDate=DateTime.Now.AddDays(20),
+        Area=AreaEnum.North,
+        Type=TypeEnum.Zimmer,
+        Pool=AttractionsEnum.לא_מעוניין,
+        Jacuzzi=AttractionsEnum.אפשרי,
+        Garden=AttractionsEnum.הכרחי,
+        Adults=2,
+        Children=1,
+             }
+        };
 
 
 

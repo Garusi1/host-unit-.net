@@ -44,7 +44,16 @@ namespace PLWPF
         {
 
             MainHostingUnitGUI HostingUnitGUIShow = new MainHostingUnitGUI();
+            try
+            {
+
             HostingUnitGUIShow.ShowDialog();//פתיחה באופן זה במחייב התייחסות לחלון זה ולא מאפשר להשתמש בחלון שקרא לו.
+            }
+            catch (Exception)
+            {
+
+                //
+            }
 
 
             //add hosing unit gui //2.1

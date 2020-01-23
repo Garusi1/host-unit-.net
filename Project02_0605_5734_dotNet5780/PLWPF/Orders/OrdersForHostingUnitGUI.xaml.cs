@@ -37,7 +37,7 @@ namespace PLWPF.Orders
                 //int id = int.Parse(selectedrow.Row.ItemArray[0].ToString());
                 //Console.WriteLine(id);
                 //Console.WriteLine(bl.getGuestRequestByID(40000000 + id));
-                Console.WriteLine(GRShow.ToString());
+                ///////////////////////////////////////////Console.WriteLine(GRShow.ToString());
             }
         }
 
