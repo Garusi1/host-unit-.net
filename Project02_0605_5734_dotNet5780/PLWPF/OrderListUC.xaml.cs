@@ -18,7 +18,7 @@ namespace PLWPF
     /// <summary>
     /// Interaction logic for OrderListUC.xaml
     /// </summary>
-    public partial class OrderListUC : UserControl
+    public partial class OrderListUC /*: UserControl*/
     {
         public OrderListUC()
         {
