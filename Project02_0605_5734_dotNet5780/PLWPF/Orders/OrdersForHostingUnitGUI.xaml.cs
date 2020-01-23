@@ -74,6 +74,7 @@ namespace PLWPF.Orders
             list.ItemsSource = ieGuest;
 
         }
+
         //private void OnMouseLeftButtonDown(object sender, RoutedEventArgs e)
         //{
         //    //var btn = sender as System.Windows.Controls.Button;

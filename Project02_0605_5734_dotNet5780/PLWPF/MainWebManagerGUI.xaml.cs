@@ -28,9 +28,9 @@ namespace PLWPF
             bl = BL.Factory.GetInstance();
 
 
-            this.TraineesTabUserControl.AddButton.Content = "הוסף תלמיד";
-            this.TraineesTabUserControl.DeleteButton.Content = "מחק תלמיד";
-            this.TraineesTabUserControl.UpdateButton.Content = "ערוך תלמיד";
+            //this.TraineesTabUserControl.AddButton.Content = "הוסף תלמיד";
+            //this.TraineesTabUserControl.DeleteButton.Content = "מחק תלמיד";
+            //this.TraineesTabUserControl.UpdateButton.Content = "ערוך תלמיד";
 
         }
 

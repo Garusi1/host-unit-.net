@@ -68,22 +68,28 @@
 
 
 
-        <TabControl HorizontalAlignment="Stretch" VerticalAlignment="Stretch" FlowDirection="RightToLeft">
-            <!--Controls:TabControlHelper.IsUnderlined="False"
-                    Controls:TabControlHelper.UnderlineMouseOverBrush="LightSkyBlue" >-->
-            <TabItem Header="  תלמידים" >
-                <local:DataManegmentGrid x:Name="TraineesTabUserControl" />
+        <!--<TabControl HorizontalAlignment="Stretch" VerticalAlignment="Stretch" FlowDirection="RightToLeft">
+            --><!--Controls:TabControlHelper.IsUnderlined="False"
+                    Controls:TabControlHelper.UnderlineMouseOverBrush="LightSkyBlue" >--><!--
+
+            <TabItem>
+                
             </TabItem>
-            <TabItem Header="  בוחנים  " >
+
+
+            <TabItem Header="{DynamicResource Guest Requests}" >
                 <local:DataManegmentGrid x:Name="TestersTabUserControl" />
             </TabItem>
-            <TabItem Header="טסטים" >
+            <TabItem Header="{DynamicResource OrderList}" >
                 <local:DataManegmentGrid x:Name="TestsTabUserControl" />
             </TabItem>
-            <TabItem Header="d" >
+            <TabItem Header="{DynamicResource HostingUnitList}" c >
                 <local:DataManegmentGrid x:Name="ddd" />
             </TabItem>
-        </TabControl>
+            <TabItem Header="{DynamicResource HostsList}" >
+                <local:DataManegmentGrid x:Name="dssd" />
+            </TabItem>
+        </TabControl>-->
 
 
         <!--<TabControl HorizontalAlignment="Stretch" VerticalAlignment="Stretch" FlowDirection="RightToLeft">
