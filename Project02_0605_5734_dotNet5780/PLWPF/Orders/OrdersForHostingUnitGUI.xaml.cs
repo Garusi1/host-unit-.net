@@ -40,27 +40,10 @@ namespace PLWPF.Orders
                 //Console.WriteLine(id);
                 //Console.WriteLine(bl.getGuestRequestByID(40000000 + id));
                  Console.WriteLine(GRShow.ToString());
-               
-                       
-                
-
-                
-            }
+             }
         }
-        //BE.Order order = new BE.Order();
 
-        //order.GuestRequestKey = GRShow.GuestRequestKey;
-        //            order.HostingUnitKey = HUshow.HostingUnitKey;
-        //        try
-        //        {
-        //         bl.addOrder(order);
-        //        }
-        //        catch (Exception ex)
-        //        {
-
-        //            System.Windows.MessageBox.Show(ex.Message);
-
-        //        }
+           
 
 
 
@@ -76,6 +59,26 @@ public OrdersForHostingUnitGUI(BE.HostingUnit HUshow1)
             list.ItemsSource = ieGuest;
 
         }
+
+        private void Button_Click_Create_Order(object sender, RoutedEventArgs e)
+        {
+            BE.Order order = new BE.Order();
+
+            order.GuestRequestKey = GRShow.GuestRequestKey;
+            order.HostingUnitKey = HUshow.HostingUnitKey;
+            try
+            {
+                bl.addOrder(order);
+                System.Windows.MessageBox.Show("ההזמנה נוספה בהצלחה");
+
+            }
+            catch (Exception ex)
+            {
+
+                System.Windows.MessageBox.Show(ex.Message);
+
+            }
+        }
         //private void OnMouseLeftButtonDown(object sender, RoutedEventArgs e)
         //{
         //    //var btn = sender as System.Windows.Controls.Button;
@@ -85,10 +88,10 @@ public OrdersForHostingUnitGUI(BE.HostingUnit HUshow1)
         //    System.Windows.Controls.ListView list = (System.Windows.Controls.ListView)sender;
         //    BE.GuestRequest selectedObject = (BE.GuestRequest)list.SelectedItem;
         //    selectedObject.ToString();
-           
-           
-            
-            
+
+
+
+
 
         //    Console.WriteLine("fdsfdsfdsfsd");
 
@@ -150,4 +153,4 @@ public OrdersForHostingUnitGUI(BE.HostingUnit HUshow1)
         //{
 
     }
-}
+    }
