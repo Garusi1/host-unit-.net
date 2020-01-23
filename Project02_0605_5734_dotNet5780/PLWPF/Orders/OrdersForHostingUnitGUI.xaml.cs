@@ -34,7 +34,6 @@ namespace PLWPF.Orders
         {
             GRShow = (BE.GuestRequest)list.SelectedItem;
             Console.WriteLine(HUshow.ToString());
-            BE.Order order = new BE.Order();
             if (GRShow != null)
             {
                 //int id = int.Parse(selectedrow.Row.ItemArray[0].ToString());
@@ -42,27 +41,30 @@ namespace PLWPF.Orders
                 //Console.WriteLine(bl.getGuestRequestByID(40000000 + id));
                  Console.WriteLine(GRShow.ToString());
                
-                    order.GuestRequestKey = GRShow.GuestRequestKey;
-                    order.HostingUnitKey = HUshow.HostingUnitKey;
-                try
-                {
-                //    bl.addOrder(order);
-                }
-                catch (Exception)
-                {
-
-                    throw new ArgumentException(string.Format("אין התאמה"));
-                }
-
-                
+                       
                 
 
                 
             }
         }
+        //BE.Order order = new BE.Order();
+
+        //order.GuestRequestKey = GRShow.GuestRequestKey;
+        //            order.HostingUnitKey = HUshow.HostingUnitKey;
+        //        try
+        //        {
+        //         bl.addOrder(order);
+        //        }
+        //        catch (Exception ex)
+        //        {
+
+        //            System.Windows.MessageBox.Show(ex.Message);
+
+        //        }
 
 
-        public OrdersForHostingUnitGUI(BE.HostingUnit HUshow1)
+
+public OrdersForHostingUnitGUI(BE.HostingUnit HUshow1)
         {
             //   bl.GetGuestRequestList
             InitializeComponent();
