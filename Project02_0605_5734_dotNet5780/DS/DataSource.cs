@@ -25,8 +25,8 @@ namespace DAL
         MailAddress=/*@*/"mgarusi101@gmail.com",
         Status=StatusGREnum.פתוחה,
         RegistrationDate=DateTime.Now,
-        EntryDate=DateTime.Now.AddDays(10),// סתם לצורך הדוגמה -
-        ReleaseDate=DateTime.Now.AddDays(20),
+        EntryDate=DateTime.Now.Date.AddDays(10),// סתם לצורך הדוגמה -
+        ReleaseDate=DateTime.Now.Date.AddDays(20),
         Area=AreaEnum.North,
         Type=TypeEnum.Zimmer,
         Pool=AttractionsEnum.לא_מעוניין,
@@ -43,8 +43,8 @@ namespace DAL
         MailAddress=/*@*/"Aasdaa@gmail.com",
         Status=StatusGREnum.פתוחה,
         RegistrationDate=DateTime.Now,
-        EntryDate=DateTime.Now.AddDays(10),// סתם לצורך הדוגמה -
-        ReleaseDate=DateTime.Now.AddDays(20),
+        EntryDate=DateTime.Now.Date.AddDays(10),// סתם לצורך הדוגמה -
+        ReleaseDate=DateTime.Now.Date.AddDays(20),
         Area=AreaEnum.North,
         Type=TypeEnum.Zimmer,
         Pool=AttractionsEnum.לא_מעוניין,
@@ -61,8 +61,8 @@ namespace DAL
         MailAddress=/*@*/"Aasdaa@gmail.com",
         Status=StatusGREnum.פתוחה,
         RegistrationDate=DateTime.Now,
-        EntryDate=DateTime.Now.AddDays(10),// סתם לצורך הדוגמה -
-        ReleaseDate=DateTime.Now.AddDays(20),
+        EntryDate=DateTime.Now.Date.AddDays(10),// סתם לצורך הדוגמה -
+        ReleaseDate=DateTime.Now.Date.AddDays(20),
         Area=AreaEnum.North,
         Type=TypeEnum.Zimmer,
         Pool=AttractionsEnum.אפשרי,
@@ -79,8 +79,8 @@ namespace DAL
         MailAddress=/*@*/"Aasdaa@gmail.com",
         Status=StatusGREnum.פתוחה,
         RegistrationDate=DateTime.Now,
-        EntryDate=DateTime.Now.AddDays(10),// סתם לצורך הדוגמה -
-        ReleaseDate=DateTime.Now.AddDays(20),
+        EntryDate=DateTime.Now.Date.AddDays(10),// סתם לצורך הדוגמה -
+        ReleaseDate=DateTime.Now.Date.AddDays(20),
         Area=AreaEnum.North,
         Type=TypeEnum.Zimmer,
         Pool=AttractionsEnum.אפשרי,
@@ -97,8 +97,8 @@ namespace DAL
         MailAddress=/*@*/"Aasdaa@gmail.com",
         Status=StatusGREnum.פתוחה,
         RegistrationDate=DateTime.Now,
-        EntryDate=DateTime.Now.AddDays(10),// סתם לצורך הדוגמה -
-        ReleaseDate=DateTime.Now.AddDays(20),
+        EntryDate=DateTime.Now.Date.AddDays(10),// סתם לצורך הדוגמה -
+        ReleaseDate=DateTime.Now.Date.AddDays(20),
         Area=AreaEnum.North,
         Type=TypeEnum.Zimmer,
         Pool=AttractionsEnum.אפשרי,
@@ -115,8 +115,8 @@ namespace DAL
         MailAddress=/*@*/"Aasdaa@gmail.com",
         Status=StatusGREnum.פתוחה,
         RegistrationDate=DateTime.Now,
-        EntryDate=DateTime.Now.AddDays(10),// סתם לצורך הדוגמה -
-        ReleaseDate=DateTime.Now.AddDays(20),
+        EntryDate=DateTime.Now.Date.AddDays(10),// סתם לצורך הדוגמה -
+        ReleaseDate=DateTime.Now.Date.AddDays(20),
         Area=AreaEnum.North,
         Type=TypeEnum.Zimmer,
         Pool=AttractionsEnum.אפשרי,
@@ -133,8 +133,8 @@ namespace DAL
         MailAddress=/*@*/"Aasdaa@gmail.com",
         Status=StatusGREnum.פתוחה,
         RegistrationDate=DateTime.Now,
-        EntryDate=DateTime.Now.AddDays(10),// סתם לצורך הדוגמה -
-        ReleaseDate=DateTime.Now.AddDays(20),
+        EntryDate=DateTime.Now.Date.AddDays(10),// סתם לצורך הדוגמה -
+        ReleaseDate=DateTime.Now.Date.AddDays(20),
         Area=AreaEnum.North,
         Type=TypeEnum.Zimmer,
         Pool=AttractionsEnum.אפשרי,
@@ -151,8 +151,8 @@ namespace DAL
         MailAddress=/*@*/"Aasdaa@gmail.com",
         Status=StatusGREnum.פתוחה,
         RegistrationDate=DateTime.Now,
-        EntryDate=DateTime.Now.AddDays(10),// סתם לצורך הדוגמה -
-        ReleaseDate=DateTime.Now.AddDays(20),
+        EntryDate=DateTime.Now.Date.AddDays(10),// סתם לצורך הדוגמה -
+        ReleaseDate=DateTime.Now.Date.AddDays(20),
         Area=AreaEnum.North,
         Type=TypeEnum.Zimmer,
         Pool=AttractionsEnum.אפשרי,
@@ -169,9 +169,9 @@ namespace DAL
         MailAddress=/*@*/"Aasdaa@gmail.com",
         Status=StatusGREnum.פתוחה,
         RegistrationDate=DateTime.Now,
-        EntryDate=DateTime.Now.AddDays(10),// סתם לצורך הדוגמה -
-        ReleaseDate=DateTime.Now.AddDays(20),
-        Area=AreaEnum.North,
+        EntryDate=DateTime.Now.Date.AddDays(10),// סתם לצורך הדוגמה -
+        ReleaseDate=DateTime.Now.Date.AddDays(20),
+        Area=AreaEnum.All,
         Type=TypeEnum.Zimmer,
         Pool=AttractionsEnum.אפשרי,
         Jacuzzi=AttractionsEnum.אפשרי,
@@ -186,24 +186,8 @@ namespace DAL
 
 
         public static List<BE.HostingUnit> HostingUnitList = new List<BE.HostingUnit>()
-        {new BE.HostingUnit()
-        {
-            HostingUnitKey=BE.Configuration.hostUnitID++, /// זה מספר רץ. יש לממש נכון
-            Owner=new BE.Host(){HostKey="311600654",PrivateName="shimon",FamilyName="miz",
-                PhoneNumber="055-555-5555",MailAddress="a@a.com",BankAccountNumber=1123,CollectionClearance="Yes",
-                BankBranchDetails=new BE.BankBranch(){
-            BankNumber=11,
-            BankName="Discount",
-            BranchNumber=510,
-            BranchAddress="Har'el St 1, 9079129",
-            BranchCity="Mevaseret Zion"} },
-            HostingUnitName="Gal Banof",
-            Area=BE.AreaEnum.Center,
-            Type=BE.TypeEnum.Zimmer
-            
-            //Diary,// יש לממש
 
-        },
+        {
         new BE.HostingUnit()
         {
             HostingUnitKey=BE.Configuration.hostUnitID++, /// זה מספר רץ. יש לממש נכון
@@ -223,7 +207,7 @@ namespace DAL
         {
             HostingUnitKey=BE.Configuration.hostUnitID++, /// זה מספר רץ. יש לממש נכון
             Owner=new BE.Host(){HostKey="311600605",PrivateName="מיכאל ",FamilyName="גרוסי",
-                PhoneNumber="055-555-5355",MailAddress="m@.com",BankAccountNumber=1123,CollectionClearance="no",
+                PhoneNumber="055-555-5355",MailAddress="mfdgsg@gmail.com",BankAccountNumber=1123,CollectionClearance="no",
                 BankBranchDetails=new BE.BankBranch(){
             BankNumber=11,
             BankName="Discount",

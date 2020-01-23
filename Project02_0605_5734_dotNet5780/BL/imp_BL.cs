@@ -441,12 +441,12 @@ namespace BL
             }
 
             //ליתר ביטחון
-            if (checkDateLegallOneYear(GR.EntryDate)) //אם התאריכים חורגים מהטווח של חודש אחורה ו11 חודש קדימה
+            if (!(checkDateLegallOneYear(GR.EntryDate))) //אם התאריכים חורגים מהטווח של חודש אחורה ו11 חודש קדימה
             {
                 throw new System.ArgumentException(string.Format("worng input {0} not in the span of dates ", GR.EntryDate));
 
             }
-            if (checkDateLegallOneYear(GR.ReleaseDate))
+            if (!(checkDateLegallOneYear(GR.ReleaseDate)))
             {
                 throw new System.ArgumentException(string.Format("worng input {0} not in the span of dates ", GR.ReleaseDate));
             }

@@ -5,8 +5,19 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:PLWPF"
         mc:Ignorable="d"
-        Title="ממשק עבור בעל אתר" Height="680" Width="1000">
+        Title="ממשק עבור בעל אתר" Height="680" Width="1500">
 
+    <Grid>
+        <Button x:Name="GuestsList_Button" Content="{DynamicResource Guest Requests}" Margin="1204,0,0.286,615.429" />
+        <Button x:Name="orderLists_Button" Content="{DynamicResource OrderList}" Margin="898,0,306.286,615.429" />
+        <Button x:Name="hostingUnitLists_Button" Content="{DynamicResource HostingUnitList}" Margin="573,0,631.286,615.429" />
+        <Button x:Name="hostLists_Button" Content="{DynamicResource HostsList}" Margin="251,0,953.286,615.429" />
+        <Grid x:Name="gridContianer" Margin="0,57,0.286,0.429">
+            <local:GuestListUC></local:GuestListUC>
+        </Grid>
+    </Grid>
+
+    
     <!--<Window.Resources>
         <BE:Configuration x:Key="ConfigurationClass"/>
     </Window.Resources>
@@ -16,7 +27,7 @@
         </Controls:WindowCommands>
     </Controls:MetroWindow.RightWindowCommands>-->
 
-    <Grid>
+    <!--<Grid>
         <Grid x:Name="NotificationsGrid" Panel.ZIndex="1" VerticalAlignment="Bottom" HorizontalAlignment="Right" Margin="10,60" Width="300">
         <Grid.RowDefinitions>
             <RowDefinition Height="*"/>
@@ -64,11 +75,54 @@
                 </Canvas>
             </Viewbox>
         </StackPanel>
-    </Grid>
+    </Grid>-->
 
 
+    <!--<Grid>
+        <TabControl VerticalAlignment="Center"
+                    HorizontalAlignment="Center">
+            <TabItem Header="Tab One">
+             <StackPanel Width="1500" Height="1500">
+                    <local:DataManegmentGrid/>
+           </StackPanel>
+            </TabItem>
+            <TabItem Header="Tab Two">
+                
+                <local:GuestListUC/>
+            </TabItem>
+        </TabControl>
+    </Grid>-->
 
-        <!--<TabControl HorizontalAlignment="Stretch" VerticalAlignment="Stretch" FlowDirection="RightToLeft">
+    <!--<Grid>
+        <TabControl>
+            <TabControl.Items>
+                <TabItem Header="tab 1">
+                    <TabItem.Content>
+                        <StackPanel x:Name="StackPanel1">
+                            
+                            <Button Content="this button is part of tab 1" />
+                        </StackPanel>
+                    </TabItem.Content>
+                </TabItem>
+                <TabItem Header="tab 2">
+                    <TabItem.Content>
+                        <StackPanel>
+                            <Button Content="this button is part of tab 2" />
+                        </StackPanel>
+                    </TabItem.Content>
+                </TabItem>
+                <TabItem Header="tab 3">
+                    <TabItem.Content>
+                        <StackPanel>
+                            <Button Content="this button is part of tab 3" />
+                        </StackPanel>
+                    </TabItem.Content>
+                </TabItem>
+            </TabControl.Items>
+        </TabControl>
+    </Grid>-->
+
+<!--<TabControl HorizontalAlignment="Stretch" VerticalAlignment="Stretch" FlowDirection="RightToLeft">
             --><!--Controls:TabControlHelper.IsUnderlined="False"
                     Controls:TabControlHelper.UnderlineMouseOverBrush="LightSkyBlue" >--><!--
 
@@ -131,6 +185,6 @@
         <StackPanel x:Name="WMstackPannel"  Grid.Row="1" Grid.ColumnSpan="4" Orientation="Vertical"/>
 
     </Grid>-->
-    </Grid>
+    <!--</Grid>-->
     
 </Window>

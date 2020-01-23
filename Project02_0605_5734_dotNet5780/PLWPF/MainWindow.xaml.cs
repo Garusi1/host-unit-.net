@@ -49,10 +49,10 @@ namespace PLWPF
 
             HostingUnitGUIShow.ShowDialog();//פתיחה באופן זה במחייב התייחסות לחלון זה ולא מאפשר להשתמש בחלון שקרא לו.
             }
-            catch (Exception)
+            catch (Exception ex)
             {
+                MessageBox.Show(ex.Message);
 
-                //
             }
 
 
