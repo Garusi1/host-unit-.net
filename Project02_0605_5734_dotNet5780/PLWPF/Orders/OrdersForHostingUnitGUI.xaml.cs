@@ -85,7 +85,7 @@ namespace PLWPF.Orders
             hhg.Add(gg);
             hhg.Add(gg1);
             hhg.Add(gg2);
-
+            
 
             list.ItemsSource = hhg;
 
@@ -99,12 +99,21 @@ namespace PLWPF.Orders
             System.Windows.Controls.ListView list = (System.Windows.Controls.ListView)sender;
             BE.GuestRequest selectedObject = (BE.GuestRequest)list.SelectedItem;
             selectedObject.ToString();
-            BE.Order order = new BE.Order();
+            try
+            {
+                BE.Order order = new BE.Order();
+
+                order.GuestRequestKey = (selectedObject.GuestRequestKey);
+                order.HostingUnitKey = (HUshow.HostingUnitKey);
+                order.OrderDate = DateTime.Now;
+                order.OrderKey = BE.Configuration.orderID;
+            }
+            catch (Exception)
+            {
+                throw new System.IO.InvalidDataException(/*"כתובת המייל לא תקינה."*/"Email address incorrect");
+            }
+           
             
-            order.GuestRequestKey= (selectedObject.GuestRequestKey);
-            order.HostingUnitKey = (HUshow.HostingUnitKey);
-            order.OrderDate = DateTime.Now;
-            order.OrderKey = BE.Configuration.orderID;
             
 
             Console.WriteLine("fdsfdsfdsfsd");
