@@ -9,14 +9,14 @@
     <Grid>
 
         <DataGrid HorizontalAlignment="Left" Height="401" Margin="10,10,0,0" VerticalAlignment="Top" Width="1173"/>
-        <ListView ItemsSource="{Binding}" x:Name="list" IsSynchronizedWithCurrentItem="True" SelectionChanged="list_SelectionChanged"  FlowDirection="RightToLeft">
-       
-            
+        <ListView ItemsSource="{Binding}" x:Name="list" IsSynchronizedWithCurrentItem="True" SelectionChanged="list_SelectionChanged"  FlowDirection="RightToLeft" Margin="0,0,0.333,53.667">
+
+
             <ListView.View>
-                
-                
+
+
                 <GridView>
-                    
+
                     <GridViewColumn Header="{DynamicResource PrivateName}" Width="90" DisplayMemberBinding="{Binding PrivateName}"></GridViewColumn>
                     <GridViewColumn Header="{DynamicResource FamilyName}" Width="90" DisplayMemberBinding="{Binding FamilyName}"></GridViewColumn>
                     <!--<GridViewColumn Header="{DynamicResource MailAddress}" Width="120" DisplayMemberBinding="{Binding MailAddress}"></GridViewColumn>-->
@@ -35,6 +35,7 @@
                 </GridView>
             </ListView.View>
         </ListView>
+        <Button Content="create order by selected guest request" HorizontalAlignment="Left" Margin="425,372,0,0" VerticalAlignment="Top" Width="308" Height="29" Click="Button_Click_Create_Order"/>
 
     </Grid>
 </Window>
