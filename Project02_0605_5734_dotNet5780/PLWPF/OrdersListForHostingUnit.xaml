@@ -33,6 +33,5 @@
         </ListView>
         <Button Content="send email" HorizontalAlignment="Left" Margin="381,390,0,9.667" Width="75" Click="Button_Click_send_email"/>
         <Button Content="confirm order" HorizontalAlignment="Left" Margin="248,390,0,0" VerticalAlignment="Top" Width="75" Click="Button_Click_confirm_order"/>
-        <Button Content="delete order" HorizontalAlignment="Left" Margin="509,390,0,0" Width="75" Click="Button_Click_delete_order" Height="21" VerticalAlignment="Top"/>
     </Grid>
 </Window>

@@ -1,7 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
+using System.Net.Mail;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
@@ -49,10 +52,6 @@ namespace PLWPF
             }
         }
 
-        private void Button_Click_delete_order(object sender, RoutedEventArgs e)
-        {
-         
-        }
 
         private void Button_Click_confirm_order(object sender, RoutedEventArgs e)
         {
@@ -95,6 +94,15 @@ namespace PLWPF
         private void Button_Click_send_email(object sender, RoutedEventArgs e)
         {
 
+            
+            Thread thr = new Thread(sendAnEamil);
+            thr.Start(789);
+
+            Console.WriteLine("Main Thread Ends!!");
+
+
+
+
             orderTemp = order;
             order.Status = BE.StatusEnum.נשלח_מייל;
 
@@ -125,6 +133,25 @@ namespace PLWPF
 
 
             }
+
+        }
+        public  void sendAnEamil()
+        {
+            
+            var client = new SmtpClient("smtp.gmail.com", 587)
+            {
+                Credentials = new NetworkCredential("zimmerisrael123@gmail.com", "Aa12345678910"),
+                EnableSsl = true
+            };
+
+            client.Send(bl.getGuestRequestByID(order.GuestRequestKey).MailAddress, bl.getGuestRequestByID(order.GuestRequestKey).MailAddress, order.ToString(), "love you :) \n Garusi zimmer ");
+            Console.WriteLine("Sent");
+
+
+            Console.ReadLine();
         }
     }
-}
+
+        
+    }
+
