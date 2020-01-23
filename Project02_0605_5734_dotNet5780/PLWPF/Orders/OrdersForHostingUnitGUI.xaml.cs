@@ -28,7 +28,7 @@ namespace PLWPF.Orders
         BE.HostingUnit HUshow;
         List<BE.GuestRequest> nn = new List<BE.GuestRequest>();
         // BE.Order order = new BE.Order;
-
+        IEnumerable<BE.GuestRequest> ieGuest;
 
         private void list_SelectionChanged(object sender, SelectionChangedEventArgs e)//https://social.msdn.microsoft.com/Forums/vstudio/en-US/194ee5ad-a3cf-48ae-8c0e-1aab84a1df97/how-to-get-wpf-listview-click-event?forum=wpf
         {
@@ -49,45 +49,11 @@ namespace PLWPF.Orders
             //   bl.GetGuestRequestList
             InitializeComponent();
             HUshow = HUshow1;
-            List<BE.GuestRequest> hhg = new List<BE.GuestRequest>();
+            bl = BL.Factory.GetInstance();
 
-            BE.GuestRequest gg = new BE.GuestRequest();
-            gg.PrivateName = "Michael";
-            gg.FamilyName = "garusi";
-            gg.MailAddress = "mgarusi101@gmail.com";
-            gg.Adults = 222;
-            gg.Children = 221;
-            gg.Pool = (BE.AttractionsEnum)1;
-            gg.Jacuzzi = (BE.AttractionsEnum)1;
-            gg.RegistrationDate = DateTime.Now;
-            gg.EntryDate = DateTime.Parse("30 1");
-            gg.ReleaseDate = DateTime.Parse("2 2");
-            gg.GuestRequestKey = BE.Configuration.geustReqID;
-           
-            
-            
-            BE.GuestRequest gg1 = new BE.GuestRequest();
-            gg1.PrivateName = "king";
-            gg1.FamilyName = "garusi";
-            gg1.MailAddress = "mgarusi101@gmail.com";
-            gg1.Adults = 222;
-            gg1.Children = 221;
-            gg1.Pool = (BE.AttractionsEnum)1;
-            gg1.Jacuzzi = (BE.AttractionsEnum)1;
-            gg1.RegistrationDate = DateTime.Now;
-            gg1.EntryDate = DateTime.Parse("30 1");
-            gg1.ReleaseDate = DateTime.Parse("2 2");
-            gg1.Type = (BE.TypeEnum)2;
-            gg1.GuestRequestKey = BE.Configuration.geustReqID;
+            ieGuest = bl.GetGuestRequestList();
 
-            BE.GuestRequest gg2 = gg;
-            
-            hhg.Add(gg);
-            hhg.Add(gg1);
-            hhg.Add(gg2);
-            
-
-            list.ItemsSource = hhg;
+            list.ItemsSource = ieGuest;
 
         }
         private void OnMouseLeftButtonDown(object sender, RoutedEventArgs e)
