@@ -65,19 +65,7 @@ namespace PLWPF.Orders
             System.Windows.Controls.ListView list = (System.Windows.Controls.ListView)sender;
             BE.GuestRequest selectedObject = (BE.GuestRequest)list.SelectedItem;
             selectedObject.ToString();
-            try
-            {
-                BE.Order order = new BE.Order();
-
-                order.GuestRequestKey = (selectedObject.GuestRequestKey);
-                order.HostingUnitKey = (HUshow.HostingUnitKey);
-                order.OrderDate = DateTime.Now;
-                order.OrderKey = BE.Configuration.orderID;
-            }
-            catch (Exception)
-            {
-                throw new System.IO.InvalidDataException(/*"כתובת המייל לא תקינה."*/"Email address incorrect");
-            }
+           
            
             
             
