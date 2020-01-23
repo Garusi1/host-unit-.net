@@ -63,7 +63,20 @@ namespace PLWPF.Orders
             gg.EntryDate = DateTime.Parse("30 1");
             gg.ReleaseDate = DateTime.Parse("2 2");
             gg.Type = (BE.TypeEnum)2;
-            BE.GuestRequest gg1 = gg;
+
+            BE.GuestRequest gg1 = new BE.GuestRequest();
+            gg1.PrivateName = "king";
+            gg1.FamilyName = "garusi";
+            gg1.MailAddress = "mgarusi101@gmail.com";
+            gg1.Adults = 222;
+            gg1.Children = 221;
+            gg1.Pool = (BE.AttractionsEnum)1;
+            gg1.Jacuzzi = (BE.AttractionsEnum)1;
+            gg1.RegistrationDate = DateTime.Now;
+            gg1.EntryDate = DateTime.Parse("30 1");
+            gg1.ReleaseDate = DateTime.Parse("2 2");
+            gg1.Type = (BE.TypeEnum)2;
+           
             BE.GuestRequest gg2= gg;
 
 
@@ -88,6 +101,7 @@ namespace PLWPF.Orders
                 list.SelectedItem = btn.DataContext;
                 GRShow = (BE.GuestRequest)list.SelectedItem;
                 Console.WriteLine(GRShow.ToString());
+
             }
 
 
