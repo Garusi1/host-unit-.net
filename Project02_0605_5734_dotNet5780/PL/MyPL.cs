@@ -15,11 +15,27 @@ namespace PL
             mainMenuEnum choosMenuEnum;
             BL.IBL bl;
             bl= BL.Factory.GetInstance();
-            IEnumerable<BE.Order> sdfsdf = bl.GetOrderList();
-            foreach (var item in sdfsdf)
+            //IEnumerable<BE.Order> sdfsdf = bl.GetOrderList();
+            //foreach (var item in sdfsdf)
+            //{
+            //    Console.WriteLine(item);
+            //}
+
+
+            IEnumerable<BE.GuestRequest> ieGuest = bl.GetGuestRequestList();
+            foreach (var item in ieGuest)
             {
                 Console.WriteLine(item);
             }
+
+            List<BE.GuestRequest>  listOfGR = new List<BE.GuestRequest>();
+
+            foreach (var Item in ieGuest)
+            {
+                listOfGR.Add(Item);
+            }
+
+
             Console.ReadKey();
 
             do
