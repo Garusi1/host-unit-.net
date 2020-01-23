@@ -23,6 +23,7 @@ namespace BE
                 if (value < 10000000) //from number with 8 letters 
                     throw new System.IO.InvalidDataException(/*מספר זיהוי אינו תקין"*/"Incorrect key!");
                 guestRequestKey = value;
+                BE.Configuration.geustReqID++;
             }
         }
 

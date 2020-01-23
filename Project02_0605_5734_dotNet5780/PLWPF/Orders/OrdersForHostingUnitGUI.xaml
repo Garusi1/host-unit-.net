@@ -20,7 +20,6 @@
                     <GridViewColumn Header="{DynamicResource PrivateName}" Width="90" DisplayMemberBinding="{Binding PrivateName}"></GridViewColumn>
                     <GridViewColumn Header="{DynamicResource FamilyName}" Width="90" DisplayMemberBinding="{Binding FamilyName}"></GridViewColumn>
                     <!--<GridViewColumn Header="{DynamicResource MailAddress}" Width="120" DisplayMemberBinding="{Binding MailAddress}"></GridViewColumn>-->
-                    <!--לפי דרישות הפרוייקט אין להציג למארח מייל של לקוח-->
                     <GridViewColumn Header="{DynamicResource RegistrationDate}" Width="120" DisplayMemberBinding="{Binding RegistrationDate}"></GridViewColumn>
                     <GridViewColumn Header="{DynamicResource EntryDate}" Width="120" DisplayMemberBinding="{Binding EntryDate}"></GridViewColumn>
                     <GridViewColumn Header="{DynamicResource ReleaseDate}" Width="120" DisplayMemberBinding="{Binding ReleaseDate}"></GridViewColumn>
