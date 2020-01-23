@@ -18,7 +18,7 @@ namespace PLWPF.UserControl
     /// <summary>
     /// Interaction logic for HostsListUC.xaml
     /// </summary>
-    public partial class HostsListUC : UserControl
+    public partial class HostsListUC /*: UserControl*/
     {
         public HostsListUC()
         {
