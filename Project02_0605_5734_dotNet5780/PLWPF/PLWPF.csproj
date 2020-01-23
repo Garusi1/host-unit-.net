@@ -59,19 +59,17 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="DataManegmentGrid.xaml.cs">
+      <DependentUpon>DataManegmentGrid.xaml</DependentUpon>
+    </Compile>
     <Compile Include="UserControl\GuestsListUC.xaml.cs">
       <DependentUpon>GuestsListUC.xaml</DependentUpon>
     </Compile>
-    <Compile Include="UserControl\HostingListUC.xaml.cs">
-      <DependentUpon>HostingListUC.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="UserControl\HostsListUC.xaml.cs">
-      <DependentUpon>HostsListUC.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="UserControl\ordersListUC.xaml.cs">
-      <DependentUpon>ordersListUC.xaml</DependentUpon>
-    </Compile>
     <Page Include="AddHostingUnitGUI.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="DataManegmentGrid.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -135,18 +133,6 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="UserControl\GuestsListUC.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="UserControl\HostingListUC.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="UserControl\HostsListUC.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="UserControl\ordersListUC.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

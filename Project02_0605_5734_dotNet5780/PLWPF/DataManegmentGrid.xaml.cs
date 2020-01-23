@@ -13,14 +13,14 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace PLWPF.UserControl
+namespace PLWPF
 {
     /// <summary>
-    /// Interaction logic for HostsListUC.xaml
+    /// Interaction logic for DataManegmentGrid.xaml
     /// </summary>
-    public partial class HostsListUC /*: UserControl*/
+    public partial class DataManegmentGrid /*: UserControl*/
     {
-        public HostsListUC()
+        public DataManegmentGrid()
         {
             InitializeComponent();
         }
