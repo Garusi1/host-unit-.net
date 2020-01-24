@@ -55,5 +55,14 @@
     <System:String x:Key="OrderList">OrderList</System:String>
     <System:String x:Key="HostsList">HostsList</System:String>
     <System:String x:Key="GuestRequestKey">GuestRequestKey</System:String>
+    <System:String x:Key="Order Key">Order Key</System:String>
+    <System:String x:Key="Create Date">Create Date</System:String>
+    <System:String x:Key="Order Status">Order Status</System:String>
+    <System:String x:Key="Order Date&quot;">Order Date</System:String>
+    <System:String x:Key="HostingUnitKey">HostingUnitKey</System:String>
+    <System:String x:Key="Phone Number">Phone Number</System:String>
+    <System:String x:Key="Host Key">Host Key</System:String>
+    <System:String x:Key="Bank Account Number">Bank Account Number</System:String>
+    <System:String x:Key="CollectionClearance">CollectionClearance</System:String>
 
 </ResourceDictionary>

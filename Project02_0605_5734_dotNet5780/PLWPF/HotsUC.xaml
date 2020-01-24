@@ -1,0 +1,58 @@
+﻿<UserControl x:Class="PLWPF.HotsUC"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:PLWPF"
+             mc:Ignorable="d" 
+             d:DesignHeight="450" d:DesignWidth="800">
+    <!--<Grid>-->
+
+        <!--<Grid Margin="0,0,120,0" >
+
+            <DataGrid HorizontalAlignment="Left" Height="401" Margin="10,10,0,0" VerticalAlignment="Top" Width="670" SelectionChanged="DataGrid_SelectionChanged"/>
+            <ListView ItemsSource="{Binding}" x:Name="list" IsSynchronizedWithCurrentItem="True" SelectionChanged="list_SelectionChanged"  FlowDirection="RightToLeft" Margin="0,0,0,0.286"
+                        GridViewColumnHeader.Click="GridViewColumnHeaderClickedHandler">
+
+
+
+                <ListView.View>
+
+
+                    <GridView>
+                        <GridViewColumn Header="{DynamicResource PrivateName}" Width="auto" DisplayMemberBinding="{Binding PrivateName}"></GridViewColumn>
+                        <GridViewColumn Header="{DynamicResource FamilyName}" Width="auto" DisplayMemberBinding="{Binding FamilyName}"></GridViewColumn>
+                        <GridViewColumn Header="{DynamicResource MailAddress}" Width="auto" DisplayMemberBinding="{Binding MailAddress}"></GridViewColumn>
+                        <GridViewColumn Header="{DynamicResource Phone Number}" Width="auto" DisplayMemberBinding="{Binding PhoneNumber}"></GridViewColumn>
+                        <GridViewColumn Header="{DynamicResource Host Key}" Width="auto" DisplayMemberBinding="{Binding HostKey}"></GridViewColumn>
+                        <GridViewColumn Header="{DynamicResource CollectionClearance}" Width="auto" DisplayMemberBinding="{Binding CollectionClearance}"></GridViewColumn>
+                        <GridViewColumn Header="{DynamicResource Bank Account Number}" Width="auto" DisplayMemberBinding="{Binding BankAccountNumber}"></GridViewColumn>
+
+
+                    </GridView>
+                </ListView.View>
+            </ListView>
+        </Grid>
+
+
+        <Grid Margin="686,0,0,10.286" FlowDirection="RightToLeft" >
+            --><!--<Grid Margin="447,-43,0,405" >-->
+            <!--<DockPanel DockPanel.Dock="Right"  >--><!--
+
+
+            <Grid.RowDefinitions >
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="4*"/>
+
+            </Grid.RowDefinitions>
+
+
+
+        </Grid>
+    </Grid>-->
+
+</UserControl>

@@ -16,11 +16,11 @@ using System.Windows.Shapes;
 namespace PLWPF
 {
     /// <summary>
-    /// Interaction logic for DataManegmentGrid.xaml
+    /// Interaction logic for hostingListsUC.xaml
     /// </summary>
-    public partial class DataManegmentGrid /*: UserControl*/
+    public partial class hostingListsUC : UserControl
     {
-        public DataManegmentGrid()
+        public hostingListsUC()
         {
             InitializeComponent();
         }

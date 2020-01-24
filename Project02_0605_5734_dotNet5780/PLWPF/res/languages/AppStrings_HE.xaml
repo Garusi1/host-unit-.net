@@ -55,4 +55,15 @@
     <System:String x:Key="OrderList">הזמנות</System:String>
     <System:String x:Key="HostsList">מארחים</System:String>
     <System:String x:Key="GuestRequestKey">מספר דרישת אירוח</System:String>
+    <System:String x:Key="Order Key">מספר הזמנה</System:String>
+    <System:String x:Key="Create Date">תאריך יצירה</System:String>
+    <System:String x:Key="Order Status">סטטוס הזמנה</System:String>
+    <System:String x:Key="Order Date">תאריך הזמנה</System:String>
+    <System:String x:Key="HostingUnitKey">מספר יחידת אירוח</System:String>
+    <System:String x:Key="Phone Number">מספר טלפון</System:String>
+    <System:String x:Key="Host Key">תז</System:String>
+    <System:String x:Key="Bank Account Number">מספר חשבון בנק</System:String>
+    <System:String x:Key="CollectionClearance">הרשאת חיוב</System:String>
+
+    
 </ResourceDictionary>

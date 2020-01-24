@@ -60,23 +60,22 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="DataManegmentGrid.xaml.cs">
-      <DependentUpon>DataManegmentGrid.xaml</DependentUpon>
-    </Compile>
     <Compile Include="GuestListUC.xaml.cs">
       <DependentUpon>GuestListUC.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="hostingListsUC.xaml.cs">
+      <DependentUpon>hostingListsUC.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="HotsUC.xaml.cs">
+      <DependentUpon>HotsUC.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="HUGuestsListUC.xaml.cs">
+      <DependentUpon>HUGuestsListUC.xaml</DependentUpon>
     </Compile>
     <Compile Include="OrderListUC.xaml.cs">
       <DependentUpon>OrderListUC.xaml</DependentUpon>
     </Compile>
-    <Compile Include="UserControl\GuestsListUC.xaml.cs">
-      <DependentUpon>GuestsListUC.xaml</DependentUpon>
-    </Compile>
     <Page Include="AddHostingUnitGUI.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="DataManegmentGrid.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -88,7 +87,19 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="hostingListsUC.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="HostingUnitKeyDialogGUI.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="HotsUC.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="HUGuestsListUC.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -144,10 +155,6 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Include="res\languages\AppStrings_EN.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="UserControl\GuestsListUC.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

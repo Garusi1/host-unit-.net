@@ -10,21 +10,23 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace PLWPF.UserControl
+namespace PLWPF
 {
+    /// <summary>
+    /// Interaction logic for HUGuestsListUC.xaml
+    /// </summary>
     /// <summary>
     /// Interaction logic for GuestsListUC.xaml
     /// </summary>
-    public partial class GuestsListUC 
+    public partial class HUGuestsListUC
     {
         BL.IBL bl;
         BE.GuestRequest GRShow;
 
 
-        public GuestsListUC()
+        public HUGuestsListUC()
         {
             InitializeComponent();
             bl = BL.Factory.GetInstance();
@@ -74,8 +76,4 @@ namespace PLWPF.UserControl
 
 
     }
-
-
 }
-
-
