@@ -7,6 +7,72 @@
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
     <Grid>
-        <Button Content="זה יוזר קונרטול של יחידות אירות"></Button>
+
+
+        <Grid Margin="0,0,120,0.0" >
+
+            <DataGrid HorizontalAlignment="Left" Height="401" Margin="10,10,0,0" VerticalAlignment="Top" Width="790"/>
+            <ListView ItemsSource="{Binding}" x:Name="list" IsSynchronizedWithCurrentItem="True" SelectionChanged="list_SelectionChanged" FlowDirection="RightToLeft" 
+                      GridViewColumnHeader.Click="GridViewColumnHeaderClickedHandler">
+
+
+                <ListView.View >
+
+
+                    <GridView >
+
+                        <GridViewColumn Header="{DynamicResource HostingUnitKey}" Width="auto" DisplayMemberBinding="{Binding HostingUnitKey}"  ></GridViewColumn>
+                        <GridViewColumn Header="{DynamicResource HostingUnitName}" Width="auto" DisplayMemberBinding="{Binding HostingUnitName}"></GridViewColumn>
+                        <GridViewColumn Header="{DynamicResource Area}" Width="auto" DisplayMemberBinding="{Binding Area}"></GridViewColumn>
+                        <GridViewColumn Header="{DynamicResource Type}" Width="auto" DisplayMemberBinding="{Binding Type}"></GridViewColumn>
+                        <GridViewColumn Header="{DynamicResource Pool}" Width="auto" DisplayMemberBinding="{Binding Pool}"></GridViewColumn>
+                        <GridViewColumn Header="{DynamicResource Jacuzzi}" Width="auto" DisplayMemberBinding="{Binding Jacuzzi}"></GridViewColumn>
+                        <GridViewColumn Header="{DynamicResource Garden}" Width="auto" DisplayMemberBinding="{Binding Garden}"></GridViewColumn>
+                        <GridViewColumn Header="{DynamicResource ChildrensAttractions}" Width="auto" DisplayMemberBinding="{Binding ChildrensAttractions}"></GridViewColumn>
+
+
+                    </GridView>
+                </ListView.View>
+            </ListView>
+
+        </Grid>
+
+
+        <Grid Margin="739,0,0,10.286" FlowDirection="RightToLeft" >
+
+
+            <Grid.RowDefinitions >
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="4*"/>
+            </Grid.RowDefinitions>
+
+
+
+            <RadioButton Grid.Row="0" x:Name="showAllRadio" Checked="showAllRadio_Checked" Content="הכל" DockPanel.Dock="Right" Margin="2,10,0,14.143" RenderTransformOrigin="0.5,0.5"  >
+                <RadioButton.RenderTransform>
+                    <TransformGroup>
+                        <ScaleTransform/>
+                        <SkewTransform/>
+                        <RotateTransform />
+                        <TranslateTransform/>
+                    </TransformGroup>
+                </RadioButton.RenderTransform>
+            </RadioButton>
+            <RadioButton x:Name="showPoolRadio" Checked="showPoolRadio_Checked" Content="בריכה" DockPanel.Dock="Right" Margin="2,13.857,10,10.286" Grid.Row="1" />
+            <RadioButton Grid.Row="2" x:Name="showJacuzziRadio" Checked="showJacuzziRadio_Checked" Content="ג'קוזי" DockPanel.Dock="Right" Margin="0,9.714,0,13.857"  />
+            <RadioButton Grid.Row="3" x:Name="showGardenRadio" Checked="showGardenRadio_Checked"  Content="גינה" DockPanel.Dock="Right" Margin="2,10.143,0,22.429"  />
+            <RadioButton Grid.Row="4" x:Name="showChildAtraRadio" Checked="showChildAtraRadio_Checked"  Content="לילדים" DockPanel.Dock="Right" Margin="2,10.143,0,22.429"  />
+
+            <!--<Button   x:Name="showAllRadio" Checked="showAllRadio_Checked" Content="הכל" DockPanel.Dock="Right" />-->
+            <!--</DockPanel>-->
+            <!--</Grid>-->
+
+        </Grid>
     </Grid>
+
+
 </UserControl>

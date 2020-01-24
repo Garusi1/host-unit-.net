@@ -64,5 +64,6 @@
     <System:String x:Key="Host Key">Host Key</System:String>
     <System:String x:Key="Bank Account Number">Bank Account Number</System:String>
     <System:String x:Key="CollectionClearance">CollectionClearance</System:String>
+    <System:String x:Key="HostingUnitName">HostingUnitName</System:String>
 
 </ResourceDictionary>

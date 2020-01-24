@@ -21,35 +21,34 @@ namespace PLWPF
     /// </summary>
     public partial class HotsUC : UserControl
     {
-        //BL.IBL bl;
+        BL.IBL bl;
 
-        //BE.Host hostShow;
+        BE.Host hostShow;
+        IEnumerable<IGrouping<int, BE.Host>> IenumaIgroupHosts;
 
-        //IEnumerable<IGrouping<int, BE.Host>> IenumaIgroupHosts;
 
+        public HotsUC()
+        {
+            InitializeComponent();
+            bl = BL.Factory.GetInstance();
 
-        //public HotsUC()
-        //{
-        //    InitializeComponent();
-        //    bl = BL.Factory.GetInstance();
+            IenumaIgroupHosts = bl.groupByNumberOfHosintgUnitForHost();// כנראה שצריך הגדרת משתנה מארח אנונימי שיש לו עוד שדה בשם כמות היחידות.  לא צריך מחיקת Host.
 
-        //    IenumaIgroupHosts = bl.groupByNumberOfHosintgUnitForHost();
-
-        //    list.ItemsSource = IenumaIgroupHosts;
-
+            //    list.ItemsSource = IenumaIgroupHosts;
 
 
 
-        //    void mouseClick(object sender, RoutedEventArgs e)
-        //    {
-        //        var btn = sender as System.Windows.Controls.Button;
-        //        list.SelectedItem = btn.DataContext;
-        //        hostShow = (BE.Host)list.SelectedItem;
 
-        //    }
-
+            //    void mouseClick(object sender, RoutedEventArgs e)
+            //    {
+            //        var btn = sender as System.Windows.Controls.Button;
+            //        list.SelectedItem = btn.DataContext;
+            //        hostShow = (BE.Host)list.SelectedItem;
 
         }
+
+
+}
 
 
 

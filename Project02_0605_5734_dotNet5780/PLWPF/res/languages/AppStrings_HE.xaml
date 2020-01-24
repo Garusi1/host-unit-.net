@@ -64,6 +64,6 @@
     <System:String x:Key="Host Key">תז</System:String>
     <System:String x:Key="Bank Account Number">מספר חשבון בנק</System:String>
     <System:String x:Key="CollectionClearance">הרשאת חיוב</System:String>
-
+    <System:String x:Key="HostingUnitName">שם יחידת אירוח</System:String>
     
 </ResourceDictionary>

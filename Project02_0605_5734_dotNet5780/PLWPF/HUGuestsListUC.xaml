@@ -9,7 +9,8 @@
     <Grid >
 
         <DataGrid HorizontalAlignment="Left" Height="401" Margin="10,10,0,0" VerticalAlignment="Top" Width="1173"/>
-        <ListView ItemsSource="{Binding}" x:Name="list" IsSynchronizedWithCurrentItem="True" SelectionChanged="list_SelectionChanged" FlowDirection="RightToLeft" >
+        <ListView ItemsSource="{Binding}" x:Name="list" IsSynchronizedWithCurrentItem="True" SelectionChanged="list_SelectionChanged" FlowDirection="RightToLeft" 
+                                  >
 
 
             <ListView.View >
