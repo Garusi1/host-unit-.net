@@ -144,7 +144,8 @@ namespace PLWPF
                 EnableSsl = true
             };
 
-            client.Send(bl.getGuestRequestByID(order.GuestRequestKey).MailAddress, bl.getGuestRequestByID(order.GuestRequestKey).MailAddress, order.ToString(), "love you :) \n Garusi zimmer ");
+            client.Send(bl.getGuestRequestByID(order.GuestRequestKey).MailAddress, 
+                bl.getGuestRequestByID(order.GuestRequestKey).MailAddress, order.ToString(), "love you :) \n Garusi zimmer ");
             Console.WriteLine("Sent");
 
 
