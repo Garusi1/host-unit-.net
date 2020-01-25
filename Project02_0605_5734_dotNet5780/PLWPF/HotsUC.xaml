@@ -6,9 +6,9 @@
              xmlns:local="clr-namespace:PLWPF"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
-    <!--<Grid>-->
+    <Grid>
 
-        <!--<Grid Margin="0,0,120,0" >
+        <Grid Margin="0,0,120,0" >
 
             <DataGrid HorizontalAlignment="Left" Height="401" Margin="10,10,0,0" VerticalAlignment="Top" Width="670" SelectionChanged="DataGrid_SelectionChanged"/>
             <ListView ItemsSource="{Binding}" x:Name="list" IsSynchronizedWithCurrentItem="True" SelectionChanged="list_SelectionChanged"  FlowDirection="RightToLeft" Margin="0,0,0,0.286"
@@ -17,7 +17,6 @@
 
 
                 <ListView.View>
-
 
                     <GridView>
                         <GridViewColumn Header="{DynamicResource PrivateName}" Width="auto" DisplayMemberBinding="{Binding PrivateName}"></GridViewColumn>
@@ -28,7 +27,6 @@
                         <GridViewColumn Header="{DynamicResource CollectionClearance}" Width="auto" DisplayMemberBinding="{Binding CollectionClearance}"></GridViewColumn>
                         <GridViewColumn Header="{DynamicResource Bank Account Number}" Width="auto" DisplayMemberBinding="{Binding BankAccountNumber}"></GridViewColumn>
 
-
                     </GridView>
                 </ListView.View>
             </ListView>
@@ -36,8 +34,8 @@
 
 
         <Grid Margin="686,0,0,10.286" FlowDirection="RightToLeft" >
-            --><!--<Grid Margin="447,-43,0,405" >-->
-            <!--<DockPanel DockPanel.Dock="Right"  >--><!--
+            <!--<Grid Margin="447,-43,0,405" >-->
+            <!--<DockPanel DockPanel.Dock="Right"  >-->
 
 
             <Grid.RowDefinitions >
@@ -52,7 +50,29 @@
 
 
 
+            <!--<Button x:Name="filterGR_button" Content="סנן לפי" Margin="632,0,0,0" Click="filterGR_button_Click"> </Button>-->
+            <!--<TextBlock  Text="סנן דרישות אירוח לפי : " DockPanel.Dock="Right" />-->
+
+            <!--<RadioButton Grid.Row="0" x:Name="showAllRadio" Checked="showAllRadio_Checked" Content="הכל" DockPanel.Dock="Right" Margin="2,10,0,14.143" RenderTransformOrigin="0.5,0.5"  >
+                <RadioButton.RenderTransform>
+                    <TransformGroup>
+                        <ScaleTransform/>
+                        <SkewTransform/>
+                        <RotateTransform />
+                        <TranslateTransform/>
+                    </TransformGroup>
+                </RadioButton.RenderTransform>
+            </RadioButton>
+            <RadioButton x:Name="showOpenRadio" Checked="showOpenRadio_Checked" Content="טרם טופל" DockPanel.Dock="Right" Margin="2,13.857,10,10.714" Grid.Row="1" />
+            <RadioButton Grid.Row="2" x:Name="showMailRadio" Checked="shoMailRadio_Checked" Content="נשלח מייל" DockPanel.Dock="Right" Margin="0,9.286,0,13.857"  />
+            <RadioButton Grid.Row="3" x:Name="showCloseRadio" Checked="showCloseRadio_Checked"  Content="נסגרה עסקה" DockPanel.Dock="Right" Margin="2,10.143,0,22"  />
+            <RadioButton Grid.Row="4" x:Name="showLostRadio" Checked="showLostRadio_Checked"  Content="נסגרה מחוסר הענות" DockPanel.Dock="Right" Margin="2,10,0,22.571"  />-->
+
+            <!--<Button   x:Name="showAllRadio" Checked="showAllRadio_Checked" Content="הכל" DockPanel.Dock="Right" />-->
+            <!--</DockPanel>-->
+            <!--</Grid>-->
+
         </Grid>
-    </Grid>-->
+    </Grid>
 
 </UserControl>
