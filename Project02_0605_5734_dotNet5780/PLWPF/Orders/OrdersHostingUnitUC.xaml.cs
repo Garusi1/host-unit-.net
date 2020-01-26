@@ -104,7 +104,7 @@ namespace PLWPF.Orders
         ////        MyCalendar.BlackoutDates.Add(new CalendarDateRange(date));
         ////    }
         ////
-        
+
         //}
         //private Calendar MyCalendar;
         //private Calendar CreateCalendar()
@@ -121,7 +121,13 @@ namespace PLWPF.Orders
 
 
 
+        void mouseClick(object sender, RoutedEventArgs e)
+        {
+            var btn = sender as System.Windows.Controls.Button;
+            list.SelectedItem = btn.DataContext;
+            order = (BE.Order)list.SelectedItem;
 
+        }
 
         private void list_SelectionChanged(object sender, SelectionChangedEventArgs e)//https://social.msdn.microsoft.com/Forums/vstudio/en-US/194ee5ad-a3cf-48ae-8c0e-1aab84a1df97/how-to-get-wpf-listview-click-event?forum=wpf
         {
@@ -130,18 +136,15 @@ namespace PLWPF.Orders
 
 
 
-            order = (BE.Order)list.SelectedItem;
 
             HUshow = bl.getHostingUnitByID(number);
             guest = bl.getGuestRequestByID(order.GuestRequestKey);
 
-            //number = HUshow.HostingUnitKey;
-
-            //HUshow = bl.getHostingUnitByID(number);
 
             IenumaOrder = bl.GetOrderList(x => x.HostingUnitKey == number); //הצג רק הזמנות רלוונטיות ליחידת אירוח זו. 
+            order = (BE.Order)list.SelectedItem;
 
-            //list.ItemsSource = IenumaOrder;
+            list.ItemsSource = IenumaOrder;
             //
 
             //order = (BE.Order)list.SelectedItem;
