@@ -26,6 +26,7 @@
                         <GridViewColumn Header="{DynamicResource Host Key}" Width="auto" DisplayMemberBinding="{Binding HostKey}"></GridViewColumn>
                         <GridViewColumn Header="{DynamicResource CollectionClearance}" Width="auto" DisplayMemberBinding="{Binding CollectionClearance}"></GridViewColumn>
                         <GridViewColumn Header="{DynamicResource Bank Account Number}" Width="auto" DisplayMemberBinding="{Binding BankAccountNumber}"></GridViewColumn>
+                        <GridViewColumn Header="{DynamicResource Number Of HostingUnits}" Width="auto" DisplayMemberBinding="{Binding NumberOfHostingUnits}"></GridViewColumn>
 
                     </GridView>
                 </ListView.View>

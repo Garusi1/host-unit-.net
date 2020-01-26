@@ -804,7 +804,7 @@ namespace BL
             return from Unit in GetHostingUnitList()
                    group Unit by Unit.Owner.HostKey into Units
                    let Owner = Units.FirstOrDefault().Owner
-                   let num_of_Unit = Units.Count() //לוודא שסופר נכון
+                   let num_of_Unit = Units.Count() 
                    group Owner by num_of_Unit;
         }
 

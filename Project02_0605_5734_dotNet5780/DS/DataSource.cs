@@ -237,6 +237,42 @@ namespace DAL
             Type=BE.TypeEnum.Zimmer,
 
         }
+                        ,
+                new BE.HostingUnit()
+        {
+            HostingUnitKey=BE.Configuration.hostUnitID++, /// זה מספר רץ. יש לממש נכון
+            Owner=new BE.Host(){HostKey="305615734",PrivateName="מיכאל ",FamilyName="גרוסי",
+                PhoneNumber="055-555-5355",MailAddress="mfdgsg@gmail.com",BankAccountNumber=1123,CollectionClearance="no",
+                BankBranchDetails=new BE.BankBranch(){
+            BankNumber=11,
+            BankName="Discount",
+            BranchNumber=510,
+            BranchAddress="Har'el St 1, 9079129",
+            BranchCity="Mevaseret Zion"} },
+            HostingUnitName=" צימר יפה מאד",
+            Area=BE.AreaEnum.North,
+            Type=BE.TypeEnum.Zimmer,
+
+        }
+
+                        ,
+                new BE.HostingUnit()
+        {
+            HostingUnitKey=BE.Configuration.hostUnitID++, /// זה מספר רץ. יש לממש נכון
+            Owner=new BE.Host(){HostKey="305615734",PrivateName="מיכאל ",FamilyName="גרוסי",
+                PhoneNumber="055-555-5355",MailAddress="mfdgsg@gmail.com",BankAccountNumber=1123,CollectionClearance="no",
+                BankBranchDetails=new BE.BankBranch(){
+            BankNumber=11,
+            BankName="Discount",
+            BranchNumber=510,
+            BranchAddress="Har'el St 1, 9079129",
+            BranchCity="Mevaseret Zion"} },
+            HostingUnitName=" צימר יפה מאד",
+            Area=BE.AreaEnum.North,
+            Type=BE.TypeEnum.Zimmer,
+
+        }
+
 
 
         };
