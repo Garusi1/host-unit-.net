@@ -6,6 +6,7 @@
         xmlns:local="clr-namespace:PLWPF"
         mc:Ignorable="d"
         Title="הזן מספר יחידת אירוח" Height="150" Width="250">
+    
 
     <Grid x:Name="DialogGrid" FlowDirection="RightToLeft">
         <StackPanel Margin="0,21,-0.429,0.143">

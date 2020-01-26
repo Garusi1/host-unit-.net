@@ -6,7 +6,10 @@
         xmlns:local="clr-namespace:PLWPF"
         xmlns:BE="clr-namespace:BE;assembly=BE" x:Class="PLWPF.GuestGUI"
         mc:Ignorable="d"
-        Title="הוספת בקשת אירוח" Height="800" Width="800" >
+        Title="הוספת בקשת אירוח" Height="700" Width="800" >
+    <Window.Background>
+        <ImageBrush ImageSource="images/guest.jpg"/>
+    </Window.Background>
 
     <Grid>
         <Grid.RowDefinitions>
@@ -31,10 +34,10 @@
             יש להגדיר כמו שצריך - בהמשך
             -->
         </Button>
-        <Label x:Name="label" Content="הוסף דרישת אירוח חדשה"  FontSize="30" Margin="0" HorizontalAlignment="Center"/>
+        <Label x:Name="label" Content="הוסף דרישת אירוח חדשה"  FontSize="30" Margin="0" HorizontalAlignment="Center" Background="#FFF7F7F7"/>
 
 
-        <Grid x:Name="grid1"  HorizontalAlignment="Left" Margin="483,130,0,0" Grid.Row="1" VerticalAlignment="Top" FlowDirection="RightToLeft" >
+        <Grid x:Name="grid1"  HorizontalAlignment="Left" Margin="483,130,0,0" Grid.Row="1" VerticalAlignment="Top" FlowDirection="RightToLeft" Background="#FFF7F7F7" >
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="Auto"/>
                 <ColumnDefinition Width="Auto"/>
@@ -57,44 +60,44 @@
                 <RowDefinition Height="Auto"/>
                 <RowDefinition Height="Auto"/>
             </Grid.RowDefinitions>
-            <Label Content="{DynamicResource Private Name:}" Grid.Column="0" HorizontalAlignment="Left" Margin="3" Grid.Row="0" VerticalAlignment="Center"/>
+            <Label Content="{DynamicResource Private Name:}" Grid.Column="0" HorizontalAlignment="Left" Margin="3" Grid.Row="0" VerticalAlignment="Center" Background="#FFF7F7F7"/>
             <TextBox x:Name="privateNameTextBox" Grid.Column="1" HorizontalAlignment="Left" Height="23" Margin="3" Grid.Row="0" Text="{Binding PrivateName, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" VerticalAlignment="Center" Width="120"/>
-            <Label Content="{DynamicResource Family Name:}" Grid.Column="0" HorizontalAlignment="Left" Margin="3" Grid.Row="1" VerticalAlignment="Center"/>
+            <Label Content="{DynamicResource Family Name:}" Grid.Column="0" HorizontalAlignment="Left" Margin="3" Grid.Row="1" VerticalAlignment="Center" Background="#FFF7F7F7"/>
             <TextBox x:Name="familyNameTextBox" Grid.Column="1" HorizontalAlignment="Left" Height="23" Margin="3" Grid.Row="1" Text="{Binding FamilyName, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" VerticalAlignment="Center" Width="120"/>
-            <Label Content="{DynamicResource Mail Address:}" Grid.Column="0" HorizontalAlignment="Left" Margin="3" Grid.Row="2" VerticalAlignment="Center"/>
+            <Label Content="{DynamicResource Mail Address:}" Grid.Column="0" HorizontalAlignment="Left" Margin="3" Grid.Row="2" VerticalAlignment="Center" Background="#FFF7F7F7"/>
             <TextBox x:Name="mailAddressTextBox" Grid.Column="1" HorizontalAlignment="Left" Height="23" Margin="3" Grid.Row="2" Text="{Binding MailAddress, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" VerticalAlignment="Center" Width="120"/>
-            
-            <Label Content="{DynamicResource Adults:}" Grid.Column="0" HorizontalAlignment="Left" Margin="3" Grid.Row="3" VerticalAlignment="Center"/>
+
+            <Label Content="{DynamicResource Adults:}" Grid.Column="0" HorizontalAlignment="Left" Margin="3" Grid.Row="3" VerticalAlignment="Center" Background="#FFF7F7F7"/>
             <TextBox x:Name="adultsTextBox" Grid.Column="1" HorizontalAlignment="Left" Height="23" Margin="3" Grid.Row="3" Text="{Binding Adults, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" VerticalAlignment="Center" Width="120"/>
-            <Label Content="{DynamicResource Children:}" Grid.Column="0" HorizontalAlignment="Left" Margin="3" Grid.Row="4" VerticalAlignment="Center"/>
+            <Label Content="{DynamicResource Children:}" Grid.Column="0" HorizontalAlignment="Left" Margin="3" Grid.Row="4" VerticalAlignment="Center" Background="#FFF7F7F7"/>
             <TextBox x:Name="childrenTextBox" Grid.Column="1" HorizontalAlignment="Left" Height="23" Margin="3" Grid.Row="4" Text="{Binding Children, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" VerticalAlignment="Center" Width="120"/>
 
-            <Label Content="{DynamicResource Type:}" Grid.Column="0" HorizontalAlignment="Left" Margin="3" Grid.Row="5" VerticalAlignment="Center"/>
+            <Label Content="{DynamicResource Type:}" Grid.Column="0" HorizontalAlignment="Left" Margin="3" Grid.Row="5" VerticalAlignment="Center" Background="#FFF7F7F7"/>
             <ComboBox x:Name="typeComboBox" Grid.Column="1" SelectedItem="{Binding Type}" HorizontalAlignment="Left" Height="Auto" Margin="3" Grid.Row="5" VerticalAlignment="Center" Width="120">
             </ComboBox>
 
-            <Label Content="{DynamicResource Area:}" Grid.Column="0" HorizontalAlignment="Left" Margin="3" Grid.Row="6" VerticalAlignment="Center"/>
+            <Label Content="{DynamicResource Area:}" Grid.Column="0" HorizontalAlignment="Left" Margin="3" Grid.Row="6" VerticalAlignment="Center" Background="#FFF7F7F7"/>
             <ComboBox x:Name="areaComboBox" Grid.Column="1" SelectedItem="{Binding Area}" HorizontalAlignment="Left" Height="Auto" Margin="3" Grid.Row="6" VerticalAlignment="Center" Width="120">
             </ComboBox>
 
-            <Label Content="{DynamicResource Pool:}" Grid.Column="0" HorizontalAlignment="Left" Margin="3" Grid.Row="7" VerticalAlignment="Center"/>
+            <Label Content="{DynamicResource Pool:}" Grid.Column="0" HorizontalAlignment="Left" Margin="3" Grid.Row="7" VerticalAlignment="Center" Background="#FFF7F7F7"/>
             <ComboBox x:Name="poolComboBox" Grid.Column="1" SelectedItem="{Binding Pool}" HorizontalAlignment="Left" Height="Auto"  Margin="3" Grid.Row="7" VerticalAlignment="Center" Width="120">
             </ComboBox>
-            <Label Content="{DynamicResource Jacuzzi:}" Grid.Column="0" HorizontalAlignment="Left" Margin="3" Grid.Row="8" VerticalAlignment="Center"/>
+            <Label Content="{DynamicResource Jacuzzi:}" Grid.Column="0" HorizontalAlignment="Left" Margin="3" Grid.Row="8" VerticalAlignment="Center" Background="#FFF7F7F7"/>
             <ComboBox x:Name="jacuzziComboBox" Grid.Column="1" SelectedItem="{Binding Jacuzzi}" HorizontalAlignment="Left" Height="Auto" Margin="3" Grid.Row="8" VerticalAlignment="Center" Width="120">
             </ComboBox>
-            <Label Content="{DynamicResource Garden:}" Grid.Column="0" HorizontalAlignment="Left" Margin="3" Grid.Row="9" VerticalAlignment="Center"/>
+            <Label Content="{DynamicResource Garden:}" Grid.Column="0" HorizontalAlignment="Left" Margin="3" Grid.Row="9" VerticalAlignment="Center" Background="#FFF7F7F7"/>
             <ComboBox x:Name="gardenComboBox" Grid.Column="1" SelectedItem="{Binding Garden}"
                       HorizontalAlignment="Left" Height="Auto"  Margin="3" Grid.Row="9" VerticalAlignment="Center" Width="120">
             </ComboBox>
 
-            <Label Content="{DynamicResource Childrens Attractions:}" Grid.Column="0" HorizontalAlignment="Left" Margin="3" Grid.Row="10" VerticalAlignment="Center"/>
+            <Label Content="{DynamicResource Childrens Attractions:}" Grid.Column="0" HorizontalAlignment="Left" Margin="3" Grid.Row="10" VerticalAlignment="Center" Background="#FFF7F7F7"/>
             <ComboBox x:Name="childrensAttractionsComboBox" Grid.Column="1" SelectedItem="{Binding ChildrensAttractions}"
                       HorizontalAlignment="Left" Height="Auto" Margin="3" Grid.Row="10" VerticalAlignment="Center" Width="120">
             </ComboBox>
-            
 
-            
+
+
 
         </Grid>
         <Border Margin="38,243,424.286,36.286" Grid.Row="1">
@@ -104,7 +107,7 @@
                     <RowDefinition Height="Auto"/>
                     <RowDefinition Height="Auto"/>
                 </Grid.RowDefinitions>
-                <TextBlock Text="בחר טווח אירוח רצוי"  Grid.Row="0" HorizontalAlignment="Center"/>
+                <TextBlock Text="בחר טווח אירוח רצוי"  Grid.Row="0" HorizontalAlignment="Center" Background="#FFF7F7F7"/>
 
                 <!--<Calendar Grid.Row="1"
                           DisplayMode="Month" SelectionMode="SingleRange"

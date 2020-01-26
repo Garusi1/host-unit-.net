@@ -6,10 +6,24 @@
         xmlns:local="clr-namespace:PLWPF"
         mc:Ignorable="d"
         Title="יחידות אירוח" Height="450" Width="800">
+    <Window.Background>
+        <ImageBrush ImageSource="images/HU.jpg"/>
+    </Window.Background>
+    <Window.Resources>
+        <Style x:Key="myButtonStyle"
+           TargetType="Button">
+            <Setter Property="FontSize"
+              Value="22" />
+            <Setter Property="FontFamily"
+              Value="Consolas" />
+            <Setter Property="FontWeight"
+              Value="Bold" />
+        </Style>
+    </Window.Resources>
     <Grid>
-        
-        <Button Content="הוסף יחידת אירוח" HorizontalAlignment="Left" Margin="312,97,0,0" VerticalAlignment="Top" Width="165" Click="Add_Hosting_Unit_Button"/>
-        <Button Content="איזור אישי" HorizontalAlignment="Left" Margin="312,123,0,0" VerticalAlignment="Top" Width="165" Click="Personal_Area_Hosting_Unit_Button"/>
+
+        <Button Content="הוסף יחידת אירוח" Style="{StaticResource myButtonStyle}" HorizontalAlignment="Left" Margin="278,100,0,0" VerticalAlignment="Top" Width="223" Click="Add_Hosting_Unit_Button"/>
+        <Button Content="איזור אישי" HorizontalAlignment="Left" Style="{StaticResource myButtonStyle}" Margin="278,157,0,0" VerticalAlignment="Top" Width="223" Click="Personal_Area_Hosting_Unit_Button"/>
 
     </Grid>
 </Window>

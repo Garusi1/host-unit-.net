@@ -6,7 +6,10 @@
         xmlns:local="clr-namespace:PLWPF"
         xmlns:BE="clr-namespace:BE;assembly=BE" x:Class="PLWPF.AddHostingUnitGUI"
         mc:Ignorable="d"
-        Title="AddHostingUnitGUI" Height="800" Width="800">
+        Title="AddHostingUnitGUI" Height="600" Width="800">
+    <Window.Background>
+        <ImageBrush ImageSource="images/newHU.jpg"/>
+    </Window.Background>
 
     <Grid Margin="0,0,0.286,-167.286" >
         <Grid.RowDefinitions>
@@ -15,7 +18,7 @@
         </Grid.RowDefinitions>
         <Label x:Name="label" Content="הוסף יחידת אירוח חדשה"  FontSize="30" Margin="235,0,235,373.715" HorizontalAlignment="Center" Grid.RowSpan="2"/>
 
-        <Grid x:Name="grid1"  HorizontalAlignment="Left" Margin="462,89,0,0" VerticalAlignment="Top" Height="255" Width="297" FlowDirection="RightToLeft">
+        <Grid x:Name="grid1"  HorizontalAlignment="Left" Margin="462,89,0,0" VerticalAlignment="Top" Height="255" Width="297" FlowDirection="RightToLeft" Background="#FFF7F7F7">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="0"/>
                 <ColumnDefinition Width="129.143"/>
@@ -49,7 +52,7 @@
             <ComboBox x:Name="typeComboBox" Grid.Column="2" SelectedItem="{Binding Type}" HorizontalAlignment="Left" Height="Auto" Margin="2.857,5,0,5" Grid.Row="7" VerticalAlignment="Center" Width="120">
             </ComboBox>
         </Grid>
-        <Grid x:Name="grid2"  HorizontalAlignment="Left" Margin="82,73,0,0" VerticalAlignment="Top" FlowDirection="RightToLeft" >
+        <Grid x:Name="grid2"  HorizontalAlignment="Left" Margin="82,73,0,0" VerticalAlignment="Top" FlowDirection="RightToLeft" Background="#FFF7F7F7" >
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="Auto"/>
                 <ColumnDefinition Width="Auto"/>
