@@ -144,19 +144,11 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="OrdersListForHostingUnit.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
     <Page Include="Orders\GuestHostingUnitUC.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Orders\HandlingOrders.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Orders\OrdersForHostingUnitGUI.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -178,17 +170,11 @@
     </Page>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="OrdersListForHostingUnit.xaml.cs">
-      <DependentUpon>OrdersListForHostingUnit.xaml</DependentUpon>
-    </Compile>
     <Compile Include="Orders\GuestHostingUnitUC.xaml.cs">
       <DependentUpon>GuestHostingUnitUC.xaml</DependentUpon>
     </Compile>
     <Compile Include="Orders\HandlingOrders.xaml.cs">
       <DependentUpon>HandlingOrders.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Orders\OrdersForHostingUnitGUI.xaml.cs">
-      <DependentUpon>OrdersForHostingUnitGUI.xaml</DependentUpon>
     </Compile>
     <Compile Include="Orders\OrdersHostingUnitUC.xaml.cs">
       <DependentUpon>OrdersHostingUnitUC.xaml</DependentUpon>
