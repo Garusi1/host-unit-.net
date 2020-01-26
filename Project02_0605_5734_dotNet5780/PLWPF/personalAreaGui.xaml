@@ -19,7 +19,7 @@
         </Style>
         </Window.Resources>
         <Window.Background>
-        <ImageBrush ImageSource="images/pz.jpg"/>
+        <ImageBrush ImageSource="images/pzd.jpg"/>
     </Window.Background>
 
 
@@ -74,7 +74,7 @@
 
             </ComboBox>
         </Grid>
-        <Grid x:Name="grid2" HorizontalAlignment="Left" Margin="501,47,0,0" VerticalAlignment="Top" Background="#FFF7F7F7">
+        <Grid x:Name="grid2" HorizontalAlignment="Left" Margin="329,47,0,0" VerticalAlignment="Top" Background="#FFF7F7F7">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="Auto"/>
                 <ColumnDefinition Width="Auto"/>
