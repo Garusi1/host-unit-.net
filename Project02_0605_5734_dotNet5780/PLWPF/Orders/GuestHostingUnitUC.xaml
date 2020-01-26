@@ -53,7 +53,8 @@
                 <RowDefinition Height="*"/>
                 <RowDefinition Height="*"/>
                 <RowDefinition Height="*"/>
-                <RowDefinition Height="5*"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="4*"/>
             </Grid.RowDefinitions>
 
 
@@ -71,9 +72,11 @@
                     </TransformGroup>
                 </RadioButton.RenderTransform>
             </RadioButton>
-            <RadioButton x:Name="showOpenRadio" Checked="showOpenRadio_Checked" Content="פתוח" DockPanel.Dock="Right" Margin="2,13.857,-46,10.286" Grid.Row="1" />
-            <RadioButton Grid.Row="2" x:Name="shoLostRadio" Checked="shoLostRadio_Checked" Content="נסגר מחוסר עניין" DockPanel.Dock="Right" Margin="0,9.714,-46,13.857"  />
-            <RadioButton Grid.Row="3" x:Name="showCloseRadio" Checked="showCloseRadio_Checked"  Content="נסגרה עסקה" DockPanel.Dock="Right" Margin="2,10.143,-46,22.429"  />
+            <RadioButton x:Name="showOpenRadio" Checked="showOpenRadio_Checked" Content="פתוח" DockPanel.Dock="Right" Margin="2,13.857,2,10.714" Grid.Row="1" />
+            <RadioButton Grid.Row="2" x:Name="shoLostRadio" Checked="shoLostRadio_Checked" Content="נסגר מחוסר עניין" DockPanel.Dock="Right" Margin="0,9.286,1,13.857"  />
+            <RadioButton Grid.Row="3" x:Name="showCloseRadio" Checked="showCloseRadio_Checked"  Content="נסגרה עסקה" DockPanel.Dock="Right" Margin="2,10.143,4,22"  />
+            <Button Grid.Row="4" Content="create order by selected guest request" Margin="0,0,600,0" Click="Button_Click_Create_Order"/>
+
             <!--<Button   x:Name="showAllRadio" Checked="showAllRadio_Checked" Content="הכל" DockPanel.Dock="Right" />-->
             <!--</DockPanel>-->
             <!--</Grid>-->

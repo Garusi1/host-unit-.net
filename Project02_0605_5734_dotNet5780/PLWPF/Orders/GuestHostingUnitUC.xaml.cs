@@ -24,7 +24,7 @@ namespace PLWPF.Orders
         BL.IBL bl;
         BE.GuestRequest GRShow;
         IEnumerable<BE.GuestRequest> ieGuest;
-        
+
 
         public GuestHostingUnitUC()
         {
@@ -47,17 +47,20 @@ namespace PLWPF.Orders
 
 
 
-    }
+        }
 
         public int number { get; set; }
 
         private void list_SelectionChanged(object sender, SelectionChangedEventArgs e)//https://social.msdn.microsoft.com/Forums/vstudio/en-US/194ee5ad-a3cf-48ae-8c0e-1aab84a1df97/how-to-get-wpf-listview-click-event?forum=wpf
         {
 
-            ieGuest = bl.GetGuestRequestList();
-            list.ItemsSource = ieGuest;
+
+
 
             GRShow = (BE.GuestRequest)list.SelectedItem;
+            ieGuest = bl.GetGuestRequestList();
+            //list.ItemsSource = ieGuest;
+
 
             if (GRShow != null)
             {
@@ -76,6 +79,71 @@ namespace PLWPF.Orders
             BE.GuestRequest selectedObject = (BE.GuestRequest)list.SelectedItem;
             selectedObject.ToString();
         }
+
+
+
+        private void Button_Click_Create_Order(object sender, RoutedEventArgs e)
+        {
+            BE.Order order = new BE.Order();
+
+            order.GuestRequestKey = GRShow.GuestRequestKey;
+            order.HostingUnitKey = number;
+
+            try
+            {
+                bl.addOrder(order);
+                System.Windows.MessageBox.Show("ההזמנה נוספה בהצלחה");
+
+            }
+
+            catch (System.ArgumentNullException ex)
+            {
+
+                System.Windows.MessageBox.Show(ex.Message);
+
+            }
+
+            catch (DuplicateWaitObjectException ex)
+            {
+
+                System.Windows.MessageBox.Show(ex.Message);
+
+            }
+
+            catch (KeyNotFoundException ex)
+            {
+
+                System.Windows.MessageBox.Show(ex.Message);
+
+            }
+
+            catch (ArgumentException ex)
+            {
+
+                System.Windows.MessageBox.Show(ex.Message);
+            }
+
+
+
+
+            catch (BE.Tools.UnLogicException ex)
+            {
+
+                System.Windows.MessageBox.Show(ex.Message);
+
+
+            }
+
+            catch (Exception ex)
+            {
+
+                System.Windows.MessageBox.Show(ex.Message);
+
+            }
+
+
+        }
+
 
 
         #region סינון 

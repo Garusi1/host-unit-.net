@@ -29,6 +29,8 @@ namespace PLWPF.Orders
         BE.Order orderTemp;
         IEnumerable<BE.Order> IenumaOrder;
         BE.HostingUnit  HUshow;
+        BE.GuestRequest guest;
+
 
         public OrdersHostingUnitUC()
         {
@@ -37,15 +39,101 @@ namespace PLWPF.Orders
 
 
 
+
+
+
+
+            #region לוח שנה
+
+            //MyCalendar = CreateCalendar();
+            //vbCalendar.Child = null; //מחיקה מהתצוגה של החלון הקודם
+            //vbCalendar.Child = MyCalendar;// הצגה של החלון הנוכחי שיצרנו
+            //SetBlackOutDates();
+
+
+
         }
+
+
+        //private void SetBlackOutDates()
+        //{
+        //    //string str;
+
+        //    //for (int i = 0; i < 12; i++)
+        //    //{
+        //    //    for (int j = 0; j < 31; j++)
+        //    //    {
+        //    //        if(HUshow.Diary[j,i]) //אם התאריך מסומן
+        //    //        {
+
+        //    //        }
+        //    //    }
+
+        //    //}
+
+
+        //    //DateTime beginDate = DateTime.Now.AddMonths(-1);//תחילת לוח
+        //    //DateTime endDate = DateTime.Now.AddMonths(11); //סוף לוח
+
+        //    //bool flag = false;
+
+        //    //for (DateTime tempDate = beginDate; tempDate < endDate; tempDate = tempDate.AddDays(1))
+        //    //{
+        //    //    if (this[tempDate])
+        //    //    {
+
+        //    //    }
+        //    //}
+
+
+
+
+
+
+        //    //for (DateTime tempDate = GR.EntryDate; tempDate < GR.RegistrationDate; tempDate = tempDate.AddDays(1))
+        //    //{
+        //    //    this[tempDate, HU] = true;//put the nights on matrix
+        //    //    Chargeamount += BE.Configuration.Commission; //חישוב עמלה על כל יום שנתפס
+        //    //}
+
+
+
+
+        ////    foreach (DateTime date in CurrentHostingUnit.AllOrders)
+        ////    {
+        ////        MyCalendar.BlackoutDates.Add(new CalendarDateRange(date));
+        ////    }
+        ////
+        
+        //}
+        //private Calendar MyCalendar;
+        //private Calendar CreateCalendar()
+        //{
+        //    Calendar MonthlyCalendar = new Calendar();
+        //    MonthlyCalendar.Name = "MonthlyCalendar";
+        //    MonthlyCalendar.DisplayMode = CalendarMode.Month;
+        //    MonthlyCalendar.SelectionMode = CalendarSelectionMode.SingleRange;
+        //    MonthlyCalendar.IsTodayHighlighted = true;
+        //    return MonthlyCalendar;
+        //}
+
+        #endregion
+
+
+
+
 
         private void list_SelectionChanged(object sender, SelectionChangedEventArgs e)//https://social.msdn.microsoft.com/Forums/vstudio/en-US/194ee5ad-a3cf-48ae-8c0e-1aab84a1df97/how-to-get-wpf-listview-click-event?forum=wpf
         {
+            try
+            {
+
+
 
             order = (BE.Order)list.SelectedItem;
 
             HUshow = bl.getHostingUnitByID(number);
-
+            guest = bl.getGuestRequestByID(order.GuestRequestKey);
 
             //number = HUshow.HostingUnitKey;
 
@@ -65,6 +153,14 @@ namespace PLWPF.Orders
                 //Console.WriteLine(bl.getGuestRequestByID(40000000 + id));
                 //Console.WriteLine(order.ToString());
             }
+
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "שגיאה");
+            }
+
+
         }
         public int number { get; set; }
 
@@ -130,8 +226,13 @@ namespace PLWPF.Orders
                     bl.UpdateOrder(order);
                     //  System.Windows.MessageBox.Show(" נסגרה בהצלחה");
 
-                    string str = (order.ToString() +  "\n  "
-                         + " " + HUshow.Type + "  " + HUshow.HostingUnitName + " מאיזור ה " + HUshow.Area
+                    string str = "שלום  " + guest.PrivateName + " "+ guest.FamilyName +
+                         "\n" + " אנחנו נרגשים  לבשר לך שנמצאה התאמה באתרינו עבור דרישת האירוח שלך!" +  
+                         "פרטי ההזמנה : "
+                        +
+                        (order.ToString() + "\n \n\n "
+                         + " " + "  " + HUshow.HostingUnitName + " מאיזור ה " + HUshow.Area+
+                         " הזמנה עבור יחידת אירות מסוג " + HUshow.Type + "תאריך כניסה :" + guest.EntryDate + "\n  תאריך יציאה: "+ guest.ReleaseDate + "\n"
                          + "\n" + " לפרטים ולסגירת עסקה אנא צרו קשר עם המארח במספר טלפון: " + HUshow.Owner.PhoneNumber
                          +  "\n  :או במייל בכתובת " + HUshow.Owner.MailAddress);
 
@@ -418,10 +519,17 @@ namespace PLWPF.Orders
 
         #endregion
 
+
+
+
+
+
         private void DataGrid_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-
+            Console.WriteLine();
         }
+
+
     }
 
 }

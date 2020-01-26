@@ -398,6 +398,19 @@ namespace BL
             BE.GuestRequest GR = getGuestRequestByID(order.GuestRequestKey);
             BE.HostingUnit HU = getHostingUnitByID(order.HostingUnitKey); // בהנחה שזה קיים אחרת לא נשלחה בקשה לפונקציה זו
 
+            var alredayExisits = from item in GetOrderList(x => x.GuestRequestKey == order.GuestRequestKey) //איפה שיש כבר הזמנה לדרישה זו
+                                 where item.HostingUnitKey == order.HostingUnitKey
+                                 select item;
+
+            if(alredayExisits.Count()>0) //זאת אומרת שכבר יש הזמנה לדרישת אירוח זו וליחדת אירוח זו
+            {
+                throw new DuplicateWaitObjectException(string.Format("לא ניתן ליצור הזמנה כפולה!" +
+                    "קיימת כבר הזמנה  מס' " 
+                    + alredayExisits.FirstOrDefault().OrderKey + " עבור דרישת לקוח מספר " + alredayExisits.FirstOrDefault().GuestRequestKey + "ויחידה מספר: "
+                    + alredayExisits.FirstOrDefault().HostingUnitKey));
+            }
+            
+
             if (GR == null)
             {
                 throw new System.ArgumentNullException(string.Format("worng input {0} not exsits ", order.GuestRequestKey));
@@ -526,7 +539,7 @@ namespace BL
                 //תפיסת היחידה
                 //DateTime LastNight = GR.RegistrationDate.AddDays(-2);
 
-                for (DateTime tempDate = GR.EntryDate; tempDate < GR.RegistrationDate; tempDate = tempDate.AddDays(1))
+                for (DateTime tempDate = GR.EntryDate; tempDate < GR.ReleaseDate; tempDate = tempDate.AddDays(1))
                 {
                     this[tempDate, HU] = true;//put the nights on matrix
                     Chargeamount += BE.Configuration.Commission; //חישוב עמלה על כל יום שנתפס

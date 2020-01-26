@@ -110,8 +110,7 @@ namespace BE
             str += "מספר הזמנה: " + OrderKey + "\n" +
                 "עבור יחידת אירוח מספר " + HostingUnitKey + "\n" + "מספר דרישת אירוח " + GuestRequestKey + "\n" +
                 //"Status: " + Status + "\n" +
-                "תאריך יצירת הזמנה  " + CreateDate.ToString() + "\n" +
-                "הזמנה ל : " + OrderDate.ToString() + "\n" 
+                "תאריך יצירת הזמנה  " + CreateDate.ToString() + "\n" 
                 ;
             return str;
         }
