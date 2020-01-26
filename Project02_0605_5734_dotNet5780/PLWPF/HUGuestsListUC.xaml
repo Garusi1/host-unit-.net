@@ -24,6 +24,7 @@
                     <GridViewColumn Header="{DynamicResource RegistrationDate}" Width="auto" DisplayMemberBinding="{Binding RegistrationDate}"></GridViewColumn>
                     <GridViewColumn Header="{DynamicResource EntryDate}" Width="auto" DisplayMemberBinding="{Binding EntryDate}"></GridViewColumn>
                     <GridViewColumn Header="{DynamicResource ReleaseDate}" Width="auto" DisplayMemberBinding="{Binding ReleaseDate}"></GridViewColumn>
+                    <GridViewColumn Header="{DynamicResource Status}" Width="auto" DisplayMemberBinding="{Binding Status}"></GridViewColumn>
                     <GridViewColumn Header="{DynamicResource Area}" Width="auto" DisplayMemberBinding="{Binding Area}"></GridViewColumn>
                     <GridViewColumn Header="{DynamicResource Type}" Width="auto" DisplayMemberBinding="{Binding Type}"></GridViewColumn>
                     <GridViewColumn Header="{DynamicResource Pool}" Width="auto" DisplayMemberBinding="{Binding Pool}"></GridViewColumn>

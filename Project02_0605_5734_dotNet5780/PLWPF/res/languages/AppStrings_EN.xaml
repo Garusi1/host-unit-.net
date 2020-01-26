@@ -66,5 +66,6 @@
     <System:String x:Key="CollectionClearance">CollectionClearance</System:String>
     <System:String x:Key="HostingUnitName">HostingUnitName</System:String>
     <System:String x:Key="Number Of HostingUnits">Number Of HostingUnits</System:String>
+    <System:String x:Key="Status">Status</System:String>
 
 </ResourceDictionary>

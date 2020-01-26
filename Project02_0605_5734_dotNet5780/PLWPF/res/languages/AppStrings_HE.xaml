@@ -66,5 +66,7 @@
     <System:String x:Key="CollectionClearance">הרשאת חיוב</System:String>
     <System:String x:Key="HostingUnitName">שם יחידת אירוח</System:String>
     <System:String x:Key="Number Of HostingUnits">מספר יחידות אירוח</System:String>
+    <System:String x:Key="Status">סטטוס</System:String>
+
 
 </ResourceDictionary>

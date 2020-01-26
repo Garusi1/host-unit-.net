@@ -32,6 +32,15 @@ namespace PLWPF.Orders
         BE.GuestRequest guest;
 
 
+
+
+
+
+
+
+
+
+
         public OrdersHostingUnitUC()
         {
             InitializeComponent();
@@ -119,15 +128,15 @@ namespace PLWPF.Orders
 
         #endregion
 
-
-
-        void mouseClick(object sender, RoutedEventArgs e)
+        public void mouseClick(object sender, RoutedEventArgs e)
         {
             var btn = sender as System.Windows.Controls.Button;
             list.SelectedItem = btn.DataContext;
             order = (BE.Order)list.SelectedItem;
 
         }
+
+
 
         private void list_SelectionChanged(object sender, SelectionChangedEventArgs e)//https://social.msdn.microsoft.com/Forums/vstudio/en-US/194ee5ad-a3cf-48ae-8c0e-1aab84a1df97/how-to-get-wpf-listview-click-event?forum=wpf
         {
@@ -140,11 +149,14 @@ namespace PLWPF.Orders
             HUshow = bl.getHostingUnitByID(number);
             guest = bl.getGuestRequestByID(order.GuestRequestKey);
 
-
-            IenumaOrder = bl.GetOrderList(x => x.HostingUnitKey == number); //הצג רק הזמנות רלוונטיות ליחידת אירוח זו. 
             order = (BE.Order)list.SelectedItem;
 
-            list.ItemsSource = IenumaOrder;
+            IenumaOrder = bl.GetOrderList(x => x.HostingUnitKey == number); //הצג רק הזמנות רלוונטיות ליחידת אירוח זו. 
+
+
+
+
+            //list.ItemsSource = IenumaOrder;
             //
 
             //order = (BE.Order)list.SelectedItem;

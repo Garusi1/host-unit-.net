@@ -33,21 +33,24 @@ namespace PLWPF.Orders
 
 
 
+            GRShow = (BE.GuestRequest)list.SelectedItem;
+            ieGuest = bl.GetGuestRequestList();
 
 
-
-
-            void mouseClick(object sender, RoutedEventArgs e)
-            {
-                var btn = sender as System.Windows.Controls.Button;
-                list.SelectedItem = btn.DataContext;
-                GRShow = (BE.GuestRequest)list.SelectedItem;
-                Console.WriteLine(GRShow.ToString());
-            }
+            list.ItemsSource = ieGuest;
 
 
 
         }
+
+        public void mouseClick(object sender, RoutedEventArgs e)
+        {
+            var btn = sender as System.Windows.Controls.Button;
+            list.SelectedItem = btn.DataContext;
+            GRShow = (BE.GuestRequest)list.SelectedItem;
+            Console.WriteLine(GRShow.ToString());
+        }
+
 
         public int number { get; set; }
 
