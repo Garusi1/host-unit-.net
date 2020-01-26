@@ -26,54 +26,39 @@ namespace PLWPF
         BE.Host hostShow;
         IEnumerable<IGrouping<int, BE.Host>> IenumaIgroupHosts;
 
-        IEnumerable<BE.Host> IenumaHosts;
         List<BE.Host> newList;
 
         public HotsUC()
         {
+
+
             InitializeComponent();
             bl = BL.Factory.GetInstance();
 
+
+
             IenumaIgroupHosts = bl.groupByNumberOfHosintgUnitForHost();// כנראה שצריך הגדרת משתנה מארח אנונימי שיש לו עוד שדה בשם כמות היחידות.  לא צריך מחיקת Host.
-
-            //var IenumaNewHosts = from item in IenumaIgroupHosts
-            //                     select 
-
-
-            List<BE.Host> ls = new List<BE.Host>();
-            //IEnumerable<IGrouping<int, BE.Host>> groups = list.GroupBy(x => x.id);
             
-            IEnumerable<BE.Host> smths = IenumaIgroupHosts.SelectMany(IenumaIgroupHosts => IenumaIgroupHosts);
-            List<BE.Host> newList = smths.ToList();
+            newList = new List<BE.Host>();
+
+                //smths.ToList();
+
+            foreach (var groupingByNumOfHU in IenumaIgroupHosts)   //עוברים על ה iGroping 
+            {
+                int propertyIntOfClassA = groupingByNumOfHU.Key;
+                //propertyIntOfClassA = IenumaIgroupHosts.num_of_Unit;
+
+                foreach (var host in groupingByNumOfHU) //מוספים רכיבים ומאתחלים רכיב של host
+                {
+                    host.NumberOfHostingUnits = propertyIntOfClassA;
+                    newList.Add(host);
+                    //int key = classA.NumberOfHostingUnits;
+                }
+            }
+
+
 
             list.ItemsSource = newList;
-
-
-
-            //List<smth> list = new List<smth>();
-            //IEnumerable<IGrouping<int, smth>> groups = list.GroupBy(x => x.id);
-            //IEnumerable<smth> smths = groups.SelectMany(group => group);
-            //List<smth> newList = smths.ToList();
-
-
-
-            //newList = new List< BE.Host > ();
-            ////IEnumerable<IGrouping<int, BE.Host>> groups = list.GroupBy(x => x.hos);
-
-            //IenumaHosts = IenumaIgroupHosts.SelectMany(group => group);
-
-
-            //newList = IenumaHosts.ToList();
-            //newList.ItemsSource = IenumaHosts;
-
-
-
-
-            //    void mouseClick(object sender, RoutedEventArgs e)
-            //    {
-            //        var btn = sender as System.Windows.Controls.Button;
-            //        list.SelectedItem = btn.DataContext;
-            //        hostShow = (BE.Host)list.SelectedItem;
 
         }
 
