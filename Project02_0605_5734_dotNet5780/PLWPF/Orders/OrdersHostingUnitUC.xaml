@@ -48,8 +48,7 @@
                 <RowDefinition Height="*"/>
                 <RowDefinition Height="*"/>
                 <RowDefinition Height="*"/>
-                <RowDefinition Height="*"/>
-                <RowDefinition Height="2*"/>
+                <RowDefinition Height="auto"/>
 
 
 
@@ -76,6 +75,10 @@
             <RadioButton Grid.Row="4" x:Name="showLostRadio" Checked="showLostRadio_Checked"  Content="נסגרה מחוסר הענות" DockPanel.Dock="Right" Margin="2,10,0,22.571"  />
             <Button Grid.Row="4" Content="שלח מייל"  Click="Button_Click_send_email"  />
             <Button Grid.Row="5"  Content="סגור עסקה" Click="Button_Click_confirm_order" />
+            <!--לוח שנה-->
+            <Viewbox Name="vbCalendar" Grid.Row="6" Stretch="Fill" HorizontalAlignment="Left" Height="150" Margin="0.143,0,0,0" VerticalAlignment="Top" Width="267" />
+
+
 
             <!--<Button   x:Name="showAllRadio" Checked="showAllRadio_Checked" Content="הכל" DockPanel.Dock="Right" />-->
             <!--</DockPanel>-->

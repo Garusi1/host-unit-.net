@@ -232,6 +232,14 @@ namespace DAL
 
             }
 
+            if (order.CreateDate==default)
+            {
+                order.CreateDate = DateTime.Now;
+            }
+
+
+
+
             ds.getOrderList().Add(order.Clone());
 
 
@@ -242,6 +250,10 @@ namespace DAL
         {
 
             ds.getOrderList().RemoveAll(x => x.OrderKey == order.OrderKey);
+            if ((order.OrderDate== default)&&(order.Status==BE.StatusEnum.נשלח_מייל))
+            {
+                order.OrderDate = DateTime.Now;
+            }
             addOrder(order);
 
             ////dataSource.orders.RemoveAll(x => x.OrderKey == ord.OrderKey);

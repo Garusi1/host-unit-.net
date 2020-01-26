@@ -38,21 +38,43 @@ namespace DAL
         new BE.GuestRequest()
             {// יש לערוך ולממש כמו שצריך
         GuestRequestKey=BE.Configuration.geustReqID++,
-        PrivateName="שלמה",
-        FamilyName="שלמה",
+        PrivateName="שלום",
+        FamilyName="שוקר",
         MailAddress=/*@*/"shuker@g.jct.ac.il",
         Status=StatusGREnum.פתוחה,
         RegistrationDate=DateTime.Now,
-        EntryDate=DateTime.Now.Date.AddDays(10),// סתם לצורך הדוגמה -
-        ReleaseDate=DateTime.Now.Date.AddDays(20),
-        Area=AreaEnum.North,
+        EntryDate=DateTime.Now.Date,// סתם לצורך הדוגמה -
+        ReleaseDate=DateTime.Now.Date.AddDays(7),
+        Area=AreaEnum.All,
         Type=TypeEnum.Zimmer,
         Pool=AttractionsEnum.לא_מעוניין,
         Jacuzzi=AttractionsEnum.אפשרי,
-        Garden=AttractionsEnum.הכרחי,
+        Garden=AttractionsEnum.אפשרי,
+        ChildrensAttractions=AttractionsEnum.אפשרי,
+        Adults=2,
+        Children=1,
+             }
+        ,
+        new BE.GuestRequest()
+            {// יש לערוך ולממש כמו שצריך
+        GuestRequestKey=BE.Configuration.geustReqID++,
+        PrivateName="סלאי",
+        FamilyName="שוקר",
+        MailAddress=/*@*/"salay4@gmail.com",
+        Status=StatusGREnum.פתוחה,
+        RegistrationDate=DateTime.Now,
+        EntryDate=DateTime.Now.Date,// סתם לצורך הדוגמה -
+        ReleaseDate=DateTime.Now.Date.AddDays(7),
+        Area=AreaEnum.All,
+        Type=TypeEnum.Zimmer,
+        Pool=AttractionsEnum.לא_מעוניין,
+        Jacuzzi=AttractionsEnum.אפשרי,
+        Garden=AttractionsEnum.אפשרי,
+        ChildrensAttractions=AttractionsEnum.אפשרי,
         Adults=2,
         Children=1,
              },
+
                 new BE.GuestRequest()
             {// יש לערוך ולממש כמו שצריך
         GuestRequestKey=BE.Configuration.geustReqID++,
@@ -286,7 +308,7 @@ namespace DAL
             OrderKey=BE.Configuration.orderID++, /// יש לממש בעזרת מספר רץ
             Status=StatusEnum.טרם_טופל,
             CreateDate=DateTime.Now,
-            OrderDate=DateTime.Now.AddDays(5), //תלוי שליחת מיילץ 
+
         },
         new Order()
         {
@@ -295,7 +317,7 @@ namespace DAL
             OrderKey=BE.Configuration.orderID++, /// יש לממש בעזרת מספר רץ
             Status=StatusEnum.טרם_טופל,
             CreateDate=DateTime.Now,
-            OrderDate=DateTime.Now.AddDays(5), //תלוי שליחת מיילץ 
+
         }
         ,
         new Order()
@@ -305,7 +327,7 @@ namespace DAL
             OrderKey=BE.Configuration.orderID++, /// יש לממש בעזרת מספר רץ
             Status=StatusEnum.טרם_טופל,
             CreateDate=DateTime.Now,
-            OrderDate=DateTime.Now.AddDays(5), //תלוי שליחת מיילץ 
+
         }
 
 
