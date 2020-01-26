@@ -12,7 +12,7 @@
         <Grid Margin="0,0,120,0" >
 
             <DataGrid HorizontalAlignment="Left" Height="401" Margin="10,10,0,0" VerticalAlignment="Top" Width="670" SelectionChanged="DataGrid_SelectionChanged"/>
-            <ListView ItemsSource="{Binding}" x:Name="list" IsSynchronizedWithCurrentItem="True" SelectionChanged="list_SelectionChanged"  FlowDirection="RightToLeft" Margin="0,0,0,0.286"
+            <ListView ItemsSource="{Binding}" x:Name="list" IsSynchronizedWithCurrentItem="True" SelectionChanged="list_SelectionChanged"  FlowDirection="RightToLeft"
                         GridViewColumnHeader.Click="GridViewColumnHeaderClickedHandler">
 
 
@@ -27,7 +27,7 @@
                         <GridViewColumn Header="{DynamicResource HostingUnitKey}" Width="auto" DisplayMemberBinding="{Binding HostingUnitKey}"></GridViewColumn>
                         <GridViewColumn Header="{DynamicResource Order Status}" Width="auto" DisplayMemberBinding="{Binding Status}"></GridViewColumn>
                         <GridViewColumn Header="{DynamicResource Order Date}" Width="auto" DisplayMemberBinding="{Binding OrderDate}"></GridViewColumn>
-                        
+
 
                     </GridView>
                 </ListView.View>
@@ -35,7 +35,7 @@
         </Grid>
 
 
-        <Grid Margin="659,0,0,10" FlowDirection="RightToLeft" Background="#FFF7F7F7" >
+        <Grid Margin="0,0,-3,32" FlowDirection="RightToLeft" Background="#FFF7F7F7" HorizontalAlignment="Right" Width="118" Height="408" VerticalAlignment="Bottom" >
             <!--<Grid Margin="447,-43,0,405" >-->
             <!--<DockPanel DockPanel.Dock="Right"  >-->
 
@@ -55,7 +55,7 @@
             <!--<Button x:Name="filterGR_button" Content="סנן לפי" Margin="632,0,0,0" Click="filterGR_button_Click"> </Button>-->
             <!--<TextBlock  Text="סנן דרישות אירוח לפי : " DockPanel.Dock="Right" />-->
 
-            <RadioButton Grid.Row="0" x:Name="showAllRadio" Checked="showAllRadio_Checked" Content="הכל" DockPanel.Dock="Right" Margin="2,10,0,14.143" RenderTransformOrigin="0.5,0.5"  >
+            <RadioButton Grid.Row="0" x:Name="showAllRadio" Checked="showAllRadio_Checked" Content="הכל"  DockPanel.Dock="Right" Margin="2,10,0,14.143" RenderTransformOrigin="0.5,0.5"  >
                 <RadioButton.RenderTransform>
                     <TransformGroup>
                         <ScaleTransform/>
