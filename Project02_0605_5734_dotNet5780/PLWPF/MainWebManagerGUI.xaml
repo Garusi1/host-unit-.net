@@ -10,7 +10,7 @@
         <Style x:Key="myButtonStyle"
            TargetType="Button">
             <Setter Property="FontSize"
-              Value="22" />
+              Value="12" />
             <Setter Property="FontFamily"
               Value="Consolas" />
             <Setter Property="FontWeight"
@@ -27,10 +27,10 @@
     </Window.Resources>
 
     <Grid>
-        <Button Click="GuestsList_Button_Click" x:Name="GuestsList_Button" Style="{StaticResource myButtonStyle}" Content="{DynamicResource Guest Requests}" Margin="1204,0,0.286,615.429" />
-        <Button Click="orderLists_Button_Click" x:Name="orderLists_Button" Style="{StaticResource myButtonStyle}" Content="{DynamicResource OrderList}" Margin="898,0,306.286,615.429" />
-        <Button Click="hostingUnitLists_Button_Click"  x:Name="hostingUnitLists_Button" Style="{StaticResource myButtonStyle}" Content="{DynamicResource HostingUnitList}" Margin="573,0,631.286,615.429" />
-        <Button Click="hostLists_Button_Click" x:Name="hostLists_Button" Style="{StaticResource myButtonStyle}" Content="{DynamicResource HostsList}" Margin="251,0,953.286,615.429" />
+        <Button Click="GuestsList_Button_Click" x:Name="GuestsList_Button" Style="{StaticResource myButtonStyle}" Content="{DynamicResource Guest Requests}" Margin="1164,0,40.333,615.667" />
+        <Button Click="orderLists_Button_Click" x:Name="orderLists_Button" Style="{StaticResource myButtonStyle}" Content="{DynamicResource OrderList}" Margin="784,0,420.333,615.667" />
+        <Button Click="hostingUnitLists_Button_Click"  x:Name="hostingUnitLists_Button" Style="{StaticResource myButtonStyle}" Content="{DynamicResource HostingUnitList}" Margin="389,0,815.333,615.667" />
+        <Button Click="hostLists_Button_Click" x:Name="hostLists_Button" Style="{StaticResource myButtonStyle}" Content="{DynamicResource HostsList}" Margin="10,0,1194.333,615.667" />
         
         
         
