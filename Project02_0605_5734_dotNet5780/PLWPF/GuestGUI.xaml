@@ -7,9 +7,31 @@
         xmlns:BE="clr-namespace:BE;assembly=BE" x:Class="PLWPF.GuestGUI"
         mc:Ignorable="d"
         Title="הוספת בקשת אירוח" Height="700" Width="800" >
+
+    <Window.Resources>
+        <Style x:Key="myButtonStyle"
+           TargetType="Button">
+            <Setter Property="FontSize"
+              Value="22" />
+            <Setter Property="FontFamily"
+              Value="Consolas" />
+            <Setter Property="FontWeight"
+              Value="Bold" />
+            <Style.Triggers>
+                <Trigger Property="IsMouseOver" Value="true">
+                    <Setter Property="Foreground" Value="Blue"/>
+                    <Setter Property="TextBlock.Focusable" Value="True"/>
+
+                </Trigger>
+            </Style.Triggers>
+
+        </Style>
+    </Window.Resources>
+
     <Window.Background>
         <ImageBrush ImageSource="images/guest.jpg"/>
     </Window.Background>
+    
 
     <Grid>
         <Grid.RowDefinitions>
@@ -19,7 +41,7 @@
         </Grid.RowDefinitions>
 
 
-        <Button Content="שמור"   Margin="10"  FontSize="30" Grid.Row="2" Click="Button_Click_Save_GuestRequest" ClickMode="Hover">
+        <Button Content="שמור"  Style="{StaticResource myButtonStyle}"  Margin="10"  FontSize="30" Grid.Row="2" Click="Button_Click_Save_GuestRequest" ClickMode="Hover">
 
             <!--
             <Button.Style>

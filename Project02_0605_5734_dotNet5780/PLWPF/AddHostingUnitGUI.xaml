@@ -10,6 +10,25 @@
     <Window.Background>
         <ImageBrush ImageSource="images/newHU.jpg"/>
     </Window.Background>
+    <Window.Resources>
+        <Style x:Key="myButtonStyle"
+           TargetType="Button">
+            <Setter Property="FontSize"
+              Value="22" />
+            <Setter Property="FontFamily"
+              Value="Consolas" />
+            <Setter Property="FontWeight"
+              Value="Bold" />
+            <Style.Triggers>
+                <Trigger Property="IsMouseOver" Value="true">
+                    <Setter Property="Foreground" Value="Blue"/>
+                    <Setter Property="TextBlock.Focusable" Value="True"/>
+
+                </Trigger>
+            </Style.Triggers>
+
+        </Style>
+    </Window.Resources>
 
     <Grid Margin="0,0,0.286,-167.286" >
         <Grid.RowDefinitions>
@@ -97,7 +116,7 @@
             <Label Content="{DynamicResource Branch Number:}" Grid.Column="0" HorizontalAlignment="Left" Margin="3" Grid.Row="12" VerticalAlignment="Center"/>
             <TextBox x:Name="branchNumberTextBox" Grid.Column="1" HorizontalAlignment="Left" Height="23" Margin="3" Grid.Row="12" Text="{Binding Owner.BankBranchDetails.BranchNumber, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" VerticalAlignment="Center" Width="120"/>
         </Grid>
-        <Button Content="{DynamicResource Save}" HorizontalAlignment="Left" Margin="342,23.286,0,0" Grid.Row="1" VerticalAlignment="Top" Width="75" Click="Button_Click_Save_HostingUnit"/>
+        <Button Content="{DynamicResource Save}" Style="{StaticResource myButtonStyle}" HorizontalAlignment="Left" Margin="342,23.286,0,0" Grid.Row="1" VerticalAlignment="Top" Width="75" Click="Button_Click_Save_HostingUnit"/>
 
     </Grid>
 </Window>

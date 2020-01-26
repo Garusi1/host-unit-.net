@@ -15,6 +15,14 @@
               Value="Consolas" />
             <Setter Property="FontWeight"
               Value="Bold" />
+            <Style.Triggers>
+                <Trigger Property="IsMouseOver" Value="true">
+                    <Setter Property="Foreground" Value="Blue"/>
+                    <Setter Property="TextBlock.Focusable" Value="True"/>
+
+                </Trigger>
+            </Style.Triggers>
+
         </Style>
     </Window.Resources>
     <Window.Background>
