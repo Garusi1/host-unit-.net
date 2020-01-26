@@ -13,7 +13,7 @@
         <Grid Margin="0,0,120,0" >
 
             <DataGrid HorizontalAlignment="Left" Height="401" Margin="10,10,0,0" VerticalAlignment="Top" Width="670" SelectionChanged="DataGrid_SelectionChanged"/>
-            <ListView ItemsSource="{Binding}" x:Name="list" IsSynchronizedWithCurrentItem="True" SelectionChanged="list_SelectionChanged"  FlowDirection="RightToLeft" Margin="0,0,0,0.286"
+            <ListView ItemsSource="{Binding}" x:Name="list" IsSynchronizedWithCurrentItem="True" SelectionChanged="list_SelectionChanged"  FlowDirection="RightToLeft" Margin="0,0,13,0"
                         GridViewColumnHeader.Click="GridViewColumnHeaderClickedHandler">
 
 
@@ -36,7 +36,7 @@
         </Grid>
 
 
-        <Grid Margin="686,30,0,-20" FlowDirection="RightToLeft" >
+        <Grid Margin="686,31,0,114" FlowDirection="RightToLeft" >
             <!--<Grid Margin="447,-43,0,405" >-->
             <!--<DockPanel DockPanel.Dock="Right"  >-->
 
@@ -73,10 +73,9 @@
             <RadioButton Grid.Row="2" x:Name="showMailRadio" Checked="shoMailRadio_Checked" Content="נשלח מייל" DockPanel.Dock="Right" Margin="0,9.286,0,13.857"  />
             <RadioButton Grid.Row="3" x:Name="showCloseRadio" Checked="showCloseRadio_Checked"  Content="נסגרה עסקה" DockPanel.Dock="Right" Margin="2,10.143,0,22"  />
             <RadioButton Grid.Row="4" x:Name="showLostRadio" Checked="showLostRadio_Checked"  Content="נסגרה מחוסר הענות" DockPanel.Dock="Right" Margin="2,10,0,22.571"  />
-            <Button Grid.Row="6" Content="שלח מייל"  Click="Button_Click_send_email" Margin="133,0,-133,101"  />
-            <Button Grid.Row="6"  Content="סגור עסקה" Click="Button_Click_confirm_order" Margin="133,68,-133,34" />
+            <Button Grid.Row="6"   Content="שלח מייל"  Click="Button_Click_send_email" Margin="2,97.667,-2,-48.333" HorizontalAlignment="Left" Width="114"  />
+            <Button Grid.Row="6"  Content="סגור עסקה" Click="Button_Click_confirm_order" Margin="2,129.333,-2,-80.333" HorizontalAlignment="Left" Width="114" />
             <!--לוח שנה-->
-            <Viewbox Name="vbCalendar" Grid.Row="6" Stretch="Fill" HorizontalAlignment="Left" Height="150" Margin="0.143,0,0,0" VerticalAlignment="Top" Width="267" />
 
 
 
