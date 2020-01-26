@@ -35,7 +35,7 @@
         </Grid>
 
 
-        <Grid Margin="686,0,0,10.286" FlowDirection="RightToLeft" >
+        <Grid Margin="659,0,0,10" FlowDirection="RightToLeft" Background="#FFF7F7F7" >
             <!--<Grid Margin="447,-43,0,405" >-->
             <!--<DockPanel DockPanel.Dock="Right"  >-->
 
