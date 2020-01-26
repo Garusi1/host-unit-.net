@@ -510,15 +510,15 @@ namespace BL
 
             }
 
-            if ((HU.Owner.CollectionClearance == "Yes") && (order.Status == BE.StatusEnum.נשלח_מייל))
-            {
-                Thread thr = new Thread(sendAnEamil);
-                thr.Start();
+            //if ((HU.Owner.CollectionClearance == "Yes") && (order.Status == BE.StatusEnum.נשלח_מייל))
+            //{
+            //    Thread thr = new Thread(sendAnEamil);
+            //    thr.Start();
 
-                sendMail(order); //שליחת מייל עם פרטי הזמנה
-                order.OrderDate = DateTime.Now;
+            //    sendMail(order); //שליחת מייל עם פרטי הזמנה
+            //    order.OrderDate = DateTime.Now;
 
-            }
+            //}
 
             if ((HU.Owner.CollectionClearance == "Yes") && (order.Status == BE.StatusEnum.נסגר_בהיענות_הלקוח))
             {
@@ -557,12 +557,13 @@ namespace BL
 
                 var fit = from orderShow in GetOrderList()
                           where (GR.GuestRequestKey == orderShow.GuestRequestKey) && (order.OrderKey != orderShow.OrderKey)//לוקח את כל הרשימה מלבד אותו מופע של הזמנה
-                          select /*{GS.GuestRequestKey,HU.HostingUnitKey };*/orderShow.Status == BE.StatusEnum.נסגר_מחוסר_הענות_הלקוח;
+                          select orderShow;
 
                 try
                 {
-                    foreach (var item in GetOrderList())
+                    foreach (var item in fit)
                     {
+                        item.Status= BE.StatusEnum.נסגר_מחוסר_הענות_הלקוח;
                         IDAL.UpdateOrder(item/*.Clone()*/);
                     }
                 }

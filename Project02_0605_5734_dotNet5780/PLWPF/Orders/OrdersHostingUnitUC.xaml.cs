@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Net;
 using System.Net.Mail;
@@ -26,32 +27,48 @@ namespace PLWPF.Orders
         BL.IBL bl;
         BE.Order order;
         BE.Order orderTemp;
-        IEnumerable<BE.Order> ieOrder;
+        IEnumerable<BE.Order> IenumaOrder;
+        BE.HostingUnit  HUshow;
 
         public OrdersHostingUnitUC()
         {
             InitializeComponent();
             bl = BL.Factory.GetInstance();
 
-            ieOrder = bl.GetOrderList();
 
-            list.ItemsSource = ieOrder;
+
         }
 
         private void list_SelectionChanged(object sender, SelectionChangedEventArgs e)//https://social.msdn.microsoft.com/Forums/vstudio/en-US/194ee5ad-a3cf-48ae-8c0e-1aab84a1df97/how-to-get-wpf-listview-click-event?forum=wpf
         {
 
             order = (BE.Order)list.SelectedItem;
+
+            HUshow = bl.getHostingUnitByID(number);
+
+
+            //number = HUshow.HostingUnitKey;
+
+            //HUshow = bl.getHostingUnitByID(number);
+
+            IenumaOrder = bl.GetOrderList(x => x.HostingUnitKey == number); //הצג רק הזמנות רלוונטיות ליחידת אירוח זו. 
+
+            //list.ItemsSource = IenumaOrder;
+            //
+
+            //order = (BE.Order)list.SelectedItem;
+
             if (order != null)
             {
                 //int id = int.Parse(selectedrow.Row.ItemArray[0].ToString());
                 //Console.WriteLine(id);
                 //Console.WriteLine(bl.getGuestRequestByID(40000000 + id));
-                Console.WriteLine(order.ToString());
+                //Console.WriteLine(order.ToString());
             }
         }
+        public int number { get; set; }
 
-
+        #region סגירת עיסקה
         private void Button_Click_confirm_order(object sender, RoutedEventArgs e)
         {
             orderTemp = order;
@@ -61,6 +78,7 @@ namespace PLWPF.Orders
             {
                 bl.UpdateOrder(order);
                 System.Windows.MessageBox.Show("ההזמנה נסגרה בהצלחה");
+                IenumaOrder = bl.GetOrderList(x => x.HostingUnitKey == number); //הצג רק הזמנות רלוונטיות ליחידת אירוח זו. 
 
             }
 
@@ -89,15 +107,17 @@ namespace PLWPF.Orders
 
 
         }
+        #endregion
+
+        #region שליחת מייל
+
 
         private void Button_Click_send_email(object sender, RoutedEventArgs e)
         {
 
 
-            Thread thr = new Thread(sendAnEamil);
-            thr.Start(789);
-
-            Console.WriteLine("Main Thread Ends!!");
+            if (order != null)
+            {
 
 
 
@@ -105,10 +125,67 @@ namespace PLWPF.Orders
             orderTemp = order;
             order.Status = BE.StatusEnum.נשלח_מייל;
 
-            try
+                try
+                {
+                    bl.UpdateOrder(order);
+                    //  System.Windows.MessageBox.Show(" נסגרה בהצלחה");
+
+                    string str = (order.ToString() +  "\n  "
+                         + " " + HUshow.Type + "  " + HUshow.HostingUnitName + " מאיזור ה " + HUshow.Area
+                         + "\n" + " לפרטים ולסגירת עסקה אנא צרו קשר עם המארח במספר טלפון: " + HUshow.Owner.PhoneNumber
+                         +  "\n  :או במייל בכתובת " + HUshow.Owner.MailAddress);
+
+
+                    var client = new SmtpClient("smtp.gmail.com", 587)
+                    {
+                        Credentials = new NetworkCredential("zimmerisrael123@gmail.com", "Aa12345678910"),
+                        EnableSsl = true
+                    };
+                   
+                    Thread T1 = new Thread(delegate ()
+                    {
+                        using (var message = new MailMessage("zimmerisrael123@gmail.com", bl.getGuestRequestByID(order.GuestRequestKey).MailAddress)
+                        {
+                            Subject = "נמצאה התאמת בקשת אירוח!",
+                            Body = str
+                        })
+                        {
+                            {
+                                client.Send(message);
+                            }
+                        }
+                    });
+
+
+
+                    T1.Start();
+
+
+
+
+                    //Thread thr = new Thread(sendAnEamil);
+
+
+
+
+                    
+                //thr.Start();
+
+
+
+                MessageBox.Show("המייל נשלח בהצלחה!", "המייל נשלח");
+
+
+                IenumaOrder = bl.GetOrderList(x => x.HostingUnitKey == number); //הצג רק הזמנות רלוונטיות ליחידת אירוח זו. 
+
+
+
+
+                }
+                catch (ArgumentNullException ex)
             {
-                bl.UpdateOrder(order);
-                //  System.Windows.MessageBox.Show(" נסגרה בהצלחה");
+                order = orderTemp;
+                MessageBox.Show(ex.Message , "ההודעה במייל ריקה");
 
             }
 
@@ -132,7 +209,32 @@ namespace PLWPF.Orders
 
 
             }
+            catch (SmtpFailedRecipientsException ex)
+            {
+                order = orderTemp;
+                MessageBox.Show(ex.Message, "ההודעה לא יכלה להישלח לחלק מהנמענים");
 
+
+            }
+            catch (InvalidOperationException ex)
+            {
+                order = orderTemp;
+                MessageBox.Show(ex.Message, "בעיה בנתונים שהוכנסו בהודעה (נתונים חסרים או שגויים)");
+
+            }
+
+            catch (SmtpException ex)
+            {
+                order = orderTemp;
+                MessageBox.Show(ex.Message, "שגיאה בעת התחברות לשרת");
+
+            }
+            }
+            else
+            {
+                MessageBox.Show(" יש לבחור תחילה הזמנה מתוך הרשימה", "שגיאה");
+
+            }
         }
         public void sendAnEamil()
         {
@@ -144,15 +246,188 @@ namespace PLWPF.Orders
             };
 
             client.Send(bl.getGuestRequestByID(order.GuestRequestKey).MailAddress,
-                bl.getGuestRequestByID(order.GuestRequestKey).MailAddress, order.ToString(), "love you :) \n Garusi zimmer ");
-            Console.WriteLine("Sent");
+                bl.getGuestRequestByID(order.GuestRequestKey).MailAddress, order.ToString(), "love you :) \n  " 
+                +" " + HUshow.Type+" " +  HUshow.HostingUnitName + " from the "  + HUshow.Area);
+            //Console.WriteLine("Sent");
 
 
-            Console.ReadLine();
+            //Console.ReadLine();
         }
 
+        #endregion
+
+
+
+        #region סינון 
+
+        private void showAllRadio_Checked(object sender, RoutedEventArgs e)
+        {
+            if (showAllRadio.IsChecked == true)
+            {
+
+                IenumaOrder = bl.GetOrderList(x => x.HostingUnitKey == number);
+                list.ItemsSource = IenumaOrder;
+
+
+            }
+        }
+
+        private void shoMailRadio_Checked(object sender, RoutedEventArgs e)
+        {
+            if (showMailRadio.IsChecked == true)
+            {
+                var orderMoreConditions = from order in bl.GetOrderList((x => x.HostingUnitKey == number))
+                            where order.Status == BE.StatusEnum.נשלח_מייל
+                            select order;
+
+                //IenumaOrder = orderMoreConditions;
+                list.ItemsSource = orderMoreConditions;
+
+
+            }
+        }
+        private void showOpenRadio_Checked(object sender, RoutedEventArgs e)
+        {
+            if (showOpenRadio.IsChecked == true)
+            {
+
+                var orderMoreConditions = from order in bl.GetOrderList((x => x.HostingUnitKey == number))
+                                          where order.Status == BE.StatusEnum.טרם_טופל
+                                          select order;
+
+                IenumaOrder = orderMoreConditions;
+                list.ItemsSource = IenumaOrder;
+            }
+        }
+
+
+        private void showCloseRadio_Checked(object sender, RoutedEventArgs e)
+        {
+            if (showCloseRadio.IsChecked == true)
+            {
+
+                var orderMoreConditions = from order in bl.GetOrderList((x => x.HostingUnitKey == number))
+                                          where order.Status == BE.StatusEnum.נסגר_בהיענות_הלקוח
+                                          select order;
+
+                IenumaOrder = orderMoreConditions;
+                list.ItemsSource = IenumaOrder;
+
+
+
+            }
+        }
+
+
+        private void showLostRadio_Checked(object sender, RoutedEventArgs e)
+        {
+            if (showLostRadio.IsChecked == true)
+            {
+
+                var orderMoreConditions = from order in bl.GetOrderList((x => x.HostingUnitKey == number))
+                                          where order.Status == BE.StatusEnum.נסגר_מחוסר_הענות_הלקוח
+                                          select order;
+
+                IenumaOrder = orderMoreConditions;
+                list.ItemsSource = IenumaOrder;
+
+
+
+            }
+        }
+
+        #endregion
+
+
+        #region מיון 
+
+        GridViewColumnHeader _lastHeaderClicked = null;
+        ListSortDirection _lastDirection = ListSortDirection.Ascending;
+
+        void GridViewColumnHeaderClickedHandler(object sender,
+                                            RoutedEventArgs e)
+        {
+            var headerClicked = e.OriginalSource as GridViewColumnHeader;
+            ListSortDirection direction;
+
+            if (headerClicked != null)
+            {
+                if (headerClicked.Role != GridViewColumnHeaderRole.Padding)
+                {
+                    if (headerClicked != _lastHeaderClicked)
+                    {
+                        direction = ListSortDirection.Ascending;
+                    }
+                    else
+                    {
+                        if (_lastDirection == ListSortDirection.Ascending)
+                        {
+                            direction = ListSortDirection.Descending;
+                        }
+                        else
+                        {
+                            direction = ListSortDirection.Ascending;
+                        }
+                    }
+
+                    var columnBinding = headerClicked.Column.DisplayMemberBinding as Binding;
+                    var sortBy = columnBinding?.Path.Path ?? headerClicked.Column.Header as string;
+
+                    Sort(sortBy, direction);
+
+                    if (direction == ListSortDirection.Ascending)
+                    {
+                        headerClicked.Column.HeaderTemplate =
+                          Resources["HeaderTemplateArrowUp"] as DataTemplate;
+                    }
+                    else
+                    {
+                        headerClicked.Column.HeaderTemplate =
+                          Resources["HeaderTemplateArrowDown"] as DataTemplate;
+                    }
+
+                    // Remove arrow from previously sorted header
+                    if (_lastHeaderClicked != null && _lastHeaderClicked != headerClicked)
+                    {
+                        _lastHeaderClicked.Column.HeaderTemplate = null;
+                    }
+
+                    _lastHeaderClicked = headerClicked;
+                    _lastDirection = direction;
+                }
+            }
+        }
+        private void Sort(string sortBy, ListSortDirection direction)
+        {
+            ICollectionView dataView =
+              CollectionViewSource.GetDefaultView(list.ItemsSource); //list is namespace of xaml
+
+            dataView.SortDescriptions.Clear();
+            SortDescription sd = new SortDescription(sortBy, direction);
+            dataView.SortDescriptions.Add(sd);
+            dataView.Refresh();
+        }
+
+
+
+
+
+
+
+
+
+        #endregion
+
+        private void DataGrid_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+
+        }
     }
 
-
-
 }
+
+
+
+
+
+

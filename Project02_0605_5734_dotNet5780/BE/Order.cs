@@ -107,11 +107,11 @@ namespace BE
         public override string ToString()  // יש לממש בהתאם לדרישות הפרוייקט.
         {
             string str = "";
-            str += "Orderkey: " + OrderKey + "\n" +
-                "HostUnitKEy " + HostingUnitKey + "\n" + "GuestRequestkey " + GuestRequestKey + "\n" +
-                "Status: " + Status + "\n" +
-                "Create Date " + CreateDate.ToString() + "\n" +
-                "Order date: " + OrderDate.ToString() + "\n" 
+            str += "מספר הזמנה: " + OrderKey + "\n" +
+                "עבור יחידת אירוח מספר " + HostingUnitKey + "\n" + "מספר דרישת אירוח " + GuestRequestKey + "\n" +
+                //"Status: " + Status + "\n" +
+                "תאריך יצירת הזמנה  " + CreateDate.ToString() + "\n" +
+                "הזמנה ל : " + OrderDate.ToString() + "\n" 
                 ;
             return str;
         }

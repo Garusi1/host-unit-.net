@@ -40,7 +40,7 @@ namespace DAL
         GuestRequestKey=BE.Configuration.geustReqID++,
         PrivateName="שלמה",
         FamilyName="שלמה",
-        MailAddress=/*@*/"Aasdaa@gmail.com",
+        MailAddress=/*@*/"shuker@g.jct.ac.il",
         Status=StatusGREnum.פתוחה,
         RegistrationDate=DateTime.Now,
         EntryDate=DateTime.Now.Date.AddDays(10),// סתם לצורך הדוגמה -
@@ -190,9 +190,9 @@ namespace DAL
         {
         new BE.HostingUnit()
         {
-            HostingUnitKey=BE.Configuration.hostUnitID++, /// זה מספר רץ. יש לממש נכון
+            HostingUnitKey=BE.Configuration.hostUnitID++, 
             Owner=new BE.Host(){HostKey="311600605",PrivateName="שלמה",FamilyName="הלוי",
-                PhoneNumber="055-555-5355",MailAddress="a@s.com",BankAccountNumber=1123,CollectionClearance="no",
+                PhoneNumber="055-555-5355",MailAddress="a@s.com",BankAccountNumber=1123,CollectionClearance="כן",
                 BankBranchDetails=new BE.BankBranch(){
             BankNumber=11,
             BankName="Discount",
@@ -205,7 +205,7 @@ namespace DAL
         },
         new BE.HostingUnit()
         {
-            HostingUnitKey=BE.Configuration.hostUnitID++, /// זה מספר רץ. יש לממש נכון
+            HostingUnitKey=BE.Configuration.hostUnitID++, 
             Owner=new BE.Host(){HostKey="305615734",PrivateName="מיכאל ",FamilyName="גרוסי",
                 PhoneNumber="055-555-5355",MailAddress="mfdgsg@gmail.com",BankAccountNumber=1123,CollectionClearance="no",
                 BankBranchDetails=new BE.BankBranch(){
@@ -223,7 +223,7 @@ namespace DAL
         ,
                 new BE.HostingUnit()
         {
-            HostingUnitKey=BE.Configuration.hostUnitID++, /// זה מספר רץ. יש לממש נכון
+            HostingUnitKey=BE.Configuration.hostUnitID++, 
             Owner=new BE.Host(){HostKey="305615734",PrivateName="מיכאל ",FamilyName="גרוסי",
                 PhoneNumber="055-555-5355",MailAddress="mfdgsg@gmail.com",BankAccountNumber=1123,CollectionClearance="no",
                 BankBranchDetails=new BE.BankBranch(){
@@ -240,7 +240,7 @@ namespace DAL
                         ,
                 new BE.HostingUnit()
         {
-            HostingUnitKey=BE.Configuration.hostUnitID++, /// זה מספר רץ. יש לממש נכון
+            HostingUnitKey=BE.Configuration.hostUnitID++, 
             Owner=new BE.Host(){HostKey="305615734",PrivateName="מיכאל ",FamilyName="גרוסי",
                 PhoneNumber="055-555-5355",MailAddress="mfdgsg@gmail.com",BankAccountNumber=1123,CollectionClearance="no",
                 BankBranchDetails=new BE.BankBranch(){
@@ -258,7 +258,7 @@ namespace DAL
                         ,
                 new BE.HostingUnit()
         {
-            HostingUnitKey=BE.Configuration.hostUnitID++, /// זה מספר רץ. יש לממש נכון
+            HostingUnitKey=BE.Configuration.hostUnitID++, 
             Owner=new BE.Host(){HostKey="305615734",PrivateName="מיכאל ",FamilyName="גרוסי",
                 PhoneNumber="055-555-5355",MailAddress="mfdgsg@gmail.com",BankAccountNumber=1123,CollectionClearance="no",
                 BankBranchDetails=new BE.BankBranch(){
@@ -292,6 +292,16 @@ namespace DAL
         {
             HostingUnitKey=20000001,/// יש לממש  לפי הקשר
             GuestRequestKey=40000000,///יש לממש בהתאם לבקשה
+            OrderKey=BE.Configuration.orderID++, /// יש לממש בעזרת מספר רץ
+            Status=StatusEnum.טרם_טופל,
+            CreateDate=DateTime.Now,
+            OrderDate=DateTime.Now.AddDays(5), //תלוי שליחת מיילץ 
+        }
+        ,
+        new Order()
+        {
+            HostingUnitKey=20000000,/// יש לממש  לפי הקשר
+            GuestRequestKey=40000001,///יש לממש בהתאם לבקשה
             OrderKey=BE.Configuration.orderID++, /// יש לממש בעזרת מספר רץ
             Status=StatusEnum.טרם_טופל,
             CreateDate=DateTime.Now,

@@ -124,7 +124,7 @@ namespace BE
             }
             set
             {
-                if (value.Equals("yes")|| value.Equals("Yes")) collectionClearance = true;
+                if (value.Equals("yes")|| value.Equals("Yes")|| value.Equals("YES")||value.Equals("כן")) collectionClearance = true;
                 else collectionClearance = false;
             }
 

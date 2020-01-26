@@ -129,7 +129,7 @@ namespace PLWPF
         {
             if (showLostRadio.IsChecked == true)
             {
-                IenumaOrder = bl.GetOrderList((x => x.Status == BE.StatusEnum.נסגר_בהיענות_הלקוח));
+                IenumaOrder = bl.GetOrderList((x => x.Status == BE.StatusEnum.נסגר_מחוסר_הענות_הלקוח));
                 list.ItemsSource = IenumaOrder;
 
 

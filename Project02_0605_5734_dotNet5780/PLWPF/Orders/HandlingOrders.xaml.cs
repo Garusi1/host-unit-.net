@@ -20,17 +20,31 @@ namespace PLWPF.Orders
     public partial class HandlingOrders : Window
     {
         BL.IBL bl;
+        BE.HostingUnit HUShow;
+        int Hukey;
 
-
-        public HandlingOrders(BE.HostingUnit HU)
+        public HandlingOrders(int num)
         {
+
             InitializeComponent();
+
             bl = BL.Factory.GetInstance();
+            HUShow = bl.getHostingUnitByID(num);
+
+            Hukey = num;
+
+            GuestUC.number = Hukey;
+            orderUC.number = Hukey;
+
             setActiveUserControl(GuestUC);
         }
 
         public void setActiveUserControl(UserControl control)
         {
+
+            //העברת משתנה מספר של יחידת אירוח
+            GuestUC.number = Hukey;
+            orderUC.number = Hukey;
             //הסתר ממשקי עזר
             GuestUC.Visibility = Visibility.Collapsed;
             orderUC.Visibility = Visibility.Collapsed;

@@ -64,6 +64,13 @@ namespace PLWPF
 
                 MessageBox.Show(ex.Message);
             }
+            catch (Exception ex)
+            {
+
+                MessageBox.Show(ex.Message,"שגיאה");
+            }
+
+
         }
 
         private void Button_Click_Delete_HostingUint(object sender, RoutedEventArgs e)
@@ -86,6 +93,12 @@ namespace PLWPF
 
                 MessageBox.Show(ex.Message);
             }
+            catch (Exception ex)
+            {
+
+                MessageBox.Show(ex.Message, "שגיאה");
+            }
+
 
 
 
@@ -103,7 +116,7 @@ namespace PLWPF
             //OrdersForHostingUnitShow.ShowDialog();
 
 
-            Orders.HandlingOrders OrdersForHostingUnitShow = new Orders.HandlingOrders(HUSource);
+            Orders.HandlingOrders OrdersForHostingUnitShow = new Orders.HandlingOrders(HUSource.HostingUnitKey);
             OrdersForHostingUnitShow.ShowDialog();
 
             

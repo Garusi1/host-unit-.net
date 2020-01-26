@@ -24,15 +24,16 @@ namespace PLWPF.Orders
         BL.IBL bl;
         BE.GuestRequest GRShow;
         IEnumerable<BE.GuestRequest> ieGuest;
+        
 
         public GuestHostingUnitUC()
         {
             InitializeComponent();
             bl = BL.Factory.GetInstance();
 
-            ieGuest = bl.GetGuestRequestList();
 
-            list.ItemsSource = ieGuest;
+
+
 
 
 
@@ -44,11 +45,18 @@ namespace PLWPF.Orders
                 Console.WriteLine(GRShow.ToString());
             }
 
-        }
 
+
+    }
+
+        public int number { get; set; }
 
         private void list_SelectionChanged(object sender, SelectionChangedEventArgs e)//https://social.msdn.microsoft.com/Forums/vstudio/en-US/194ee5ad-a3cf-48ae-8c0e-1aab84a1df97/how-to-get-wpf-listview-click-event?forum=wpf
         {
+
+            ieGuest = bl.GetGuestRequestList();
+            list.ItemsSource = ieGuest;
+
             GRShow = (BE.GuestRequest)list.SelectedItem;
 
             if (GRShow != null)

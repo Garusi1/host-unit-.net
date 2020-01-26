@@ -6,7 +6,9 @@
              xmlns:local="clr-namespace:PLWPF.Orders"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
-    <!--<Grid>
+
+
+    <Grid>
 
         <Grid Margin="0,0,120,0" >
 
@@ -35,8 +37,8 @@
 
 
         <Grid Margin="686,0,0,10.286" FlowDirection="RightToLeft" >
-            --><!--<Grid Margin="447,-43,0,405" >-->
-            <!--<DockPanel DockPanel.Dock="Right"  >--><!--
+            <!--<Grid Margin="447,-43,0,405" >-->
+            <!--<DockPanel DockPanel.Dock="Right"  >-->
 
 
             <Grid.RowDefinitions >
@@ -45,14 +47,18 @@
                 <RowDefinition Height="*"/>
                 <RowDefinition Height="*"/>
                 <RowDefinition Height="*"/>
-                <RowDefinition Height="4*"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="2*"/>
+
+
 
             </Grid.RowDefinitions>
 
 
 
-            --><!--<Button x:Name="filterGR_button" Content="סנן לפי" Margin="632,0,0,0" Click="filterGR_button_Click"> </Button>-->
-            <!--<TextBlock  Text="סנן דרישות אירוח לפי : " DockPanel.Dock="Right" />--><!--
+            <!--<Button x:Name="filterGR_button" Content="סנן לפי" Margin="632,0,0,0" Click="filterGR_button_Click"> </Button>-->
+            <!--<TextBlock  Text="סנן דרישות אירוח לפי : " DockPanel.Dock="Right" />-->
 
             <RadioButton Grid.Row="0" x:Name="showAllRadio" Checked="showAllRadio_Checked" Content="הכל" DockPanel.Dock="Right" Margin="2,10,0,14.143" RenderTransformOrigin="0.5,0.5"  >
                 <RadioButton.RenderTransform>
@@ -68,39 +74,15 @@
             <RadioButton Grid.Row="2" x:Name="showMailRadio" Checked="shoMailRadio_Checked" Content="נשלח מייל" DockPanel.Dock="Right" Margin="0,9.286,0,13.857"  />
             <RadioButton Grid.Row="3" x:Name="showCloseRadio" Checked="showCloseRadio_Checked"  Content="נסגרה עסקה" DockPanel.Dock="Right" Margin="2,10.143,0,22"  />
             <RadioButton Grid.Row="4" x:Name="showLostRadio" Checked="showLostRadio_Checked"  Content="נסגרה מחוסר הענות" DockPanel.Dock="Right" Margin="2,10,0,22.571"  />
+            <Button Grid.Row="4" Content="שלח מייל"  Click="Button_Click_send_email"  />
+            <Button Grid.Row="5"  Content="סגור עסקה" Click="Button_Click_confirm_order" />
 
-            --><!--<Button   x:Name="showAllRadio" Checked="showAllRadio_Checked" Content="הכל" DockPanel.Dock="Right" />-->
+            <!--<Button   x:Name="showAllRadio" Checked="showAllRadio_Checked" Content="הכל" DockPanel.Dock="Right" />-->
             <!--</DockPanel>-->
-            <!--</Grid>--><!--
+            <!--</Grid>-->
 
         </Grid>
-    </Grid>-->
-    <Grid>
-        <DataGrid HorizontalAlignment="Left" Height="401" Margin="10,10,0,0" VerticalAlignment="Top" Width="1173"/>
-        <ListView ItemsSource="{Binding}" x:Name="list" IsSynchronizedWithCurrentItem="True" SelectionChanged="list_SelectionChanged"  FlowDirection="RightToLeft" Margin="0,10,0.333,43.667">
-            <ListView.View>
-
-                <GridView>
-
-                    <GridViewColumn Header="{DynamicResource Hosting Unit Key:}" Width="120" DisplayMemberBinding="{Binding HostingUnitKey}"></GridViewColumn>
-
-                    <GridViewColumn Header="{DynamicResource GuestRequestKey}" Width="120" DisplayMemberBinding="{Binding GuestRequestKey}"></GridViewColumn>
-                    <GridViewColumn Header= "מספר הזמנה" Width="120" DisplayMemberBinding="{Binding OrderKey}"></GridViewColumn>
-                    <GridViewColumn Header= "סטטוס" Width="120" DisplayMemberBinding="{Binding Status}"></GridViewColumn>
-
-                    <GridViewColumn Header="תאריך יצירה" Width="120" DisplayMemberBinding="{Binding CreateDate}"></GridViewColumn>
-                    <GridViewColumn Header= "תאריך הזמנה" Width="120" DisplayMemberBinding="{Binding OrderDate}"></GridViewColumn>
-
-
-
-                </GridView>
-
-
-            </ListView.View>
-
-
-        </ListView>
-        <Button Content="send email" HorizontalAlignment="Left" Margin="381,390,0,9.667" Width="75" Click="Button_Click_send_email"/>
-        <Button Content="confirm order" HorizontalAlignment="Left" Margin="248,390,0,0" VerticalAlignment="Top" Width="75" Click="Button_Click_confirm_order"/>
     </Grid>
+
+
 </UserControl>

@@ -31,8 +31,11 @@ namespace DAL
                 throw new DuplicateWaitObjectException((/* "ישנו מספר זהה של דרישת אירוח"*/"Cannot add.duplicate GuestRequest key on data "));
 
             }
-
+            if (guest.GuestRequestKey==0)
+            {
             guest.GuestRequestKey = BE.Configuration.geustReqID++;
+
+            }
 
             ds.getGuestRequestList().Add(guest.Clone());
 
@@ -108,7 +111,11 @@ namespace DAL
         //HostingUnit
         public int addHostingUnit(BE.HostingUnit hostUnit)
         {
-            hostUnit.HostingUnitKey = BE.Configuration.hostUnitID++;
+            if (hostUnit.HostingUnitKey ==0)
+            {
+                hostUnit.HostingUnitKey = BE.Configuration.hostUnitID++;
+            }
+
 
             foreach (BE.HostingUnit element in GetHostingUnitList())
             {
@@ -264,7 +271,7 @@ namespace DAL
         {
 
             var list = from item in GetOrderList()
-                       where item.GuestRequestKey == id
+                       where item.OrderKey == id
                        select item.Clone();
             return list.FirstOrDefault();
             //foreach (var item in list)

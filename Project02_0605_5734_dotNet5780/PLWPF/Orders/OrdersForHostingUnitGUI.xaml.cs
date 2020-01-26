@@ -32,6 +32,7 @@ namespace PLWPF.Orders
 
         private void list_SelectionChanged(object sender, SelectionChangedEventArgs e)//https://social.msdn.microsoft.com/Forums/vstudio/en-US/194ee5ad-a3cf-48ae-8c0e-1aab84a1df97/how-to-get-wpf-listview-click-event?forum=wpf
         {
+
             GRShow = (BE.GuestRequest)list.SelectedItem;
             Console.WriteLine(HUshow.ToString());
             if (GRShow != null)
@@ -44,15 +45,13 @@ namespace PLWPF.Orders
         }
 
            
-
-
-
-public OrdersForHostingUnitGUI(BE.HostingUnit HUshow1)
+        public OrdersForHostingUnitGUI(int  HUkey)
         {
             //   bl.GetGuestRequestList
             InitializeComponent();
-            HUshow = HUshow1;
+
             bl = BL.Factory.GetInstance();
+            HUshow = bl.getHostingUnitByID(HUkey);
 
             ieGuest = bl.GetGuestRequestList();
 
