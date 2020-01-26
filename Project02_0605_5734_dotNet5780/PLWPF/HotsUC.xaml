@@ -24,7 +24,8 @@
                         <GridViewColumn Header="{DynamicResource MailAddress}" Width="auto" DisplayMemberBinding="{Binding MailAddress}"></GridViewColumn>
                         <GridViewColumn Header="{DynamicResource Phone Number}" Width="auto" DisplayMemberBinding="{Binding PhoneNumber}"></GridViewColumn>
                         <GridViewColumn Header="{DynamicResource Host Key}" Width="auto" DisplayMemberBinding="{Binding HostKey}"></GridViewColumn>
-                        <GridViewColumn Header="{DynamicResource CollectionClearance}" Width="auto" DisplayMemberBinding="{Binding CollectionClearance}"></GridViewColumn>
+                        <!--<GridViewColumn Header="{DynamicResource CollectionClearance}" Width="auto" DisplayMemberBinding="{Binding CollectionClearance}"></GridViewColumn>-->
+                        <!--השדה הנ"ל לא מתאים לוגית בגלל אופן איפוס שדה זה דרך כל יחידת אירוח בנפרד. -->
                         <GridViewColumn Header="{DynamicResource Bank Account Number}" Width="auto" DisplayMemberBinding="{Binding BankAccountNumber}"></GridViewColumn>
                         <GridViewColumn Header="{DynamicResource Number Of HostingUnits}" Width="auto" DisplayMemberBinding="{Binding NumberOfHostingUnits}"></GridViewColumn>
 
