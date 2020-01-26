@@ -19,9 +19,54 @@ namespace PLWPF.Orders
     /// </summary>
     public partial class HandlingOrders : Window
     {
-        public HandlingOrders()
+        BL.IBL bl;
+
+
+        public HandlingOrders(BE.HostingUnit HU)
         {
             InitializeComponent();
+            bl = BL.Factory.GetInstance();
+            setActiveUserControl(GuestUC);
         }
+
+        public void setActiveUserControl(UserControl control)
+        {
+            //הסתר ממשקי עזר
+            GuestUC.Visibility = Visibility.Collapsed;
+            orderUC.Visibility = Visibility.Collapsed;
+            //HostingUC.Visibility = Visibility.Collapsed;
+            //HostsUC.Visibility = Visibility.Collapsed;
+
+            //גילוי ממשק שנשלח.
+            control.Visibility = Visibility.Visible;
+        }
+
+        private void GuestsList_Button_Click(object sender, RoutedEventArgs e)
+        {
+
+            setActiveUserControl(GuestUC);
+        }
+
+        private void orderLists_Button_Click(object sender, RoutedEventArgs e)
+        {
+            setActiveUserControl(orderUC);
+        }
+
+        //private void hostingUnitLists_Button_Click(object sender, RoutedEventArgs e)
+        //{
+        //    setActiveUserControl(HostingUC);
+        //}
+
+        //private void hostLists_Button_Click(object sender, RoutedEventArgs e)
+        //{
+        //    setActiveUserControl(HostsUC);
+        //}
+
+
+    }
+    public partial class MainWebManagerGUI : Window
+    {
+
+       
     }
 }

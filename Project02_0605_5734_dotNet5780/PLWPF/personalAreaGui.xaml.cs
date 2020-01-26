@@ -99,9 +99,14 @@ namespace PLWPF
             //רשימת הזמנות עבור יחידה זו 
         private void Button_Click_Orders_For_HostingUnit(object sender, RoutedEventArgs e)
         {
-            Orders.OrdersForHostingUnitGUI OrdersForHostingUnitShow = new Orders.OrdersForHostingUnitGUI(HUSource);
+            //Orders.OrdersForHostingUnitGUI OrdersForHostingUnitShow = new Orders.OrdersForHostingUnitGUI(HUSource);
+            //OrdersForHostingUnitShow.ShowDialog();
+
+
+            Orders.HandlingOrders OrdersForHostingUnitShow = new Orders.HandlingOrders(HUSource);
             OrdersForHostingUnitShow.ShowDialog();
 
+            
 
         }
     }
