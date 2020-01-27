@@ -147,21 +147,27 @@ namespace PLWPF.Orders
 
 
             HUshow = bl.getHostingUnitByID(number);
+            order = (BE.Order)list.SelectedItem;
+
             guest = bl.getGuestRequestByID(order.GuestRequestKey);
 
-            order = (BE.Order)list.SelectedItem;
 
             IenumaOrder = bl.GetOrderList(x => x.HostingUnitKey == number); //הצג רק הזמנות רלוונטיות ליחידת אירוח זו. 
 
+            list.ItemsSource = IenumaOrder;
 
 
 
-            //list.ItemsSource = IenumaOrder;
-            //
 
-            //order = (BE.Order)list.SelectedItem;
 
-            if (order != null)
+
+
+                //list.ItemsSource = IenumaOrder;
+                //
+
+                //order = (BE.Order)list.SelectedItem;
+
+                if (order != null)
             {
                 //int id = int.Parse(selectedrow.Row.ItemArray[0].ToString());
                 //Console.WriteLine(id);
@@ -190,6 +196,9 @@ namespace PLWPF.Orders
                 bl.UpdateOrder(order);
                 System.Windows.MessageBox.Show("ההזמנה נסגרה בהצלחה");
                 IenumaOrder = bl.GetOrderList(x => x.HostingUnitKey == number); //הצג רק הזמנות רלוונטיות ליחידת אירוח זו. 
+                list.ItemsSource = IenumaOrder;
+
+
 
             }
 
@@ -213,6 +222,14 @@ namespace PLWPF.Orders
 
 
             }
+            catch (Exception ex)
+            {
+                order = orderTemp;
+                MessageBox.Show(ex.Message, "שגיאה");
+
+
+            }
+
 
 
 
@@ -396,8 +413,9 @@ namespace PLWPF.Orders
                             where order.Status == BE.StatusEnum.נשלח_מייל
                             select order;
 
-                //IenumaOrder = orderMoreConditions;
-                list.ItemsSource = orderMoreConditions;
+                IenumaOrder = orderMoreConditions;
+                list.ItemsSource = IenumaOrder;
+
 
 
             }
@@ -427,6 +445,7 @@ namespace PLWPF.Orders
                                           select order;
 
                 IenumaOrder = orderMoreConditions;
+
                 list.ItemsSource = IenumaOrder;
 
 
