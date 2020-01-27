@@ -13,9 +13,12 @@
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*"/>
                 <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions>
             <Button Grid.Column="0" Click="GuestsList_Button_Click" x:Name="GuestsList_Button" Content="{DynamicResource Guest Requests}"  />
             <Button Grid.Column="1" Click="orderLists_Button_Click" x:Name="orderLists_Button" Content="{DynamicResource OrderList}"  />
+            <Button Grid.Column="2" Click="Calander_Button_Click" x:Name="Calander_Button" Content="לוח שנה"  />
+
             <!--<Button Click="hostingUnitLists_Button_Click"  x:Name="hostingUnitLists_Button" Content="{DynamicResource HostingUnitList}" Margin="573,0,631.286,615.429" />
         <Button Click="hostLists_Button_Click" x:Name="hostLists_Button" Content="{DynamicResource HostsList}" Margin="251,0,953.286,615.429" />-->
 
@@ -26,6 +29,9 @@
 
                 <local:GuestHostingUnitUC x:Name="GuestUC" Visibility="Collapsed" ></local:GuestHostingUnitUC>
             <local:OrdersHostingUnitUC x:Name="orderUC" Visibility="Collapsed"></local:OrdersHostingUnitUC>
+            <local:calanderForHU x:Name="calanderForHU" Visibility="Collapsed"></local:calanderForHU>
+
+            
             <!--<local:hostingListsUC x:Name="HostingUC" Visibility="Collapsed"></local:hostingListsUC>
             <local:HotsUC x:Name="HostsUC" Visibility="Collapsed"></local:HotsUC>-->
         </Grid>

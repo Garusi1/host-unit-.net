@@ -144,6 +144,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Orders\calanderForHU.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Orders\GuestHostingUnitUC.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -170,6 +174,9 @@
     </Page>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Orders\calanderForHU.xaml.cs">
+      <DependentUpon>calanderForHU.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Orders\GuestHostingUnitUC.xaml.cs">
       <DependentUpon>GuestHostingUnitUC.xaml</DependentUpon>
     </Compile>

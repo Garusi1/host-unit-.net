@@ -693,6 +693,14 @@ namespace BL
             for (DateTime tempDate = enteryDate; tempDate <= LastNight; tempDate = tempDate.AddDays(1))
                 if (this[tempDate, HU]) { return false; }// check if the days are avaiable
 
+
+            //DateTime LastNight = enteryDate.AddDays(numOfDayes - 1);
+
+
+            //for (DateTime tempDate = enteryDate; tempDate < guestReq.ReleaseDate; tempDate = tempDate.AddDays(1))
+            //    if (this[tempDate, HU]) { return false; }// check if the days are avaiable
+
+
             return true;
         }
 

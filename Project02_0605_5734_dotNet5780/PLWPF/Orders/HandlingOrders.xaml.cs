@@ -45,10 +45,12 @@ namespace PLWPF.Orders
             //העברת משתנה מספר של יחידת אירוח
             GuestUC.number = Hukey;
             orderUC.number = Hukey;
+            calanderForHU.number = Hukey;
+
             //הסתר ממשקי עזר
             GuestUC.Visibility = Visibility.Collapsed;
             orderUC.Visibility = Visibility.Collapsed;
-            //HostingUC.Visibility = Visibility.Collapsed;
+            calanderForHU.Visibility = Visibility.Collapsed;
             //HostsUC.Visibility = Visibility.Collapsed;
 
             //גילוי ממשק שנשלח.
@@ -64,6 +66,11 @@ namespace PLWPF.Orders
         private void orderLists_Button_Click(object sender, RoutedEventArgs e)
         {
             setActiveUserControl(orderUC);
+        }
+
+        private void Calander_Button_Click(object sender, RoutedEventArgs e)
+        {
+            setActiveUserControl(calanderForHU);
         }
 
         //private void hostingUnitLists_Button_Click(object sender, RoutedEventArgs e)
