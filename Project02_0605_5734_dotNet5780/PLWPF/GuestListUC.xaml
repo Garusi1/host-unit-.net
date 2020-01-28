@@ -42,9 +42,7 @@
             </ListView>
 
         </Grid>
-
-
-        <Grid Margin="739,0,0,10.286" FlowDirection="RightToLeft" >
+        <Grid Margin="0,0,-3,32" FlowDirection="RightToLeft" Background="#FFF7F7F7" HorizontalAlignment="Right" Width="118" Height="408" VerticalAlignment="Bottom" >
             <!--<Grid Margin="447,-43,0,405" >-->
             <!--<DockPanel DockPanel.Dock="Right"  >-->
 
@@ -55,6 +53,7 @@
                 <RowDefinition Height="*"/>
                 <RowDefinition Height="*"/>
                 <RowDefinition Height="5*"/>
+
             </Grid.RowDefinitions>
 
 
@@ -78,8 +77,9 @@
             <!--<Button   x:Name="showAllRadio" Checked="showAllRadio_Checked" Content="הכל" DockPanel.Dock="Right" />-->
             <!--</DockPanel>-->
             <!--</Grid>-->
-
         </Grid>
+
+      
     </Grid>
 
 

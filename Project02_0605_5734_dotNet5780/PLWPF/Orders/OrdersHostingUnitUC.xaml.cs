@@ -31,7 +31,7 @@ namespace PLWPF.Orders
         BE.HostingUnit  HUshow;
         BE.GuestRequest guest;
 
-
+        
 
 
 
@@ -45,10 +45,6 @@ namespace PLWPF.Orders
         {
             InitializeComponent();
             bl = BL.Factory.GetInstance();
-
-
-
-
 
 
 
@@ -145,25 +141,9 @@ namespace PLWPF.Orders
 
 
 
-
             HUshow = bl.getHostingUnitByID(number);
-            order = (BE.Order)list.SelectedItem;
-
-            guest = bl.getGuestRequestByID(order.GuestRequestKey);
-
-
-            IenumaOrder = bl.GetOrderList(x => x.HostingUnitKey == number); //הצג רק הזמנות רלוונטיות ליחידת אירוח זו. 
-
             list.ItemsSource = IenumaOrder;
 
-
-
-
-
-
-
-                //list.ItemsSource = IenumaOrder;
-                //
 
                 //order = (BE.Order)list.SelectedItem;
 
@@ -188,6 +168,12 @@ namespace PLWPF.Orders
         #region סגירת עיסקה
         private void Button_Click_confirm_order(object sender, RoutedEventArgs e)
         {
+
+            order = (BE.Order)list.SelectedItem;
+
+            guest = bl.getGuestRequestByID(order.GuestRequestKey);
+
+
             orderTemp = order;
             order.Status = BE.StatusEnum.נסגר_בהיענות_הלקוח;
 
@@ -243,6 +229,9 @@ namespace PLWPF.Orders
         private void Button_Click_send_email(object sender, RoutedEventArgs e)
         {
 
+            order = (BE.Order)list.SelectedItem;
+
+            guest = bl.getGuestRequestByID(order.GuestRequestKey);
 
             if (order != null)
             {
@@ -409,11 +398,7 @@ namespace PLWPF.Orders
         {
             if (showMailRadio.IsChecked == true)
             {
-                var orderMoreConditions = from order in bl.GetOrderList((x => x.HostingUnitKey == number))
-                            where order.Status == BE.StatusEnum.נשלח_מייל
-                            select order;
-
-                IenumaOrder = orderMoreConditions;
+                IenumaOrder = bl.GetOrderList(x => (x.HostingUnitKey == number)&&(x.Status == BE.StatusEnum.נשלח_מייל));
                 list.ItemsSource = IenumaOrder;
 
 
@@ -424,12 +409,7 @@ namespace PLWPF.Orders
         {
             if (showOpenRadio.IsChecked == true)
             {
-
-                var orderMoreConditions = from order in bl.GetOrderList((x => x.HostingUnitKey == number))
-                                          where order.Status == BE.StatusEnum.טרם_טופל
-                                          select order;
-
-                IenumaOrder = orderMoreConditions;
+                IenumaOrder = bl.GetOrderList(x => (x.HostingUnitKey == number) && (x.Status == BE.StatusEnum.טרם_טופל));
                 list.ItemsSource = IenumaOrder;
             }
         }
@@ -439,16 +419,8 @@ namespace PLWPF.Orders
         {
             if (showCloseRadio.IsChecked == true)
             {
-
-                var orderMoreConditions = from order in bl.GetOrderList((x => x.HostingUnitKey == number))
-                                          where order.Status == BE.StatusEnum.נסגר_בהיענות_הלקוח
-                                          select order;
-
-                IenumaOrder = orderMoreConditions;
-
+                IenumaOrder = bl.GetOrderList(x => (x.HostingUnitKey == number) && (x.Status == BE.StatusEnum.נסגר_בהיענות_הלקוח));
                 list.ItemsSource = IenumaOrder;
-
-
 
             }
         }
@@ -459,14 +431,8 @@ namespace PLWPF.Orders
             if (showLostRadio.IsChecked == true)
             {
 
-                var orderMoreConditions = from order in bl.GetOrderList((x => x.HostingUnitKey == number))
-                                          where order.Status == BE.StatusEnum.נסגר_מחוסר_הענות_הלקוח
-                                          select order;
-
-                IenumaOrder = orderMoreConditions;
+                IenumaOrder = bl.GetOrderList(x => (x.HostingUnitKey == number) && (x.Status == BE.StatusEnum.נסגר_מחוסר_הענות_הלקוח));
                 list.ItemsSource = IenumaOrder;
-
-
 
             }
         }

@@ -84,7 +84,7 @@ namespace PLWPF.Orders
         }
 
 
-
+        #region הוספת הזמנה
         private void Button_Click_Create_Order(object sender, RoutedEventArgs e)
         {
             BE.Order order = new BE.Order();
@@ -147,7 +147,7 @@ namespace PLWPF.Orders
 
         }
 
-
+        #endregion
 
         #region סינון 
 
@@ -169,7 +169,6 @@ namespace PLWPF.Orders
             {
                 ieGuest = bl.GetGuestRequestList((x => x.Status == BE.StatusGREnum.פתוחה));
                 list.ItemsSource = ieGuest;
-
 
             }
         }

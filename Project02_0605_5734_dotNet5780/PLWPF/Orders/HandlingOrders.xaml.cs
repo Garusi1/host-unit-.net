@@ -17,6 +17,8 @@ namespace PLWPF.Orders
     /// <summary>
     /// Interaction logic for HandlingOrders.xaml
     /// </summary>
+    /// 
+
     public partial class HandlingOrders : Window
     {
         BL.IBL bl;
@@ -25,7 +27,7 @@ namespace PLWPF.Orders
 
         public HandlingOrders(int num)
         {
-
+            Hukey = num;
             InitializeComponent();
 
             bl = BL.Factory.GetInstance();

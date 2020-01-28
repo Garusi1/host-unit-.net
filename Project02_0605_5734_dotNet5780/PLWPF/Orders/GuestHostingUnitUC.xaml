@@ -5,6 +5,7 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:PLWPF.Orders"
              mc:Ignorable="d" 
+             Name="MyPropertyWindows"
              d:DesignHeight="450" d:DesignWidth="800">
     <Grid>
 
@@ -43,7 +44,9 @@
         </Grid>
 
 
-        <Grid Margin="739,0,0,10.286" FlowDirection="RightToLeft" >
+  
+
+        <Grid Margin="0,0,-3,32" FlowDirection="RightToLeft" Background="#FFF7F7F7" HorizontalAlignment="Right" Width="118" Height="408" VerticalAlignment="Bottom" >
             <!--<Grid Margin="447,-43,0,405" >-->
             <!--<DockPanel DockPanel.Dock="Right"  >-->
 
@@ -59,9 +62,6 @@
 
 
 
-            <!--<Button x:Name="filterGR_button" Content="סנן לפי" Margin="632,0,0,0" Click="filterGR_button_Click"> </Button>-->
-            <!--<TextBlock  Text="סנן דרישות אירוח לפי : " DockPanel.Dock="Right" />-->
-
             <RadioButton Grid.Row="0" x:Name="showAllRadio" Checked="showAllRadio_Checked" Content="הכל" DockPanel.Dock="Right" Margin="2,10,0,14.143" RenderTransformOrigin="0.5,0.5"  >
                 <RadioButton.RenderTransform>
                     <TransformGroup>
@@ -76,10 +76,6 @@
             <RadioButton Grid.Row="2" x:Name="shoLostRadio" Checked="shoLostRadio_Checked" Content="נסגר מחוסר עניין" DockPanel.Dock="Right" Margin="0,9.286,1,13.857"  />
             <RadioButton Grid.Row="3" x:Name="showCloseRadio" Checked="showCloseRadio_Checked"  Content="נסגרה עסקה" DockPanel.Dock="Right" Margin="2,10.143,4,22"  />
             <Button Grid.Row="4" Content="create order by selected guest request" Margin="0,0,600,0" Click="Button_Click_Create_Order"/>
-
-            <!--<Button   x:Name="showAllRadio" Checked="showAllRadio_Checked" Content="הכל" DockPanel.Dock="Right" />-->
-            <!--</DockPanel>-->
-            <!--</Grid>-->
 
         </Grid>
     </Grid>

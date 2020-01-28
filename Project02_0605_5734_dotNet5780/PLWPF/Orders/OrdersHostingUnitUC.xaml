@@ -36,7 +36,8 @@
         </Grid>
 
 
-        <Grid Margin="686,31,0,114" FlowDirection="RightToLeft" >
+  
+        <Grid Margin="0,0,-3,32" FlowDirection="RightToLeft" Background="#FFF7F7F7" HorizontalAlignment="Right" Width="118" Height="408" VerticalAlignment="Bottom" >
             <!--<Grid Margin="447,-43,0,405" >-->
             <!--<DockPanel DockPanel.Dock="Right"  >-->
 
@@ -48,9 +49,8 @@
                 <RowDefinition Height="*"/>
                 <RowDefinition Height="*"/>
                 <RowDefinition Height="*"/>
-                <RowDefinition Height="auto"/>
-
-
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
 
             </Grid.RowDefinitions>
 
@@ -58,7 +58,6 @@
 
             <!--<Button x:Name="filterGR_button" Content="סנן לפי" Margin="632,0,0,0" Click="filterGR_button_Click"> </Button>-->
             <!--<TextBlock  Text="סנן דרישות אירוח לפי : " DockPanel.Dock="Right" />-->
-
             <RadioButton Grid.Row="0" x:Name="showAllRadio" Checked="showAllRadio_Checked" Content="הכל" DockPanel.Dock="Right" Margin="2,10,0,14.143" RenderTransformOrigin="0.5,0.5"  >
                 <RadioButton.RenderTransform>
                     <TransformGroup>
@@ -73,18 +72,10 @@
             <RadioButton Grid.Row="2" x:Name="showMailRadio" Checked="shoMailRadio_Checked" Content="נשלח מייל" DockPanel.Dock="Right" Margin="0,9.286,0,13.857"  />
             <RadioButton Grid.Row="3" x:Name="showCloseRadio" Checked="showCloseRadio_Checked"  Content="נסגרה עסקה" DockPanel.Dock="Right" Margin="2,10.143,0,22"  />
             <RadioButton Grid.Row="4" x:Name="showLostRadio" Checked="showLostRadio_Checked"  Content="נסגרה מחוסר הענות" DockPanel.Dock="Right" Margin="2,10,0,22.571"  />
-            <Button Grid.Row="6"   Content="שלח מייל"  Click="Button_Click_send_email" Margin="2,97.667,-2,-48.333" HorizontalAlignment="Left" Width="114"  />
-            <Button Grid.Row="6"  Content="סגור עסקה" Click="Button_Click_confirm_order" Margin="2,129.333,-2,-80.333" HorizontalAlignment="Left" Width="114" />
-            <!--לוח שנה-->
-
-
-
-            <!--<Button   x:Name="showAllRadio" Checked="showAllRadio_Checked" Content="הכל" DockPanel.Dock="Right" />-->
-            <!--</DockPanel>-->
-            <!--</Grid>-->
+            <Button Grid.Row="5"   Content="שלח מייל"  Click="Button_Click_send_email"  DockPanel.Dock="Right" Width="114"  />
+            <Button Grid.Row="6"  Content="סגור עסקה" Click="Button_Click_confirm_order"  DockPanel.Dock="Right" Width="114" />
 
         </Grid>
-    </Grid>
-
+</Grid>
 
 </UserControl>
