@@ -57,8 +57,12 @@ namespace PLWPF.Orders
             get => HU.Diary[generalDate.Day - 1, generalDate.Month - 1];
         }
 
-        public int number { get; set; }
+        public int number { get; set; } //number of Hosting Unit
 
-
+        private void Button_refresh(object sender, RoutedEventArgs e)
+        {
+            HU = bl.getHostingUnitByID(number);
+            SetBlackOutDates(HU);
+        }
     }
 }

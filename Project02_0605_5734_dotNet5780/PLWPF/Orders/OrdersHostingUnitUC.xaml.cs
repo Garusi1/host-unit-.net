@@ -28,10 +28,10 @@ namespace PLWPF.Orders
         BE.Order order;
         BE.Order orderTemp;
         IEnumerable<BE.Order> IenumaOrder;
-        BE.HostingUnit  HUshow;
+        BE.HostingUnit HUshow;
         BE.GuestRequest guest;
 
-        
+
 
 
 
@@ -141,19 +141,19 @@ namespace PLWPF.Orders
 
 
 
-            HUshow = bl.getHostingUnitByID(number);
-            list.ItemsSource = IenumaOrder;
+                HUshow = bl.getHostingUnitByID(number);
+                list.ItemsSource = IenumaOrder;
 
 
                 //order = (BE.Order)list.SelectedItem;
 
                 if (order != null)
-            {
-                //int id = int.Parse(selectedrow.Row.ItemArray[0].ToString());
-                //Console.WriteLine(id);
-                //Console.WriteLine(bl.getGuestRequestByID(40000000 + id));
-                //Console.WriteLine(order.ToString());
-            }
+                {
+                    //int id = int.Parse(selectedrow.Row.ItemArray[0].ToString());
+                    //Console.WriteLine(id);
+                    //Console.WriteLine(bl.getGuestRequestByID(40000000 + id));
+                    //Console.WriteLine(order.ToString());
+                }
 
             }
             catch (Exception ex)
@@ -171,53 +171,67 @@ namespace PLWPF.Orders
 
             order = (BE.Order)list.SelectedItem;
 
-            guest = bl.getGuestRequestByID(order.GuestRequestKey);
 
 
-            orderTemp = order;
-            order.Status = BE.StatusEnum.נסגר_בהיענות_הלקוח;
 
-            try
+            //orderTemp = bl.getOrderByID(order.OrderKey) ;
+
+
+            if (order != null)
             {
-                bl.UpdateOrder(order);
-                System.Windows.MessageBox.Show("ההזמנה נסגרה בהצלחה");
-                IenumaOrder = bl.GetOrderList(x => x.HostingUnitKey == number); //הצג רק הזמנות רלוונטיות ליחידת אירוח זו. 
-                list.ItemsSource = IenumaOrder;
+                guest = bl.getGuestRequestByID(order.GuestRequestKey);
 
+                order.Status = BE.StatusEnum.נסגר_בהיענות_הלקוח;
+
+
+
+
+                try
+                {
+                    bl.UpdateOrder(order);
+                    System.Windows.MessageBox.Show("ההזמנה נסגרה בהצלחה");
+                    IenumaOrder = bl.GetOrderList(x => x.HostingUnitKey == number); //הצג רק הזמנות רלוונטיות ליחידת אירוח זו. 
+                    list.ItemsSource = IenumaOrder;
+
+
+
+                }
+
+                catch (ArgumentException ex)
+                {
+                    order = bl.getOrderByID(order.OrderKey);
+                    MessageBox.Show(ex.Message, "שגיאה");
+
+                }
+                catch (KeyNotFoundException ex)
+                {
+                    order = bl.getOrderByID(order.OrderKey);
+                    MessageBox.Show(ex.Message, "שגיאה");
+
+
+                }
+                catch (BE.Tools.UnLogicException ex)
+                {
+                    order = bl.getOrderByID(order.OrderKey);
+                    MessageBox.Show(ex.Message, "שגיאה");
+
+
+                }
+                catch (Exception ex)
+                {
+                    order = orderTemp;
+                    MessageBox.Show(ex.Message, "שגיאה");
+
+
+                }
 
 
             }
-
-            catch (ArgumentException ex)
+            else
             {
-                order = orderTemp;
-                MessageBox.Show(ex.Message);
+                MessageBox.Show(" יש לבחור תחילה הזמנה מתוך הרשימה", "שגיאה");
 
             }
-            catch (KeyNotFoundException ex)
-            {
-                order = orderTemp;
-                MessageBox.Show(ex.Message);
-
-
-            }
-            catch (BE.Tools.UnLogicException ex)
-            {
-                order = orderTemp;
-                MessageBox.Show(ex.Message);
-
-
-            }
-            catch (Exception ex)
-            {
-                order = orderTemp;
-                MessageBox.Show(ex.Message, "שגיאה");
-
-
-            }
-
-
-
 
 
         }
@@ -239,23 +253,23 @@ namespace PLWPF.Orders
 
 
 
-            orderTemp = order;
-            order.Status = BE.StatusEnum.נשלח_מייל;
+                orderTemp = order;
+                order.Status = BE.StatusEnum.נשלח_מייל;
 
                 try
                 {
                     bl.UpdateOrder(order);
                     //  System.Windows.MessageBox.Show(" נסגרה בהצלחה");
 
-                    string str = "שלום  " + guest.PrivateName + " "+ guest.FamilyName +
-                         "\n" + " אנחנו נרגשים  לבשר לך שנמצאה התאמה באתרינו עבור דרישת האירוח שלך!" +  
+                    string str = "שלום  " + guest.PrivateName + " " + guest.FamilyName +
+                         "\n" + " אנחנו נרגשים  לבשר לך שנמצאה התאמה באתרינו עבור דרישת האירוח שלך!" +
                          "פרטי ההזמנה : "
                         +
                         (order.ToString() + "\n \n\n "
-                         + " " + "  " + HUshow.HostingUnitName + " מאיזור ה " + HUshow.Area+
-                         " הזמנה עבור יחידת אירות מסוג " + HUshow.Type + "תאריך כניסה :" + guest.EntryDate + "\n  תאריך יציאה: "+ guest.ReleaseDate + "\n"
+                         + " " + "  " + HUshow.HostingUnitName + " מאיזור ה " + HUshow.Area +
+                         " הזמנה עבור יחידת אירות מסוג " + HUshow.Type + "תאריך כניסה :" + guest.EntryDate + "\n  תאריך יציאה: " + guest.ReleaseDate + "\n"
                          + "\n" + " לפרטים ולסגירת עסקה אנא צרו קשר עם המארח במספר טלפון: " + HUshow.Owner.PhoneNumber
-                         +  "\n  :או במייל בכתובת " + HUshow.Owner.MailAddress);
+                         + "\n  :או במייל בכתובת " + HUshow.Owner.MailAddress);
 
 
                     var client = new SmtpClient("smtp.gmail.com", 587)
@@ -263,7 +277,7 @@ namespace PLWPF.Orders
                         Credentials = new NetworkCredential("zimmerisrael123@gmail.com", "Aa12345678910"),
                         EnableSsl = true
                     };
-                   
+
                     Thread T1 = new Thread(delegate ()
                     {
                         using (var message = new MailMessage("zimmerisrael123@gmail.com", bl.getGuestRequestByID(order.GuestRequestKey).MailAddress)
@@ -290,67 +304,73 @@ namespace PLWPF.Orders
 
 
 
-                    
-                //thr.Start();
+
+                    //thr.Start();
 
 
 
-                MessageBox.Show("המייל נשלח בהצלחה!", "המייל נשלח");
+                    MessageBox.Show("המייל נשלח בהצלחה!", "המייל נשלח");
 
 
-                IenumaOrder = bl.GetOrderList(x => x.HostingUnitKey == number); //הצג רק הזמנות רלוונטיות ליחידת אירוח זו. 
+                    IenumaOrder = bl.GetOrderList(x => x.HostingUnitKey == number); //הצג רק הזמנות רלוונטיות ליחידת אירוח זו. 
 
 
 
 
                 }
                 catch (ArgumentNullException ex)
-            {
-                order = orderTemp;
-                MessageBox.Show(ex.Message , "ההודעה במייל ריקה");
+                {
+                    order = orderTemp;
+                    MessageBox.Show(ex.Message, "ההודעה במייל ריקה");
 
-            }
+                }
 
-            catch (ArgumentException ex)
-            {
-                order = orderTemp;
-                MessageBox.Show(ex.Message);
+                catch (ArgumentException ex)
+                {
+                    order = orderTemp;
+                    MessageBox.Show(ex.Message);
 
-            }
-            catch (KeyNotFoundException ex)
-            {
-                order = orderTemp;
-                MessageBox.Show(ex.Message);
-
-
-            }
-            catch (BE.Tools.UnLogicException ex)
-            {
-                order = orderTemp;
-                MessageBox.Show(ex.Message);
+                }
+                catch (KeyNotFoundException ex)
+                {
+                    order = orderTemp;
+                    MessageBox.Show(ex.Message);
 
 
-            }
-            catch (SmtpFailedRecipientsException ex)
-            {
-                order = orderTemp;
-                MessageBox.Show(ex.Message, "ההודעה לא יכלה להישלח לחלק מהנמענים");
+                }
+                catch (BE.Tools.UnLogicException ex)
+                {
+                    order = orderTemp;
+                    MessageBox.Show(ex.Message);
 
 
-            }
-            catch (InvalidOperationException ex)
-            {
-                order = orderTemp;
-                MessageBox.Show(ex.Message, "בעיה בנתונים שהוכנסו בהודעה (נתונים חסרים או שגויים)");
+                }
+                catch (SmtpFailedRecipientsException ex)
+                {
+                    order = orderTemp;
+                    MessageBox.Show(ex.Message, "ההודעה לא יכלה להישלח לחלק מהנמענים");
 
-            }
 
-            catch (SmtpException ex)
-            {
-                order = orderTemp;
-                MessageBox.Show(ex.Message, "שגיאה בעת התחברות לשרת");
+                }
+                catch (InvalidOperationException ex)
+                {
+                    order = orderTemp;
+                    MessageBox.Show(ex.Message, "בעיה בנתונים שהוכנסו בהודעה (נתונים חסרים או שגויים)");
 
-            }
+                }
+
+                catch (SmtpException ex)
+                {
+                    order = orderTemp;
+                    MessageBox.Show(ex.Message, "שגיאה בעת התחברות לשרת");
+
+                }
+                catch (Exception ex)
+                {
+                    order = orderTemp;
+                    MessageBox.Show(ex.Message, "שגיאה בעת התחברות לשרת");
+
+                }
             }
             else
             {
@@ -368,8 +388,8 @@ namespace PLWPF.Orders
             };
 
             client.Send(bl.getGuestRequestByID(order.GuestRequestKey).MailAddress,
-                bl.getGuestRequestByID(order.GuestRequestKey).MailAddress, order.ToString(), "love you :) \n  " 
-                +" " + HUshow.Type+" " +  HUshow.HostingUnitName + " from the "  + HUshow.Area);
+                bl.getGuestRequestByID(order.GuestRequestKey).MailAddress, order.ToString(), "love you :) \n  "
+                + " " + HUshow.Type + " " + HUshow.HostingUnitName + " from the " + HUshow.Area);
             //Console.WriteLine("Sent");
 
 
@@ -398,7 +418,7 @@ namespace PLWPF.Orders
         {
             if (showMailRadio.IsChecked == true)
             {
-                IenumaOrder = bl.GetOrderList(x => (x.HostingUnitKey == number)&&(x.Status == BE.StatusEnum.נשלח_מייל));
+                IenumaOrder = bl.GetOrderList(x => (x.HostingUnitKey == number) && (x.Status == BE.StatusEnum.נשלח_מייל));
                 list.ItemsSource = IenumaOrder;
 
 

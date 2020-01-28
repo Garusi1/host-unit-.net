@@ -7,8 +7,9 @@ using System.Threading.Tasks;
 namespace BE
 {
     [Serializable]
-    public class Order //מחלקה בשם Order שמייצגת הזמנה )כלומר את הקשר בין לקוח ליחידת אירוח( ותכלול:
+    public class Order  //מחלקה בשם Order שמייצגת הזמנה )כלומר את הקשר בין לקוח ליחידת אירוח( ותכלול:
     {
+
         private int hostingUnitKey;
         public int HostingUnitKey
         {
@@ -66,10 +67,10 @@ namespace BE
             get { return status; }
             set
             {
-                if (!Enum.IsDefined(typeof(StatusEnum), value))
-                    throw new System.IO.InvalidDataException("Enum input illegal");
-                if (status == StatusEnum.נסגר_מחוסר_הענות_הלקוח || status == StatusEnum.נסגר_בהיענות_הלקוח)
-                    throw new ArgumentException("לא ניתן לשנות עסקה שנסגרה");
+                //if (!Enum.IsDefined(typeof(StatusEnum), value))
+                //    throw new System.IO.InvalidDataException("Enum input illegal");
+                //if (status == StatusEnum.נסגר_מחוסר_הענות_הלקוח || status == StatusEnum.נסגר_בהיענות_הלקוח)
+                //    throw new ArgumentException("לא ניתן לשנות עסקה שנסגרה");
 
                 status = value;
             }
@@ -115,6 +116,10 @@ namespace BE
             return str;
         }
 
+        //public bool isEqual(Order order)
+        //{
+        //    return order.OrderKey == OrderKey;
+        //}
 
     }
 }

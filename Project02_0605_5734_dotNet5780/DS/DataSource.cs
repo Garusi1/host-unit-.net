@@ -25,7 +25,7 @@ namespace DAL
         MailAddress=/*@*/"mgarusi101@gmail.com",
         Status=StatusGREnum.פתוחה,
         RegistrationDate=DateTime.Now,
-        EntryDate=DateTime.Now.Date.AddDays(10),// סתם לצורך הדוגמה -
+        EntryDate=DateTime.Now.Date.AddDays(1),// סתם לצורך הדוגמה -
         ReleaseDate=DateTime.Now.Date.AddDays(20),
         Area=AreaEnum.North,
         Type=TypeEnum.Zimmer,

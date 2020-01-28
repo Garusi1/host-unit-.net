@@ -35,7 +35,8 @@ namespace BE
         טרם_טופל,
         נשלח_מייל,
         נסגר_מחוסר_הענות_הלקוח,
-        נסגר_בהיענות_הלקוח
+        נסגר_בהיענות_הלקוח,
+        נסגר_היות_ויחידית_אירוח_נתפסה_כבר
         //Not_yet_treated,
         //Mail_has_been_sent,
         //Closes_for_lack_of_customer_responsiveness,

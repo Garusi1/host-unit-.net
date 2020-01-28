@@ -6,15 +6,44 @@
              xmlns:local="clr-namespace:PLWPF.Orders"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
+
     <Grid>
-        <Calendar x:Name="vbCalendar" Margin="112,113,126,109.286" SelectionMode="MultipleRange"  
+
+        <Grid Margin="0,0,120,0" >
+            <Calendar x:Name="vbCalendar" Margin="112,113,126,109.286" SelectionMode="MultipleRange"  
           IsTodayHighlighted="false" 
           
           xmlns:sys="clr-namespace:System;assembly=mscorlib">
 
 
-        </Calendar>
+            </Calendar>
+
+        </Grid>
 
 
+
+        <Grid Margin="0,0,-3,32" FlowDirection="RightToLeft" Background="#FFF7F7F7" HorizontalAlignment="Right" Width="118" Height="408" VerticalAlignment="Bottom" >
+            <!--<Grid Margin="447,-43,0,405" >-->
+            <!--<DockPanel DockPanel.Dock="Right"  >-->
+
+
+            <Grid.RowDefinitions >
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+
+            </Grid.RowDefinitions>
+
+
+
+            <Button Grid.Row="0"  Content="רענן" x:Name="refresh" Click="Button_refresh"  DockPanel.Dock="Right" Width="114" />
+
+        </Grid>
     </Grid>
+
 </UserControl>

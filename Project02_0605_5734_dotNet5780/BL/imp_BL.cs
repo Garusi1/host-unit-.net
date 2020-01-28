@@ -497,6 +497,8 @@ namespace BL
             BE.HostingUnit HU = getHostingUnitByID(order.HostingUnitKey); // בהנחה שזה קיים אחרת לא נשלחה בקשה לפונקציה זו
             BE.Order orderBeforeChange = getOrderByID(order.OrderKey);
 
+            
+
             if (!(ApproveRequest(GR, HU))) //check if the dates are available on matrix.   // if not, return false.)
             {
                 throw new BE.Tools.UnLogicException(string.Format("The dates on Hosting unit are not available"));
@@ -507,7 +509,7 @@ namespace BL
                 throw new BE.Tools.UnLogicException(string.Format("בעל יחידת דיור אינו מורשה לשלוח מייל כל עוד לא חתם על הרשאה לחיוב חשבון בנק"));
 
 
-            if (orderBeforeChange.Status == BE.StatusEnum.נסגר_בהיענות_הלקוח || orderBeforeChange.Status == BE.StatusEnum.נסגר_מחוסר_הענות_הלקוח)
+            if (orderBeforeChange.Status == BE.StatusEnum.נסגר_בהיענות_הלקוח || orderBeforeChange.Status == BE.StatusEnum.נסגר_מחוסר_הענות_הלקוח || orderBeforeChange.Status == BE.StatusEnum.נסגר_היות_ויחידית_אירוח_נתפסה_כבר)
             {
                 throw new BE.Tools.UnLogicException(string.Format("לא ניתן לשנות סטטוס הזמנה שנסגרה"));
 
@@ -533,19 +535,40 @@ namespace BL
 
             //}
 
+
+            if (!(orderBeforeChange.Status == BE.StatusEnum.נשלח_מייל)&& order.Status == BE.StatusEnum.נסגר_בהיענות_הלקוח)
+            {
+                throw new BE.Tools.UnLogicException(string.Format("לא ניתן לסגור עסקה לפני שליחת מייל."));
+
+            }
+
+
+
+            bool flag; //מסמן אם העדכון הינו עבור סגירת עסקה או עבור שליחת דואר.
+            flag = false;
+
+
             if ((HU.Owner.CollectionClearance == "Yes") && (order.Status == BE.StatusEnum.נסגר_בהיענות_הלקוח))
             {
+                flag = true;
                 int Chargeamount = 0;
-                //תפיסת היחידה
-                //DateTime LastNight = GR.RegistrationDate.AddDays(-2);
 
+                if (!(checkAvailabilityGuestAndHosing(GR, HU))) //אם זה לא זמין ייכנס לתוך
+                {
+                    throw new BE.Tools.UnLogicException(string.Format("שגיאה! יחידה האירוח " + HU.HostingUnitKey  + "\n"+
+                      "\n" + " תפוסה בתאריכי דרישת האירוח" + GR.GuestRequestKey + "\n" +
+                        "  לא ניתן לעדכן הזמנה" + order.OrderKey));
+                }
                 for (DateTime tempDate = GR.EntryDate; tempDate < GR.ReleaseDate; tempDate = tempDate.AddDays(1))
                 {
                     this[tempDate, HU] = true;//put the nights on matrix
                     Chargeamount += BE.Configuration.Commission; //חישוב עמלה על כל יום שנתפס
                 }
 
-                bankAccountDebit(HU, Chargeamount);
+
+
+  
+                BE.GuestRequest tempGR = GR;
                 GR.Status = StatusGREnum.נסגרה_עסקה_דרך_האתר;
                 try
                 {
@@ -563,22 +586,90 @@ namespace BL
                     throw e;
                 }
 
+                try
+                {
+                    IDAL.UpdateOrder(order/*.Clone()*/);
+                }
+                catch (KeyNotFoundException e)
+                {
+                    GR = getGuestRequestByID(order.GuestRequestKey);
+                    try
+                    {
+                        updateGuestRequest(GR);
 
+                    }
+                    catch (ArgumentException ex)
+                    {
 
+                        throw e;
+                    }
+                    catch (KeyNotFoundException ex)
+                    {
 
-
-
-                var fit = from orderShow in GetOrderList()
-                          where (GR.GuestRequestKey == orderShow.GuestRequestKey) && (order.OrderKey != orderShow.OrderKey)//לוקח את כל הרשימה מלבד אותו מופע של הזמנה
-                          select orderShow;
+                        throw e;
+                    }
+                    throw e;
+                }
 
                 try
                 {
-                    foreach (var item in fit)
+                    IDAL.updateHostingUnit(HU);
+                }
+                catch (Exception ex) //אין שגיאה מוגדרת להוספה
+                {
+
+                    throw ex;
+                }
+
+
+                bankAccountDebit(HU, Chargeamount);
+
+
+                //var fit = from orderShow in GetOrderList()
+                //          where (GR.GuestRequestKey == orderShow.GuestRequestKey) && (order.OrderKey != orderShow.OrderKey)
+                //          select orderShow;
+
+
+                //var fitOrders = from item in GetOrderList(x => (x.GuestRequestKey == GR.GuestRequestKey))
+                //       where item.OrderKey != order.OrderKey
+                //                select item;
+
+
+                //IEnumerable<BE.Order> fitOrders = GetOrderList(x => (x.GuestRequestKey == GR.GuestRequestKey)
+                //      && (x.OrderKey != order.OrderKey));
+                try
+                {
+                    foreach (var item in GetOrderList(x => (x.GuestRequestKey == GR.GuestRequestKey)))//לוקח את כל שאר ההזמנות שמשוייכות לדרישת אירוח זו
                     {
-                        item.Status= BE.StatusEnum.נסגר_מחוסר_הענות_הלקוח;
-                        IDAL.UpdateOrder(item/*.Clone()*/);
+                        if (item.OrderKey!=order.OrderKey)
+                        {
+                            item.Status = BE.StatusEnum.נסגר_מחוסר_הענות_הלקוח;
+                            IDAL.UpdateOrder(item/*.Clone()*/);
+                        }
+
                     }
+
+                    ///סגירת כל הזמנות שמתנגשות עם ההזמנה שאושרה!
+                    ///
+                    foreach (var item in GetOrderList(x => (x.GuestRequestKey != GR.GuestRequestKey)))//לוקח את כל שאר ההזמנות שמשוייכות לדרישת אירוח זו
+                    {
+                        if (item.OrderKey != order.OrderKey)
+                        {
+
+                            BE.GuestRequest guest = getGuestRequestByID(item.GuestRequestKey);
+                            BE.HostingUnit hosting = getHostingUnitByID(item.HostingUnitKey); // בהנחה שזה קיים אחרת לא נשלחה בקשה לפונקציה זו
+                            if (!(checkAvailabilityGuestAndHosing(guest, hosting))) //אם זה לא זמין ייכנס לתוך
+                            {
+                                item.Status = BE.StatusEnum.נסגר_היות_ויחידית_אירוח_נתפסה_כבר; //היות וכבר נתפס ע"י מישהו אחר
+                                IDAL.UpdateOrder(item/*.Clone()*/);
+                            }
+
+
+                        }
+
+                    }
+
+
                 }
                 catch (KeyNotFoundException e)
                 {
@@ -588,15 +679,20 @@ namespace BL
 
             }
 
-            try
-            {
-                IDAL.UpdateOrder(order/*.Clone()*/);
-            }
-            catch (KeyNotFoundException e)
-            {
 
-                throw e;
+            if ((flag != true)&& (!(order.Status == BE.StatusEnum.נסגר_בהיענות_הלקוח))) // במידה ומסנים לעדכן שדה שהוא לא השדה ההמוזכר. 
+            {
+                try
+                {
+                    IDAL.UpdateOrder(order/*.Clone()*/);
+                }
+                catch (KeyNotFoundException e)
+                {
+
+                    throw e;
+                }
             }
+           
 
         }
 
@@ -630,7 +726,7 @@ namespace BL
         {
 
 
-            return IDAL.GetOrderList(predicat);
+            return IDAL.GetOrderList(predicat).ToList();
 
             //IEnumerable<BE.Order> list = IDAL.GetOrderList(); 
             //return list;
@@ -703,6 +799,26 @@ namespace BL
 
             return true;
         }
+
+
+
+
+        /// <summary>
+        /// בדיקה האם יש זמינות עבור דרישת אירוח ויחידת אירוח
+        /// </summary>
+        /// <param name="GR"></param>
+        /// <param name="HU"></param>
+        /// <returns></returns>
+        bool checkAvailabilityGuestAndHosing(BE.GuestRequest GR, BE.HostingUnit HU) //check if the dates are available on matrix.   // if not, return false.
+        {
+          
+            for (DateTime tempDate = GR.EntryDate; tempDate < GR.ReleaseDate; tempDate = tempDate.AddDays(1))
+                if (this[tempDate, HU]) { return false; }// check if the days are avaiable
+            return true;
+        }
+
+
+
 
 
         public int numberOfDayes(DateTime start, DateTime end = default(DateTime)) //מספר הימים שעברו בטווח תאריכים מסוים או מתאריך מסוים ועד היום.
