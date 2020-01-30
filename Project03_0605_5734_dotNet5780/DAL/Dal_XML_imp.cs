@@ -334,13 +334,6 @@ namespace DAL
         }
 
 
-        /// <summary>
-        /// list l 
-        /// </summary>
-        /// <returns></returns>
-        /// 
-        //IEnumerable<BE.BankBranch>
-
 
 
         public IEnumerable<BE.BankBranch> GetBankBranchList(Func<BE.BankBranch, bool> predicat = null)
