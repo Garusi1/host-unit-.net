@@ -1058,13 +1058,12 @@ namespace BL
                     Console.WriteLine("\n\n\n\n\n in the if \n\n\n\n\n\n");
                     getBankDetails();
                     Console.WriteLine("fdsfhkdsjfhdskjfhkdsjfs");
-                }
-
-
                 string now = DateTime.Now.ToString();
                 Console.WriteLine(now);
                 System.IO.File.WriteAllText(path, now);
-                System.IO.File.WriteAllText(path, now);
+                }
+
+
             }
            // catch (Exception e)
             {
