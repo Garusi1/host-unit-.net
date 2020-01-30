@@ -6,6 +6,7 @@ using System.IO;
 using System.Linq;
 using System.Net;
 using System.Net.Mail;
+using System.Reflection;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
@@ -1039,15 +1040,12 @@ namespace BL
           //  try
             {
                 string sw = "";
-                string _filePath = Path.GetDirectoryName(System.AppDomain.CurrentDomain.BaseDirectory);
-                Console.WriteLine(_filePath);
-                string s = @"\PLWPF\bin\Debug";
-                int lenToCut = _filePath.Length - s.Length;
-                _filePath = _filePath.Substring(0,lenToCut);
-                Console.WriteLine(_filePath);
-                string Datepath = _filePath+ @"\BL\bank\f.txt";
+                //string _filePath = Path.GetDirectoryName(System.AppDomain.CurrentDomain.BaseDirectory);
+                string path  = (Directory.GetParent(Directory.GetCurrentDirectory()).Parent.Parent.FullName +@"\BL\bank\f.txt");
 
-                sw = System.IO.File.ReadAllText(Datepath);
+                Console.WriteLine("\n\npath path path\n\n"+ path+"\n\n");
+               
+                sw = System.IO.File.ReadAllText(path);
                 DateTime dff = DateTime.Parse(sw);
 
 
@@ -1064,8 +1062,8 @@ namespace BL
 
                 string now = DateTime.Now.ToString();
                 Console.WriteLine(now);
-                System.IO.File.WriteAllText(Datepath, now);
-                System.IO.File.WriteAllText(Datepath, now);
+                System.IO.File.WriteAllText(path, now);
+                System.IO.File.WriteAllText(path, now);
             }
            // catch (Exception e)
             {
@@ -1081,35 +1079,31 @@ namespace BL
         public static void getBankDetails()
         {
 
-            Console.WriteLine("\n\n\n\n\n in the func2 \n\n\n\n\n\n");
+            Console.WriteLine("\n\n in the func2 \n\n");
             //StreamWriter sw = new StreamWriter(@"‏‏C:\Users\mgaru\source\repos\Project_CSH\32\f.txt");
-            string _filePath = Path.GetDirectoryName(System.AppDomain.CurrentDomain.BaseDirectory);
-            Console.WriteLine(_filePath);
-            string s = @"\PLWPF\bin\Debug";
-            int lenToCut = _filePath.Length - s.Length;
-            _filePath = _filePath.Substring(0, lenToCut);
-            Console.WriteLine(_filePath);
-            string xmlPath = _filePath + @"\BL\bank\atmData.xml";
-           // const string xmlLocalPath = @"atmData.xml";
+            string path = (Directory.GetParent(Directory.GetCurrentDirectory()).Parent.Parent.FullName + @"\BL\bank\atmData.xml");
+
+            
             WebClient wc = new WebClient();
             try
             {
                 string xmlServerPath = @"http://www.boi.org.il/he/BankingSupervision/BanksAndBranchLocations/Lists/BoiBankBranchesDocs/atm.xml";
-                wc.DownloadFile(xmlServerPath, xmlPath);
+                wc.DownloadFile(xmlServerPath, path);
+
 
 
             }
             catch (Exception)
             {
                 string xmlServerPath = @"http://www.jct.ac.il/~coshri/atm.xml";
-                wc.DownloadFile(xmlServerPath, xmlPath);
+                wc.DownloadFile(xmlServerPath, path);
 
             }
             finally
             {
                 wc.Dispose();
             }
-            char[] gg = xmlPath.ToCharArray();
+            char[] gg = path.ToCharArray();
 
             Console.WriteLine(gg);
 
