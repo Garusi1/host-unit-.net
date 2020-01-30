@@ -4,40 +4,71 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using System.Xml.Linq;
+using System.Xml.Serialization;
+using BE;
+
 
 namespace DAL
 {
-    public class Dal_XML_imp
+    class Dal_XML_imp
     {
-        //public void XmlSample()
+       DataSource ds = new DataSource();
+
+        //public void guestListToXML()
         //{
-        //    if (!File.Exists(FPath))
-        //        CreateFiles();
+        //    List<BE.GuestRequest> GRL = ds.getGuestRequestList();
+        //    string _filePath = Path.GetDirectoryName(System.AppDomain.CurrentDomain.BaseDirectory);
+        //    Console.WriteLine(_filePath);
+        //    string s = @"\PLWPF\bin\Debug";
+        //    int lenToCut = _filePath.Length - s.Length;
+        //    _filePath = _filePath.Substring(0, lenToCut);
+        //    Console.WriteLine(_filePath);
+        //    Stream xmlPath = File.OpenWrite(_filePath + @"xml_files\guestRequestList.txt");
+        //    //Stream st = File.OpenWrite(Environment.CurrentDirectory + "guestRequestList.txt");
+        //    XmlSerializer xmlS = new XmlSerializer(typeof(List<BE.GuestRequest>));
+        //    xmlS.Serialize(xmlPath, GRL);
         //}
-        //private void CreateFiles()
+        //public void OrderListToXML()
         //{
-        //    studentRoot = new XElement("students");
+        //    List<BE.Order> OL = ds.getOrderList();
+        //    Stream st = File.OpenWrite(Environment.CurrentDirectory + "orderList.txt");
+        //    XmlSerializer xmlS = new XmlSerializer(typeof(List<BE.GuestRequest>));
+        //    xmlS.Serialize(st, OL);
+        //}
+        //public void HostingUnitListToXML()
+        //{
+        //    List<BE.HostingUnit> HUL = ds.getHostingUnitList();
+        //    Stream st = File.OpenWrite(Environment.CurrentDirectory + "guestRequestList.txt");
+        //    XmlSerializer xmlS = new XmlSerializer(typeof(List<BE.GuestRequest>));
+        //    xmlS.Serialize(st, HUL);
         //}
 
+        //public void addGuestRequest(BE.GuestRequest guest)
+        //{
+        //    bool exists = ds.getGuestRequestList().Any(x => x.GuestRequestKey == guest.GuestRequestKey);
+        //    if (exists)
+        //    {
+        //        throw new DuplicateWaitObjectException((/* "ישנו מספר זהה של דרישת אירוח"*/"Cannot add.duplicate GuestRequest key on data "));
 
-            /// <summary>
-            /// יצירה זמנית ומהירה של xml ממה שיש כבר בdata
-            /// </summary>
-        public void tempCreate ()
-        {
-            //DataSource ds = new DataSource();
+        //    }
+        //    if (guest.GuestRequestKey == 0)
+        //    {
+        //        guest.GuestRequestKey = BE.Configuration.geustReqID++;
 
-            //XDocument xmlDoc= new XDocument(
-            //    new XDeclaration("1.0","utf-8","yes"),
-            //    new XComment("מתוך מחלקה לאקס אמ אל"),
-            //    new XElement("GuestRequests", //שם שורש
-            //        from p in ds.getGuestRequestList()
-            //        select new XElement("GuestRequestKey", p.GuestRequestKey),
-            //        new XElement (,p),
+        //    }
+
+        //    ds.getGuestRequestList().Add(guest.Clone());
+
+        //    //foreach (BE.GuestRequest element in ds.getGuestRequestList()) 
+        //    //{
+        //    //    if (element.isEqual(guest))
+        //    //        throw new DuplicateWaitObjectException((/* "ישנו מספר זהה של דרישת אירוח"*/"Cannot add.duplicate GuestRequest key on data "));
+        //    //}
 
 
-        }
+
+
+        //}
 
     }
 }

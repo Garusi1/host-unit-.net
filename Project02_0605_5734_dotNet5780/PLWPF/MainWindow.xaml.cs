@@ -20,6 +20,7 @@ namespace PLWPF
     /// </summary>
     public partial class MainWindow : Window
     {
+        BL.Factory bl = new BL.Factory();
         public MainWindow()
         {
             InitializeComponent();
@@ -30,6 +31,9 @@ namespace PLWPF
             Application.Current.Resources.MergedDictionaries.Clear();
             Application.Current.Resources.MergedDictionaries.Add(resourceDict);
             // ---- עד כאן שפה
+            
+          //  bl.bankThread();
+
         }
 
 
