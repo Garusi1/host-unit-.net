@@ -11,28 +11,6 @@ namespace DAL
 {
     public static class Cloning
     {
-        /// <summary>
-        /// deep cloning
-        /// </summary>
-        /// <typeparam name="T"></typeparam>
-        /// <param name="source"></param>
-        /// <returns></returns>
-        ////public static T Clone<T>(this T source)
-        ////{
-        ////    if (source == null)
-        ////        return default(T);
-        ////    if (!typeof(T).IsSerializable)
-        ////        throw new ArgumentException("The type must be serializable.", "source");
-        ////    IFormatter formatter = new BinaryFormatter();  // serialize or convert the object to a binary format
-        ////    Stream stream = new MemoryStream(); //כאן אפשר גם לשלח לקובץ עם נשמתמש בזרימה בהפנייה אחרת
-        ////    using (stream)
-        ////    {
-        ////        formatter.Serialize(stream, source); //מעבירים מהמקור לזרימת הנתונים
-        ////        stream.Seek(0, SeekOrigin.Begin);
-        ////        return (T)formatter.Deserialize(stream);
-        ////    }
-        ////}
-
 
 
         public static T Clone<T>(this T source)
@@ -51,8 +29,6 @@ namespace DAL
                 return (T)formatter.Deserialize(stream);
             }
         }
-
-
 
 
 
