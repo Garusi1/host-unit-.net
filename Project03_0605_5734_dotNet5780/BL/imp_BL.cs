@@ -1124,7 +1124,7 @@ namespace BL
         {
             while (true)
             {
-                Thread.Sleep(1000);
+                Thread.Sleep(2000);
 
                 try
                 {
@@ -1173,7 +1173,115 @@ namespace BL
             return (mone % 10 == 0);
         }
 
+        public void sendEmail(Order order)
+        {
+            GuestRequest guest = new GuestRequest();
+            guest = getGuestRequestByID(order.GuestRequestKey);
+            HostingUnit HUshow = new HostingUnit();
+            HUshow = getHostingUnitByID(order.HostingUnitKey);
+            Order orderTemp = new Order();
 
+            try
+            {
+               
+                //  System.Windows.MessageBox.Show(" נסגרה בהצלחה");
+
+                string str = "שלום  " + guest.PrivateName + " " + guest.FamilyName +
+                     "\n" + " אנחנו נרגשים  לבשר לך שנמצאה התאמה באתרינו עבור דרישת האירוח שלך!" +
+                     "פרטי ההזמנה : "
+                    +
+                    (order.ToString() + "\n \n\n "
+                     + " " + "  " + HUshow.HostingUnitName + " מאיזור ה " + HUshow.Area +
+                     " הזמנה עבור יחידת אירות מסוג " + HUshow.Type + "תאריך כניסה :" + guest.EntryDate + "\n  תאריך יציאה: " + guest.ReleaseDate + "\n"
+                     + "\n" + " לפרטים ולסגירת עסקה אנא צרו קשר עם המארח במספר טלפון: " + HUshow.Owner.PhoneNumber
+                     + "\n  :או במייל בכתובת " + HUshow.Owner.MailAddress);
+
+
+                var client = new SmtpClient("smtp.gmail.com", 587)
+                {
+                    Credentials = new NetworkCredential("zimmerisrael123@gmail.com", "Aa12345678910"),
+                    EnableSsl = true
+                };
+
+                Thread T1 = new Thread(delegate ()
+                {
+                    using (var message = new MailMessage("zimmerisrael123@gmail.com", getGuestRequestByID(order.GuestRequestKey).MailAddress)
+                    {
+                        Subject = "נמצאה התאמת בקשת אירוח!",
+                        Body = str
+                    })
+                    {
+                        {
+                            client.Send(message);
+                        }
+                    }
+                });
+
+
+
+                T1.Start();
+                
+               /* MessageBox.Show("המייל נשלח בהצלחה!", "המייל נשלח");
+
+
+                IenumaOrder = bl.GetOrderList(x => x.HostingUnitKey == number); *///הצג רק הזמנות רלוונטיות ליחידת אירוח זו. 
+
+             }
+            catch (ArgumentNullException ex)
+            {
+                order = orderTemp;
+                throw ex;
+            }
+
+            catch (ArgumentException ex)
+            {
+                order = orderTemp;
+                throw ex;
+
+            }
+            catch (KeyNotFoundException ex)
+            {
+                order = orderTemp;
+                throw ex;
+
+
+            }
+            catch (BE.Tools.UnLogicException ex)
+            {
+                order = orderTemp;
+                throw ex;
+
+
+            }
+            catch (SmtpFailedRecipientsException ex)
+            {
+                order = orderTemp;
+                throw ex;
+
+
+            }
+            catch (InvalidOperationException ex)
+            {
+                order = orderTemp;
+                throw ex;
+
+            }
+
+            catch (SmtpException ex)
+            {
+                order = orderTemp;
+                throw ex;
+
+            }
+            catch (Exception ex)
+            {
+                order = orderTemp;
+                throw ex;
+
+            }
+        
+            
+        }
 
 
     }

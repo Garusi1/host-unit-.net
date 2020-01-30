@@ -154,7 +154,7 @@ namespace PLWPF.Orders
                     //Console.WriteLine(bl.getGuestRequestByID(40000000 + id));
                     //Console.WriteLine(order.ToString());
                 }
-                    
+
             }
             catch (Exception ex)
             {
@@ -240,28 +240,34 @@ namespace PLWPF.Orders
         #region שליחת מייל
 
 
+        // מה נשאר לפונ החדשה
+        //  MessageBox.Show("המייל נשלח בהצלחה!", "המייל נשלח");
+
+
+        //IenumaOrder = bl.GetOrderList(x => x.HostingUnitKey == number); 
+
         private void Button_Click_send_email(object sender, RoutedEventArgs e)
         {
 
             order = (BE.Order)list.SelectedItem;
 
-            guest = bl.getGuestRequestByID(order.GuestRequestKey);
 
             if (order != null)
             {
 
+                guest = bl.getGuestRequestByID(order.GuestRequestKey);
 
-
-
-                orderTemp = order;
+                orderTemp = new BE.Order();
+                orderTemp = order;//צריך לעשות new
                 order.Status = BE.StatusEnum.נשלח_מייל;
 
                 try
                 {
                     bl.UpdateOrder(order);
+                    bl.sendEmail(order);
                     //  System.Windows.MessageBox.Show(" נסגרה בהצלחה");
 
-                    string str = "שלום  " + guest.PrivateName + " " + guest.FamilyName +
+                   /* string str = "שלום  " + guest.PrivateName + " " + guest.FamilyName +
                          "\n" + " אנחנו נרגשים  לבשר לך שנמצאה התאמה באתרינו עבור דרישת האירוח שלך!" +
                          "פרטי ההזמנה : "
                         +
@@ -305,7 +311,7 @@ namespace PLWPF.Orders
 
 
 
-                    //thr.Start();
+                    //thr.Start();*/
 
 
 
@@ -378,23 +384,23 @@ namespace PLWPF.Orders
 
             }
         }
-        public void sendAnEamil()
-        {
+        //public void sendAnEamil()
+        //{
 
-            var client = new SmtpClient("smtp.gmail.com", 587)
-            {
-                Credentials = new NetworkCredential("zimmerisrael123@gmail.com", "Aa12345678910"),
-                EnableSsl = true
-            };
+        //    var client = new SmtpClient("smtp.gmail.com", 587)
+        //    {
+        //        Credentials = new NetworkCredential("zimmerisrael123@gmail.com", "Aa12345678910"),
+        //        EnableSsl = true
+        //    };
 
-            client.Send(bl.getGuestRequestByID(order.GuestRequestKey).MailAddress,
-                bl.getGuestRequestByID(order.GuestRequestKey).MailAddress, order.ToString(), "love you :) \n  "
-                + " " + HUshow.Type + " " + HUshow.HostingUnitName + " from the " + HUshow.Area);
-            //Console.WriteLine("Sent");
+        //    client.Send(bl.getGuestRequestByID(order.GuestRequestKey).MailAddress,
+        //        bl.getGuestRequestByID(order.GuestRequestKey).MailAddress, order.ToString(), "love you :) \n  "
+        //        + " " + HUshow.Type + " " + HUshow.HostingUnitName + " from the " + HUshow.Area);
+        //    //Console.WriteLine("Sent");
 
 
-            //Console.ReadLine();
-        }
+        //    //Console.ReadLine();
+        //}
 
         #endregion
 

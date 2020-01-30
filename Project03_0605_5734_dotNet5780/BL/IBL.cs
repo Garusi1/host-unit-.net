@@ -19,6 +19,9 @@ namespace BL
         /// <param name="guest"></param>
         void updateGuestRequest(BE.GuestRequest guest);
 
+        void sendEmail(BE.Order order);
+
+
         BE.GuestRequest getGuestRequestByID(int ID);
 
 
