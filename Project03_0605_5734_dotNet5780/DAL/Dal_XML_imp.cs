@@ -26,6 +26,11 @@ namespace DAL
         public static List<BE.BankBranch> bankAccuntsList;
         public static List<BE.Order> OrderList;
 
+        XElement GuestRoot;
+
+
+
+
         internal Dal_XML_imp()
         {
             //DownloadBankXml();
@@ -87,52 +92,164 @@ namespace DAL
 
         public void addGuestRequest(BE.GuestRequest guest)
         {
-            bool exists = GuestRequestList1.Any(x => x.GuestRequestKey == guest.GuestRequestKey);
-            if (exists)
+            if (getGuestRequestByID(guest.GuestRequestKey) != null)
             {
-                throw new DuplicateWaitObjectException((/* "ישנו מספר זהה של דרישת אירוח"*/"Cannot add.duplicate GuestRequest key on data "));
-
+                throw new DuplicateWaitObjectException("Duplicate Wait Object Exception"); 
             }
-            if (guest.GuestRequestKey == 0)
+            try
             {
-                guest.GuestRequestKey = BE.Configuration.GetGuestRequestKey();
+                XElement guestXml = new XElement("GuestRequest");
+                guestXml.Add(
+                    new XElement("GuestRequestKey", guest.GuestRequestKey),
+                    new XElement("PrivateName", guest.PrivateName),
+                    new XElement("FamilyName", guest.FamilyName),
+                    new XElement("Status", guest.Status),
+                    new XElement("RegistrationDate", guest.RegistrationDate),
+                    new XElement("EntryDate", guest.EntryDate),
+                    new XElement("ReleaseDate", guest.ReleaseDate),
+                    new XElement("Area", guest.Area),
+                    new XElement("Type", guest.Type),
+                    new XElement("Jacuzzi", guest.Jacuzzi),
+                    new XElement("Garden", guest.Garden),
+                    new XElement("ChildrensAttractions", guest.ChildrensAttractions),
+                    new XElement("Adults", guest.Adults),
+                    new XElement("Children", guest.Children),
+                    new XElement("Pool", guest.Pool)
 
+
+                    );
+                GuestRoot.Add(guestXml);
+                GuestRoot.Save(BE.Tools.GuestPath);
             }
-
-            GuestRequestList1.Add(guest.Clone());
-            BE.Tools.SaveToXML<List<BE.GuestRequest>>(GuestRequestList1, BE.Tools.GuestPath);
-
+            catch (Exception ex)
+            {
+                throw new System.Xml.XmlException("שגיאה בהוספת דרישת אירוח בxml");
+            }
 
         }
 
+        // updateOrder function   add update Order  to Xml data
         public void updateGuestRequest(BE.GuestRequest guest)
-
         {
+            guest = guest.Clone();
+            XElement oldGuest = (from guestXml in GuestRoot.Elements()
+                                 where guestXml.Element("GuestRequestKey").Value == guest.GuestRequestKey.ToString()
+                                 select guestXml).FirstOrDefault();
 
-            if (guest.GuestRequestKey == 0)//זה אומר שאין קוד ייחודי שהרי הערך לא מאותחל על ברירת מחדל- דרישות דף פרוייקט.
-                guest.GuestRequestKey = BE.Configuration.GetGuestRequestKey(); //הענק לו קוד ייחודי
+            oldGuest.Element("GuestRequestKey").Value = guest.GuestRequestKey.ToString();
+            oldGuest.Element("PrivateName").Value = guest.PrivateName.ToString();
+            oldGuest.Element("FamilyName").Value = guest.FamilyName.ToString();
+            oldGuest.Element("Status").Value = guest.Status.ToString();
+            oldGuest.Element("RegistrationDate").Value = guest.RegistrationDate.ToString();
+            oldGuest.Element("EntryDate").Value = guest.EntryDate.ToString();
+            oldGuest.Element("ReleaseDate").Value = guest.ReleaseDate.ToString();
+            oldGuest.Element("Area").Value = guest.Area.ToString();
+            oldGuest.Element("Type").Value = guest.Type.ToString();
+            oldGuest.Element("Pool").Value = guest.Pool.ToString();
+            oldGuest.Element("Jacuzzi").Value = guest.Jacuzzi.ToString();
+            oldGuest.Element("Garden").Value = guest.Garden.ToString();
+            oldGuest.Element("ChildrensAttractions").Value = guest.ChildrensAttractions.ToString();
+            oldGuest.Element("Adults").Value = guest.Adults.ToString();
+            oldGuest.Element("Children").Value = guest.Children.ToString();
 
-            //אם זה קיים הוא מוחק ישן ושם חדש. אם לא קיים, פשוט יוסיף אותו. 
-            GuestRequestList1.RemoveAll(x => x.GuestRequestKey == guest.GuestRequestKey);
-            addGuestRequest(guest);
 
-            //אם איו מופע כנ"ל משמע שלא מצא אותו ברשימה
-
+            GuestRoot.Save(BE.Tools.GuestPath);
 
         }
 
-
+        // GetOrder function get Order Key and return Order obj from xml data.
         public BE.GuestRequest getGuestRequestByID(int ID)
         {
+            //OrderRoot = XElement.Load(OrderPath);
+            return (from guest in GuestRoot.Elements().Where(x => x.Element("GuestRequestKey").Value == ID.ToString())
+                    select new BE.GuestRequest()
+                    {
+                        GuestRequestKey = Convert.ToInt32(guest.Element("GuestRequestKey").Value),
+                        Adults = Convert.ToInt32(guest.Element("Adults").Value),
+                        Children = Convert.ToInt32(guest.Element("Children").Value),
 
-            var list = from item in GetGuestRequestList()
-                       where item.GuestRequestKey == ID
-                       select item.Clone();
+                        Area = (BE.AreaEnum)Enum.Parse(typeof(BE.AreaEnum), guest.Element("Area").Value),
+                        Status = (BE.StatusGREnum)Enum.Parse(typeof(BE.StatusGREnum), guest.Element("Status").Value),
+                        Type = (BE.TypeEnum)Enum.Parse(typeof(BE.TypeEnum), guest.Element("Type").Value),
+                        Pool = (BE.AttractionsEnum)Enum.Parse(typeof(BE.AttractionsEnum), guest.Element("Pool").Value),
+                        Jacuzzi = (BE.AttractionsEnum)Enum.Parse(typeof(BE.AttractionsEnum), guest.Element("Jacuzzi").Value),
+                        Garden = (BE.AttractionsEnum)Enum.Parse(typeof(BE.AttractionsEnum), guest.Element("Garden").Value),
+                        ChildrensAttractions = (BE.AttractionsEnum)Enum.Parse(typeof(BE.AttractionsEnum), guest.Element("ChildrensAttractions").Value),
 
-            return list.FirstOrDefault();
+                        PrivateName= guest.Element("PrivateName").Value,
+                        FamilyName = guest.Element("FamilyName").Value,
 
+                        EntryDate = DateTime.Parse(guest.Element("EntryDate").Value),
+                        RegistrationDate = DateTime.Parse(guest.Element("RegistrationDate").Value),
+                        ReleaseDate = DateTime.Parse(guest.Element("ReleaseDate").Value)
+
+
+                    }).FirstOrDefault().Clone();
         }
 
+
+
+
+
+
+
+
+
+
+
+
+
+        #region כתיבה פשוטה ללא לינק לאקסאמאל לדרישות אירוח
+
+        //public void addGuestRequest(BE.GuestRequest guest)
+        //{
+        //    bool exists = GuestRequestList1.Any(x => x.GuestRequestKey == guest.GuestRequestKey);
+        //    if (exists)
+        //    {
+        //        throw new DuplicateWaitObjectException((/* "ישנו מספר זהה של דרישת אירוח"*/"Cannot add.duplicate GuestRequest key on data "));
+
+        //    }
+        //    if (guest.GuestRequestKey == 0)
+        //    {
+        //        guest.GuestRequestKey = BE.Configuration.GetGuestRequestKey();
+
+        //    }
+
+        //    GuestRequestList1.Add(guest.Clone());
+        //    BE.Tools.SaveToXML<List<BE.GuestRequest>>(GuestRequestList1, BE.Tools.GuestPath);
+
+
+        //}
+
+        //public void updateGuestRequest(BE.GuestRequest guest)
+
+        //{
+
+        //    if (guest.GuestRequestKey == 0)//זה אומר שאין קוד ייחודי שהרי הערך לא מאותחל על ברירת מחדל- דרישות דף פרוייקט.
+        //        guest.GuestRequestKey = BE.Configuration.GetGuestRequestKey(); //הענק לו קוד ייחודי
+
+        //    //אם זה קיים הוא מוחק ישן ושם חדש. אם לא קיים, פשוט יוסיף אותו. 
+        //    GuestRequestList1.RemoveAll(x => x.GuestRequestKey == guest.GuestRequestKey);
+        //    addGuestRequest(guest);
+
+        //    //אם איו מופע כנ"ל משמע שלא מצא אותו ברשימה
+
+
+        //}
+
+
+        //public BE.GuestRequest getGuestRequestByID(int ID)
+        //{
+
+        //    var list = from item in GetGuestRequestList()
+        //               where item.GuestRequestKey == ID
+        //               select item.Clone();
+
+        //    return list.FirstOrDefault();
+
+        //}
+
+        #endregion
 
         #endregion
 
@@ -303,16 +420,62 @@ namespace DAL
 
 
 
+
+        // getAllOrders function  return all Order obj from xml data.
         public IEnumerable<BE.GuestRequest> GetGuestRequestList(Func<BE.GuestRequest, bool> predicat = null)
         {
+            try
+            {
+                return (from guest in GuestRoot.Elements()
+                        let guestObject = new BE.GuestRequest()
+                        {
 
-            var li = from item in GuestRequestList1
-                     where predicat == null ? true : predicat(item)
-                     select item.Clone();
+                            GuestRequestKey = Convert.ToInt32(guest.Element("GuestRequestKey").Value),
+                            Adults = Convert.ToInt32(guest.Element("Adults").Value),
+                            Children = Convert.ToInt32(guest.Element("Children").Value),
 
-            return li;
+                            Area = (BE.AreaEnum)Enum.Parse(typeof(BE.AreaEnum), guest.Element("Area").Value),
+                            Status = (BE.StatusGREnum)Enum.Parse(typeof(BE.StatusGREnum), guest.Element("Status").Value),
+                            Type = (BE.TypeEnum)Enum.Parse(typeof(BE.TypeEnum), guest.Element("Type").Value),
+                            Pool = (BE.AttractionsEnum)Enum.Parse(typeof(BE.AttractionsEnum), guest.Element("Pool").Value),
+                            Jacuzzi = (BE.AttractionsEnum)Enum.Parse(typeof(BE.AttractionsEnum), guest.Element("Jacuzzi").Value),
+                            Garden = (BE.AttractionsEnum)Enum.Parse(typeof(BE.AttractionsEnum), guest.Element("Garden").Value),
+                            ChildrensAttractions = (BE.AttractionsEnum)Enum.Parse(typeof(BE.AttractionsEnum), guest.Element("ChildrensAttractions").Value),
 
+                            PrivateName = guest.Element("PrivateName").Value,
+                            FamilyName = guest.Element("FamilyName").Value,
+
+                            EntryDate = DateTime.Parse(guest.Element("EntryDate").Value),
+                            RegistrationDate = DateTime.Parse(guest.Element("RegistrationDate").Value),
+                            ReleaseDate = DateTime.Parse(guest.Element("ReleaseDate").Value)
+
+                        }
+                        where predicat == null ? true : predicat(guestObject)
+                        select guestObject).ToList().Clone();
+            }
+            catch (Exception ex) 
+            {
+                throw new System.Xml.XmlException("שגיאה בלקיחת דרישת אירוח מהxml");
+            }
         }
+
+
+
+        #region מימוש ללא לינק לאקס אמ אל
+
+        //public IEnumerable<BE.GuestRequest> GetGuestRequestList(Func<BE.GuestRequest, bool> predicat = null)
+        //{
+
+        //    var li = from item in GuestRequestList1
+        //             where predicat == null ? true : predicat(item)
+        //             select item.Clone();
+
+        //    return li;
+
+        //}
+        #endregion
+
+
         public IEnumerable<BE.HostingUnit> GetHostingUnitList(Func<BE.HostingUnit, bool> predicat = null)
         {
 
