@@ -161,5 +161,7 @@ namespace BL
         IEnumerable<BE.HostingUnit> hostsHostingUnit(string IDHost);
 
 
+        void bankThread();
+
         }
     }

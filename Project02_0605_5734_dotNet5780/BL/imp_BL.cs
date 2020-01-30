@@ -9,6 +9,8 @@ using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using BE;
+using System.Net;
+using System.Net;
 //using DAL; // יש להוריד על פניה מלאה לclone  שנמצא בdal . 
 namespace BL
 {
@@ -1027,7 +1029,67 @@ namespace BL
         }
         #endregion
 
+        #region bankdata
+        private void updateBankDetails()
+        {
+            string sw = "";
+            string Datepath = @"C:\Users\mgaru\source\repos\ConsoleApp5\f.txt";
 
+            sw = System.IO.File.ReadAllText(Datepath);
+            DateTime dff = DateTime.Parse(sw);
+
+
+            Console.WriteLine(sw);
+             DateTime dd = DateTime.Parse(sw);
+            if ((DateTime.Now.Subtract(dff)).TotalDays > 1)
+            {
+                getBankDetails();
+                Console.WriteLine("fdsfhkdsjfhdskjfhkdsjfs");
+            }
+         
+
+            string now = DateTime.Now.ToString();
+            
+            System.IO.File.WriteAllText(Datepath, now);
+            
+
+        }
+
+
+        public static void getBankDetails()
+        {
+            //StreamWriter sw = new StreamWriter(@"f.txt");
+            Console.WriteLine("\n in the func \n");
+            const string xmlLocalPath = @"atmData.xml";
+            WebClient wc = new WebClient();
+            try
+            {
+                string xmlServerPath = (@"http://www.boi.org.il/he/BankingSupervision/BanksAndBranchLocations/Lists/BoiBankBranchesDocs/atm.xml");
+                wc.DownloadFile(xmlServerPath, xmlLocalPath);
+               
+
+            }
+            catch (Exception)
+            {
+                string xmlServerPath = @"http://www.jct.ac.il/~coshri/atm.xml";
+                wc.DownloadFile(xmlServerPath, xmlLocalPath);
+             
+            }
+            finally
+            {
+                wc.Dispose();
+            }
+            char[] gg = xmlLocalPath.ToCharArray();
+
+            Console.WriteLine(gg);
+
+
+        }
+
+        public void bankThread(){
+        Thread th = new Thread(updateBankDetails);
+        }
+        #endregion
 
 
         /// <summary>

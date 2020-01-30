@@ -1,5 +1,7 @@
-﻿using System;
+﻿using DAL;
+using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -12,6 +14,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using System.Windows.Threading;
 
 namespace PLWPF
 {
@@ -20,16 +23,38 @@ namespace PLWPF
     /// </summary>
     public partial class MainWindow : Window
     {
+        BL.IBL bl;
+        private DispatcherTimer dispatcherTimer;
+
         public MainWindow()
         {
             InitializeComponent();
-
+            bl = BL.Factory.GetInstance();
             /// טעינת שפה עברית לחלונות  ---
             Uri dictUri = new Uri(@"/res/languages/AppStrings_HE.xaml", UriKind.Relative); 
             ResourceDictionary resourceDict = Application.LoadComponent(dictUri) as ResourceDictionary;
             Application.Current.Resources.MergedDictionaries.Clear();
             Application.Current.Resources.MergedDictionaries.Add(resourceDict);
             // ---- עד כאן שפה
+            bl.bankThread();
+            dispatcherTimer = new DispatcherTimer();
+            dispatcherTimer.Tick += new EventHandler(dispatcherTimer_Tick);
+            dispatcherTimer.Interval = new TimeSpan(0, 0, 2);
+            MyLabel.Visibility = System.Windows.Visibility.Visible;
+            dispatcherTimer.Start();
+
+
+
+        }
+
+        private void dispatcherTimer_Tick(object sender, EventArgs e)
+        {
+            //Things which happen after 1 timer interval
+            MessageBox.Show("נתוני הבנקים עדכניים");
+            MyLabel.Visibility = System.Windows.Visibility.Collapsed;
+
+            //Disable the timer
+            dispatcherTimer.IsEnabled = false;
         }
 
 

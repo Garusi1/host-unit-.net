@@ -2,6 +2,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Net;
 using System.Net.Mail;
@@ -1028,7 +1029,101 @@ namespace BL
         #endregion
 
 
+        #region bank Data
 
+        public void updateBankDetails()
+        {
+            Console.WriteLine("\n\n\n\n\n in the func1 \n\n\n\n\n\n");
+
+
+          //  try
+            {
+                string sw = "";
+                string _filePath = Path.GetDirectoryName(System.AppDomain.CurrentDomain.BaseDirectory);
+                Console.WriteLine(_filePath);
+                string s = @"\PLWPF\bin\Debug";
+                int lenToCut = _filePath.Length - s.Length;
+                _filePath = _filePath.Substring(0,lenToCut);
+                Console.WriteLine(_filePath);
+                string Datepath = _filePath+ @"\BL\bank\f.txt";
+
+                sw = System.IO.File.ReadAllText(Datepath);
+                DateTime dff = DateTime.Parse(sw);
+
+
+
+
+                Console.WriteLine(sw);
+                if ((DateTime.Now.Subtract(dff)).TotalDays > 1)
+                {
+                    Console.WriteLine("\n\n\n\n\n in the if \n\n\n\n\n\n");
+                    getBankDetails();
+                    Console.WriteLine("fdsfhkdsjfhdskjfhkdsjfs");
+                }
+
+
+                string now = DateTime.Now.ToString();
+                Console.WriteLine(now);
+                System.IO.File.WriteAllText(Datepath, now);
+                System.IO.File.WriteAllText(Datepath, now);
+            }
+           // catch (Exception e)
+            {
+
+               // throw new Exception();
+            }
+            
+           
+
+
+            }
+
+        public static void getBankDetails()
+        {
+
+            Console.WriteLine("\n\n\n\n\n in the func2 \n\n\n\n\n\n");
+            //StreamWriter sw = new StreamWriter(@"‏‏C:\Users\mgaru\source\repos\Project_CSH\32\f.txt");
+            string _filePath = Path.GetDirectoryName(System.AppDomain.CurrentDomain.BaseDirectory);
+            Console.WriteLine(_filePath);
+            string s = @"\PLWPF\bin\Debug";
+            int lenToCut = _filePath.Length - s.Length;
+            _filePath = _filePath.Substring(0, lenToCut);
+            Console.WriteLine(_filePath);
+            string xmlPath = _filePath + @"\BL\bank\atmData.xml";
+           // const string xmlLocalPath = @"atmData.xml";
+            WebClient wc = new WebClient();
+            try
+            {
+                string xmlServerPath = @"http://www.boi.org.il/he/BankingSupervision/BanksAndBranchLocations/Lists/BoiBankBranchesDocs/atm.xml";
+                wc.DownloadFile(xmlServerPath, xmlPath);
+
+
+            }
+            catch (Exception)
+            {
+                string xmlServerPath = @"http://www.jct.ac.il/~coshri/atm.xml";
+                wc.DownloadFile(xmlServerPath, xmlPath);
+
+            }
+            finally
+            {
+                wc.Dispose();
+            }
+            char[] gg = xmlPath.ToCharArray();
+
+            Console.WriteLine(gg);
+
+
+        }
+
+        public void bankThread()
+        {
+            Thread th = new Thread(updateBankDetails);
+            th.Start();
+        }
+
+
+        #endregion 
 
         /// <summary>
         /// בדיקת חוקיות ת"ז בישראל

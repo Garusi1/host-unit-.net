@@ -231,6 +231,10 @@
       <Project>{8a48592f-f3d0-41b9-9dea-0eea16e86e11}</Project>
       <Name>BL</Name>
     </ProjectReference>
+    <ProjectReference Include="..\DS\DS.csproj">
+      <Project>{3B40623F-9FA7-42A2-9002-B63255960A5D}</Project>
+      <Name>DS</Name>
+    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <Resource Include="images\16032010612.jpg" />
