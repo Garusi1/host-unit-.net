@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
+using System.Xml.Serialization;
 
 namespace BE
 {
@@ -55,6 +56,8 @@ namespace BE
 
         private bool[,] diary = new bool[31, 12];
 
+
+        [XmlIgnore]  //להתעלם בסרילזיציה כי יש בעיה להמיר מערך דו ממדי לאקס אמ אל
         public bool[,] Diary
         {
             get { return diary; }
@@ -65,6 +68,35 @@ namespace BE
 
 
         }
+
+
+
+
+        [XmlArray("Diary")]  //אומרים לאקס אמ אל לקרוא לאלמנט הבא בשם שבין המרכאות
+        public bool[] TempDiary
+        {
+            get { return Diary.Flatten(); }
+            set { Diary = value.Expand(12); }
+        }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
         public bool isEqual(HostingUnit host1)
         {

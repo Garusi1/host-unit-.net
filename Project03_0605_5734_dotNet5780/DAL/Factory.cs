@@ -16,8 +16,10 @@ namespace DAL
         public static IDAL GetInstance()
         {
             if (instance == null)
-                instance = new imp_Dal();
-            return instance;
+                instance = new Dal_XML_imp();
+                //instance = new imp_Dal();
+
+                return instance;
         }
 
     }

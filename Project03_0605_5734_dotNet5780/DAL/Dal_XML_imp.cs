@@ -23,7 +23,7 @@ namespace DAL
 
         public static List<BE.HostingUnit> HostingUnitList1;
 
-        //public static List<BE.BankBranch> bankAccunts;
+        public static List<BE.BankBranch> bankAccuntsList;
         public static List<BE.Order> OrderList;
 
         internal Dal_XML_imp()
@@ -39,23 +39,24 @@ namespace DAL
                 BE.Tools.SaveConfigToXml();
             }
             else
-            {
+            { 
 
 
                 BE.Tools.ConfigRoot = XElement.Load(BE.Tools.configPath);
-                BE.Configuration.geustReqID = Convert.ToInt32(BE.Tools.ConfigRoot.Element("GuestRequestKey").Value);
-                BE.Configuration.hostUnitID = Convert.ToInt32(BE.Tools.ConfigRoot.Element("HostingUnitKey").Value);
-                BE.Configuration.orderID = Convert.ToInt32(BE.Tools.ConfigRoot.Element("OrderKey").Value);
-                BE.Configuration.Commission = Convert.ToInt32(BE.Tools.ConfigRoot.Element("commission").Value);
+                BE.Configuration.geustReqID = Convert.ToInt32(BE.Tools.ConfigRoot.Element("geustReqID").Value);
+                BE.Configuration.hostUnitID = Convert.ToInt32(BE.Tools.ConfigRoot.Element("hostUnitID").Value);
+                BE.Configuration.orderID = Convert.ToInt32(BE.Tools.ConfigRoot.Element("orderID").Value);
+                Configuration.Commission = Convert.ToInt32(BE.Tools.ConfigRoot.Element("Commission").Value);
                 //BE.Configuration.commissionAll = Convert.ToInt32(BE.Tools.ConfigRoot.Element("commissionAll").Value);
                 //BE.Configuration.LastApdateMonthly = Convert.ToDateTime(BE.Tools.ConfigRoot.Element("LastApdateMonthly").Value);
                 //BE.Configuration.LastApdateDaily = Convert.ToDateTime(BE.Tools.ConfigRoot.Element("LastApdateDaily").Value);
+
             }
 
             if (!File.Exists(BE.Tools.OrderPath))
             {
-                OrderRoot = new XElement("Orders");
-                OrderRoot.Save(BE.Tools.OrderPath);
+                BE.Tools.SaveToXML(new List<BE.Order>(), BE.Tools.OrderPath);
+
             }
             if (!File.Exists(BE.Tools.GuestPath))
             {
@@ -63,11 +64,12 @@ namespace DAL
             }
             if (!File.Exists(BE.Tools.HostingUnitPath))
             {
-                BE.Tools.SaveToXML(new List<HostingUnit>(), BE.Tools.HostingUnitPath);
+                BE.Tools.SaveToXML(new List<BE.HostingUnit>(), BE.Tools.HostingUnitPath);
             }
 
             HostingUnitList1 = BE.Tools.LoadFromXML<List<HostingUnit>>(BE.Tools.HostingUnitPath);
-            OrderRoot = XElement.Load(BE.Tools.OrderPath);
+
+            OrderList = BE.Tools.LoadFromXML<List<Order>>(BE.Tools.OrderPath);
             GuestRequestList1 = BE.Tools.LoadFromXML<List<GuestRequest>>(BE.Tools.GuestPath);
 
 
@@ -271,8 +273,6 @@ namespace DAL
                 order.OrderDate = DateTime.Now; //עדכון זמן שליחת מייל
             }
 
-
-
             addOrder(order);
 
 
@@ -336,116 +336,50 @@ namespace DAL
 
 
 
-        public IEnumerable<BE.BankBranch> GetBankBranchList(Func<BE.BankBranch, bool> predicat = null)
+
+
+
+        public IEnumerable<BE.BankBranch> GetBankBranchList()
         {
 
 
-            var li = from item in ds.getBankBranchList()
-                     where predicat == null ? true : predicat(item)
-                     select item.Clone();
-            //קורא רק ב foreach 
+            
 
-
-
-            return /*(List<BE.BankBranch>)*/li;
-
-
-        }
-
-
-
-
-
-        public void updateBankDetails()
-        {
-            Console.WriteLine("\n\n\n\n\n in the func1 \n\n\n\n\n\n");
-
-
-            //  try
+            string BankAccuntPath_temp = BE.Tools.BankAccuntPath;
+            if (!File.Exists(BE.Tools.BankAccuntPath) || BE.Configuration.BanksXmlFinish == false)
             {
-                string sw = "";
-                string _filePath = Path.GetDirectoryName(System.AppDomain.CurrentDomain.BaseDirectory);
-                Console.WriteLine(_filePath);
-                string s = @"\PLWPF\bin\Debug";
-                int lenToCut = _filePath.Length - s.Length;
-                _filePath = _filePath.Substring(0, lenToCut);
-                Console.WriteLine(_filePath);
-                string Datepath = _filePath + @"\BL\bank\f.txt";
-
-                sw = System.IO.File.ReadAllText(Datepath);
-                DateTime dff = DateTime.Parse(sw);
-
-
-
-
-                Console.WriteLine(sw);
-                if ((DateTime.Now.Subtract(dff)).TotalDays > 1)
-                {
-                    Console.WriteLine("\n\n\n\n\n in the if \n\n\n\n\n\n");
-                    getBankDetails();
-                    Console.WriteLine("fdsfhkdsjfhdskjfhkdsjfs");
-                }
-
-
-                string now = DateTime.Now.ToString();
-                Console.WriteLine(now);
-                System.IO.File.WriteAllText(Datepath, now);
-                System.IO.File.WriteAllText(Datepath, now);
+                BankAccuntPath_temp = "atm1.xml";
             }
-            // catch (Exception e)
+            else
             {
-
-                // throw new Exception();
+                long length = new FileInfo(BE.Tools.BankAccuntPath).Length;
+                if (length < 10000)
+                    BankAccuntPath_temp = "atm1.xml";
             }
-
-
-
-
-        }
-
-        public static void getBankDetails()
-        {
-
-            Console.WriteLine("\n\n\n\n\n in the func2 \n\n\n\n\n\n");
-            //StreamWriter sw = new StreamWriter(@"‏‏C:\Users\mgaru\source\repos\Project_CSH\32\f.txt");
-            string _filePath = Path.GetDirectoryName(System.AppDomain.CurrentDomain.BaseDirectory);
-            Console.WriteLine(_filePath);
-            string s = @"\PLWPF\bin\Debug";
-            int lenToCut = _filePath.Length - s.Length;
-            _filePath = _filePath.Substring(0, lenToCut);
-            Console.WriteLine(_filePath);
-            string xmlPath = _filePath + @"\BL\bank\atmData.xml";
-            // const string xmlLocalPath = @"atmData.xml";
-            WebClient wc = new WebClient();
             try
             {
-                string xmlServerPath = @"http://www.boi.org.il/he/BankingSupervision/BanksAndBranchLocations/Lists/BoiBankBranchesDocs/atm.xml";
-                wc.DownloadFile(xmlServerPath, xmlPath);
-
+                bankAccuntsRoot = XElement.Load(BankAccuntPath_temp);
 
             }
-            catch (Exception)
-            {
-                string xmlServerPath = @"http://www.jct.ac.il/~coshri/atm.xml";
-                wc.DownloadFile(xmlServerPath, xmlPath);
+            catch { }
 
-            }
-            finally
-            {
-                wc.Dispose();
-            }
-            char[] gg = xmlPath.ToCharArray();
+            bankAccuntsList = BE.Tools.XmlToBankAccunt(bankAccuntsRoot);
 
-            Console.WriteLine(gg);
+
+            var IenumBank = from BankAccunt in bankAccuntsList
+                            select BankAccunt.Clone();
+            return IenumBank;
+
+
+
 
 
         }
 
-        public void bankThread()
-        {
-            Thread th = new Thread(updateBankDetails);
-            th.Start();
-        }
+
+
+
+
 
 
         #endregion
@@ -457,60 +391,3 @@ namespace DAL
 
 
 
-//DataSource ds = new DataSource();
-
-// //public void guestListToXML()
-// //{
-// //    List<BE.GuestRequest> GRL = ds.getGuestRequestList();
-// //    string _filePath = Path.GetDirectoryName(System.AppDomain.CurrentDomain.BaseDirectory);
-// //    Console.WriteLine(_filePath);
-// //    string s = @"\PLWPF\bin\Debug";
-// //    int lenToCut = _filePath.Length - s.Length;
-// //    _filePath = _filePath.Substring(0, lenToCut);
-// //    Console.WriteLine(_filePath);
-// //    Stream xmlPath = File.OpenWrite(_filePath + @"xml_files\guestRequestList.txt");
-// //    //Stream st = File.OpenWrite(Environment.CurrentDirectory + "guestRequestList.txt");
-// //    XmlSerializer xmlS = new XmlSerializer(typeof(List<BE.GuestRequest>));
-// //    xmlS.Serialize(xmlPath, GRL);
-// //}
-// //public void OrderListToXML()
-// //{
-// //    List<BE.Order> OL = ds.getOrderList();
-// //    Stream st = File.OpenWrite(Environment.CurrentDirectory + "orderList.txt");
-// //    XmlSerializer xmlS = new XmlSerializer(typeof(List<BE.GuestRequest>));
-// //    xmlS.Serialize(st, OL);
-// //}
-// //public void HostingUnitListToXML()
-// //{
-// //    List<BE.HostingUnit> HUL = ds.getHostingUnitList();
-// //    Stream st = File.OpenWrite(Environment.CurrentDirectory + "guestRequestList.txt");
-// //    XmlSerializer xmlS = new XmlSerializer(typeof(List<BE.GuestRequest>));
-// //    xmlS.Serialize(st, HUL);
-// //}
-
-// //public void addGuestRequest(BE.GuestRequest guest)
-// //{
-// //    bool exists = ds.getGuestRequestList().Any(x => x.GuestRequestKey == guest.GuestRequestKey);
-// //    if (exists)
-// //    {
-// //        throw new DuplicateWaitObjectException((/* "ישנו מספר זהה של דרישת אירוח"*/"Cannot add.duplicate GuestRequest key on data "));
-
-// //    }
-// //    if (guest.GuestRequestKey == 0)
-// //    {
-// //        guest.GuestRequestKey = BE.Configuration.geustReqID++;
-
-// //    }
-
-// //    ds.getGuestRequestList().Add(guest.Clone());
-
-// //    //foreach (BE.GuestRequest element in ds.getGuestRequestList()) 
-// //    //{
-// //    //    if (element.isEqual(guest))
-// //    //        throw new DuplicateWaitObjectException((/* "ישנו מספר זהה של דרישת אירוח"*/"Cannot add.duplicate GuestRequest key on data "));
-// //    //}
-
-
-
-
-// //}

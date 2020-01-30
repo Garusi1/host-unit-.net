@@ -32,7 +32,7 @@ namespace DAL
 
         IEnumerable<BE.HostingUnit> GetHostingUnitList(Func<BE.HostingUnit, bool> predicat = null);
         IEnumerable<BE.Order> GetOrderList(Func<BE.Order, bool> predicat = null);
-        IEnumerable<BE.BankBranch> GetBankBranchList(Func<BE.BankBranch, bool> predicat = null);
+        IEnumerable<BE.BankBranch> GetBankBranchList(/*Func<BE.BankBranch, bool> predicat = null*/);
 
 
         //תוספות

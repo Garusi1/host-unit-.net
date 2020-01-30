@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Xml.Linq;
 
 namespace BE
 {
@@ -12,21 +13,15 @@ namespace BE
         public static int hostUnitID = 20000000;
         public static int geustReqID = 40000000;
         public static int Commission = 10;
+
+
+        public static bool BanksXmlFinish = true;
         public static int GetGuestRequestKey()
         {
             geustReqID++;
             Tools.SaveConfigToXml();
             return geustReqID;
 
-        }
-
-
-        
-        public static int GetHostingUnitKey()
-        {
-            hostUnitID++;
-            Tools.SaveConfigToXml();
-            return hostUnitID;
         }
 
         public static int GetOrderKey()
@@ -36,6 +31,20 @@ namespace BE
             return orderID;
 
         }
+
+
+
+
+        public static int GetHostingUnitKey()
+        {
+            hostUnitID++;
+            Tools.SaveConfigToXml();
+            return hostUnitID;
+        }
+
+
+        //public static XElement ConfigRoot;
+
 
     }
 }

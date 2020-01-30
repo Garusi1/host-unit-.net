@@ -6,6 +6,7 @@ using System.IO;
 using System.Linq;
 using System.Net;
 using System.Net.Mail;
+using System.Net.NetworkInformation;
 using System.Reflection;
 using System.Text;
 using System.Threading;
@@ -603,12 +604,12 @@ namespace BL
                     catch (ArgumentException ex)
                     {
 
-                        throw e;
+                        throw ex;
                     }
                     catch (KeyNotFoundException ex)
                     {
 
-                        throw e;
+                        throw ex;
                     }
                     throw e;
                 }
@@ -704,10 +705,10 @@ namespace BL
 
         #region return lists
 
-        public IEnumerable<BE.BankBranch> GetBankBranchList(Func<BE.BankBranch, bool> predicat = null)
+        public IEnumerable<BE.BankBranch> GetBankBranchList(/*Func<BE.BankBranch, bool> predicat = null*/)
         {
             //throw new NotImplementedException();
-            return IDAL.GetBankBranchList(predicat)/*.Clone()*/;
+            return IDAL.GetBankBranchList(/*predicat*/)/*.Clone()*/;
         }
 
         public IEnumerable<BE.GuestRequest> GetGuestRequestList(Func<BE.GuestRequest, bool> predicat = null)
@@ -1046,13 +1047,13 @@ namespace BL
                 Console.WriteLine("\n\npath path path\n\n"+ path+"\n\n");
                
                 sw = System.IO.File.ReadAllText(path);
-                DateTime dff = DateTime.Parse(sw);
+                DateTime dff = DateTime.Parse(sw); //תאריך שקוראים מתוך קובץ זמן עדכון אחרון לתאריך בנקים.
 
 
 
 
                 Console.WriteLine(sw);
-                if ((DateTime.Now.Subtract(dff)).TotalDays > 1)
+                if ((DateTime.Now.Subtract(dff)).TotalDays >= 1)
                 {
                     Console.WriteLine("\n\n\n\n\n in the if \n\n\n\n\n\n");
                     getBankDetails();
@@ -1076,14 +1077,15 @@ namespace BL
 
             }
 
-        public static void getBankDetails()
+        public void getBankDetails()
         {
 
             Console.WriteLine("\n\n in the func2 \n\n");
             //StreamWriter sw = new StreamWriter(@"‏‏C:\Users\mgaru\source\repos\Project_CSH\32\f.txt");
-            string path = (Directory.GetParent(Directory.GetCurrentDirectory()).Parent.Parent.FullName + @"\BL\bank\atmData.xml");
+            string path = BE.Tools.BankAccuntPath;
 
-            
+
+
             WebClient wc = new WebClient();
             try
             {
@@ -1112,8 +1114,32 @@ namespace BL
 
         public void bankThread()
         {
-            Thread th = new Thread(updateBankDetails);
+            Thread th = new Thread(DownloadBankXmlLoop);
             th.Start();
+        }
+
+
+
+        public void DownloadBankXmlLoop()
+        {
+            while (true)
+            {
+                Thread.Sleep(1000);
+
+                try
+                {
+                    if (new System.Net.NetworkInformation.Ping().Send("google.com").Status == IPStatus.Success)
+                    {
+                        updateBankDetails();
+                     
+                        long length = new FileInfo(BE.Tools.BankAccuntPath).Length;
+                        if (length > 50000) break; 
+                    }
+                }
+                catch { }
+            }
+
+
         }
 
 

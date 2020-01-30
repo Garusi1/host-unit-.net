@@ -14,11 +14,6 @@ namespace DAL
     {
         DataSource ds = new DataSource();
 
-        //public static List<BE.GuestRequest> GuestRequestList1 = new List<BE.GuestRequest>();
-
-        //public static List<BE.HostingUnit> HostingUnitList1 = new List<BE.HostingUnit>();
-
-        //public static List<BE.Order> OrderList1 = new List<BE.Order>();
 
         #region GuestRequest
         //#endregion
@@ -346,18 +341,18 @@ namespace DAL
 
 
 
-        public IEnumerable<BE.BankBranch> GetBankBranchList(Func<BE.BankBranch, bool> predicat = null)
+        public IEnumerable<BE.BankBranch> GetBankBranchList(/*Func<BE.BankBranch, bool> predicat = null*/)
         {
 
 
-            var li = from item in ds.getBankBranchList()
-                     where predicat== null ? true: predicat(item)
-                     select item.Clone();
-            //קורא רק ב foreach 
+            var li = /*from item in*/ ds.getBankBranchList();
+                     //where predicat== null ? true: predicat(item)
+                     //select item.Clone();
+       
 
 
 
-            return /*(List<BE.BankBranch>)*/li;
+            return /*(List<BE.BankBranch>)*/li.Clone();
 
 
         }
