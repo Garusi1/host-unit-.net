@@ -1282,9 +1282,20 @@ namespace BL
             
         }
 
+        public IEnumerable<BE.BankBranch> getAllBankBranches() //getAllBankBranches function.
+        { //the function return all Bank Branches
+            try
+            {
+                return IDAL.getAllBankBranches();
+
+            }
+            catch
+            {
+                throw new Exception("שגיאה בהורדת נתוני בנקים");
+            }
+        }
 
     }
-
 
 
 

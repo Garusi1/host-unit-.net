@@ -17,8 +17,6 @@ namespace DAL
         //////XElement OrderRoot;
         XElement bankAccuntsRoot;
 
-
-
         public static List<BE.GuestRequest> GuestRequestList1;
 
         public static List<BE.HostingUnit> HostingUnitList1;
@@ -52,9 +50,7 @@ namespace DAL
                 BE.Configuration.hostUnitID = Convert.ToInt32(BE.Tools.ConfigRoot.Element("hostUnitID").Value);
                 BE.Configuration.orderID = Convert.ToInt32(BE.Tools.ConfigRoot.Element("orderID").Value);
                 Configuration.Commission = Convert.ToInt32(BE.Tools.ConfigRoot.Element("Commission").Value);
-                //BE.Configuration.commissionAll = Convert.ToInt32(BE.Tools.ConfigRoot.Element("commissionAll").Value);
-                //BE.Configuration.LastApdateMonthly = Convert.ToDateTime(BE.Tools.ConfigRoot.Element("LastApdateMonthly").Value);
-                //BE.Configuration.LastApdateDaily = Convert.ToDateTime(BE.Tools.ConfigRoot.Element("LastApdateDaily").Value);
+
 
             }
 
@@ -63,9 +59,13 @@ namespace DAL
                 BE.Tools.SaveToXML(new List<BE.Order>(), BE.Tools.OrderPath);
 
             }
+
+
             if (!File.Exists(BE.Tools.GuestPath))
             {
-                BE.Tools.SaveToXML(new List<BE.GuestRequest>(), BE.Tools.GuestPath);
+                GuestRoot = new XElement("GuestRequests");
+                GuestRoot.Save(BE.Tools.GuestPath);
+
             }
             if (!File.Exists(BE.Tools.HostingUnitPath))
             {
@@ -75,7 +75,7 @@ namespace DAL
             HostingUnitList1 = BE.Tools.LoadFromXML<List<HostingUnit>>(BE.Tools.HostingUnitPath);
 
             OrderList = BE.Tools.LoadFromXML<List<Order>>(BE.Tools.OrderPath);
-            GuestRequestList1 = BE.Tools.LoadFromXML<List<GuestRequest>>(BE.Tools.GuestPath);
+            //GuestRequestList1 = BE.Tools.LoadFromXML<List<GuestRequest>>(BE.Tools.GuestPath);
 
 
         }
@@ -92,10 +92,19 @@ namespace DAL
 
         public void addGuestRequest(BE.GuestRequest guest)
         {
-            if (getGuestRequestByID(guest.GuestRequestKey) != null)
+            try
             {
-                throw new DuplicateWaitObjectException("Duplicate Wait Object Exception"); 
+                if (getGuestRequestByID(guest.GuestRequestKey) != null)
+                {
+                    throw new DuplicateWaitObjectException("Duplicate Wait Object Exception");
+                }
             }
+            catch (Exception)
+            {
+                 //תופס מצב שיש שוויון ל null
+
+            }
+
             try
             {
                 XElement guestXml = new XElement("GuestRequest");
@@ -160,31 +169,66 @@ namespace DAL
         // GetOrder function get Order Key and return Order obj from xml data.
         public BE.GuestRequest getGuestRequestByID(int ID)
         {
-            //OrderRoot = XElement.Load(OrderPath);
+            
+
+
+            //var ret = from guest in GuestRoot.Elements().Where(x => x.Element("GuestRequestKey").Value == ID.ToString())
+            //           let tempGuest = new BE.GuestRequest()
+            //           {
+            //               GuestRequestKey = Convert.ToInt32(guest.Element("GuestRequestKey").Value),
+            //               Adults = Convert.ToInt32(guest.Element("Adults").Value),
+            //               Children = Convert.ToInt32(guest.Element("Children").Value),
+
+            //               Area = (BE.AreaEnum)Enum.Parse(typeof(BE.AreaEnum), guest.Element("Area").Value),
+            //               Status = (BE.StatusGREnum)Enum.Parse(typeof(BE.StatusGREnum), guest.Element("Status").Value),
+            //               Type = (BE.TypeEnum)Enum.Parse(typeof(BE.TypeEnum), guest.Element("Type").Value),
+            //               Pool = (BE.AttractionsEnum)Enum.Parse(typeof(BE.AttractionsEnum), guest.Element("Pool").Value),
+            //               Jacuzzi = (BE.AttractionsEnum)Enum.Parse(typeof(BE.AttractionsEnum), guest.Element("Jacuzzi").Value),
+            //               Garden = (BE.AttractionsEnum)Enum.Parse(typeof(BE.AttractionsEnum), guest.Element("Garden").Value),
+            //               ChildrensAttractions = (BE.AttractionsEnum)Enum.Parse(typeof(BE.AttractionsEnum), guest.Element("ChildrensAttractions").Value),
+
+            //               PrivateName = guest.Element("PrivateName").Value,
+            //               FamilyName = guest.Element("FamilyName").Value,
+
+            //               EntryDate = DateTime.Parse(guest.Element("EntryDate").Value),
+            //               RegistrationDate = DateTime.Parse(guest.Element("RegistrationDate").Value),
+            //               ReleaseDate = DateTime.Parse(guest.Element("ReleaseDate").Value)
+
+
+            //           }.Clone()
+            //          select tempGuest;
+
+
+            //return ret.FirstOrDefault();
+
+
             return (from guest in GuestRoot.Elements().Where(x => x.Element("GuestRequestKey").Value == ID.ToString())
-                    select new BE.GuestRequest()
-                    {
-                        GuestRequestKey = Convert.ToInt32(guest.Element("GuestRequestKey").Value),
-                        Adults = Convert.ToInt32(guest.Element("Adults").Value),
-                        Children = Convert.ToInt32(guest.Element("Children").Value),
+                       select new BE.GuestRequest()
+                       {
+                           GuestRequestKey = Convert.ToInt32(guest.Element("GuestRequestKey").Value),
+                           Adults = Convert.ToInt32(guest.Element("Adults").Value),
+                           Children = Convert.ToInt32(guest.Element("Children").Value),
 
-                        Area = (BE.AreaEnum)Enum.Parse(typeof(BE.AreaEnum), guest.Element("Area").Value),
-                        Status = (BE.StatusGREnum)Enum.Parse(typeof(BE.StatusGREnum), guest.Element("Status").Value),
-                        Type = (BE.TypeEnum)Enum.Parse(typeof(BE.TypeEnum), guest.Element("Type").Value),
-                        Pool = (BE.AttractionsEnum)Enum.Parse(typeof(BE.AttractionsEnum), guest.Element("Pool").Value),
-                        Jacuzzi = (BE.AttractionsEnum)Enum.Parse(typeof(BE.AttractionsEnum), guest.Element("Jacuzzi").Value),
-                        Garden = (BE.AttractionsEnum)Enum.Parse(typeof(BE.AttractionsEnum), guest.Element("Garden").Value),
-                        ChildrensAttractions = (BE.AttractionsEnum)Enum.Parse(typeof(BE.AttractionsEnum), guest.Element("ChildrensAttractions").Value),
+                           Area = (BE.AreaEnum)Enum.Parse(typeof(BE.AreaEnum), guest.Element("Area").Value),
+                           Status = (BE.StatusGREnum)Enum.Parse(typeof(BE.StatusGREnum), guest.Element("Status").Value),
+                           Type = (BE.TypeEnum)Enum.Parse(typeof(BE.TypeEnum), guest.Element("Type").Value),
+                           Pool = (BE.AttractionsEnum)Enum.Parse(typeof(BE.AttractionsEnum), guest.Element("Pool").Value),
+                           Jacuzzi = (BE.AttractionsEnum)Enum.Parse(typeof(BE.AttractionsEnum), guest.Element("Jacuzzi").Value),
+                           Garden = (BE.AttractionsEnum)Enum.Parse(typeof(BE.AttractionsEnum), guest.Element("Garden").Value),
+                           ChildrensAttractions = (BE.AttractionsEnum)Enum.Parse(typeof(BE.AttractionsEnum), guest.Element("ChildrensAttractions").Value),
 
-                        PrivateName= guest.Element("PrivateName").Value,
-                        FamilyName = guest.Element("FamilyName").Value,
+                           PrivateName = guest.Element("PrivateName").Value,
+                           FamilyName = guest.Element("FamilyName").Value,
 
-                        EntryDate = DateTime.Parse(guest.Element("EntryDate").Value),
-                        RegistrationDate = DateTime.Parse(guest.Element("RegistrationDate").Value),
-                        ReleaseDate = DateTime.Parse(guest.Element("ReleaseDate").Value)
+                           EntryDate = DateTime.Parse(guest.Element("EntryDate").Value),
+                           RegistrationDate = DateTime.Parse(guest.Element("RegistrationDate").Value),
+                           ReleaseDate = DateTime.Parse(guest.Element("ReleaseDate").Value)
 
 
-                    }).FirstOrDefault().Clone();
+                       }).FirstOrDefault().Clone();
+
+
+
         }
 
 
@@ -453,7 +497,7 @@ namespace DAL
                         where predicat == null ? true : predicat(guestObject)
                         select guestObject).ToList().Clone();
             }
-            catch (Exception ex) 
+            catch (Exception) 
             {
                 throw new System.Xml.XmlException("שגיאה בלקיחת דרישת אירוח מהxml");
             }
@@ -542,7 +586,62 @@ namespace DAL
 
 
 
+        public static List<BankBranch> saveBankBranches(string pathToBankdetails)
+        {
 
+            XElement bankAccuntsRoot = XElement.Load(pathToBankdetails);
+
+            try
+            {
+
+                return (from BB in bankAccuntsRoot.Elements()
+                        select new BankBranch()
+                        {
+                            BankName = BB.Element("שם_בנק").Value.Trim(),
+                            BankNumber = Convert.ToInt32(BB.Element("קוד_בנק").Value.Trim()),
+                            BranchAddress = BB.Element("כתובת_ה-ATM").Value.Trim(),
+                            BranchCity = BB.Element("ישוב").Value.Trim(),
+                            BranchNumber = Convert.ToInt32(BB.Element("קוד_סניף").Value.Trim())
+                        }
+                        ).Distinct().ToList();
+            }
+            catch (Exception ex)
+            {
+                // throw new Exception("file_problem_Order");
+                throw ex;
+            }
+        }
+        public IEnumerable<BankBranch> getAllBankBranches()
+        {
+
+            string BankAccuntPath_temp = Tools.BankAccuntPath;
+            if (!File.Exists(Tools.BankAccuntPath))
+            {
+                BankAccuntPath_temp = "atmData.xml";
+            }
+            else
+            {
+                long length = new FileInfo(Tools.BankAccuntPath).Length;
+                if (length < 10000)
+                    BankAccuntPath_temp = "atmData.xml";
+            }
+            try
+            {
+                bankAccuntsRoot = XElement.Load(BankAccuntPath_temp);
+
+            }
+            catch { }
+
+            bankAccuntsList = saveBankBranches(Tools.BankAccuntPath);
+            //SaveToXML(bankAccunts, "banks.xml");
+            return from BankAccunt in bankAccuntsList
+
+                   select BankAccunt.Clone();
+            // throw new Exception("banks file problem");
+
+
+
+        }
 
 
         #endregion

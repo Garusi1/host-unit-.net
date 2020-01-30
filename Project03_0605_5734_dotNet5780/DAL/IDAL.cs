@@ -46,7 +46,7 @@ namespace DAL
 
         BE.Order GetOrderById(int id);
 
-
+        IEnumerable<BankBranch> getAllBankBranches();
 
 
 

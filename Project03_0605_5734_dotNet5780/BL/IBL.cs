@@ -166,5 +166,11 @@ namespace BL
 
         void bankThread();
 
-        }
+
+
+
+        IEnumerable<BE.BankBranch> getAllBankBranches();
+
+
+    }
     }
