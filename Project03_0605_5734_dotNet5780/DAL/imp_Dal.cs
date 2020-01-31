@@ -10,6 +10,8 @@ using BE;
 
 namespace DAL
 {
+
+    #region לא רלוונטי 
     //public class imp_Dal : IDAL
     //{
     //    DataSource ds = new DataSource();
@@ -47,7 +49,7 @@ namespace DAL
     //    public void updateGuestRequest(BE.GuestRequest guest)
 
     //    {
-  
+
     //        if (guest.GuestRequestKey == 0)//זה אומר שאין קוד ייחודי שהרי הערך לא מאותחל על ברירת מחדל- דרישות דף פרוייקט.
     //            BE.Configuration.geustReqID++; //הענק לו קוד ייחודי
 
@@ -348,7 +350,7 @@ namespace DAL
     //        var li = /*from item in*/ ds.getBankBranchList();
     //                 //where predicat== null ? true: predicat(item)
     //                 //select item.Clone();
-       
+
 
 
 
@@ -399,7 +401,7 @@ namespace DAL
     //}
 
 
-
+    #endregion
 
 
 

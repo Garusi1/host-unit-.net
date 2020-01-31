@@ -23,15 +23,15 @@ namespace DAL
         PrivateName="Michael",
         FamilyName="Garusi",
         MailAddress=/*@*/"mgarusi101@gmail.com",
-        Status=StatusGREnum.פתוחה,
+        Status=Enums.StatusGREnum.פתוחה,
         RegistrationDate=DateTime.Now,
         EntryDate=DateTime.Now.Date.AddDays(1),// סתם לצורך הדוגמה -
         ReleaseDate=DateTime.Now.Date.AddDays(20),
-        Area=AreaEnum.North,
-        Type=TypeEnum.Zimmer,
-        Pool=AttractionsEnum.לא_מעוניין,
-        Jacuzzi=AttractionsEnum.אפשרי,
-        Garden=AttractionsEnum.הכרחי,
+        Area=Enums.AreaEnum.North,
+        Type=Enums.TypeEnum.Zimmer,
+        Pool=Enums.AttractionsEnum.לא_מעוניין,
+        Jacuzzi=Enums.AttractionsEnum.אפשרי,
+        Garden=Enums.AttractionsEnum.הכרחי,
         Adults=2,
         Children=0,
              },
@@ -41,16 +41,16 @@ namespace DAL
         PrivateName="שלום",
         FamilyName="שוקר",
         MailAddress=/*@*/"shuker@g.jct.ac.il",
-        Status=StatusGREnum.פתוחה,
+        Status=Enums.StatusGREnum.פתוחה,
         RegistrationDate=DateTime.Now,
         EntryDate=DateTime.Now.Date,// סתם לצורך הדוגמה -
         ReleaseDate=DateTime.Now.Date.AddDays(7),
-        Area=AreaEnum.All,
-        Type=TypeEnum.Zimmer,
-        Pool=AttractionsEnum.לא_מעוניין,
-        Jacuzzi=AttractionsEnum.אפשרי,
-        Garden=AttractionsEnum.אפשרי,
-        ChildrensAttractions=AttractionsEnum.אפשרי,
+        Area=Enums.AreaEnum.All,
+        Type=Enums.TypeEnum.Zimmer,
+        Pool=Enums.AttractionsEnum.לא_מעוניין,
+        Jacuzzi=Enums.AttractionsEnum.אפשרי,
+        Garden=Enums.AttractionsEnum.אפשרי,
+        ChildrensAttractions=Enums.AttractionsEnum.אפשרי,
         Adults=2,
         Children=1,
              }
@@ -61,16 +61,16 @@ namespace DAL
         PrivateName="סלאי",
         FamilyName="שוקר",
         MailAddress=/*@*/"salay4@gmail.com",
-        Status=StatusGREnum.פתוחה,
+        Status=Enums.StatusGREnum.פתוחה,
         RegistrationDate=DateTime.Now,
         EntryDate=DateTime.Now.Date,// סתם לצורך הדוגמה -
         ReleaseDate=DateTime.Now.Date.AddDays(7),
-        Area=AreaEnum.All,
-        Type=TypeEnum.Zimmer,
-        Pool=AttractionsEnum.לא_מעוניין,
-        Jacuzzi=AttractionsEnum.אפשרי,
-        Garden=AttractionsEnum.אפשרי,
-        ChildrensAttractions=AttractionsEnum.אפשרי,
+        Area=Enums.AreaEnum.All,
+        Type=Enums.TypeEnum.Zimmer,
+        Pool=Enums.AttractionsEnum.לא_מעוניין,
+        Jacuzzi=Enums.AttractionsEnum.אפשרי,
+        Garden=Enums.AttractionsEnum.אפשרי,
+        ChildrensAttractions=Enums.AttractionsEnum.אפשרי,
         Adults=2,
         Children=1,
              },
@@ -81,16 +81,16 @@ namespace DAL
         PrivateName="שלמה",
         FamilyName="שלמה",
         MailAddress=/*@*/"Aasdaa@gmail.com",
-        Status=StatusGREnum.פתוחה,
+        Status=Enums.StatusGREnum.פתוחה,
         RegistrationDate=DateTime.Now,
         EntryDate=DateTime.Now.Date.AddDays(10),// סתם לצורך הדוגמה -
         ReleaseDate=DateTime.Now.Date.AddDays(20),
-        Area=AreaEnum.North,
-        Type=TypeEnum.Zimmer,
-        Pool=AttractionsEnum.אפשרי,
-        Jacuzzi=AttractionsEnum.אפשרי,
-        Garden=AttractionsEnum.אפשרי,
-        ChildrensAttractions=AttractionsEnum.אפשרי,
+        Area=Enums.AreaEnum.North,
+        Type=Enums.TypeEnum.Zimmer,
+        Pool=Enums.AttractionsEnum.אפשרי,
+        Jacuzzi=Enums.AttractionsEnum.אפשרי,
+        Garden=Enums.AttractionsEnum.אפשרי,
+        ChildrensAttractions=Enums.AttractionsEnum.אפשרי,
         Adults=2,
         Children=1,
              }, new BE.GuestRequest()
@@ -99,16 +99,16 @@ namespace DAL
         PrivateName="שלמה",
         FamilyName="שלמה",
         MailAddress=/*@*/"Aasdaa@gmail.com",
-        Status=StatusGREnum.פתוחה,
+        Status=Enums.StatusGREnum.פתוחה,
         RegistrationDate=DateTime.Now,
         EntryDate=DateTime.Now.Date.AddDays(10),// סתם לצורך הדוגמה -
         ReleaseDate=DateTime.Now.Date.AddDays(20),
-        Area=AreaEnum.North,
-        Type=TypeEnum.Zimmer,
-        Pool=AttractionsEnum.אפשרי,
-        Jacuzzi=AttractionsEnum.אפשרי,
-        Garden=AttractionsEnum.אפשרי,
-        ChildrensAttractions=AttractionsEnum.אפשרי,
+        Area=Enums.AreaEnum.North,
+        Type=Enums.TypeEnum.Zimmer,
+        Pool=Enums.AttractionsEnum.אפשרי,
+        Jacuzzi=Enums.AttractionsEnum.אפשרי,
+        Garden=Enums.AttractionsEnum.אפשרי,
+        ChildrensAttractions=Enums.AttractionsEnum.אפשרי,
         Adults=2,
         Children=1,
              }, new BE.GuestRequest()
@@ -117,16 +117,16 @@ namespace DAL
         PrivateName="שלמה",
         FamilyName="שלמה",
         MailAddress=/*@*/"Aasdaa@gmail.com",
-        Status=StatusGREnum.פתוחה,
+        Status=Enums.StatusGREnum.פתוחה,
         RegistrationDate=DateTime.Now,
         EntryDate=DateTime.Now.Date.AddDays(10),// סתם לצורך הדוגמה -
         ReleaseDate=DateTime.Now.Date.AddDays(20),
-        Area=AreaEnum.North,
-        Type=TypeEnum.Zimmer,
-        Pool=AttractionsEnum.אפשרי,
-        Jacuzzi=AttractionsEnum.אפשרי,
-        Garden=AttractionsEnum.אפשרי,
-        ChildrensAttractions=AttractionsEnum.אפשרי,
+        Area=Enums.AreaEnum.North,
+        Type=Enums.TypeEnum.Zimmer,
+        Pool=Enums.AttractionsEnum.אפשרי,
+        Jacuzzi=Enums.AttractionsEnum.אפשרי,
+        Garden=Enums.AttractionsEnum.אפשרי,
+        ChildrensAttractions=Enums.AttractionsEnum.אפשרי,
         Adults=2,
         Children=1,
              }, new BE.GuestRequest()
@@ -135,16 +135,16 @@ namespace DAL
         PrivateName="שלמה",
         FamilyName="שלמה",
         MailAddress=/*@*/"Aasdaa@gmail.com",
-        Status=StatusGREnum.פתוחה,
+        Status=Enums.StatusGREnum.פתוחה,
         RegistrationDate=DateTime.Now,
         EntryDate=DateTime.Now.Date.AddDays(10),// סתם לצורך הדוגמה -
         ReleaseDate=DateTime.Now.Date.AddDays(20),
-        Area=AreaEnum.North,
-        Type=TypeEnum.Zimmer,
-        Pool=AttractionsEnum.אפשרי,
-        Jacuzzi=AttractionsEnum.אפשרי,
-        Garden=AttractionsEnum.אפשרי,
-        ChildrensAttractions=AttractionsEnum.אפשרי,
+        Area=Enums.AreaEnum.North,
+        Type=Enums.TypeEnum.Zimmer,
+        Pool=Enums.AttractionsEnum.אפשרי,
+        Jacuzzi=Enums.AttractionsEnum.אפשרי,
+        Garden=Enums.AttractionsEnum.אפשרי,
+        ChildrensAttractions=Enums.AttractionsEnum.אפשרי,
         Adults=2,
         Children=1,
              }, new BE.GuestRequest()
@@ -153,16 +153,16 @@ namespace DAL
         PrivateName="שלמה",
         FamilyName="שלמה",
         MailAddress=/*@*/"Aasdaa@gmail.com",
-        Status=StatusGREnum.פתוחה,
+        Status=Enums.StatusGREnum.פתוחה,
         RegistrationDate=DateTime.Now,
         EntryDate=DateTime.Now.Date.AddDays(10),// סתם לצורך הדוגמה -
         ReleaseDate=DateTime.Now.Date.AddDays(20),
-        Area=AreaEnum.North,
-        Type=TypeEnum.Zimmer,
-        Pool=AttractionsEnum.אפשרי,
-        Jacuzzi=AttractionsEnum.אפשרי,
-        Garden=AttractionsEnum.אפשרי,
-        ChildrensAttractions=AttractionsEnum.אפשרי,
+        Area=Enums.AreaEnum.North,
+        Type=Enums.TypeEnum.Zimmer,
+        Pool=Enums.AttractionsEnum.אפשרי,
+        Jacuzzi=Enums.AttractionsEnum.אפשרי,
+        Garden=Enums.AttractionsEnum.אפשרי,
+        ChildrensAttractions=Enums.AttractionsEnum.אפשרי,
         Adults=2,
         Children=1,
              }, new BE.GuestRequest()
@@ -171,16 +171,16 @@ namespace DAL
         PrivateName="שלמה",
         FamilyName="שלמה",
         MailAddress=/*@*/"Aasdaa@gmail.com",
-        Status=StatusGREnum.פתוחה,
+        Status=Enums.StatusGREnum.פתוחה,
         RegistrationDate=DateTime.Now,
         EntryDate=DateTime.Now.Date.AddDays(10),// סתם לצורך הדוגמה -
         ReleaseDate=DateTime.Now.Date.AddDays(20),
-        Area=AreaEnum.North,
-        Type=TypeEnum.Zimmer,
-        Pool=AttractionsEnum.אפשרי,
-        Jacuzzi=AttractionsEnum.אפשרי,
-        Garden=AttractionsEnum.אפשרי,
-        ChildrensAttractions=AttractionsEnum.אפשרי,
+        Area=Enums.AreaEnum.North,
+        Type=Enums.TypeEnum.Zimmer,
+        Pool=Enums.AttractionsEnum.אפשרי,
+        Jacuzzi=Enums.AttractionsEnum.אפשרי,
+        Garden=Enums.AttractionsEnum.אפשרי,
+        ChildrensAttractions=Enums.AttractionsEnum.אפשרי,
         Adults=2,
         Children=1,
              }, new BE.GuestRequest()
@@ -189,16 +189,16 @@ namespace DAL
         PrivateName="שלמה",
         FamilyName="שלמה",
         MailAddress=/*@*/"Aasdaa@gmail.com",
-        Status=StatusGREnum.פתוחה,
+        Status=Enums.StatusGREnum.פתוחה,
         RegistrationDate=DateTime.Now,
         EntryDate=DateTime.Now.Date.AddDays(10),// סתם לצורך הדוגמה -
         ReleaseDate=DateTime.Now.Date.AddDays(20),
-        Area=AreaEnum.All,
-        Type=TypeEnum.Zimmer,
-        Pool=AttractionsEnum.אפשרי,
-        Jacuzzi=AttractionsEnum.אפשרי,
-        Garden=AttractionsEnum.אפשרי,
-        ChildrensAttractions=AttractionsEnum.אפשרי,
+        Area=Enums.AreaEnum.All,
+        Type=Enums.TypeEnum.Zimmer,
+        Pool=Enums.AttractionsEnum.אפשרי,
+        Jacuzzi=Enums.AttractionsEnum.אפשרי,
+        Garden=Enums.AttractionsEnum.אפשרי,
+        ChildrensAttractions=Enums.AttractionsEnum.אפשרי,
         Adults=2,
         Children=1,
              },
@@ -222,8 +222,8 @@ namespace DAL
             BranchAddress="Har'el St 1, 9079129",
             BranchCity="Mevaseret Zion"} },
             HostingUnitName="צימר יפה",
-            Area=BE.AreaEnum.Center,
-            Type=BE.TypeEnum.Zimmer
+            Area=BE.Enums.AreaEnum.Center,
+            Type=BE.Enums.TypeEnum.Zimmer
         },
         new BE.HostingUnit()
         {
@@ -237,8 +237,8 @@ namespace DAL
             BranchAddress="Har'el St 1, 9079129",
             BranchCity="Mevaseret Zion"} },
             HostingUnitName="צימר יפה",
-            Area=BE.AreaEnum.North,
-            Type=BE.TypeEnum.Zimmer,
+            Area=BE.Enums.AreaEnum.North,
+            Type=BE.Enums.TypeEnum.Zimmer,
             
         }
 
@@ -255,8 +255,8 @@ namespace DAL
             BranchAddress="Har'el St 1, 9079129",
             BranchCity="Mevaseret Zion"} },
             HostingUnitName=" צימר יפה מאד",
-            Area=BE.AreaEnum.North,
-            Type=BE.TypeEnum.Zimmer,
+            Area=BE.Enums.AreaEnum.North,
+            Type=BE.Enums.TypeEnum.Zimmer,
 
         }
                         ,
@@ -272,8 +272,8 @@ namespace DAL
             BranchAddress="Har'el St 1, 9079129",
             BranchCity="Mevaseret Zion"} },
             HostingUnitName=" צימר יפה מאד",
-            Area=BE.AreaEnum.North,
-            Type=BE.TypeEnum.Zimmer,
+            Area=BE.Enums.AreaEnum.North,
+            Type=BE.Enums.TypeEnum.Zimmer,
 
         }
 
@@ -290,8 +290,8 @@ namespace DAL
             BranchAddress="Har'el St 1, 9079129",
             BranchCity="Mevaseret Zion"} },
             HostingUnitName=" צימר יפה מאד",
-            Area=BE.AreaEnum.North,
-            Type=BE.TypeEnum.Zimmer,
+            Area=BE.Enums.AreaEnum.North,
+            Type=BE.Enums.TypeEnum.Zimmer,
 
         }
 
@@ -306,7 +306,7 @@ namespace DAL
             HostingUnitKey=20000000,/// יש לממש  לפי הקשר
             GuestRequestKey=40000000,///יש לממש בהתאם לבקשה
             OrderKey=BE.Configuration.orderID++, /// יש לממש בעזרת מספר רץ
-            Status=StatusEnum.טרם_טופל,
+            Status=Enums.StatusEnum.טרם_טופל,
             CreateDate=DateTime.Now,
 
         },
@@ -315,7 +315,7 @@ namespace DAL
             HostingUnitKey=20000001,/// יש לממש  לפי הקשר
             GuestRequestKey=40000000,///יש לממש בהתאם לבקשה
             OrderKey=BE.Configuration.orderID++, /// יש לממש בעזרת מספר רץ
-            Status=StatusEnum.טרם_טופל,
+            Status=Enums.StatusEnum.טרם_טופל,
             CreateDate=DateTime.Now,
 
         }
@@ -325,7 +325,7 @@ namespace DAL
             HostingUnitKey=20000000,/// יש לממש  לפי הקשר
             GuestRequestKey=40000001,///יש לממש בהתאם לבקשה
             OrderKey=BE.Configuration.orderID++, /// יש לממש בעזרת מספר רץ
-            Status=StatusEnum.טרם_טופל,
+            Status=Enums.StatusEnum.טרם_טופל,
             CreateDate=DateTime.Now,
 
         }

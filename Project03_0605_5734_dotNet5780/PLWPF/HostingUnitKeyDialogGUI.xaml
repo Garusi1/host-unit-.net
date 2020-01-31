@@ -5,13 +5,17 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:PLWPF"
         mc:Ignorable="d"
-        Title="הזן מספר יחידת אירוח" Height="150" Width="250">
+        Title="הזן מספר יחידת אירוח" Height="150" Width="400">
     
 
     <Grid x:Name="DialogGrid" FlowDirection="RightToLeft">
         <StackPanel Margin="0,21,-0.429,0.143">
             <TextBlock Text="הזן מספר יחידת אירוח שקיימת במערכת:" HorizontalAlignment="Center" />
-            <TextBox x:Name="ResponseTextBox"/>
+            <TextBox x:Name="ResponseTextBox">
+                <TextBox.InputBindings>
+                    <KeyBinding Key="Enter" Command="{Binding EnterKeyCommand}"/>
+                </TextBox.InputBindings>
+            </TextBox>
             <Button Content="OK" Click="OKButton_Click" />
         </StackPanel>
     </Grid>

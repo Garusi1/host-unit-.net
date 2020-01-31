@@ -76,13 +76,13 @@ namespace BE
         }
 
 
-        private StatusGREnum status;// for example: "Active"  // פתוחה, נסגרה_עסקה_דרך_האתר, נסגרה_כי_פג_תוקפה
-        public StatusGREnum Status
+        private Enums.StatusGREnum status;// for example: "Active"  // פתוחה, נסגרה_עסקה_דרך_האתר, נסגרה_כי_פג_תוקפה
+        public Enums.StatusGREnum Status
         {
             get { return status; }
             set
             {
-                if (!Enum.IsDefined(typeof(StatusGREnum), value))
+                if (!Enum.IsDefined(typeof(Enums.StatusGREnum), value))
                     throw new System.IO.InvalidDataException("Enum input illegal");
                 status = value;
             }
@@ -127,14 +127,14 @@ namespace BE
 
 
 
-        public AreaEnum area;//All,North,South,Center,Jerusalem
+        public Enums.AreaEnum area;//All,North,South,Center,Jerusalem
 
-        public AreaEnum Area
+        public Enums.AreaEnum Area
         {
             get { return area; }
             set
             {
-                if (!Enum.IsDefined(typeof(AreaEnum), value))
+                if (!Enum.IsDefined(typeof(Enums.AreaEnum), value))
                     throw new System.IO.InvalidDataException("Enum input illegal");
                 area = value;
             }
@@ -144,13 +144,13 @@ namespace BE
         //public AreaEnum SubArea { get; private set; } .... // להגדיר באופן נכון כמו את האחרים
 
 
-        private TypeEnum type;  //Zimmer\Hotel\Camping\ Etc;
-        public TypeEnum Type
+        private Enums.TypeEnum type;  //Zimmer\Hotel\Camping\ Etc;
+        public Enums.TypeEnum Type
         {
             get { return type; }
             set
             {
-                if (!Enum.IsDefined(typeof(TypeEnum), value))
+                if (!Enum.IsDefined(typeof(Enums.TypeEnum), value))
                     throw new System.IO.InvalidDataException("Enum input illegal");
                 type = value;
             }
@@ -160,52 +160,52 @@ namespace BE
 
         // AttractionsEnum= הכרחי/אפשרי/לא מעוניין
 
-        private AttractionsEnum pool;
-        public AttractionsEnum Pool
+        private Enums.AttractionsEnum pool;
+        public Enums.AttractionsEnum Pool
         {
             get { return pool; }
             set
             {
-                if (!Enum.IsDefined(typeof(AttractionsEnum), value))
+                if (!Enum.IsDefined(typeof(Enums.AttractionsEnum), value))
                     throw new System.IO.InvalidDataException("Enum input illegal");
                 pool = value;
             }
         }
 
 
-        private AttractionsEnum jacuzzi;
-        public AttractionsEnum Jacuzzi
+        private Enums.AttractionsEnum jacuzzi;
+        public Enums.AttractionsEnum Jacuzzi
         {
             get { return jacuzzi; }
             set
             {
-                if (!Enum.IsDefined(typeof(AttractionsEnum), value))
+                if (!Enum.IsDefined(typeof(Enums.AttractionsEnum), value))
                     throw new System.IO.InvalidDataException("Enum input illegal");
                 jacuzzi = value;
             }
         }
 
 
-        private AttractionsEnum garden;
-        public AttractionsEnum Garden
+        private Enums.AttractionsEnum garden;
+        public Enums.AttractionsEnum Garden
         {
             get { return garden; }
             set
             {
-                if (!Enum.IsDefined(typeof(AttractionsEnum), value))
+                if (!Enum.IsDefined(typeof(Enums.AttractionsEnum), value))
                     throw new System.IO.InvalidDataException("Enum input illegal");
                 garden = value;
             }
         }
 
 
-        private AttractionsEnum childrensAttractions;
-        public AttractionsEnum ChildrensAttractions
+        private Enums.AttractionsEnum childrensAttractions;
+        public Enums.AttractionsEnum ChildrensAttractions
         {
             get { return childrensAttractions; }
             set
             {
-                if (!Enum.IsDefined(typeof(AttractionsEnum), value))
+                if (!Enum.IsDefined(typeof(Enums.AttractionsEnum), value))
                     throw new System.IO.InvalidDataException("Enum input illegal");
                 childrensAttractions = value;
             }

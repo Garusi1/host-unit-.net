@@ -44,17 +44,17 @@ namespace BL
                 throw new System.ArgumentException(/*מספר מבוגרים אינו יכול להיות שלילי"*/"Number of adults cannot be negative");
             if (guest.Adults == 0)
                 throw new System.ArgumentException(/*מספר מבוגרים אינוי יכול להיות 0"*/"Number of adults cannot be 0");
-            if (guest.Type == BE.TypeEnum.Unknown)
+            if (guest.Type == BE.Enums.TypeEnum.Unknown)
                 throw new System.ArgumentException(/*חובה לבחור סוג יחידת יחידת אירוח"*/"Select unit type of hosting unit is required");
 
             //AttractionsEnum // Unknown,הכרחי, אפשרי, לא_מעוניין
-            if (guest.Pool == BE.AttractionsEnum.Unknown)
+            if (guest.Pool == BE.Enums.AttractionsEnum.Unknown)
                 throw new System.ArgumentException(/*חובה לבחור האם מעוניין בבריכה"*/"Must choose whether you want a pool");
-            if (guest.Jacuzzi == BE.AttractionsEnum.Unknown)
+            if (guest.Jacuzzi == BE.Enums.AttractionsEnum.Unknown)
                 throw new System.ArgumentException(/*חובה לבחור האם מעוניין בג'קוזי"*/"Must choose whether you want a jacuzzi");
-            if (guest.Garden == BE.AttractionsEnum.Unknown)
+            if (guest.Garden == BE.Enums.AttractionsEnum.Unknown)
                 throw new System.ArgumentException(/*חובה לבחור האם מעוניין בגינה"*/"Must choose whether you want a garden");
-            if ((guest.ChildrensAttractions == BE.AttractionsEnum.Unknown) && (guest.Children > 0))
+            if ((guest.ChildrensAttractions == BE.Enums.AttractionsEnum.Unknown) && (guest.Children > 0))
                 throw new System.ArgumentException(/*חובה לבחור האם מעוניין באטראקציות לילדים"*/"Must choose whether you want a Childrens Attractions");
 
 
@@ -82,7 +82,7 @@ namespace BL
             if (guest.ReleaseDate < theDateToday.AddDays(1))
                 throw new System.ArgumentException(/*תאריך יציאה אינו יכול להיות  מוקדם מעוד יום"*/"ReleaseDate cannot be earlier from tomorrow ");
 
-            if (guest.Status != BE.StatusGREnum.פתוחה)
+            if (guest.Status != BE.Enums.StatusGREnum.פתוחה)
                 throw new System.ArgumentException(/* "סטטוס דרישת לקוח שגוי.סטטוס דרישה חדשה יהיה תמיד פתוח"*/"Incorrect GuestRequest status. New GuestRequest status will always be open ");
 
 
@@ -207,7 +207,7 @@ namespace BL
             ////if (guest.ReleaseDate < theDateToday.AddDays(1))
             ////    throw new System.ArgumentException(/*תאריך יציאה אינו יכול להיות  מוקדם מעוד יום"*/"ReleaseDate cannot be earlier from tomorrow ");
 
-            if (!(oldGuest.Status == BE.StatusGREnum.פתוחה))
+            if (!(oldGuest.Status == BE.Enums.StatusGREnum.פתוחה))
             {
                 throw new ArgumentException(string.Format("לא ניתן לשנות דרישת לקוח שאינה פתוחה"));
             }
@@ -243,12 +243,12 @@ namespace BL
 
             if (!ValidateID(hostUnit.Owner.HostKey))
                 throw new System.IO.InvalidDataException("תעודת זהות של מארח לא תקינה.");
-            if (!Enum.IsDefined(typeof(BE.AreaEnum), hostUnit.Area))
+            if (!Enum.IsDefined(typeof(BE.Enums.AreaEnum), hostUnit.Area))
                 throw new System.IO.InvalidDataException("Enum input illegal");
-            if (hostUnit.Area == BE.AreaEnum.All)
+            if (hostUnit.Area == BE.Enums.AreaEnum.All)
                 throw new System.IO.InvalidDataException("Enum input illegal. HostingUnit cannot be in All regions");
 
-            if (hostUnit.Type == BE.TypeEnum.Unknown)
+            if (hostUnit.Type == BE.Enums.TypeEnum.Unknown)
                 throw new System.IO.InvalidDataException("חובה להגיד סוג יחידת אירוח");
 
 
@@ -285,7 +285,7 @@ namespace BL
             //תנאים למחיקה
 
             var ls = from item in GetOrderList()
-                     where ((item.HostingUnitKey == hostUnitID) && ((item.Status == BE.StatusEnum.טרם_טופל) || (item.Status == BE.StatusEnum.נשלח_מייל)))
+                     where ((item.HostingUnitKey == hostUnitID) && ((item.Status == BE.Enums.StatusEnum.טרם_טופל) || (item.Status == BE.Enums.StatusEnum.נשלח_מייל)))
                      select hostUnitID;
             foreach (var item in ls)
             {
@@ -317,12 +317,12 @@ namespace BL
                 throw new ArgumentException("חובה למלא את כל השדות");
             if (!ValidateID(hostUnit.Owner.HostKey))
                 throw new System.IO.InvalidDataException("תעודת זהות של מארח לא תקינה.");
-            if (!Enum.IsDefined(typeof(BE.AreaEnum), hostUnit.Area))
+            if (!Enum.IsDefined(typeof(BE.Enums.AreaEnum), hostUnit.Area))
                 throw new System.IO.InvalidDataException("Enum input illegal");
-            if (hostUnit.Area == BE.AreaEnum.All)
+            if (hostUnit.Area == BE.Enums.AreaEnum.All)
                 throw new System.IO.InvalidDataException("Enum input illegal. HostingUnit cannot be in All regions");
 
-            if (hostUnit.Type == BE.TypeEnum.Unknown)
+            if (hostUnit.Type == BE.Enums.TypeEnum.Unknown)
                 throw new System.IO.InvalidDataException("חובה להגיד סוג יחידת אירוח");
 
 
@@ -330,8 +330,8 @@ namespace BL
             {
                 var checkOrder = from item in GetOrderList()
                                  where (item.HostingUnitKey == hostUnit.HostingUnitKey) &&
-                                 ((item.Status == BE.StatusEnum.טרם_טופל) ||
-                                 (item.Status == BE.StatusEnum.נשלח_מייל))
+                                 ((item.Status == BE.Enums.StatusEnum.טרם_טופל) ||
+                                 (item.Status == BE.Enums.StatusEnum.נשלח_מייל))
                                  select item;
 
                 foreach (var item in checkOrder)
@@ -420,7 +420,7 @@ namespace BL
 
             }
 
-            if (!(GR.Status == BE.StatusGREnum.פתוחה))
+            if (!(GR.Status == BE.Enums.StatusGREnum.פתוחה))
             {
                 throw new BE.Tools.UnLogicException(string.Format("This Guest request {0} are close ", order.GuestRequestKey));
 
@@ -432,26 +432,26 @@ namespace BL
             {
                 throw new System.ArgumentException(string.Format("the Guest request and the Hosting Unit are not fit in Type parmater  "));
             }
-            if ((!(GR.Area == BE.AreaEnum.All)) && (!(GR.Area == HU.Area)))
+            if ((!(GR.Area == BE.Enums.AreaEnum.All)) && (!(GR.Area == HU.Area)))
             {
                 throw new System.ArgumentException(string.Format("the Guest request and the Hosting Unit are not fit in Area parmater  "));
             }
 
 
-            if ((!(HU.Pool) && (GR.Pool == BE.AttractionsEnum.הכרחי)) || (((HU.Pool) && (GR.Pool == BE.AttractionsEnum.לא_מעוניין))))
+            if ((!(HU.Pool) && (GR.Pool == BE.Enums.AttractionsEnum.הכרחי)) || (((HU.Pool) && (GR.Pool == BE.Enums.AttractionsEnum.לא_מעוניין))))
             {
                 throw new System.ArgumentException(string.Format("the Guest request and the Hosting Unit are not fit in the Pool parmater  "));
             }
 
-            if ((!(HU.Jacuzzi) && (GR.Jacuzzi == BE.AttractionsEnum.הכרחי)) || (((HU.Jacuzzi) && (GR.Jacuzzi == BE.AttractionsEnum.לא_מעוניין))))
+            if ((!(HU.Jacuzzi) && (GR.Jacuzzi == BE.Enums.AttractionsEnum.הכרחי)) || (((HU.Jacuzzi) && (GR.Jacuzzi == BE.Enums.AttractionsEnum.לא_מעוניין))))
             {
                 throw new System.ArgumentException(string.Format("the Guest request and the Hosting Unit are not fit in the Jacuzzi parmater  "));
             }
-            if ((!(HU.Garden) && (GR.Garden == BE.AttractionsEnum.הכרחי)) || (((HU.Garden) && (GR.Garden == BE.AttractionsEnum.לא_מעוניין))))
+            if ((!(HU.Garden) && (GR.Garden == BE.Enums.AttractionsEnum.הכרחי)) || (((HU.Garden) && (GR.Garden == BE.Enums.AttractionsEnum.לא_מעוניין))))
             {
                 throw new System.ArgumentException(string.Format("the Guest request and the Hosting Unit are not fit in the Garden parmater  "));
             }
-            if ((!(HU.ChildrensAttractions) && (GR.ChildrensAttractions == BE.AttractionsEnum.הכרחי)) || (((HU.ChildrensAttractions) && (GR.ChildrensAttractions == BE.AttractionsEnum.לא_מעוניין))))
+            if ((!(HU.ChildrensAttractions) && (GR.ChildrensAttractions == BE.Enums.AttractionsEnum.הכרחי)) || (((HU.ChildrensAttractions) && (GR.ChildrensAttractions == BE.Enums.AttractionsEnum.לא_מעוניין))))
             {
                 throw new System.ArgumentException(string.Format("the Guest request and the Hosting Unit are not fit in the ChildrensAttractions parmater  "));
             }
@@ -508,21 +508,23 @@ namespace BL
             }
 
 
-            if ((HU.Owner.CollectionClearance == "No") && (order.Status == BE.StatusEnum.נשלח_מייל))
+            if ((HU.Owner.CollectionClearance == "No") && (order.Status == BE.Enums.StatusEnum.נשלח_מייל))
                 throw new BE.Tools.UnLogicException(string.Format("בעל יחידת דיור אינו מורשה לשלוח מייל כל עוד לא חתם על הרשאה לחיוב חשבון בנק"));
 
 
-            if (orderBeforeChange.Status == BE.StatusEnum.נסגר_בהיענות_הלקוח || orderBeforeChange.Status == BE.StatusEnum.נסגר_מחוסר_הענות_הלקוח || orderBeforeChange.Status == BE.StatusEnum.נסגר_היות_ויחידית_אירוח_נתפסה_כבר)
+            if (orderBeforeChange.Status == BE.Enums.StatusEnum.נסגר_בהיענות_הלקוח ||
+                orderBeforeChange.Status == BE.Enums.StatusEnum.נסגר_מחוסר_הענות_הלקוח || 
+                orderBeforeChange.Status == BE.Enums.StatusEnum.נסגר_היות_ויחידית_אירוח_נתפסה_כבר)
             {
                 throw new BE.Tools.UnLogicException(string.Format("לא ניתן לשנות סטטוס הזמנה שנסגרה"));
 
             }
 
-            if ((HU.Owner.CollectionClearance == "No") && (order.Status == BE.StatusEnum.נסגר_בהיענות_הלקוח))
+            if ((HU.Owner.CollectionClearance == "No") && (order.Status == BE.Enums.StatusEnum.נסגר_בהיענות_הלקוח))
                 throw new BE.Tools.UnLogicException(string.Format("בעל יחידת דיור אינו מורשה לסגור עסקה כל עוד לא חתם על הרשאה לחיוב חשבון בנק"));
 
 
-            if (GR.Status == BE.StatusGREnum.נסגרה_כי_פג_תוקפה || GR.Status == BE.StatusGREnum.נסגרה_עסקה_דרך_האתר)
+            if (GR.Status == BE.Enums.StatusGREnum.נסגרה_כי_פג_תוקפה || GR.Status == BE.Enums.StatusGREnum.נסגרה_עסקה_דרך_האתר)
             {
                 throw new BE.Tools.UnLogicException(string.Format("דרישת הלקוח נסגרה"));
 
@@ -539,7 +541,7 @@ namespace BL
             //}
 
 
-            if (!(orderBeforeChange.Status == BE.StatusEnum.נשלח_מייל)&& order.Status == BE.StatusEnum.נסגר_בהיענות_הלקוח)
+            if (!(orderBeforeChange.Status == BE.Enums.StatusEnum.נשלח_מייל)&& order.Status == BE.Enums.StatusEnum.נסגר_בהיענות_הלקוח)
             {
                 throw new BE.Tools.UnLogicException(string.Format("לא ניתן לסגור עסקה לפני שליחת מייל."));
 
@@ -551,7 +553,7 @@ namespace BL
             flag = false;
 
 
-            if ((HU.Owner.CollectionClearance == "Yes") && (order.Status == BE.StatusEnum.נסגר_בהיענות_הלקוח))
+            if ((HU.Owner.CollectionClearance == "Yes") && (order.Status == BE.Enums.StatusEnum.נסגר_בהיענות_הלקוח))
             {
                 flag = true;
                 int Chargeamount = 0;
@@ -572,7 +574,7 @@ namespace BL
 
   
                 BE.GuestRequest tempGR = GR;
-                GR.Status = StatusGREnum.נסגרה_עסקה_דרך_האתר;
+                GR.Status = BE.Enums.StatusGREnum.נסגרה_עסקה_דרך_האתר;
                 try
                 {
                     updateGuestRequest(GR);
@@ -646,7 +648,7 @@ namespace BL
                     {
                         if (item.OrderKey!=order.OrderKey)
                         {
-                            item.Status = BE.StatusEnum.נסגר_מחוסר_הענות_הלקוח;
+                            item.Status = BE.Enums.StatusEnum.נסגר_מחוסר_הענות_הלקוח;
                             IDAL.UpdateOrder(item/*.Clone()*/);
                         }
 
@@ -663,7 +665,7 @@ namespace BL
                             BE.HostingUnit hosting = getHostingUnitByID(item.HostingUnitKey); // בהנחה שזה קיים אחרת לא נשלחה בקשה לפונקציה זו
                             if (!(checkAvailabilityGuestAndHosing(guest, hosting))) //אם זה לא זמין ייכנס לתוך
                             {
-                                item.Status = BE.StatusEnum.נסגר_היות_ויחידית_אירוח_נתפסה_כבר; //היות וכבר נתפס ע"י מישהו אחר
+                                item.Status = BE.Enums.StatusEnum.נסגר_היות_ויחידית_אירוח_נתפסה_כבר; //היות וכבר נתפס ע"י מישהו אחר
                                 IDAL.UpdateOrder(item/*.Clone()*/);
                             }
 
@@ -683,7 +685,7 @@ namespace BL
             }
 
 
-            if ((flag != true)&& (!(order.Status == BE.StatusEnum.נסגר_בהיענות_הלקוח))) // במידה ומסנים לעדכן שדה שהוא לא השדה ההמוזכר. 
+            if ((flag != true)&& (!(order.Status == BE.Enums.StatusEnum.נסגר_בהיענות_הלקוח))) // במידה ומסנים לעדכן שדה שהוא לא השדה ההמוזכר. 
             {
                 try
                 {
@@ -871,7 +873,7 @@ namespace BL
             int number = 0;
             var ls = from item in GetOrderList()
                      where ((item.GuestRequestKey == guest.GuestRequestKey) &&
-                           ((item.Status == BE.StatusEnum.נשלח_מייל)))//סימון נשלח מייל
+                           ((item.Status == BE.Enums.StatusEnum.נשלח_מייל)))//סימון נשלח מייל
                      select item;
             foreach (var item in ls)
             {
@@ -887,8 +889,8 @@ namespace BL
             int number = 0;
             var ls = from item in GetOrderList()
                      where ((item.HostingUnitKey == HU.HostingUnitKey) &&
-                           ((item.Status == BE.StatusEnum.נשלח_מייל) ||
-                           (item.Status == BE.StatusEnum.נסגר_בהיענות_הלקוח)))//משמע הזמנה נסגרה דרך האתר ויחידה נתפסה
+                           ((item.Status == BE.Enums.StatusEnum.נשלח_מייל) ||
+                           (item.Status == BE.Enums.StatusEnum.נסגר_בהיענות_הלקוח)))//משמע הזמנה נסגרה דרך האתר ויחידה נתפסה
                      select item;
             foreach (var item in ls)
             {
@@ -907,7 +909,7 @@ namespace BL
         /// מחזיר גרופינג של דרישות לקוח לפי איזור. 
         /// </summary>
         /// <returns> ערך אחד. יש לבצע בפונקציה המזמנת forech</returns>
-        public IEnumerable<IGrouping<BE.AreaEnum, BE.GuestRequest>> groupByAreaGR()
+        public IEnumerable<IGrouping<BE.Enums.AreaEnum, BE.GuestRequest>> groupByAreaGR()
         {
             var result = from item in GetGuestRequestList()
                          group item by item.Area;
@@ -957,7 +959,7 @@ namespace BL
         /// מחזיר גרופינג של יחידת אירוח מסודר לפי איזור. 
         /// </summary>
         /// <returns> ערך אחד. יש לבצע בפונקציה המזמנת forech</returns>
-        public IEnumerable<IGrouping<BE.AreaEnum, BE.HostingUnit>> groupByAreaHostingUnit()
+        public IEnumerable<IGrouping<BE.Enums.AreaEnum, BE.HostingUnit>> groupByAreaHostingUnit()
         {
 
             return from item in GetHostingUnitList()

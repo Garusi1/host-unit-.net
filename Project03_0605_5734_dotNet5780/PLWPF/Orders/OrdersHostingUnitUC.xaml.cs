@@ -181,7 +181,7 @@ namespace PLWPF.Orders
             {
                 guest = bl.getGuestRequestByID(order.GuestRequestKey);
 
-                order.Status = BE.StatusEnum.נסגר_בהיענות_הלקוח;
+                order.Status = BE.Enums.StatusEnum.נסגר_בהיענות_הלקוח;
 
 
 
@@ -259,7 +259,7 @@ namespace PLWPF.Orders
 
                 orderTemp = new BE.Order();
                 orderTemp = order;//צריך לעשות new
-                order.Status = BE.StatusEnum.נשלח_מייל;
+                order.Status = BE.Enums.StatusEnum.נשלח_מייל;
 
                 try
                 {
@@ -424,7 +424,7 @@ namespace PLWPF.Orders
         {
             if (showMailRadio.IsChecked == true)
             {
-                IenumaOrder = bl.GetOrderList(x => (x.HostingUnitKey == number) && (x.Status == BE.StatusEnum.נשלח_מייל));
+                IenumaOrder = bl.GetOrderList(x => (x.HostingUnitKey == number) && (x.Status == BE.Enums.StatusEnum.נשלח_מייל));
                 list.ItemsSource = IenumaOrder;
 
 
@@ -435,7 +435,7 @@ namespace PLWPF.Orders
         {
             if (showOpenRadio.IsChecked == true)
             {
-                IenumaOrder = bl.GetOrderList(x => (x.HostingUnitKey == number) && (x.Status == BE.StatusEnum.טרם_טופל));
+                IenumaOrder = bl.GetOrderList(x => (x.HostingUnitKey == number) && (x.Status == BE.Enums.StatusEnum.טרם_טופל));
                 list.ItemsSource = IenumaOrder;
             }
         }
@@ -445,7 +445,7 @@ namespace PLWPF.Orders
         {
             if (showCloseRadio.IsChecked == true)
             {
-                IenumaOrder = bl.GetOrderList(x => (x.HostingUnitKey == number) && (x.Status == BE.StatusEnum.נסגר_בהיענות_הלקוח));
+                IenumaOrder = bl.GetOrderList(x => (x.HostingUnitKey == number) && (x.Status == BE.Enums.StatusEnum.נסגר_בהיענות_הלקוח));
                 list.ItemsSource = IenumaOrder;
 
             }
@@ -457,7 +457,7 @@ namespace PLWPF.Orders
             if (showLostRadio.IsChecked == true)
             {
 
-                IenumaOrder = bl.GetOrderList(x => (x.HostingUnitKey == number) && (x.Status == BE.StatusEnum.נסגר_מחוסר_הענות_הלקוח));
+                IenumaOrder = bl.GetOrderList(x => (x.HostingUnitKey == number) && (x.Status == BE.Enums.StatusEnum.נסגר_מחוסר_הענות_הלקוח));
                 list.ItemsSource = IenumaOrder;
 
             }

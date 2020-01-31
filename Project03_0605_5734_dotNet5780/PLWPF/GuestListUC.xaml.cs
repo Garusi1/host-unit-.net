@@ -19,6 +19,7 @@ namespace PLWPF
 
     public partial class GuestListUC :UserControl
     {
+        #region כללי
         BL.IBL bl;
         BE.GuestRequest GRShow;
         IEnumerable<BE.GuestRequest> ieGuest;
@@ -68,6 +69,7 @@ namespace PLWPF
             selectedObject.ToString();
         }
 
+        #endregion
 
         #region סינון 
 
@@ -87,7 +89,7 @@ namespace PLWPF
         {
             if (showOpenRadio.IsChecked == true)
             {
-                ieGuest = bl.GetGuestRequestList((x => x.Status ==BE.StatusGREnum.פתוחה ));
+                ieGuest = bl.GetGuestRequestList((x => x.Status ==BE.Enums.StatusGREnum.פתוחה ));
                 list.ItemsSource = ieGuest;
 
 
@@ -98,7 +100,7 @@ namespace PLWPF
         {
             if (shoLostRadio.IsChecked==true)
             {
-                ieGuest = bl.GetGuestRequestList((x => x.Status == BE.StatusGREnum.נסגרה_כי_פג_תוקפה));
+                ieGuest = bl.GetGuestRequestList((x => x.Status == BE.Enums.StatusGREnum.נסגרה_כי_פג_תוקפה));
                 list.ItemsSource = ieGuest;
 
 
@@ -109,7 +111,7 @@ namespace PLWPF
         {
             if (showCloseRadio.IsChecked == true)
             {
-                ieGuest = bl.GetGuestRequestList((x => x.Status == BE.StatusGREnum.נסגרה_כי_פג_תוקפה));
+                ieGuest = bl.GetGuestRequestList((x => x.Status == BE.Enums.StatusGREnum.נסגרה_כי_פג_תוקפה));
                 list.ItemsSource = ieGuest;
 
 

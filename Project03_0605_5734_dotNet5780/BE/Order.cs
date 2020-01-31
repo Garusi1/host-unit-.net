@@ -61,8 +61,8 @@ namespace BE
 
 
         ///eunm - //טרם טופל, נשלח מייל, נסגר מחוסר הענות של הלקוח ,נסגר בהיענות של הלקוח
-        private StatusEnum status;
-        public StatusEnum Status
+        private Enums.StatusEnum status;
+        public Enums.StatusEnum Status
         {
             get { return status; }
             set

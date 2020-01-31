@@ -96,7 +96,7 @@ namespace PLWPF
         {
             if (showMailRadio.IsChecked == true)
             {
-                IenumaOrder = bl.GetOrderList((x => x.Status == BE.StatusEnum.נשלח_מייל));
+                IenumaOrder = bl.GetOrderList((x => x.Status == BE.Enums.StatusEnum.נשלח_מייל));
                 list.ItemsSource = IenumaOrder;
 
 
@@ -107,7 +107,7 @@ namespace PLWPF
             if (showOpenRadio.IsChecked == true)
             {
 
-                IenumaOrder = bl.GetOrderList((x => x.Status == BE.StatusEnum.טרם_טופל));
+                IenumaOrder = bl.GetOrderList((x => x.Status == BE.Enums.StatusEnum.טרם_טופל));
                 list.ItemsSource = IenumaOrder;
             }
         }
@@ -117,7 +117,7 @@ namespace PLWPF
         {
             if (showCloseRadio.IsChecked == true)
             {
-                IenumaOrder = bl.GetOrderList((x => x.Status == BE.StatusEnum.נסגר_בהיענות_הלקוח));
+                IenumaOrder = bl.GetOrderList((x => x.Status == BE.Enums.StatusEnum.נסגר_בהיענות_הלקוח));
                 list.ItemsSource = IenumaOrder;
 
 
@@ -129,7 +129,7 @@ namespace PLWPF
         {
             if (showLostRadio.IsChecked == true)
             {
-                IenumaOrder = bl.GetOrderList((x => x.Status == BE.StatusEnum.נסגר_מחוסר_הענות_הלקוח));
+                IenumaOrder = bl.GetOrderList((x => x.Status == BE.Enums.StatusEnum.נסגר_מחוסר_הענות_הלקוח));
                 list.ItemsSource = IenumaOrder;
 
 

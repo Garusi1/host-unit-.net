@@ -24,7 +24,7 @@
 
                         <GridViewColumn Header="{DynamicResource PrivateName}" Width="auto" DisplayMemberBinding="{Binding PrivateName}"  ></GridViewColumn>
                         <GridViewColumn Header="{DynamicResource FamilyName}" Width="auto" DisplayMemberBinding="{Binding FamilyName}"></GridViewColumn>
-                        <GridViewColumn Header="{DynamicResource MailAddress}" Width="auto" DisplayMemberBinding="{Binding MailAddress}"></GridViewColumn>
+                        <!--<GridViewColumn Header="{DynamicResource MailAddress}" Width="auto" DisplayMemberBinding="{Binding MailAddress}"></GridViewColumn>-->
                         <GridViewColumn Header="{DynamicResource RegistrationDate}" Width="auto" DisplayMemberBinding="{Binding RegistrationDate}"></GridViewColumn>
                         <GridViewColumn Header="{DynamicResource EntryDate}" Width="auto" DisplayMemberBinding="{Binding EntryDate}"></GridViewColumn>
                         <GridViewColumn Header="{DynamicResource ReleaseDate}" Width="auto" DisplayMemberBinding="{Binding ReleaseDate}"></GridViewColumn>

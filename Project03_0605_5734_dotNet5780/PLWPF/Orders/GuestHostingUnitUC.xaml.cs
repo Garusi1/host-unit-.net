@@ -21,6 +21,9 @@ namespace PLWPF.Orders
     /// </summary>
     public partial class GuestHostingUnitUC : UserControl
     {
+
+
+        #region כללי
         BL.IBL bl;
         BE.GuestRequest GRShow;
         IEnumerable<BE.GuestRequest> ieGuest;
@@ -82,6 +85,8 @@ namespace PLWPF.Orders
             BE.GuestRequest selectedObject = (BE.GuestRequest)list.SelectedItem;
             selectedObject.ToString();
         }
+
+        #endregion
 
 
         #region הוספת הזמנה
@@ -167,7 +172,7 @@ namespace PLWPF.Orders
         {
             if (showOpenRadio.IsChecked == true)
             {
-                ieGuest = bl.GetGuestRequestList((x => x.Status == BE.StatusGREnum.פתוחה));
+                ieGuest = bl.GetGuestRequestList((x => x.Status == BE.Enums.StatusGREnum.פתוחה));
                 list.ItemsSource = ieGuest;
 
             }
@@ -177,7 +182,7 @@ namespace PLWPF.Orders
         {
             if (shoLostRadio.IsChecked == true)
             {
-                ieGuest = bl.GetGuestRequestList((x => x.Status == BE.StatusGREnum.נסגרה_כי_פג_תוקפה));
+                ieGuest = bl.GetGuestRequestList((x => x.Status == BE.Enums.StatusGREnum.נסגרה_כי_פג_תוקפה));
                 list.ItemsSource = ieGuest;
 
 
@@ -188,7 +193,7 @@ namespace PLWPF.Orders
         {
             if (showCloseRadio.IsChecked == true)
             {
-                ieGuest = bl.GetGuestRequestList((x => x.Status == BE.StatusGREnum.נסגרה_כי_פג_תוקפה));
+                ieGuest = bl.GetGuestRequestList((x => x.Status == BE.Enums.StatusGREnum.נסגרה_כי_פג_תוקפה));
                 list.ItemsSource = ieGuest;
 
 

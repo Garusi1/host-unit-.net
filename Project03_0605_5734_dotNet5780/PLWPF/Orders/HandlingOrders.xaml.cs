@@ -21,6 +21,8 @@ namespace PLWPF.Orders
 
     public partial class HandlingOrders : Window
     {
+
+        #region כללי
         BL.IBL bl;
         BE.HostingUnit HUShow;
         int Hukey;
@@ -75,21 +77,8 @@ namespace PLWPF.Orders
             setActiveUserControl(calanderForHU);
         }
 
-        //private void hostingUnitLists_Button_Click(object sender, RoutedEventArgs e)
-        //{
-        //    setActiveUserControl(HostingUC);
-        //}
 
-        //private void hostLists_Button_Click(object sender, RoutedEventArgs e)
-        //{
-        //    setActiveUserControl(HostsUC);
-        //}
-
-
+        #endregion
     }
-    public partial class MainWebManagerGUI : Window
-    {
 
-       
-    }
 }

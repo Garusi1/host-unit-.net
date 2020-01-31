@@ -17,7 +17,7 @@ namespace DAL
         //////XElement OrderRoot;
         XElement bankAccuntsRoot;
 
-        public static List<BE.GuestRequest> GuestRequestList1;
+        //public static List<BE.GuestRequest> GuestRequestList1;
 
         public static List<BE.HostingUnit> HostingUnitList1;
 
@@ -54,6 +54,12 @@ namespace DAL
 
             }
 
+            if (!File.Exists(BE.Tools.GuestPath))
+            {
+                GuestRoot = new XElement("GuestRequests");
+                GuestRoot.Save(BE.Tools.GuestPath);
+
+            }
             if (!File.Exists(BE.Tools.OrderPath))
             {
                 BE.Tools.SaveToXML(new List<BE.Order>(), BE.Tools.OrderPath);
@@ -61,22 +67,15 @@ namespace DAL
             }
 
 
-            if (!File.Exists(BE.Tools.GuestPath))
-            {
-                GuestRoot = new XElement("GuestRequests");
-                GuestRoot.Save(BE.Tools.GuestPath);
-
-            }
             if (!File.Exists(BE.Tools.HostingUnitPath))
             {
                 BE.Tools.SaveToXML(new List<BE.HostingUnit>(), BE.Tools.HostingUnitPath);
             }
 
+            GuestRoot = XElement.Load(BE.Tools.GuestPath);
             HostingUnitList1 = BE.Tools.LoadFromXML<List<HostingUnit>>(BE.Tools.HostingUnitPath);
-
             OrderList = BE.Tools.LoadFromXML<List<Order>>(BE.Tools.OrderPath);
             //GuestRequestList1 = BE.Tools.LoadFromXML<List<GuestRequest>>(BE.Tools.GuestPath);
-
 
         }
 
@@ -209,13 +208,13 @@ namespace DAL
                            Adults = Convert.ToInt32(guest.Element("Adults").Value),
                            Children = Convert.ToInt32(guest.Element("Children").Value),
 
-                           Area = (BE.AreaEnum)Enum.Parse(typeof(BE.AreaEnum), guest.Element("Area").Value),
-                           Status = (BE.StatusGREnum)Enum.Parse(typeof(BE.StatusGREnum), guest.Element("Status").Value),
-                           Type = (BE.TypeEnum)Enum.Parse(typeof(BE.TypeEnum), guest.Element("Type").Value),
-                           Pool = (BE.AttractionsEnum)Enum.Parse(typeof(BE.AttractionsEnum), guest.Element("Pool").Value),
-                           Jacuzzi = (BE.AttractionsEnum)Enum.Parse(typeof(BE.AttractionsEnum), guest.Element("Jacuzzi").Value),
-                           Garden = (BE.AttractionsEnum)Enum.Parse(typeof(BE.AttractionsEnum), guest.Element("Garden").Value),
-                           ChildrensAttractions = (BE.AttractionsEnum)Enum.Parse(typeof(BE.AttractionsEnum), guest.Element("ChildrensAttractions").Value),
+                           Area = (BE.Enums.AreaEnum)Enum.Parse(typeof(BE.Enums.AreaEnum), guest.Element("Area").Value),
+                           Status = (BE.Enums.StatusGREnum)Enum.Parse(typeof(BE.Enums.StatusGREnum), guest.Element("Status").Value),
+                           Type = (BE.Enums.TypeEnum)Enum.Parse(typeof(BE.Enums.TypeEnum), guest.Element("Type").Value),
+                           Pool = (BE.Enums.AttractionsEnum)Enum.Parse(typeof(BE.Enums.AttractionsEnum), guest.Element("Pool").Value),
+                           Jacuzzi = (BE.Enums.AttractionsEnum)Enum.Parse(typeof(BE.Enums.AttractionsEnum), guest.Element("Jacuzzi").Value),
+                           Garden = (BE.Enums.AttractionsEnum)Enum.Parse(typeof(BE.Enums.AttractionsEnum), guest.Element("Garden").Value),
+                           ChildrensAttractions = (BE.Enums.AttractionsEnum)Enum.Parse(typeof(BE.Enums.AttractionsEnum), guest.Element("ChildrensAttractions").Value),
 
                            PrivateName = guest.Element("PrivateName").Value,
                            FamilyName = guest.Element("FamilyName").Value,
@@ -429,7 +428,7 @@ namespace DAL
             OrderList.RemoveAll(x => x.OrderKey == order.OrderKey);
 
 
-            if ((order.OrderDate == default) && (order.Status == BE.StatusEnum.נשלח_מייל))
+            if ((order.OrderDate == default) && (order.Status == BE.Enums.StatusEnum.נשלח_מייל))
             {
                 order.OrderDate = DateTime.Now; //עדכון זמן שליחת מייל
             }
@@ -478,13 +477,13 @@ namespace DAL
                             Adults = Convert.ToInt32(guest.Element("Adults").Value),
                             Children = Convert.ToInt32(guest.Element("Children").Value),
 
-                            Area = (BE.AreaEnum)Enum.Parse(typeof(BE.AreaEnum), guest.Element("Area").Value),
-                            Status = (BE.StatusGREnum)Enum.Parse(typeof(BE.StatusGREnum), guest.Element("Status").Value),
-                            Type = (BE.TypeEnum)Enum.Parse(typeof(BE.TypeEnum), guest.Element("Type").Value),
-                            Pool = (BE.AttractionsEnum)Enum.Parse(typeof(BE.AttractionsEnum), guest.Element("Pool").Value),
-                            Jacuzzi = (BE.AttractionsEnum)Enum.Parse(typeof(BE.AttractionsEnum), guest.Element("Jacuzzi").Value),
-                            Garden = (BE.AttractionsEnum)Enum.Parse(typeof(BE.AttractionsEnum), guest.Element("Garden").Value),
-                            ChildrensAttractions = (BE.AttractionsEnum)Enum.Parse(typeof(BE.AttractionsEnum), guest.Element("ChildrensAttractions").Value),
+                            Area = (BE.Enums.AreaEnum)Enum.Parse(typeof(BE.Enums.AreaEnum), guest.Element("Area").Value),
+                            Status = (BE.Enums.StatusGREnum)Enum.Parse(typeof(BE.Enums.StatusGREnum), guest.Element("Status").Value),
+                            Type = (BE.Enums.TypeEnum)Enum.Parse(typeof(BE.Enums.TypeEnum), guest.Element("Type").Value),
+                            Pool = (BE.Enums.AttractionsEnum)Enum.Parse(typeof(BE.Enums.AttractionsEnum), guest.Element("Pool").Value),
+                            Jacuzzi = (BE.Enums.AttractionsEnum)Enum.Parse(typeof(BE.Enums.AttractionsEnum), guest.Element("Jacuzzi").Value),
+                            Garden = (BE.Enums.AttractionsEnum)Enum.Parse(typeof(BE.Enums.AttractionsEnum), guest.Element("Garden").Value),
+                            ChildrensAttractions = (BE.Enums.AttractionsEnum)Enum.Parse(typeof(BE.Enums.AttractionsEnum), guest.Element("ChildrensAttractions").Value),
 
                             PrivateName = guest.Element("PrivateName").Value,
                             FamilyName = guest.Element("FamilyName").Value,

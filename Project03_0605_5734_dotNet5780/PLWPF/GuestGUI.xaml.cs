@@ -36,12 +36,12 @@ namespace PLWPF
             this.DataContext = GRShow;
             //this.GuestRequestGrid.DataContext =GRShow; //הקשר הדטה לפי GuestRequest
 
-            this.typeComboBox.ItemsSource = Enum.GetValues(typeof(BE.TypeEnum));
-            this.areaComboBox.ItemsSource = Enum.GetValues(typeof(BE.AreaEnum));
-            this.poolComboBox.ItemsSource = Enum.GetValues(typeof(BE.AttractionsEnum));
-            this.jacuzziComboBox.ItemsSource = Enum.GetValues(typeof(BE.AttractionsEnum));
-            this.gardenComboBox.ItemsSource = Enum.GetValues(typeof(BE.AttractionsEnum));
-            this.childrensAttractionsComboBox.ItemsSource = Enum.GetValues(typeof(BE.AttractionsEnum));
+            this.typeComboBox.ItemsSource = Enum.GetValues(typeof(BE.Enums.TypeEnum));
+            this.areaComboBox.ItemsSource = Enum.GetValues(typeof(BE.Enums.AreaEnum));
+            this.poolComboBox.ItemsSource = Enum.GetValues(typeof(BE.Enums.AttractionsEnum));
+            this.jacuzziComboBox.ItemsSource = Enum.GetValues(typeof(BE.Enums.AttractionsEnum));
+            this.gardenComboBox.ItemsSource = Enum.GetValues(typeof(BE.Enums.AttractionsEnum));
+            this.childrensAttractionsComboBox.ItemsSource = Enum.GetValues(typeof(BE.Enums.AttractionsEnum));
 
 
 

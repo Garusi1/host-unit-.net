@@ -22,6 +22,8 @@ namespace PLWPF
     public partial class hostingListsUC : UserControl
     {
 
+
+        #region כללי
         BL.IBL bl;
         BE.HostingUnit HostingShow;
         IEnumerable<BE.HostingUnit> IenumaHosting;
@@ -71,7 +73,7 @@ namespace PLWPF
             selectedObject.ToString();
         }
 
-
+        #endregion
         #region סינון 
 
         private void showAllRadio_Checked(object sender, RoutedEventArgs e)

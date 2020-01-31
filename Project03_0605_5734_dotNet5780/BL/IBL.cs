@@ -128,7 +128,7 @@ namespace BL
         /// רשימת דרישות לקוח מקובצת ע"פ אזור הנופש הנדרש.
         /// </summary>
         /// <returns></returns>
-        IEnumerable<IGrouping<BE.AreaEnum, BE.GuestRequest>> groupByAreaGR();
+        IEnumerable<IGrouping<BE.Enums.AreaEnum, BE.GuestRequest>> groupByAreaGR();
 
 
         /// <summary>
@@ -153,7 +153,7 @@ namespace BL
         /// רשימת יחידות אירוח מקובצת  ע"פ אזור הנופש הנדרש.
         /// </summary>
         /// <returns></returns>
-        IEnumerable<IGrouping<BE.AreaEnum, BE.HostingUnit>> groupByAreaHostingUnit();
+        IEnumerable<IGrouping<BE.Enums.AreaEnum, BE.HostingUnit>> groupByAreaHostingUnit();
 
 
 

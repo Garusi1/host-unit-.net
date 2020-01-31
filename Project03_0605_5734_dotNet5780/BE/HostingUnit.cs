@@ -127,16 +127,16 @@ namespace BE
 
 
 
-        private AreaEnum area;//All,North,South,Center,Jerusalem
+        private Enums.AreaEnum area;//All,North,South,Center,Jerusalem
 
-        public AreaEnum Area
+        public Enums.AreaEnum Area
         {
             get { return area; }
             set
             {
-                if (!Enum.IsDefined(typeof(AreaEnum), value))
+                if (!Enum.IsDefined(typeof(Enums.AreaEnum), value))
                     throw new System.IO.InvalidDataException("Enum input illegal");
-                if (value== AreaEnum.All)
+                if (value== Enums.AreaEnum.All)
                     throw new System.IO.InvalidDataException("Enum input illegal. HostingUnit cannot be in All regions!!!");
 
                 area = value;
@@ -149,15 +149,15 @@ namespace BE
         //public AreaEnum SubArea { get; private set; } .... // להגדיר באופן נכון כמו את האחרים
 
 
-        private TypeEnum type;  //Zimmer\Hotel\Camping\ Etc;
-        public TypeEnum Type
+        private Enums.TypeEnum type;  //Zimmer\Hotel\Camping\ Etc;
+        public Enums.TypeEnum Type
         {
             get { return type; }
             set
             {
-                if (!Enum.IsDefined(typeof(TypeEnum), value))
+                if (!Enum.IsDefined(typeof(Enums.TypeEnum), value))
                     throw new System.IO.InvalidDataException("Enum input illegal");
-                if (value == TypeEnum.Unknown)
+                if (value == Enums.TypeEnum.Unknown)
                     throw new System.IO.InvalidDataException("סוג יחידת אירוח אינו יכול להיות לא ידוע");
                 type = value;
             }
@@ -222,28 +222,6 @@ namespace BE
         }
 
 
-
-
-        //public bool this[DateTime generalDate] // define indexer 
-        //{
-        //    get
-        //    {
-        //        if (checkDateLegallOneYear(generalDate))
-        //            return Diary[generalDate.Day - 1, generalDate.Month - 1];
-        //        return false;
-
-        //    }
-        //    set {
-        //        if(checkDateLegallOneYear(generalDate))
-        //            Diary[generalDate.Day - 1, generalDate.Month - 1] = value;
-
-
-        //    }
-
-        //    //get => Diary[generalDate.Day - 1, generalDate.Month - 1];
-
-
-        //}
 
 
 

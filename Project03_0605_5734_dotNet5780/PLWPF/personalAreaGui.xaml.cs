@@ -35,8 +35,8 @@ namespace PLWPF
 
 
 
-            this.typeComboBox.ItemsSource = Enum.GetValues(typeof(BE.TypeEnum));
-            this.areaComboBox.ItemsSource = Enum.GetValues(typeof(BE.AreaEnum));
+            this.typeComboBox.ItemsSource = Enum.GetValues(typeof(BE.Enums.TypeEnum));
+            this.areaComboBox.ItemsSource = Enum.GetValues(typeof(BE.Enums.AreaEnum));
 
         }
 

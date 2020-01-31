@@ -73,5 +73,15 @@ namespace PLWPF
             }
 
         }
+
+
+
+        private void EnterKeyCommand(object sender, RoutedEventArgs e)
+        {
+            OKButton_Click(sender, e);
+        }
+
+
+
     }
 }
