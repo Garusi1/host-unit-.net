@@ -50,7 +50,8 @@
 
             </Grid.RowDefinitions>
             <TextBox HorizontalAlignment="Left" Height="23" Margin="-3,14,0,0" Grid.Row="3" TextWrapping="Wrap" Text="עמלה עד עכשיו" VerticalAlignment="Top" Width="114"/>
-            <TextBox HorizontalAlignment="Left" Height="23" Margin="26,22,-2,0" Grid.Row="4" TextWrapping="Wrap" Text="{Binding commissionAll}" VerticalAlignment="Top" Width="90"/>
+            <TextBox x:Name="uuu" HorizontalAlignment="Left" Height="23" IsReadOnly="True" Margin="26,22,-2,0" Grid.Row="4" TextWrapping="Wrap" VerticalAlignment="Top" Width="90"/>
+         
 
 
 

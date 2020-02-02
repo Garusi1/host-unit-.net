@@ -71,7 +71,7 @@
             <ComboBox x:Name="typeComboBox" Grid.Column="2" SelectedItem="{Binding Type}" HorizontalAlignment="Left" Height="Auto" Margin="2.857,5,0,5" Grid.Row="7" VerticalAlignment="Center" Width="120">
             </ComboBox>
         </Grid>
-        <Grid x:Name="grid2"  HorizontalAlignment="Left" Margin="82,73,0,0" VerticalAlignment="Top" FlowDirection="RightToLeft" Background="#FFF7F7F7" >
+        <Grid x:Name="grid2"  HorizontalAlignment="Left" Margin="82,46,0,0" VerticalAlignment="Top" FlowDirection="RightToLeft" Background="#FFF7F7F7" Height="411" Grid.RowSpan="2" >
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="Auto"/>
                 <ColumnDefinition Width="Auto"/>

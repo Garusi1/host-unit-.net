@@ -22,7 +22,7 @@ namespace PLWPF
     public partial class HotsUC : UserControl
     {
         BL.IBL bl;
-
+      
         BE.Host hostShow;
         IEnumerable<IGrouping<int, BE.Host>> IenumaIgroupHosts;
 
@@ -35,8 +35,9 @@ namespace PLWPF
             InitializeComponent();
             bl = BL.Factory.GetInstance();
             bl = BL.Factory.GetInstance();
-
-            this.DataContext = BE.Configuration.commissionAll;
+            int a = BE.Configuration.commissionAll;
+            string rr = a.ToString(); 
+            uuu.Text = rr;
 
 
             IenumaIgroupHosts = bl.groupByNumberOfHosintgUnitForHost();// כנראה שצריך הגדרת משתנה מארח אנונימי שיש לו עוד שדה בשם כמות היחידות.  לא צריך מחיקת Host.
