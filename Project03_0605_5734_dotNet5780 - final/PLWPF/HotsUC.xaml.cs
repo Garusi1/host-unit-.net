@@ -28,22 +28,23 @@ namespace PLWPF
 
         List<BE.Host> newList;
 
+
         public HotsUC()
         {
 
 
             InitializeComponent();
             bl = BL.Factory.GetInstance();
-            bl = BL.Factory.GetInstance();
 
-            this.DataContext = BE.Configuration.commissionAll;
+
 
 
             IenumaIgroupHosts = bl.groupByNumberOfHosintgUnitForHost();// כנראה שצריך הגדרת משתנה מארח אנונימי שיש לו עוד שדה בשם כמות היחידות.  לא צריך מחיקת Host.
             
             newList = new List<BE.Host>();
 
-                //smths.ToList();
+
+            //smths.ToList();
 
             foreach (var groupingByNumOfHU in IenumaIgroupHosts)   //עוברים על ה iGroping 
             {
@@ -62,7 +63,14 @@ namespace PLWPF
 
             list.ItemsSource = newList;
 
+
+
+            int a = BE.Configuration.commissionAll;
+            string commaa = a.ToString();
+            commView.Text = commaa;
+
         }
+
 
         private void DataGrid_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
@@ -89,7 +97,6 @@ namespace PLWPF
             BE.Order selectedObject = (BE.Order)list.SelectedItem;
             selectedObject.ToString();
         }
-
 
 
 
