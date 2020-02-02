@@ -71,7 +71,7 @@
             <ComboBox x:Name="typeComboBox" Grid.Column="2" SelectedItem="{Binding Type}" HorizontalAlignment="Left" Height="Auto" Margin="2.857,5,0,5" Grid.Row="7" VerticalAlignment="Center" Width="120">
             </ComboBox>
         </Grid>
-        <Grid x:Name="grid2"  HorizontalAlignment="Left" Margin="73,45,0,0" VerticalAlignment="Top" FlowDirection="RightToLeft" Background="#FFF7F7F7" Height="403" Grid.RowSpan="2" >
+        <Grid x:Name="grid2"  HorizontalAlignment="Left" Margin="82,46,0,0" VerticalAlignment="Top" FlowDirection="RightToLeft" Background="#FFF7F7F7" Height="411" Grid.RowSpan="2" >
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="Auto"/>
                 <ColumnDefinition Width="Auto"/>
@@ -90,7 +90,6 @@
                 <RowDefinition Height="Auto"/>
                 <RowDefinition Height="Auto"/>
                 <RowDefinition Height="Auto"/>
-
             </Grid.RowDefinitions>
             <Label Content="{DynamicResource Private Name:}" Grid.Column="0" HorizontalAlignment="Left" Margin="3" Grid.Row="0" VerticalAlignment="Center"/>
             <TextBox x:Name="privateNameTextBox" Grid.Column="1" HorizontalAlignment="Left" Height="23" Margin="3" Grid.Row="0" Text="{Binding Owner.PrivateName, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" VerticalAlignment="Center" Width="120"/>
@@ -112,7 +111,6 @@
             <TextBox Name="BranchAddressTextBox" IsReadOnly="True" Grid.Column="1" HorizontalAlignment="Left" Height="23" Margin="3" Grid.Row="8" Text="{Binding Owner.BankBranchDetails.BranchAddress, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" VerticalAlignment="Center" Width="120"/>
             <Label Content="{DynamicResource Branch City:}" Grid.Column="0" HorizontalAlignment="Left" Margin="3" Grid.Row="9" VerticalAlignment="Center"/>
             <TextBox x:Name="BranchCityTextBox" Grid.Column="1" HorizontalAlignment="Left" Height="23" Margin="3" Grid.Row="9" Text="{Binding Owner.BankBranchDetails.BranchCity, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" VerticalAlignment="Center" Width="120"/>
-
             <Label Content="{DynamicResource Bank Account Number:}" Grid.Column="0" HorizontalAlignment="Left" Margin="3" Grid.Row="10" VerticalAlignment="Center"/>
             <TextBox x:Name="bankAccountNumberTextBox" Grid.Column="1" HorizontalAlignment="Left" Height="23" Margin="3" Grid.Row="10" Text="{Binding Owner.BankAccountNumber, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" VerticalAlignment="Center" Width="120"/>
             <Label Content="{DynamicResource Collection Clearance:}" Grid.Column="0" HorizontalAlignment="Left" Margin="3" Grid.Row="11" VerticalAlignment="Center"/>
