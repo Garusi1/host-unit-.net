@@ -44,7 +44,7 @@ namespace PLWPF
             
             newList = new List<BE.Host>();
 
-                //smths.ToList();
+
 
             foreach (var groupingByNumOfHU in IenumaIgroupHosts)   //עוברים על ה iGroping 
             {
@@ -61,6 +61,7 @@ namespace PLWPF
 
 
 
+
             list.ItemsSource = newList;
 
         }
@@ -73,10 +74,10 @@ namespace PLWPF
         {
             hostShow = (BE.Host)list.SelectedItem;
 
-            if (hostShow != null)
-            {
+            //if (hostShow != null)
+            //{
 
-            }
+            //}
         }
 
 

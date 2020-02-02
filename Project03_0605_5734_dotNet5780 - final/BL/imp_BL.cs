@@ -155,58 +155,6 @@ namespace BL
             }
 
 
-
-            // כל זה במידה ונרצה לעדכן הכל... אבל לא ממש רלוונטי לתוכנה
-            /// בהנחה שבממשק משתמש קיבלנו את מספר ההזמנה והראנו שקיים ולאחר מכן בוצע עדכון שדות 
-            /// 
-            ////            //אם לא הושלם מילוי
-            ////if (guest.PrivateName == "" || guest.FamilyName == "" || guest.MailAddress == null || guest.EntryDate == null || guest.ReleaseDate == null)
-            ////    throw new Exception("חובה למלא את כל השדות");
-            ////if (!checkRequestDates(guest))// if the dates are not legal
-            ////    throw new System.ArgumentException("Dates are not legal!");
-
-            ///////throw new System.ArgumentException(string.Format("worng input {0} not llegal ", generalDate));
-
-
-            ////if (guest.Adults < 0)
-            ////    throw new System.ArgumentException(/*מספר מבוגרים אינו יכול להיות שלילי"*/"Number of adults cannot be negative");
-            ////if (guest.Adults == 0)
-            ////    throw new System.ArgumentException(/*מספר מבוגרים אינוי יכול להיות 0"*/"Number of adults cannot be 0");
-            ////if (guest.Type == BE.TypeEnum.Unknown)
-            ////    throw new System.ArgumentException(/*חובה לבחור סוג יחידת יחידת אירוח"*/"Select unit type of hosting unit is required");
-
-            //////AttractionsEnum // Unknown,הכרחי, אפשרי, לא_מעוניין
-            ////if (guest.Pool == BE.AttractionsEnum.Unknown)
-            ////    throw new System.ArgumentException(/*חובה לבחור האם מעוניין בבריכה"*/"Must choose whether you want a pool");
-            ////if (guest.Jacuzzi == BE.AttractionsEnum.Unknown)
-            ////    throw new System.ArgumentException(/*חובה לבחור האם מעוניין בג'קוזי"*/"Must choose whether you want a jacuzzi");
-            ////if (guest.Garden == BE.AttractionsEnum.Unknown)
-            ////    throw new System.ArgumentException(/*חובה לבחור האם מעוניין בגינה"*/"Must choose whether you want a garden");
-            ////if ((guest.ChildrensAttractions == BE.AttractionsEnum.Unknown) && (guest.Children > 0))
-            ////    throw new System.ArgumentException(/*חובה לבחור האם מעוניין באטראקציות לילדים"*/"Must choose whether you want a Childrens Attractions");
-
-            ////if (checkDateLegallOneYear(guest.EntryDate)) //אם התאריכים חורגים מהטווח של חודש אחורה ו11 חודש קדימה
-            ////{
-            ////    throw new System.ArgumentException(string.Format("worng input {0} not in the span of dates ", guest.EntryDate));
-
-            ////}
-            ////if (checkDateLegallOneYear(guest.ReleaseDate))
-            ////{
-            ////    throw new System.ArgumentException(string.Format("worng input {0} not in the span of dates ", guest.ReleaseDate));
-            ////}
-
-
-
-            //////מילוי ערכים שגויים
-            ////DateTime theDateToday = new DateTime();
-            ////theDateToday = DateTime.Now;
-            ////theDateToday = new DateTime(theDateToday.Year, theDateToday.Month, theDateToday.Day); //איפוס שעון ל00:00:00
-            ////if (guest.EntryDate < theDateToday)
-            ////    throw new System.ArgumentException(/*תאריך כניסה אינו יכול להיות  מוקדם מעכשיו"*/"EntryDate cannot be earlier from now ");
-
-            ////if (guest.ReleaseDate < theDateToday.AddDays(1))
-            ////    throw new System.ArgumentException(/*תאריך יציאה אינו יכול להיות  מוקדם מעוד יום"*/"ReleaseDate cannot be earlier from tomorrow ");
-
             if (!(oldGuest.Status == BE.Enums.StatusGREnum.פתוחה))
             {
                 throw new ArgumentException(string.Format("לא ניתן לשנות דרישת לקוח שאינה פתוחה"));
@@ -559,6 +507,8 @@ namespace BL
                 {
                     this[tempDate, HU] = true;//put the nights on matrix
                     Chargeamount += BE.Configuration.Commission; //חישוב עמלה על כל יום שנתפס
+                    BE.Configuration.commissionAll += BE.Configuration.Commission;
+
                 }
 
 
@@ -958,7 +908,7 @@ namespace BL
         /// <returns> ערך אחד. יש לבצע בפונקציה המזמנת forech</returns>
         public IEnumerable<BE.HostingUnit> hostsHostingUnit(string IDHost)
         {
-            List<BE.HostingUnit> list = new List<BE.HostingUnit>();
+            //List<BE.HostingUnit> list = new List<BE.HostingUnit>();
 
 
             var li = from item in GetHostingUnitList()

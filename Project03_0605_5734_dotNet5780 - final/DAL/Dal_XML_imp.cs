@@ -31,7 +31,6 @@ namespace DAL
 
         internal Dal_XML_imp()
         {
-            //DownloadBankXml();
 
 
 
