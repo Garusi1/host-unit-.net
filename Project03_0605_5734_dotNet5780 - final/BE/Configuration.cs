@@ -13,7 +13,7 @@ namespace BE
         public static int hostUnitID = 20000000;
         public static int geustReqID = 40000000;
         public static int Commission = 10;
-        public static int commissionAll = 5;
+        public static int commissionAll = 0;
 
 
 
