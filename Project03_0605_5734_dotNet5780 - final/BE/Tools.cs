@@ -171,10 +171,9 @@ namespace BE
                     new XElement("geustReqID", Configuration.geustReqID),
                     new XElement("hostUnitID", Configuration.hostUnitID),
                     new XElement("orderID", Configuration.orderID),
-                    new XElement("Commission", Configuration.Commission));
-                    ////new XElement("commissionAll", Configuration.commissionAll),
-                    //new XElement("LastApdateMonthly", Configuration.LastApdateMonthly),
-                    //new XElement("LastApdateDaily", Configuration.LastApdateDaily));
+                    new XElement("Commission", Configuration.Commission),
+                    new XElement("commissionAll", Configuration.commissionAll));
+
                 ConfigRoot.Save(configPath);
 
             }

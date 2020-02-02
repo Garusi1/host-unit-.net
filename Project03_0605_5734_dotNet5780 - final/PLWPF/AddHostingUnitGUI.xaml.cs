@@ -42,6 +42,19 @@ namespace PLWPF
             this.areaComboBox.ItemsSource = Enum.GetValues(typeof(BE.Enums.AreaEnum));
 
 
+            bankAccunts = new List<BE.BankBranch>();
+            try
+            {
+                bankAccunts = bl.getAllBankBranches();
+
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+
+            }
+
+
             List<string> bankNames = (from bank in bankAccunts select bank.BankName).Distinct().ToList();
             BankNameComboBox.ItemsSource = bankNames;
 
@@ -112,6 +125,9 @@ namespace PLWPF
 
         }
 
+        private void BankNumberComboBox_TextChanged(object sender, SelectionChangedEventArgs e)
+        {
 
+        }
     }
 }

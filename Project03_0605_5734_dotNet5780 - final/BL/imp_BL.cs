@@ -530,15 +530,6 @@ namespace BL
 
             }
 
-            //if ((HU.Owner.CollectionClearance == "Yes") && (order.Status == BE.StatusEnum.נשלח_מייל))
-            //{
-            //    Thread thr = new Thread(sendAnEamil);
-            //    thr.Start();
-
-            //    sendMail(order); //שליחת מייל עם פרטי הזמנה
-            //    order.OrderDate = DateTime.Now;
-
-            //}
 
 
             if (!(orderBeforeChange.Status == BE.Enums.StatusEnum.נשלח_מייל)&& order.Status == BE.Enums.StatusEnum.נסגר_בהיענות_הלקוח)
@@ -594,6 +585,8 @@ namespace BL
                 try
                 {
                     IDAL.UpdateOrder(order/*.Clone()*/);
+                    
+
                 }
                 catch (KeyNotFoundException e)
                 {
@@ -627,21 +620,9 @@ namespace BL
                 }
 
 
-                bankAccountDebit(HU, Chargeamount);
 
 
-                //var fit = from orderShow in GetOrderList()
-                //          where (GR.GuestRequestKey == orderShow.GuestRequestKey) && (order.OrderKey != orderShow.OrderKey)
-                //          select orderShow;
 
-
-                //var fitOrders = from item in GetOrderList(x => (x.GuestRequestKey == GR.GuestRequestKey))
-                //       where item.OrderKey != order.OrderKey
-                //                select item;
-
-
-                //IEnumerable<BE.Order> fitOrders = GetOrderList(x => (x.GuestRequestKey == GR.GuestRequestKey)
-                //      && (x.OrderKey != order.OrderKey));
                 try
                 {
                     foreach (var item in GetOrderList(x => (x.GuestRequestKey == GR.GuestRequestKey)))//לוקח את כל שאר ההזמנות שמשוייכות לדרישת אירוח זו
@@ -758,9 +739,7 @@ namespace BL
         public void bankAccountDebit(BE.HostingUnit HU, int Chargeamount)
         {
 
-            //לוקח חשבון ומחייב אותו איכשהו... 
-            // חיים מציע ליצור string  ערוך שייצג עיסקה ולשלוח אותו לפונקצייה 
-            // ששולחת לבנק הודעה ב tread - בפועל לא שולחים לבנק. 
+            BE.Configuration.commissionAll += Chargeamount; 
 
         }
 

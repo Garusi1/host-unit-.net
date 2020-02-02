@@ -34,7 +34,9 @@ namespace PLWPF
 
             InitializeComponent();
             bl = BL.Factory.GetInstance();
+            bl = BL.Factory.GetInstance();
 
+            this.DataContext = BE.Configuration.commissionAll;
 
 
             IenumaIgroupHosts = bl.groupByNumberOfHosintgUnitForHost();// כנראה שצריך הגדרת משתנה מארח אנונימי שיש לו עוד שדה בשם כמות היחידות.  לא צריך מחיקת Host.

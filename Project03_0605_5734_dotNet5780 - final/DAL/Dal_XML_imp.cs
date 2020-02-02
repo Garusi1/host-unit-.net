@@ -49,8 +49,8 @@ namespace DAL
                 BE.Configuration.geustReqID = Convert.ToInt32(BE.Tools.ConfigRoot.Element("geustReqID").Value);
                 BE.Configuration.hostUnitID = Convert.ToInt32(BE.Tools.ConfigRoot.Element("hostUnitID").Value);
                 BE.Configuration.orderID = Convert.ToInt32(BE.Tools.ConfigRoot.Element("orderID").Value);
-                Configuration.Commission = Convert.ToInt32(BE.Tools.ConfigRoot.Element("Commission").Value);
-
+                BE.Configuration.Commission = Convert.ToInt32(BE.Tools.ConfigRoot.Element("Commission").Value);
+                //BE.Configuration.commissionAll = Convert.ToInt32(BE.Tools.ConfigRoot.Element("commissionAll").Value);
 
             }
 
@@ -529,13 +529,13 @@ namespace DAL
             string BankAccuntPath_temp = BE.Tools.BankAccuntPath;
             if (!File.Exists(BE.Tools.BankAccuntPath) || BE.Configuration.BanksXmlFinish == false)
             {
-                BankAccuntPath_temp = "atm1.xml";
+                BankAccuntPath_temp = "atmTemp.xml";
             }
             else
             {
                 long length = new FileInfo(BE.Tools.BankAccuntPath).Length;
                 if (length < 10000)
-                    BankAccuntPath_temp = "atm1.xml";
+                    BankAccuntPath_temp = "atmTemp.xml";
             }
             try
             {
@@ -591,17 +591,17 @@ namespace DAL
             string BankAccuntPath_temp = Tools.BankAccuntPath;
             if (!File.Exists(Tools.BankAccuntPath))
             {
-                BankAccuntPath_temp = "atmData.xml";
+                BankAccuntPath_temp = "atmTemp.xml";
             }
             else
             {
                 long length = new FileInfo(Tools.BankAccuntPath).Length;
                 if (length < 10000)
-                    BankAccuntPath_temp = "atmData.xml";
+                    BankAccuntPath_temp = "atmTemp.xml";
             }
             try
             {
-                bankAccuntsRoot = XElement.Load(BankAccuntPath_temp);
+                bankAccuntsRoot = XElement.Load(Tools.BankAccuntPath);
 
             }
             catch { }

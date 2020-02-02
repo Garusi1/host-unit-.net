@@ -569,7 +569,7 @@ namespace DAL
             {
 
                 return (from BB in bankAccuntsRoot.Elements()
-                        select new BankBranch()
+                        select new BE.BankBranch()
                         {
                             BankName = BB.Element("שם_בנק").Value.Trim(),
                             BankNumber = Convert.ToInt32(BB.Element("קוד_בנק").Value.Trim()),
